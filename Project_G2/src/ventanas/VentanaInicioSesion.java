@@ -2,6 +2,9 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,7 +17,7 @@ public class VentanaInicioSesion extends JFrame{
 	
 	
 	protected JPanel pNorte, pSur, pOeste, pEste, pCentro;
-	protected JButton btnReg, btnIS;
+	protected JButton btnReg, btnIS, btnOjo;
 	protected JTextField campoCorreo;
 	protected JPasswordField campoContrasenia;
 	protected JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull;
@@ -24,9 +27,11 @@ public class VentanaInicioSesion extends JFrame{
 	
 	 
 	pNorte = new JPanel(new GridLayout(1,2));
-	pCentro = new JPanel(new GridLayout(3,3));
+	pCentro = new JPanel(new GridLayout(3,4));
 	pSur = new JPanel();
-	
+	pOeste = new JPanel();
+	pEste = new JPanel();
+
 	
 	txtIS = new JLabel("INICIA SESIÓN:");
 	txtOlvidoCsnia = new JLabel("¿Has olvidado tu contraseña?");
@@ -36,6 +41,7 @@ public class VentanaInicioSesion extends JFrame{
 	
 	btnIS = new JButton("INICIAR SESIÓN");
 	btnReg = new JButton("REGISTRARSE");
+	btnOjo = new JButton("Ojo"); // aqui tenemos que ponder una imagen 
 	
 	campoContrasenia = new JPasswordField();
 	campoCorreo = new JTextField();
@@ -48,23 +54,29 @@ public class VentanaInicioSesion extends JFrame{
 	pCentro.add(txtNull);
 	pCentro.add(txtContrasenia);
 	pCentro.add(campoContrasenia);
-	pCentro.add(txtNull);	//aqui iria el ojo
+	pCentro.add(btnOjo);	//aqui iria el ojo
 	pCentro.add(txtNull);
 	pCentro.add(txtOlvidoCsnia);
 	pCentro.add(txtNull);
 	
+	pSur.add(btnReg);
+	pSur.add(btnIS);	
+	
+	pOeste.add(txtNull);
+	
+	pEste.add(txtNull);
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//EVENTOS
+	txtOlvidoCsnia.addMouseListener(new MouseAdapter() {
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			VentanaRegistro VR = new VentanaRegistro();
+			dispose();
+		}
+	});
 	
 	
 	
@@ -72,6 +84,8 @@ public class VentanaInicioSesion extends JFrame{
 	this.add(pNorte,BorderLayout.NORTH);
 	this.add(pSur,BorderLayout.SOUTH);
 	this.add(pCentro,BorderLayout.CENTER);
+	this.add(pEste,BorderLayout.EAST);
+	this.add(pOeste,BorderLayout.WEST);
 	
 	
 	this.setTitle("Inicio Sesión");
