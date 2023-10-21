@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class VentanaRegistro extends JFrame{
 	
@@ -29,7 +30,7 @@ public class VentanaRegistro extends JFrame{
 	
 	public VentanaRegistro() {
 		
-		pNorte = new JPanel(new GridLayout(1,2));
+		pNorte = new JPanel(new BorderLayout());
 		pCentro = new JPanel(new GridLayout(8,2));
 		pSur = new JPanel();
 		pOeste = new JPanel();
@@ -63,7 +64,7 @@ public class VentanaRegistro extends JFrame{
 		
 		pregSeg = new JComboBox<>();
 		
-		pNorte.add(txtReg);
+		pNorte.add(txtReg, BorderLayout.NORTH);
 		
 		
 		//añadir imagen
@@ -92,9 +93,13 @@ public class VentanaRegistro extends JFrame{
 		pSur.add(btnReg);
 		pSur.add(btnVolver);	
 		
+		
+		
+		pNorte.add(pCentro);
+		
 		this.add(pNorte,BorderLayout.NORTH);
 		this.add(pSur,BorderLayout.SOUTH);
-		this.add(pCentro,BorderLayout.CENTER);
+		//this.add(pCentro,BorderLayout.NORTH);
 		this.add(pEste,BorderLayout.EAST);
 		this.add(pOeste,BorderLayout.WEST);
 		

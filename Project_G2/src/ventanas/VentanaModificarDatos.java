@@ -47,6 +47,8 @@ public class VentanaModificarDatos extends JFrame{
 		
 		
 		
+		
+		
 	
 	this.setTitle("Modificar Datos");
 	this.setBounds(300, 200, 600, 400);
