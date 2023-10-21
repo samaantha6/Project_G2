@@ -5,7 +5,7 @@ public class VentanaInicio {
 	public static void main(String[] args) {
 		
 		VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
-		VentanaRegistro ventanaReg = new VentanaRegistro();
+		//VentanaRegistro ventanaReg = new VentanaRegistro();
 		
 		
 		

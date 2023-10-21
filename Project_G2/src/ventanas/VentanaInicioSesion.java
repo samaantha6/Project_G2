@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,11 +15,11 @@ import javax.swing.JTextField;
 public class VentanaInicioSesion extends JFrame{
 	
 	
-	protected JPanel pNorte, pSur, pOeste, pEste, pCentro;
-	protected JButton btnReg, btnIS, btnOjo;
-	protected JTextField campoCorreo;
-	protected JPasswordField campoContrasenia;
-	protected JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull;
+	private JPanel pNorte, pSur, pOeste, pEste, pCentro;
+	private JButton btnReg, btnIS;
+	private JTextField campoCorreo;
+	private JPasswordField campoContrasenia;
+	private JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull;
 	
 	
 	public VentanaInicioSesion() {
@@ -41,7 +40,7 @@ public class VentanaInicioSesion extends JFrame{
 	
 	btnIS = new JButton("INICIAR SESIÓN");
 	btnReg = new JButton("REGISTRARSE");
-	btnOjo = new JButton("Ojo"); // aqui tenemos que ponder una imagen 
+	 
 	
 	campoContrasenia = new JPasswordField();
 	campoCorreo = new JTextField();
@@ -54,7 +53,6 @@ public class VentanaInicioSesion extends JFrame{
 	pCentro.add(txtNull);
 	pCentro.add(txtContrasenia);
 	pCentro.add(campoContrasenia);
-	pCentro.add(btnOjo);	//aqui iria el ojo
 	pCentro.add(txtNull);
 	pCentro.add(txtOlvidoCsnia);
 	pCentro.add(txtNull);
@@ -70,13 +68,14 @@ public class VentanaInicioSesion extends JFrame{
 	
 	//EVENTOS
 	txtOlvidoCsnia.addMouseListener(new MouseAdapter() {
-		
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			VentanaRegistro VR = new VentanaRegistro();
 			dispose();
 		}
 	});
+	
+	
 	
 	
 	

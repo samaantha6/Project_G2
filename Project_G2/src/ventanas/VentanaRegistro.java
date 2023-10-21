@@ -14,13 +14,13 @@ import javax.swing.JTextField;
 
 public class VentanaRegistro extends JFrame{
 	
-	protected JPanel pNorte, pSur, pOeste, pEste, pCentroIzq, pCentroDer, pCentro;
-	protected JLabel txtReg, txtNombre, txtApellido, txtCorreo, txtTelefono, txtContrasenia, txtPregSeg, txtVenificaCon, txtRespuesta;
-	protected JButton btnReg, btnVolver, btnOjo;
-	protected JComboBox<String> pregSeg;
-	protected JCheckBox Condiciones;
-	protected JTextField campoReg, campoNombre, campoApellido, campoCorreo, campoTelefono, campoRespuesta;
-	protected JPasswordField campoContrasenia, campoVenificaCon;
+	private JPanel pNorte, pSur, pOeste, pEste, pCentroIzq, pCentroDer, pCentro;
+	private JLabel txtReg, txtNombre, txtApellido, txtCorreo, txtTelefono, txtContrasenia, txtPregSeg, txtVenificaCon, txtRespuesta;
+	private JButton btnReg, btnVolver, btnOjo;
+	private JComboBox<String> pregSeg;
+	private JCheckBox Condiciones;
+	private JTextField campoReg, campoNombre, campoApellido, campoCorreo, campoTelefono, campoRespuesta;
+	private JPasswordField campoContrasenia, campoVenificaCon;
 	
 	public VentanaRegistro() {
 		
