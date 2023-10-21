@@ -6,6 +6,7 @@ public class VentanaInicio {
 		
 		VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
 		//VentanaRegistro ventanaReg = new VentanaRegistro();
+		VentanaModificarDatos ventanaMD = new VentanaModificarDatos();
 		
 		
 		

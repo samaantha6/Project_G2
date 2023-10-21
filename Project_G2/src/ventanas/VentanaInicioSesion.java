@@ -72,13 +72,12 @@ public class VentanaInicioSesion extends JFrame{
 	txtOlvidoCsnia.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			VentanaRegistro VR = new VentanaRegistro();
+			VentanaModificarDatos VMD = new VentanaModificarDatos();
 			dispose();
 		}
 	});
 	
 	btnReg.addActionListener(new ActionListener() {
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			VentanaRegistro VR = new VentanaRegistro();

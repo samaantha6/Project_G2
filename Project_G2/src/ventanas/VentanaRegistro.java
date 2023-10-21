@@ -3,6 +3,7 @@ package ventanas;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -14,6 +15,7 @@ import javax.swing.JTextField;
 
 public class VentanaRegistro extends JFrame{
 	
+	
 	private JPanel pNorte, pSur, pOeste, pEste, pCentro;
 	private JLabel txtReg, txtNombre, txtApellido, txtCorreo, txtTelefono, txtContrasenia, txtPregSeg, txtVenificaCon, txtRespuesta;
 	private JButton btnReg, btnVolver;
@@ -21,6 +23,9 @@ public class VentanaRegistro extends JFrame{
 	private JCheckBox Condiciones;
 	private JTextField campoReg, campoNombre, campoApellido, campoCorreo, campoTelefono, campoRespuesta;
 	private JPasswordField campoContrasenia, campoVenificaCon;
+	
+
+	
 	
 	public VentanaRegistro() {
 		
@@ -92,12 +97,12 @@ public class VentanaRegistro extends JFrame{
 		this.add(pCentro,BorderLayout.CENTER);
 		this.add(pEste,BorderLayout.EAST);
 		this.add(pOeste,BorderLayout.WEST);
-//		pCentro.add(pCentroIzq);
-//		pCentro.add(pCentroDer);
 		
 		this.setTitle("Registro");
 		this.setBounds(300, 200, 600, 400);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
+	
 }
+
