@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 public class VentanaRegistro extends JFrame{
 	
-	private JPanel pNorte, pSur, pOeste, pEste, pCentroIzq, pCentroDer, pCentro;
+	private JPanel pNorte, pSur, pOeste, pEste, pCentro;
 	private JLabel txtReg, txtNombre, txtApellido, txtCorreo, txtTelefono, txtContrasenia, txtPregSeg, txtVenificaCon, txtRespuesta;
 	private JButton btnReg, btnVolver;
 	private JComboBox<String> pregSeg;
@@ -42,7 +42,7 @@ public class VentanaRegistro extends JFrame{
 		
 
 		btnReg = new JButton("REGISTRARSE");
-		btnVolver = new JButton("volver");
+		btnVolver = new JButton("VOLVER");
 		
 		campoContrasenia = new JPasswordField();
 		campoVenificaCon = new JPasswordField();
