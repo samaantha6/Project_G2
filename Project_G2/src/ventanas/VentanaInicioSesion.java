@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,12 +34,17 @@ public class VentanaInicioSesion extends JFrame{
 	pOeste = new JPanel();
 	pEste = new JPanel();
 
-	
+	JLabel imagenLabel = new JLabel();
 	txtIS = new JLabel("INICIA SESIÓN:");
 	txtOlvidoCsnia = new JLabel("¿Has olvidado tu contraseña?");
 	txtCorreo = new JLabel("correo:");
 	txtContrasenia = new JLabel("contraseña:");
 	txtNull = new JLabel("");
+	
+	//ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource("img/bizcocho-de-limon.jpg")).getImage().getScaledInstance(imagenLabel.getWidth(), getHeight(), 0));
+	ImageIcon imagen = new ImageIcon("\\src\\ventanas\\bizcocho-de-limon.jpg");
+	imagenLabel.setIcon(imagen);
+	
 	
 	btnIS = new JButton("INICIAR SESIÓN");
 	btnReg = new JButton("REGISTRARSE");
@@ -48,6 +54,7 @@ public class VentanaInicioSesion extends JFrame{
 	campoCorreo = new JTextField();
 	
 	pNorte.add(txtIS);
+	pNorte.add(imagenLabel);
 	//añadir imagen
 	
 	pCentro.add(txtCorreo);

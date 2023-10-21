@@ -1,6 +1,10 @@
 package ventanas;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,17 +14,18 @@ import javax.swing.JTextField;
 public class VentanaModificarDatos extends JFrame{
 	
 	private JLabel txtModDatos, txtCorreo, txtTelefono, txtNewCon, txtVerifCon, txtNom, txtApel, txtPregSeg, txtRes;
-	private JTextField campoCorreo, campoTelefono, campoPregSeg, campoRes, campoNom, campoApel;
+	private JTextField campoCorreo, campoTelefono, campoRes, campoNom, campoApel;
 	private JPasswordField campoCon, campoVerifCon;
 	private JButton btnElimCuen, btnModif, btnVolver;
 	private JPanel pNorte, pSur, pCentro;
+	private JComboBox<String> campoPregSeg;
 	
 	
 	public VentanaModificarDatos() {
 		
-		pNorte = new JPanel();
-		pSur = new JPanel();
-		pCentro = new JPanel();
+		pNorte = new JPanel(new GridLayout(1,2));
+		pSur = new JPanel(new GridLayout(1,3));
+		pCentro = new JPanel(new GridLayout(8,2));
 		
 		txtNom = new JLabel("Nombre:");
 		txtApel = new JLabel("Apellido:");
@@ -35,9 +40,9 @@ public class VentanaModificarDatos extends JFrame{
 		campoNom = new JTextField();
 		campoApel = new JTextField();
 		campoCorreo = new JTextField();
-		campoPregSeg = new JTextField();
 		campoTelefono = new JTextField();
-		
+		campoPregSeg = new JComboBox<>();
+
 		campoCon = new JPasswordField();
 		campoVerifCon = new JPasswordField();
 		
@@ -45,11 +50,34 @@ public class VentanaModificarDatos extends JFrame{
 		btnElimCuen = new JButton("ELIMINAR CUENTA");
 		btnVolver = new JButton("VOLVER");
 		
+		pNorte.add(txtModDatos);
+		//pNorte.add();
 		
+		pCentro.add(txtCorreo);		
+		pCentro.add(campoCorreo);		
+		pCentro.add(txtTelefono);		
+		pCentro.add(campoTelefono);		
+		pCentro.add(txtNewCon);		
+		pCentro.add(campoCon);		//ojo
+		pCentro.add(txtVerifCon);		
+		pCentro.add(campoVerifCon);	//ojo	
+		pCentro.add(txtPregSeg);		
+		pCentro.add(campoPregSeg);		
+		pCentro.add(txtRes);	
+		//pCentro.add(campoRes);	
+		pCentro.add(txtNom);	
+		pCentro.add(campoNom);	
+		pCentro.add(txtApel);
+		pCentro.add(campoApel);
+				
+		pSur.add(btnElimCuen);
+		pSur.add(btnModif);
+		pSur.add(btnVolver);
 		
+		this.add(pNorte, BorderLayout.NORTH);
+		this.add(pCentro, BorderLayout.CENTER);
+		this.add(pSur, BorderLayout.SOUTH);
 		
-		
-	
 	this.setTitle("Modificar Datos");
 	this.setBounds(300, 200, 600, 400);
 	this.setVisible(true);
