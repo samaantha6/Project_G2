@@ -22,7 +22,7 @@ public class VentanaInicioSesion extends JFrame{
 	private JButton btnReg, btnIS;
 	private JTextField campoCorreo;
 	private JPasswordField campoContrasenia;
-	private JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull;
+	private JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull, imagenLabel;
 	
 	
 	public VentanaInicioSesion() {
@@ -34,14 +34,14 @@ public class VentanaInicioSesion extends JFrame{
 	pOeste = new JPanel();
 	pEste = new JPanel();
 
-	JLabel imagenLabel = new JLabel();
+	imagenLabel = new JLabel();
 	txtIS = new JLabel("INICIA SESIÓN:");
 	txtOlvidoCsnia = new JLabel("¿Has olvidado tu contraseña?");
 	txtCorreo = new JLabel("correo:");
 	txtContrasenia = new JLabel("contraseña:");
 	txtNull = new JLabel("");
 	
-	//ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource("img/bizcocho-de-limon.jpg")).getImage().getScaledInstance(imagenLabel.getWidth(), getHeight(), 0));
+	//ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource("\\src\\ventanas\\bizcocho-de-limon.jpg")).getImage().getScaledInstance(imagenLabel.getWidth(), getHeight(), 0));
 	ImageIcon imagen = new ImageIcon("\\src\\ventanas\\bizcocho-de-limon.jpg");
 	imagenLabel.setIcon(imagen);
 	
