@@ -1,19 +1,21 @@
 package ventanas;
 
+import java.awt.BorderLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class VentanaInicio extends Frame{
+public class VentanaInicio extends JFrame{
 	
 	private JPanel pNorte, pSur, pEsteArriba, pEsteAbajo, pOeste, pCentro;
 	private JButton btnVerEnvio, bntFac, btnHacerEnvio, btnCargar, btnCerrarSesion;
 	private JTextField campoAlto, campoAncho, campoLargo, campoPeso;
-	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso;
+	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso, txtSeparador;
 
 	
 	public VentanaInicio() {
@@ -33,6 +35,8 @@ public class VentanaInicio extends Frame{
 		txtAncho = new JLabel("Ancho");
 		txtLargo = new JLabel("Largo");
 		txtPeso = new JLabel("Peso");
+		txtSeparador = new JLabel("|\n|");
+		
 		
 		btnVerEnvio = new JButton("VER ENVÍOS");
 		bntFac = new JButton("FACTURACION");
@@ -45,20 +49,27 @@ public class VentanaInicio extends Frame{
 		campoLargo = new JTextField();
 		campoPeso = new JTextField();
 		
+		
+		pCentro.add(txtSeparador);
 		pNorte.add(txtBienvedida);
-		//pNorte.add(txtBienvedida);
 		pNorte.add(btnCerrarSesion);
 		
-		this.setTitle("Pantalla inicio");
-		this.setBounds(300, 200, 600, 400);
-		this.setVisible(true);
+		add(pCentro, BorderLayout.CENTER);
+		add(pNorte, BorderLayout.NORTH);
+
 		
+		setTitle("Pantalla inicio");
+		setBounds(300, 200, 600, 400);
+		setVisible(true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	public static void main(String[] args) {
 		
-		VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
+		//VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
 		//VentanaRegistro ventanaReg = new VentanaRegistro();
 		//VentanaModificarDatos ventanaMD = new VentanaModificarDatos();
+		
+		VentanaInicio a = new VentanaInicio();
 		
 	}
 

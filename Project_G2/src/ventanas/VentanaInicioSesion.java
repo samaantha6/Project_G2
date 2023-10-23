@@ -28,7 +28,6 @@ public class VentanaInicioSesion extends JFrame{
 	
 	public VentanaInicioSesion() {
 	
-		//new GridLayout(3,4)
 	 
 	pNorte = new JPanel(new GridLayout(1,2));
 	pCentro = new JPanel(new GridLayout(3,4));
@@ -47,9 +46,10 @@ public class VentanaInicioSesion extends JFrame{
 	txtContrasenia = new JLabel("contraseña:");
 	txtNull = new JLabel("");
 	
-	ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource("src\\ventanas\\bizcocho-de-limon.jpg")).getImage().getScaledInstance(imagenLabel.getWidth(), getHeight(), 0));
-	//ImageIcon imagen = new ImageIcon("src\\ventanas\\bizcocho-de-limon.jpg");
-	imagenLabel.setIcon(imagen);
+	
+//	//ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource("src\\ventanas\\bizcocho-de-limon.jpg")).getImage().getScaledInstance(imagenLabel.getWidth(), getHeight(), 0));
+//	ImageIcon imagen = new ImageIcon("src\\ventanas\\logoPngNegro.png");
+//	imagenLabel.setIcon(imagen);
 	
 	
 	btnIS = new JButton("INICIAR SESIÓN");
