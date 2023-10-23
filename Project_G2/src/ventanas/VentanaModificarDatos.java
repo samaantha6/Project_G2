@@ -20,7 +20,11 @@ public class VentanaModificarDatos extends JFrame{
 	private JPanel pNorte, pSur, pCentro;
 	private JComboBox<String> campoPregSeg;
 	
-	
+	/**
+	 * Meotodo samdksada
+	 * @param
+	 * @return zssadaz
+	 */
 	public VentanaModificarDatos() {
 		
 		pNorte = new JPanel(new GridLayout(1,2));
@@ -41,6 +45,7 @@ public class VentanaModificarDatos extends JFrame{
 		campoApel = new JTextField();
 		campoCorreo = new JTextField();
 		campoTelefono = new JTextField();
+		campoRes = new JTextField();
 		campoPregSeg = new JComboBox<>();
 
 		campoCon = new JPasswordField();
@@ -64,7 +69,7 @@ public class VentanaModificarDatos extends JFrame{
 		pCentro.add(txtPregSeg);		
 		pCentro.add(campoPregSeg);		
 		pCentro.add(txtRes);	
-		//pCentro.add(campoRes);	
+		pCentro.add(campoRes);	
 		pCentro.add(txtNom);	
 		pCentro.add(campoNom);	
 		pCentro.add(txtApel);

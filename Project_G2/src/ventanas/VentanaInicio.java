@@ -57,8 +57,8 @@ public class VentanaInicio extends Frame{
 	public static void main(String[] args) {
 		
 		VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
-		VentanaRegistro ventanaReg = new VentanaRegistro();
-		VentanaModificarDatos ventanaMD = new VentanaModificarDatos();
+		//VentanaRegistro ventanaReg = new VentanaRegistro();
+		//VentanaModificarDatos ventanaMD = new VentanaModificarDatos();
 		
 	}
 
