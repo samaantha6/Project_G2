@@ -48,7 +48,7 @@ public class VentanaInicioSesion extends JFrame{
 	txtNull = new JLabel("");
 	
 	ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource("src\\ventanas\\bizcocho-de-limon.jpg")).getImage().getScaledInstance(imagenLabel.getWidth(), getHeight(), 0));
-	ImageIcon imagen = new ImageIcon("src\\ventanas\\bizcocho-de-limon.jpg");
+	//ImageIcon imagen = new ImageIcon("src\\ventanas\\bizcocho-de-limon.jpg");
 	imagenLabel.setIcon(imagen);
 	
 	
