@@ -35,7 +35,7 @@ public class VentanaInicio extends JFrame{
 		txtAncho = new JLabel("Ancho");
 		txtLargo = new JLabel("Largo");
 		txtPeso = new JLabel("Peso");
-		txtSeparador = new JLabel("|\n|");
+		
 		
 		
 		btnVerEnvio = new JButton("VER ENVÍOS");
@@ -69,7 +69,8 @@ public class VentanaInicio extends JFrame{
 		//VentanaRegistro ventanaReg = new VentanaRegistro();
 		//VentanaModificarDatos ventanaMD = new VentanaModificarDatos();
 		
-		VentanaInicio a = new VentanaInicio();
+		//VentanaInicio a = new VentanaInicio();
+		VentanaHacerEnvio b = new VentanaHacerEnvio();
 		
 	}
 
