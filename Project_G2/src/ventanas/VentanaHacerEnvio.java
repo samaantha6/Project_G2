@@ -19,13 +19,13 @@ public class VentanaHacerEnvio extends JFrame {
 	private JTabbedPane tabEnvios;
 	
 	private JLabel txtCrearEnvio,  
-					txtDesde, txtA, txtNom, txtDir, txtTel, txtCorreo, 
+					txtDesde, txtA, txtNom, txtDir, txtTel, txtCorreo, txtNomA, txtDirA, txtTelA, txtCorreoA,
 					txtEmbalado, txtLargo, txtAncho, txtAlto, txtPeso, txtKg, txtValor, txtEur,
 					txtFEnvio, txtRecog, txtCasoRecog, txtEntrega,
 					txtQueEnvia, txtDescrip, txtTarj, txtFTarj, txtCVV, txtDni,
 					txtEnDesde, txtEnHasta, txtInfo, txtPago, txtEnvios;
 	
-	private JTextField	campoNom, campoDir, campoTel, campoCorreo, 
+	private JTextField	campoNom, campoDir, campoTel, campoCorreo, campoNomA, campoDirA, campoTelA, campoCorreoA, 
 						campoLargo, campoAncho, campoAlto, campoValor,
 						campoDescrip, campoTarj, campoFTarj, campoCVV, campoDni,
 						campoEnDesde, campoEnHasta, campoPago;
@@ -40,7 +40,7 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private JPanel pNorte, pNorte2, pNorte3,
 					pCentro, 
-					pDonde, pDesde, pA, pCamposDesde, pCamposA,
+					pDonde, ptxtDesde, ptxtA, pCamposDesde, pCamposA, pA, pDesde,
 					pQue, 
 					pComo, 
 					pPago, 
@@ -58,9 +58,16 @@ public class VentanaHacerEnvio extends JFrame {
 		
 		btnVolver = new JButton("<-");
 		
+		pDonde = new JPanel();
+		pQue = new JPanel();
+		pComo = new JPanel();
+		pPago = new JPanel();
+		pRev = new JPanel();
+		
 		pNorte = new JPanel(new GridLayout(1,2));
 		pNorte2 = new JPanel();
 		pNorte3 = new JPanel();
+
 
 		//TAB DONDE
 		
@@ -72,20 +79,32 @@ public class VentanaHacerEnvio extends JFrame {
 		txtTel = new JLabel("Teléfono:");
 		txtCorreo = new JLabel("Correo:");
 		
+		txtNomA = new JLabel("Nombre:");
+		txtDirA = new JLabel("Dirección");
+		txtTelA = new JLabel("Teléfono:");
+		txtCorreoA = new JLabel("Correo:");
+		
 		campoNom = new JTextField(20);
 		campoDir = new JTextField(20);
 		campoTel = new JTextField(20);
 		campoCorreo = new JTextField(20);
 		
+		campoNomA = new JTextField(20);
+		campoDirA = new JTextField(20);
+		campoTelA = new JTextField(20);
+		campoCorreoA = new JTextField(20);
+		
 		btnAnt = new JButton("<-");
 		btnSig = new JButton("->");
 		
-		pDesde = new JPanel();
+		ptxtDesde = new JPanel();
+		ptxtA = new JPanel();
+		pCamposDesde = new JPanel(new GridLayout(4,2));
+		pCamposA = new JPanel(new GridLayout(4,2));
 		pA = new JPanel();
-		pCamposDesde = new JPanel();
-		pCamposA = new JPanel();
+		pDesde = new JPanel();
 		
-		pCamposDesde.add(txtDesde);
+		ptxtDesde.add(txtDesde);
 		
 		pCamposDesde.add(txtNom);
 		pCamposDesde.add(campoNom);
@@ -96,22 +115,26 @@ public class VentanaHacerEnvio extends JFrame {
 		pCamposDesde.add(txtTel);
 		pCamposDesde.add(campoTel);
 		
-		pCamposA.add(txtA);
+		ptxtA.add(txtA);
 		
-		pCamposA.add(txtNom);
-		pCamposA.add(campoNom);
-		pCamposA.add(txtDir);
-		pCamposA.add(campoDir);
-		pCamposA.add(txtCorreo);
-		pCamposA.add(campoCorreo);
-		pCamposA.add(txtTel);
-		pCamposA.add(campoTel);
+		pCamposA.add(txtNomA);
+		pCamposA.add(campoNomA);
+		pCamposA.add(txtDirA);
+		pCamposA.add(campoDirA);
+		pCamposA.add(txtCorreoA);
+		pCamposA.add(campoCorreoA);
+		pCamposA.add(txtTelA);
+		pCamposA.add(campoTelA);
 		
+		pDesde.add(ptxtDesde, BorderLayout.NORTH);
+		pDesde.add(pCamposDesde, BorderLayout.CENTER);
+		pA.add(ptxtA, BorderLayout.NORTH);
+		pA.add(pCamposA, BorderLayout.CENTER);
 		
-		//pCentro.add(pCamposDesde, BorderLayout.WEST);
-		//pCentro.add(pCamposA, BorderLayout.EAST);
-		//add(pCentro);
-
+		pDonde.add(pDesde, BorderLayout.WEST);
+		pDonde.add(pA, BorderLayout.EAST);
+		
+		add(pDonde);
 		
 		//TAB QUE
 		
