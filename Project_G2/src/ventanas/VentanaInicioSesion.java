@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,7 @@ import javax.swing.JTextField;
 public class VentanaInicioSesion extends JFrame{
 	
 	
-	private JPanel pNorte, pSur, pOeste, pEste, pCentro, pCentroDer, pCentroIzq, pCentroCen;
+	private JPanel pNorte, pNorteIzq, pNorteDer, pSur, pOeste, pEste, pCentro, pCentroDer, pCentroIzq, pCentroCen;
 	private JButton btnReg, btnIS;
 	private JTextField campoCorreo;
 	private JPasswordField campoContrasenia;
@@ -30,7 +31,9 @@ public class VentanaInicioSesion extends JFrame{
 	
 	 
 	pNorte = new JPanel(new GridLayout(1,2));
-	pCentro = new JPanel(new GridLayout(3,4));
+	pNorteIzq = new JPanel();
+	pNorteDer = new JPanel();
+	pCentro = new JPanel(new GridLayout(3,1));
 	pSur = new JPanel();
 	pCentroDer = new JPanel();
 	pCentroIzq = new JPanel();
@@ -50,7 +53,8 @@ public class VentanaInicioSesion extends JFrame{
 //	//ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource("src\\ventanas\\bizcocho-de-limon.jpg")).getImage().getScaledInstance(imagenLabel.getWidth(), getHeight(), 0));
 //	ImageIcon imagen = new ImageIcon("src\\ventanas\\logoPngNegro.png");
 //	imagenLabel.setIcon(imagen);
-	
+	ImageIcon imageIcon = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+	JLabel jLabel = new JLabel(imageIcon);
 	
 	btnIS = new JButton("INICIAR SESIÓN");
 	btnReg = new JButton("REGISTRARSE");
@@ -59,8 +63,13 @@ public class VentanaInicioSesion extends JFrame{
 	campoContrasenia = new JPasswordField(20);
 	campoCorreo = new JTextField(20);
 	
-	pNorte.add(txtIS);
-	pNorte.add(imagenLabel);
+	jLabel.setPreferredSize(new Dimension(imageIcon.getIconWidth(), imageIcon.getIconHeight()));
+	
+	pNorteIzq.add(txtIS);
+	pNorteDer.add(jLabel);
+	
+	pNorte.add(pNorteIzq,BorderLayout.EAST);
+	pNorte.add(pNorteDer,BorderLayout.WEST);
 	//añadir imagen
 	
 	pCentroDer.add(txtCorreo);
@@ -93,6 +102,14 @@ public class VentanaInicioSesion extends JFrame{
 		}
 	});
 	
+	btnIS.addActionListener(new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			VentanaInicio VI = new VentanaInicio();
+			dispose();			
+		}
+	});
+	
 	btnReg.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -114,7 +131,7 @@ public class VentanaInicioSesion extends JFrame{
 
 	
 	setTitle("Inicio Sesión");
-	setBounds(300, 200, 600, 400);
+	setBounds(600, 400, 1200, 800);
 	setVisible(true);
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
