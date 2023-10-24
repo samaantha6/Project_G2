@@ -88,5 +88,11 @@ public class VentanaModificarDatos extends JFrame{
 	this.setVisible(true);
 	this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
+	
+	public static void main(String[] args) {
+		
+		VentanaModificarDatos ventana = new VentanaModificarDatos();
+		
+	}
 
 }
