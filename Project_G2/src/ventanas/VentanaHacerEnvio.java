@@ -24,16 +24,16 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private JLabel txtCrearEnvio,  
 					txtDesde, txtA, txtNom, txtDir, txtTel, txtCorreo, txtNomA, txtDirA, txtTelA, txtCorreoA,
-					txtEmbalado, txtLargo, txtAncho, txtAlto, txtPeso, txtKg, txtValor, txtEur, tctInfo,
+					txtEmbalado, txtLargo, txtAncho, txtAlto, txtPeso, txtKg, txtValor, txtEur, txtInfo,
 					txtFEnvio, txtRecog, txtCasoRecog, txtEntrega,
 					txtQueEnvia, txtDescrip, txtTarj, txtFTarj, txtCVV, txtDni,
-					txtEnDesde, txtEnHasta, txtInfo, txtPago, txtEnvios;
+					txtEnDesde, txtEnHasta, txtInfo2, txtPago, txtEnvios, txtRevPeso, txtRevLargo, txtRevAncho, txtRevAlto, txtRevKg;
 	
 	private JTextField	campoNom, campoDir, campoTel, campoCorreo, campoNomA, campoDirA, campoTelA, campoCorreoA, 
 						campoFenvio,
 						campoLargo, campoAncho, campoAlto, campoValor, campoPeso,
 						campoDescrip, campoTarj, campoFTarj, campoCVV, campoDni,
-						campoEnDesde, campoEnHasta, campoPago;
+						campoEnDesde, campoEnHasta, campoPago, campoRevLargo, campoRevAncho, campoRevAlto, campoRevPeso, campoEnvios;
 	
 	private JButton btnVolver;
 	
@@ -48,11 +48,11 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private JPanel pNorte, pNorte2, pNorte3,
 					pCentro, 
-					pDonde, ptxtDesde, ptxtA, pCamposDesde, pCamposA, pA, pDesde, pBtn,
-					pQue, pAltLarAnc, pPeso, pEmbalaje, pValor, pBtn2, pNQue, pSQue, pCQue,
+					pDonde, ptxtDesde, ptxtA, pCamposDesde, pCamposA, pA, pDesde,
+					pQue, pAltLarAnc, pPeso, pEmbalaje, pValor, pNQue, pCQue,
 					pComo, pFEnvio, pRecog, pEntrega, pRecYEnt, pEntrega2, pRecog2,
-					pPago, 
-					pRev;
+					pPago, pEnvio, pTarj, pContra, pRmtYDest, pTarj1, pTarj2, pFactura1, pFactura2,
+					pRev, pRevEnvio, pInfo, pAltPesLrAn, pEnYPg;
 	
 	
 	
@@ -79,6 +79,7 @@ public class VentanaHacerEnvio extends JFrame {
 
 
 		//TAB DONDE
+		
 		
 		txtA = new JLabel("A");
 		txtDesde = new JLabel("DESDE");
@@ -145,7 +146,9 @@ public class VentanaHacerEnvio extends JFrame {
 		
 		add(pDonde);
 		
+		
 		//TAB QUE
+		
 		
 		txtEmbalado = new JLabel("Embalaje:");
 		txtLargo = new JLabel("Largo:");
@@ -172,7 +175,6 @@ public class VentanaHacerEnvio extends JFrame {
 		pPeso = new JPanel();
 		pValor = new JPanel();
 		pNQue = new JPanel();
-		pSQue = new JPanel();
 		pCQue = new JPanel();
 		
 		pEmbalaje.add(txtEmbalado);
@@ -262,8 +264,130 @@ public class VentanaHacerEnvio extends JFrame {
 		//TAB PAGO
 		
 		
+		txtQueEnvia = new JLabel("¿Que estás enviando?");
+		txtDescrip = new JLabel("(Descripción breve)");
+		txtTarj = new JLabel("Nº tarjeta:");
+		txtFTarj = new JLabel("Fecha de caducidad:");
+		txtCVV = new JLabel("CVV:");
+		txtDni = new JLabel("DNI:");
 		
+		campoDescrip = new JTextField(30);
+		campoTarj = new JTextField(10);
+		campoFTarj = new JTextField(5);
+		campoCVV = new JTextField(5);
+		campoDni = new JTextField(10);
+		
+		checkFactura = new JCheckBox("¿Factura?");
+		
+		radTarj = new JRadioButton("Tarjeta");
+		radContrareembolso = new JRadioButton("Contrareembolso");
+		radFacRemit = new JRadioButton("Remitente");
+		radFacDestinat = new JRadioButton("Destinatario");
+		
+		pRmtYDest = new JPanel(new GridLayout(2,1));
+		pContra = new JPanel();
+		pTarj = new JPanel();
+		pEnvio = new JPanel();
+		pTarj1 = new JPanel();
+		pTarj2 = new JPanel();
+		pFactura1 = new JPanel();
+		pFactura2 = new JPanel();
+
+		pTarj1.add(txtTarj);
+		pTarj1.add(campoTarj);
+		
+		pTarj2.add(txtFTarj);
+		pTarj2.add(campoFTarj);
+		pTarj2.add(txtCVV);
+		pTarj2.add(campoCVV);
+		
+		pTarj.add(radTarj);
+		pTarj.add(pTarj1);
+		pTarj.add(pTarj2);
+		
+		pRmtYDest.add(radFacRemit);
+		pRmtYDest.add(radFacDestinat);
+		
+		pFactura1.add(checkFactura);
+		pFactura1.add(pRmtYDest);
+		
+		pFactura2.add(txtDni);
+		pFactura2.add(campoDni);
+		
+		pContra.add(radContrareembolso);
+		pContra.add(pFactura1);
+		pContra.add(pFactura2);
+		 
+		pEnvio.add(txtQueEnvia);
+		pEnvio.add(campoDescrip);
+		pEnvio.add(txtDescrip);
+		 
+		pPago.add(pEnvio);
+		pPago.add(pTarj);
+		pPago.add(pContra);
+		 
+		add(pPago);
+		 
+		 
 		//TAB REVISION
+		 
+		 
+		txtEnDesde = new JLabel("Enviar desde:");
+		txtEnHasta = new JLabel("Hasta:");
+		txtInfo2 = new JLabel("Info:");
+		txtPago = new JLabel("Pago:");
+		txtEnvios = new JLabel("Tipo Envios:");
+		txtRevPeso = new JLabel("Peso:");
+		txtRevLargo = new JLabel("Largo:");
+		txtRevAncho = new JLabel("Ancho:");
+		txtRevAlto = new JLabel("Alto:");
+		txtRevKg = new JLabel("kg");
+		 
+		campoEnDesde = new JTextField(10);
+		campoEnHasta = new JTextField(10);
+		campoPago = new JTextField(8);
+		campoRevLargo = new JTextField(5);
+		campoRevAncho = new JTextField(5);
+		campoRevAlto = new JTextField(5);
+		campoRevPeso = new JTextField(5);
+		campoEnvios = new JTextField(10);
+	 
+		checkTerminos = new JCheckBox("<html><u>Aceptas terminos y condiciones de uso</u></html>");
+		
+		
+		pRevEnvio = new JPanel(new GridLayout(2,4));
+		pInfo = new JPanel();
+		pAltPesLrAn = new JPanel(new GridLayout(4,2));
+		pEnYPg = new JPanel(new GridLayout(2,2));
+		 
+		 
+		 pRevEnvio.add(txtEnDesde);
+		 pRevEnvio.add(campoEnDesde);
+		 pRevEnvio.add(txtEnHasta);
+		 pRevEnvio.add(campoEnHasta);
+		 
+		 pAltPesLrAn.add(txtRevPeso);
+		 pAltPesLrAn.add(campoRevPeso);
+		 pAltPesLrAn.add(txtRevAlto);
+		 pAltPesLrAn.add(campoRevAlto);
+		 pAltPesLrAn.add(txtRevAncho);
+		 pAltPesLrAn.add(campoRevAncho);
+		 pAltPesLrAn.add(txtRevLargo);
+		 pAltPesLrAn.add(campoRevLargo);
+
+		 pEnYPg.add(txtEnvios);
+		 pEnYPg.add(campoEnvios);
+		 pEnYPg.add(txtPago);
+		 pEnYPg.add(campoPago);
+		 
+		 pRev.add(pRevEnvio);
+		 pRev.add(pEnYPg);
+		 pRev.add(pAltPesLrAn);
+		 pRev.add(checkTerminos);
+		 
+		 add(pRev);
+		 
+		 	 
 		
 		tabEnvios.addTab("DONDE", pDonde);
 		tabEnvios.addTab("QUE", pQue);

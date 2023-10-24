@@ -117,12 +117,12 @@ public class VentanaInicio extends JFrame{
 	}
 	public static void main(String[] args) {
 		
-		//VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
+		VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
 		//VentanaRegistro ventanaReg = new VentanaRegistro();
 		//VentanaModificarDatos ventanaMD = new VentanaModificarDatos();
 		//VentanaFacturacion ventanaFac = new VentanaFacturacion();
 		//VentanaInicio a = new VentanaInicio();
-		VentanaHacerEnvio b = new VentanaHacerEnvio();
+		//VentanaHacerEnvio b = new VentanaHacerEnvio();
 		//VentanaGestionEmpleados ventanaGesEmp = new VentanaGestionEmpleados();
 		
 	}
