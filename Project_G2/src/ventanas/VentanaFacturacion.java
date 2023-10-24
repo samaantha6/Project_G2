@@ -7,26 +7,23 @@ import java.awt.event.ActionListener;
 
 	public class VentanaFacturacion extends JFrame {
 		
-		private JPanel pNorte, pNorteArriba, pSurCentro, pOesteArriba, pEste, pEsteAbajo, pOeste, pCentro;
+		private JPanel pNorte, pNorteArriba, pOesteArriba, pEste, pOeste, pCentro;
 	    private JButton btnatras, btnexportar;
 	    private JTextField nRef, nPrecio, nDesc, nPagado, nEstado;
-	    private JLabel txtPrecio, txtPagado, txtRef, txtNull, txtDesc, txtFact, txtEstado, txtDetalles, txtExport, imagenLabel;
+	    private JLabel txtPrecio, txtPagado, txtRef, txtDesc, txtFact, txtEstado, txtDetalles, txtExport, imagenLabel;
 	    
 	    public VentanaFacturacion() {
 	    	
 	    	pNorte = new JPanel(new BorderLayout());
-			pCentro = new JPanel(new GridLayout(14,14));
 			pNorteArriba = new JPanel(new GridLayout(-80,10));
-			pSurCentro = new JPanel(new GridLayout(19,20));
-			pOesteArriba = new JPanel(new GridLayout(2,2));
-			pEste = new JPanel(new GridLayout(8,1));
-	        pEsteAbajo = new JPanel(new GridLayout(2, 1));
+			pCentro = new JPanel(new GridLayout(14,14));
+			pOesteArriba = new JPanel(new GridLayout(4, 1));
 			pOeste = new JPanel(new GridLayout(3,2));
+			pEste = new JPanel(new GridLayout(7,1));
 	        
 	    	imagenLabel = new JLabel();
 
 	        txtPrecio = new JLabel("Precio");
-	        txtNull = new JLabel("");
 	        txtRef = new JLabel("¿Envío?");
 	        txtDesc = new JLabel("Descripción");
 	        txtEstado = new JLabel("Estado");
@@ -48,16 +45,13 @@ import java.awt.event.ActionListener;
 	    	pNorte.add(imagenLabel); //Imagen
 	    	
 	    	pEste.add(txtDetalles);
-	    	JPanel precioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Panel para alinear los componentes horizontalmente
+	    	
+	    	// Paneles  para alinear los componentes horizontalmente
+	    	JPanel precioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
 	        precioPanel.add(txtPrecio);
 	        precioPanel.add(nPrecio);
 	        pEste.add(precioPanel);
 	    
-	        JPanel refPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	        refPanel.add(txtRef);
-	        refPanel.add(nRef);
-	        pEste.add(refPanel);
-
 	        JPanel descPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	        descPanel.add(txtDesc);
 	        descPanel.add(nDesc);
@@ -72,23 +66,33 @@ import java.awt.event.ActionListener;
 	        exPanel.add(txtExport);
 	        exPanel.add(btnexportar);
 	        pEste.add(exPanel);
-
 	        
+	        //Espacios en blanco para colocar los elementos de la izq. como qeuremos
+	        pOesteArriba.add(txtRef); 
+	        pOesteArriba.add(new JLabel(""));
+	        pOesteArriba.add(nRef);
+	        pOesteArriba.add(txtPagado);
+	        pOesteArriba.add(new JLabel(""));
+	        pOesteArriba.add(nPagado);
+	        
+	        JPanel panelEnvio = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	        panelEnvio.add(txtRef);
+	        panelEnvio.add(nRef);
+	    	pOesteArriba.add(panelEnvio);
+	    	
+	    	JPanel panelPago = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	        panelPago.add(txtPagado);
+	        panelPago.add(nPagado);
+	    	pOesteArriba.add(panelPago);
+
 	        pNorteArriba.add(btnatras);
 	    	pNorteArriba.add(txtFact);
 	        
-	    	pOesteArriba.add(txtRef);
-	    	pOesteArriba.add(nRef);
-	    	pOesteArriba.add(txtPagado);
-	    	pOesteArriba.add(nPagado);
 
-	    	
-	        pOeste.add(pOesteArriba, BorderLayout.NORTH);
-	        pEste.add(pEsteAbajo, BorderLayout.EAST);
+	        pOeste.add(pOesteArriba, BorderLayout.CENTER);
 	        
 	        add(pNorte, BorderLayout.NORTH);
 	        add(pNorteArriba, BorderLayout.NORTH);
-	        add(pSurCentro, BorderLayout.CENTER);
 
 	        add(pCentro, BorderLayout.CENTER);
 	        add(pOeste, BorderLayout.WEST);
