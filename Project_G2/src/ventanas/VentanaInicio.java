@@ -14,9 +14,9 @@ import javax.swing.JTextField;
 
 public class VentanaInicio extends JFrame{
 	
-	private JPanel pNorte, pNorteIzq, pNorteDer, pSur, pEsteArriba, pEsteAbajo, pOeste, pCentro;
-	private JButton btnVerEnvio, bntFac, btnHacerEnvio, btnCargar, btnCerrarSesion;
-	private JTextField campoAlto, campoAncho, campoLargo, campoPeso;
+	private JPanel pNorte, pNorteIzq, pNorteDer, pSur, pEste, pEsteArriba, pEsteCentro, pEsteAbajo, pOeste, pOesteArriba, pOesteCentro, pOesteAbajo, pCentro;
+	private JButton btnVerEnvio, btnFac, btnHacerEnvio, btnCargar, btnCerrarSesion;
+	private JTextField campoAlto, campoAncho, campoLargo, campoPeso, campoDesde, campoHasta;
 	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso, txtSeparador;
 
 	
@@ -27,9 +27,14 @@ public class VentanaInicio extends JFrame{
 		pNorteDer = new JPanel();
 		pCentro = new JPanel(new GridLayout(3,4));
 		pSur = new JPanel();
-		pEsteArriba = new JPanel(new GridLayout(3,2));
+		pEste = new JPanel(new GridLayout(3,1));
+		pEsteArriba = new JPanel();
+		pEsteCentro = new JPanel(new GridLayout(2,2));
 		pEsteAbajo = new JPanel(new GridLayout(2,4));
-		pOeste = new JPanel(new GridLayout(3,2));
+		pOeste = new JPanel(new GridLayout(3,1));
+		pOesteArriba = new JPanel();
+		pOesteCentro = new JPanel();
+		pOesteAbajo = new JPanel();
 		
 		txtBienvedida = new JLabel("Bienvenid@!");
 		txtCrearPre = new JLabel("Crear Presupuesto:");
@@ -45,7 +50,7 @@ public class VentanaInicio extends JFrame{
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		
 		btnVerEnvio = new JButton("VER ENVÍOS");
-		bntFac = new JButton("FACTURACION");
+		btnFac = new JButton("FACTURACION");
 		btnHacerEnvio = new JButton("HACER ENVÍO");
 		btnCargar = new JButton("CARGAR");
 		btnCerrarSesion = new JButton("CERRAR SESIÓN");
@@ -54,16 +59,55 @@ public class VentanaInicio extends JFrame{
 		campoAncho = new JTextField();
 		campoLargo = new JTextField();
 		campoPeso = new JTextField();
+		campoDesde = new JTextField();
+		campoHasta = new JTextField();
 		
 		pNorteIzq.add(btnCerrarSesion);
 		pNorteDer.add(txtBienvedida);
 		
-		pNorte.add(pNorteDer, BorderLayout.EAST);
 		pNorte.add(labelImagenLogo);
+		pNorte.add(pNorteDer, BorderLayout.EAST);
 		pNorte.add(pNorteIzq, BorderLayout.WEST);
+		
+		pOesteArriba.add(btnVerEnvio);
+		//pOesteArriba.add(labelImagenLogo);
+		pOesteCentro.add(btnFac);
+		//pOesteCentro.add(labelImagenLogo);
+		pOesteAbajo.add(btnHacerEnvio);
+		//pOesteAbajo.add(labelImagenLogo);
+		
+		pOeste.add(pOesteArriba, BorderLayout.NORTH);
+		pOeste.add(pOesteCentro, BorderLayout.CENTER);
+		pOeste.add(pOesteAbajo, BorderLayout.SOUTH);
+		
+		pEsteArriba.add(txtCrearPre);
+
+		pEsteCentro.add(txtDesde);
+		pEsteCentro.add(campoDesde);
+		pEsteCentro.add(txtHasta);
+		pEsteCentro.add(campoHasta);
+		
+		pEsteAbajo.add(txtAlto);
+		pEsteAbajo.add(campoAlto);
+		pEsteAbajo.add(txtAncho);
+		pEsteAbajo.add(campoAncho);
+		pEsteAbajo.add(txtLargo);
+		pEsteAbajo.add(campoLargo);
+		pEsteAbajo.add(txtPeso);
+		pEsteAbajo.add(campoPeso);
+		
+		pEste.add(pEsteArriba, BorderLayout.NORTH);
+		pEste.add(pEsteCentro, BorderLayout.CENTER);
+		pEste.add(pEsteAbajo, BorderLayout.SOUTH);
+		
+		pCentro.add(pEste,BorderLayout.EAST);
+		
+		pSur.add(btnCargar);
 		
 		add(pCentro, BorderLayout.CENTER);
 		add(pNorte, BorderLayout.NORTH);
+		add(pOeste, BorderLayout.WEST);
+		add(pSur, BorderLayout.SOUTH);
 
 		
 		setTitle("Pantalla inicio");
