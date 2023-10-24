@@ -52,7 +52,7 @@ public class VentanaInicio extends JFrame{
 		btnVerEnvio = new JButton("VER ENVÍOS");
 		btnFac = new JButton("FACTURACION");
 		btnHacerEnvio = new JButton("HACER ENVÍO");
-		btnCargar = new JButton("CARGAR");
+		btnCargar = new JButton("CREAR");
 		btnCerrarSesion = new JButton("CERRAR SESIÓN");
 		
 		campoAlto = new JTextField();
