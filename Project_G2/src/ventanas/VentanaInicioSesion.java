@@ -53,20 +53,18 @@ public class VentanaInicioSesion extends JFrame{
 //	//ImageIcon imagen = new ImageIcon(new ImageIcon(getClass().getResource("src\\ventanas\\bizcocho-de-limon.jpg")).getImage().getScaledInstance(imagenLabel.getWidth(), getHeight(), 0));
 //	ImageIcon imagen = new ImageIcon("src\\ventanas\\logoPngNegro.png");
 //	imagenLabel.setIcon(imagen);
-	ImageIcon imageIcon = new ImageIcon(getClass().getResource("logoPngNegro.png"));
-	JLabel jLabel = new JLabel(imageIcon);
+	ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+	JLabel labelImagenLogo = new JLabel(logo);
+	labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 	
 	btnIS = new JButton("INICIAR SESIÓN");
 	btnReg = new JButton("REGISTRARSE");
 	 
-	
 	campoContrasenia = new JPasswordField(20);
 	campoCorreo = new JTextField(20);
 	
-	jLabel.setPreferredSize(new Dimension(imageIcon.getIconWidth(), imageIcon.getIconHeight()));
-	
 	pNorteIzq.add(txtIS);
-	pNorteDer.add(jLabel);
+	pNorteDer.add(labelImagenLogo);
 	
 	pNorte.add(pNorteIzq,BorderLayout.EAST);
 	pNorte.add(pNorteDer,BorderLayout.WEST);
@@ -131,7 +129,7 @@ public class VentanaInicioSesion extends JFrame{
 
 	
 	setTitle("Inicio Sesión");
-	setBounds(600, 400, 1200, 800);
+	setBounds(300, 200, 600, 400);
 	setVisible(true);
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}

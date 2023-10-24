@@ -1,9 +1,11 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,7 +40,9 @@ public class VentanaInicio extends JFrame{
 		txtLargo = new JLabel("Largo");
 		txtPeso = new JLabel("Peso");
 		
-		
+		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		JLabel labelImagenLogo = new JLabel(logo);
+		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		
 		btnVerEnvio = new JButton("VER ENVÍOS");
 		bntFac = new JButton("FACTURACION");
@@ -55,6 +59,7 @@ public class VentanaInicio extends JFrame{
 		pNorteDer.add(txtBienvedida);
 		
 		pNorte.add(pNorteDer, BorderLayout.EAST);
+		pNorte.add(labelImagenLogo);
 		pNorte.add(pNorteIzq, BorderLayout.WEST);
 		
 		add(pCentro, BorderLayout.CENTER);
@@ -71,9 +76,10 @@ public class VentanaInicio extends JFrame{
 		VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
 		//VentanaRegistro ventanaReg = new VentanaRegistro();
 		//VentanaModificarDatos ventanaMD = new VentanaModificarDatos();
-		
+		//VentanaFacturacion ventanaFac = new VentanaFacturacion();
 		//VentanaInicio a = new VentanaInicio();
 		//VentanaHacerEnvio b = new VentanaHacerEnvio();
+		//VentanaGestionEmpleados ventanaGesEmp = new VentanaGestionEmpleados();
 		
 	}
 

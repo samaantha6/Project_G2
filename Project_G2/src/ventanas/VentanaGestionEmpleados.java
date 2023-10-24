@@ -27,7 +27,9 @@ public class VentanaGestionEmpleados extends JFrame {
         pOeste = new JPanel(new GridLayout(5,5));
         pEste = new JPanel();
         
-    	imagenLabel = new JLabel();
+    	ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+    	JLabel labelImagenLogo = new JLabel(logo);
+    	labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 
         txtEnv = new JLabel("Envíos realizados");
         txtNull = new JLabel("");
@@ -37,7 +39,6 @@ public class VentanaGestionEmpleados extends JFrame {
         btneliminar = new JButton("Eliminar Envío");
         nRef = new JTextField(10);
         
-    	pNorte.add(imagenLabel); //Imagen
 
         pOeste.add(btnatras);
         

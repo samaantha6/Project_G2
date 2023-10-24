@@ -1,9 +1,10 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
-
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -59,6 +60,10 @@ public class VentanaRegistro extends JFrame{
 		campoCorreo = new JTextField();
 		campoTelefono = new JTextField();
 		campoRespuesta = new JTextField();
+		
+		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		JLabel labelImagenLogo = new JLabel(logo);
+		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 
 		Condiciones = new JCheckBox("Acepto condiciones y términos de seguridad");
 		
@@ -96,6 +101,7 @@ public class VentanaRegistro extends JFrame{
 		
 		
 		pNorte.add(pCentro);
+		pNorte.add(labelImagenLogo);
 		
 		this.add(pNorte,BorderLayout.NORTH);
 		this.add(pSur,BorderLayout.SOUTH);

@@ -21,7 +21,9 @@ import java.awt.event.ActionListener;
 			pOeste = new JPanel(new GridLayout(3,2));
 			pEste = new JPanel(new GridLayout(7,1));
 	        
-	    	imagenLabel = new JLabel();
+			ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+			JLabel labelImagenLogo = new JLabel(logo);
+			labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 
 	        txtPrecio = new JLabel("Precio");
 	        txtRef = new JLabel("¿Envío?");
@@ -40,9 +42,6 @@ import java.awt.event.ActionListener;
 	        nDesc = new JTextField(10);
 	        nEstado = new JTextField(10);
 	        nPagado = new JTextField(10);
-
-
-	    	pNorte.add(imagenLabel); //Imagen
 	    	
 	    	pEste.add(txtDetalles);
 	    	
@@ -87,6 +86,7 @@ import java.awt.event.ActionListener;
 
 	        pNorteArriba.add(btnatras);
 	    	pNorteArriba.add(txtFact);
+	    	pNorteArriba.add(labelImagenLogo);
 	        
 
 	        pOeste.add(pOesteArriba, BorderLayout.CENTER);
@@ -104,9 +104,5 @@ import java.awt.event.ActionListener;
 	        setVisible(true);
 	        
 	    }
-	        public static void main(String[] args) {
-	    		
-	    		VentanaFacturacion ventana = new VentanaFacturacion();
-	    		
-	    	}
+
 }

@@ -2,8 +2,10 @@ package ventanas;
 
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -63,6 +65,10 @@ public class VentanaHacerEnvio extends JFrame {
 		pComo = new JPanel();
 		pPago = new JPanel();
 		pRev = new JPanel();
+		
+		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		JLabel labelImagenLogo = new JLabel(logo);
+		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		
 		pNorte = new JPanel(new GridLayout(1,2));
 		pNorte2 = new JPanel();
@@ -153,7 +159,7 @@ public class VentanaHacerEnvio extends JFrame {
 		
 		pNorte2.add(btnVolver);
 		pNorte2.add(txtCrearEnvio);
-//		pNorte3.add(LOGO);
+		pNorte3.add(labelImagenLogo);
 		pNorte.add(pNorte2);
 		pNorte.add(pNorte3);
 		add(pNorte, BorderLayout.NORTH);

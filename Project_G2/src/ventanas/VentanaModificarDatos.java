@@ -1,8 +1,10 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -51,12 +53,16 @@ public class VentanaModificarDatos extends JFrame{
 		campoCon = new JPasswordField();
 		campoVerifCon = new JPasswordField();
 		
+		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		JLabel labelImagenLogo = new JLabel(logo);
+		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
+		
 		btnModif = new JButton("MODIFICAR");
 		btnElimCuen = new JButton("ELIMINAR CUENTA");
 		btnVolver = new JButton("VOLVER");
 		
 		pNorte.add(txtModDatos);
-		//pNorte.add();
+		pNorte.add(labelImagenLogo);
 		
 		pCentro.add(txtCorreo);		
 		pCentro.add(campoCorreo);		
@@ -87,12 +93,6 @@ public class VentanaModificarDatos extends JFrame{
 	this.setBounds(300, 200, 600, 400);
 	this.setVisible(true);
 	this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	}
-	
-	public static void main(String[] args) {
-		
-		VentanaModificarDatos ventana = new VentanaModificarDatos();
-		
 	}
 
 }
