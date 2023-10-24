@@ -105,7 +105,7 @@ public class VentanaRegistro extends JFrame{
 		
 		this.add(pNorte,BorderLayout.NORTH);
 		this.add(pSur,BorderLayout.SOUTH);
-		//this.add(pCentro,BorderLayout.NORTH);
+		this.add(pCentro,BorderLayout.CENTER);
 		this.add(pEste,BorderLayout.EAST);
 		this.add(pOeste,BorderLayout.WEST);
 		
