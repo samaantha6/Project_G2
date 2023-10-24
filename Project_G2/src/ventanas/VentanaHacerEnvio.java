@@ -4,7 +4,9 @@ package ventanas;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.security.acl.Group;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -54,12 +56,16 @@ public class VentanaHacerEnvio extends JFrame {
 					pPago, pEnvio, pTarj, pContra, pRmtYDest, pTarj1, pTarj2, pFactura1, pFactura2,
 					pRev, pRevEnvio, pInfo, pAltPesLrAn, pEnYPg;
 	
+	private ButtonGroup tipoEnvioGrupo, recogidaGrupo, pagoGrupo, facturaGrupo;
+	
 	
 	
 	
 	
 	public VentanaHacerEnvio() {
 	
+		
+		
 		tabEnvios = new JTabbedPane();
 		
 		txtCrearEnvio = new JLabel("CREAR ENVÍO:");
@@ -226,12 +232,22 @@ public class VentanaHacerEnvio extends JFrame {
 		
 		comboRecog = new JComboBox<String>();
 		
+		tipoEnvioGrupo = new ButtonGroup();
+		recogidaGrupo = new ButtonGroup();
+		
 		pFEnvio = new JPanel();
 		pRecog = new JPanel();
 		pEntrega = new JPanel();
 		pRecYEnt = new JPanel();
 		pEntrega2 = new JPanel(new GridLayout(3,1));
 		pRecog2 = new JPanel(new GridLayout(3,1));
+		
+		recogidaGrupo.add(radPtoRecog);
+		recogidaGrupo.add(radUsoDir);
+		
+		tipoEnvioGrupo.add(radEstandar);
+		tipoEnvioGrupo.add(radPremium);
+		tipoEnvioGrupo.add(radSuper);
 		
 		pFEnvio.add(txtFEnvio);
 		pFEnvio.add(campoFenvio);
@@ -284,6 +300,9 @@ public class VentanaHacerEnvio extends JFrame {
 		radFacRemit = new JRadioButton("Remitente");
 		radFacDestinat = new JRadioButton("Destinatario");
 		
+		pagoGrupo = new ButtonGroup();
+		facturaGrupo = new ButtonGroup();
+		
 		pRmtYDest = new JPanel(new GridLayout(2,1));
 		pContra = new JPanel();
 		pTarj = new JPanel();
@@ -293,6 +312,12 @@ public class VentanaHacerEnvio extends JFrame {
 		pFactura1 = new JPanel();
 		pFactura2 = new JPanel();
 
+		pagoGrupo.add(radTarj);
+		pagoGrupo.add(radContrareembolso);
+		
+		facturaGrupo.add(radFacRemit);
+		facturaGrupo.add(radFacDestinat);
+		
 		pTarj1.add(txtTarj);
 		pTarj1.add(campoTarj);
 		
