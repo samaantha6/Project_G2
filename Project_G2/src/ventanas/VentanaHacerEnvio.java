@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,19 +23,21 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private JLabel txtCrearEnvio,  
 					txtDesde, txtA, txtNom, txtDir, txtTel, txtCorreo, txtNomA, txtDirA, txtTelA, txtCorreoA,
-					txtEmbalado, txtLargo, txtAncho, txtAlto, txtPeso, txtKg, txtValor, txtEur,
+					txtEmbalado, txtLargo, txtAncho, txtAlto, txtPeso, txtKg, txtValor, txtEur, tctInfo,
 					txtFEnvio, txtRecog, txtCasoRecog, txtEntrega,
 					txtQueEnvia, txtDescrip, txtTarj, txtFTarj, txtCVV, txtDni,
 					txtEnDesde, txtEnHasta, txtInfo, txtPago, txtEnvios;
 	
 	private JTextField	campoNom, campoDir, campoTel, campoCorreo, campoNomA, campoDirA, campoTelA, campoCorreoA, 
-						campoLargo, campoAncho, campoAlto, campoValor,
+						campoLargo, campoAncho, campoAlto, campoValor, campoPeso,
 						campoDescrip, campoTarj, campoFTarj, campoCVV, campoDni,
 						campoEnDesde, campoEnHasta, campoPago;
 	
-	private JButton btnAnt, btnSig, btnVolver;
+	private JButton btnVolver;
 	
 	private JCheckBox checkTerminos, checkFactura;
+	
+	private JComboBox<String> comboEmbalaje;
 	
 	private JRadioButton radFragil, 
 							radPtoRecog, radUsoDir,radEstandar, radSuper, radPremium,
@@ -42,8 +45,8 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private JPanel pNorte, pNorte2, pNorte3,
 					pCentro, 
-					pDonde, ptxtDesde, ptxtA, pCamposDesde, pCamposA, pA, pDesde,
-					pQue, 
+					pDonde, ptxtDesde, ptxtA, pCamposDesde, pCamposA, pA, pDesde, pBtn,
+					pQue, pAltLarAnc, pPeso, pEmbalaje, pValor, pBtn2, pNQue, pSQue, pCQue,
 					pComo, 
 					pPago, 
 					pRev;
@@ -66,9 +69,6 @@ public class VentanaHacerEnvio extends JFrame {
 		pPago = new JPanel();
 		pRev = new JPanel();
 		
-		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
-		JLabel labelImagenLogo = new JLabel(logo);
-		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		
 		pNorte = new JPanel(new GridLayout(1,2));
 		pNorte2 = new JPanel();
@@ -99,9 +99,7 @@ public class VentanaHacerEnvio extends JFrame {
 		campoDirA = new JTextField(20);
 		campoTelA = new JTextField(20);
 		campoCorreoA = new JTextField(20);
-		
-		btnAnt = new JButton("<-");
-		btnSig = new JButton("->");
+	
 		
 		ptxtDesde = new JPanel();
 		ptxtA = new JPanel();
@@ -109,8 +107,9 @@ public class VentanaHacerEnvio extends JFrame {
 		pCamposA = new JPanel(new GridLayout(4,2));
 		pA = new JPanel();
 		pDesde = new JPanel();
+
 		
-		ptxtDesde.add(txtDesde);
+		ptxtDesde.add(txtDesde, BorderLayout.NORTH);
 		
 		pCamposDesde.add(txtNom);
 		pCamposDesde.add(campoNom);
@@ -121,7 +120,7 @@ public class VentanaHacerEnvio extends JFrame {
 		pCamposDesde.add(txtTel);
 		pCamposDesde.add(campoTel);
 		
-		ptxtA.add(txtA);
+		ptxtA.add(txtA, BorderLayout.NORTH);
 		
 		pCamposA.add(txtNomA);
 		pCamposA.add(campoNomA);
@@ -132,30 +131,100 @@ public class VentanaHacerEnvio extends JFrame {
 		pCamposA.add(txtTelA);
 		pCamposA.add(campoTelA);
 		
-		pDesde.add(ptxtDesde, BorderLayout.NORTH);
-		pDesde.add(pCamposDesde, BorderLayout.CENTER);
-		pA.add(ptxtA, BorderLayout.NORTH);
-		pA.add(pCamposA, BorderLayout.CENTER);
 		
-		pDonde.add(pDesde, BorderLayout.WEST);
-		pDonde.add(pA, BorderLayout.EAST);
+		pDesde.add(ptxtDesde, BorderLayout.NORTH);
+		pDesde.add(pCamposDesde, BorderLayout.SOUTH);
+		pA.add(ptxtA, BorderLayout.NORTH);
+		pA.add(pCamposA, BorderLayout.SOUTH);
+		
+		pDonde.add(pDesde);
+		pDonde.add(pA);
 		
 		add(pDonde);
 		
 		//TAB QUE
 		
+		txtEmbalado = new JLabel("Embalaje:");
+		txtLargo = new JLabel("Largo:");
+		txtAncho = new JLabel("Alto:");
+		txtAlto = new JLabel("Ancho:");
+		txtPeso = new JLabel("Peso:");
+		txtKg = new JLabel("kg");
+		txtValor = new JLabel("Valor del paquete:");
+		txtEur = new JLabel("EUR");
+		txtInfo = new JLabel("El nº de referencia se asigna automáticamente.");
+		
+		campoLargo = new JTextField(10);
+		campoAncho = new JTextField(10);
+		campoAlto = new JTextField(10);
+		campoValor = new JTextField(10);
+		campoPeso = new JTextField(10);
+		
+		radFragil = new JRadioButton("¿Frágil?");
+		
+		comboEmbalaje = new JComboBox<String>();
+		
+		pEmbalaje = new JPanel(new GridLayout(1,2));
+		pAltLarAnc = new JPanel();
+		pPeso = new JPanel();
+		pValor = new JPanel();
+		pNQue = new JPanel();
+		pSQue = new JPanel();
+		pCQue = new JPanel();
+		
+		pEmbalaje.add(txtEmbalado);
+		pEmbalaje.add(comboEmbalaje);
+		
+		pAltLarAnc.add(txtLargo);
+		pAltLarAnc.add(campoLargo);
+		pAltLarAnc.add(txtAlto);
+		pAltLarAnc.add(campoAlto);
+		pAltLarAnc.add(txtAncho);
+		pAltLarAnc.add(campoAncho);
+		
+		pValor.add(txtValor);
+		pValor.add(campoValor);
+		pValor.add(txtEur);
+		
+		pPeso.add(txtPeso);
+		pPeso.add(campoPeso);
+		pPeso.add(txtKg);
+		
+		
+		pNQue.add(pEmbalaje);
+		pNQue.add(pPeso);
+		pCQue.add(pValor);
+		pCQue.add(radFragil);
+		pQue.add(pNQue);
+		pQue.add(pAltLarAnc);
+		pQue.add(pCQue);
+		
+		add(pQue);
+			
+		
 		//TAB COMO
+		
+		
+		txtFEnvio = new JLabel();
+		txtRecog = new JLabel();
+		txtCasoRecog = new JLabel();
+		txtEntrega = new JLabel();
+		
+		
 		
 		//TAB PAGO
 		
 		//TAB REVISION
 		
-//		tabEnvios.addTab("DONDE", radio);
-//		tabEnvios.addTab("QUE", );
-//		tabEnvios.addTab("COMO", a);
-//		tabEnvios.addTab("PAGO", a);
-//		tabEnvios.addTab("REVISIÓN", a);
+		tabEnvios.addTab("DONDE", pDonde);
+		tabEnvios.addTab("QUE", pQue);
+		tabEnvios.addTab("COMO", pComo);
+		tabEnvios.addTab("PAGO", pPago);
+		tabEnvios.addTab("REVISIÓN", pRev);
 		
+		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		JLabel labelImagenLogo = new JLabel(logo);
+		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		
 		pNorte2.add(btnVolver);
 		pNorte2.add(txtCrearEnvio);
@@ -163,11 +232,13 @@ public class VentanaHacerEnvio extends JFrame {
 		pNorte.add(pNorte2);
 		pNorte.add(pNorte3);
 		add(pNorte, BorderLayout.NORTH);
-//		add(tabEnvios);
+		add(tabEnvios, BorderLayout.CENTER);
+		
+		
 	
 		
 		setTitle("Hacer envío");
-		setBounds(300, 200, 600, 400);
+		setBounds(300, 200, 800, 400);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
