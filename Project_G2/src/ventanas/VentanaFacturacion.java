@@ -99,7 +99,7 @@ import java.awt.event.ActionListener;
 	        add(pEste, BorderLayout.EAST);
 	        
 	        setTitle("Facturación");
-	        setBounds(300, 18, 600, 400); // Ajustar el ancho del marco
+	        setBounds(350, 100, 600, 400); // Ajustar el ancho del marco
 	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	        setVisible(true);
 	        
