@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,6 +30,7 @@ public class VentanaHacerEnvio extends JFrame {
 					txtEnDesde, txtEnHasta, txtInfo, txtPago, txtEnvios;
 	
 	private JTextField	campoNom, campoDir, campoTel, campoCorreo, campoNomA, campoDirA, campoTelA, campoCorreoA, 
+						campoFenvio,
 						campoLargo, campoAncho, campoAlto, campoValor, campoPeso,
 						campoDescrip, campoTarj, campoFTarj, campoCVV, campoDni,
 						campoEnDesde, campoEnHasta, campoPago;
@@ -37,7 +39,8 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private JCheckBox checkTerminos, checkFactura;
 	
-	private JComboBox<String> comboEmbalaje;
+	private JComboBox<String> comboEmbalaje,
+								comboRecog;
 	
 	private JRadioButton radFragil, 
 							radPtoRecog, radUsoDir,radEstandar, radSuper, radPremium,
@@ -47,7 +50,7 @@ public class VentanaHacerEnvio extends JFrame {
 					pCentro, 
 					pDonde, ptxtDesde, ptxtA, pCamposDesde, pCamposA, pA, pDesde, pBtn,
 					pQue, pAltLarAnc, pPeso, pEmbalaje, pValor, pBtn2, pNQue, pSQue, pCQue,
-					pComo, 
+					pComo, pFEnvio, pRecog, pEntrega, pRecYEnt, pEntrega2, pRecog2,
 					pPago, 
 					pRev;
 	
@@ -198,6 +201,7 @@ public class VentanaHacerEnvio extends JFrame {
 		pQue.add(pNQue);
 		pQue.add(pAltLarAnc);
 		pQue.add(pCQue);
+		pQue.add(txtInfo);
 		
 		add(pQue);
 			
@@ -205,14 +209,59 @@ public class VentanaHacerEnvio extends JFrame {
 		//TAB COMO
 		
 		
-		txtFEnvio = new JLabel();
-		txtRecog = new JLabel();
-		txtCasoRecog = new JLabel();
-		txtEntrega = new JLabel();
+		txtFEnvio = new JLabel("Fecha de envío:");
+		txtRecog = new JLabel("Recogida:");
+		txtCasoRecog = new JLabel("(En caso de ir a recoger el \n paquete a domicilio.)");
+		txtEntrega = new JLabel("¿Cuando se entrega?");
 		
+		campoFenvio = new JTextField(10);
+		
+		radPtoRecog = new JRadioButton("Punto de recogida");
+		radUsoDir = new JRadioButton("Usar mi direccion");
+		radEstandar = new JRadioButton("Estandar");
+		radSuper = new JRadioButton("Superior");
+		radPremium = new JRadioButton("Premium");
+		
+		comboRecog = new JComboBox<String>();
+		
+		pFEnvio = new JPanel();
+		pRecog = new JPanel();
+		pEntrega = new JPanel();
+		pRecYEnt = new JPanel();
+		pEntrega2 = new JPanel(new GridLayout(3,1));
+		pRecog2 = new JPanel(new GridLayout(3,1));
+		
+		pFEnvio.add(txtFEnvio);
+		pFEnvio.add(campoFenvio);
+		pFEnvio.add(txtCasoRecog);
+		
+		pRecog2.add(radPtoRecog);
+		pRecog2.add(comboRecog);
+		pRecog2.add(radUsoDir);
+		
+
+		pEntrega2.add(radEstandar);
+		pEntrega2.add(radSuper);
+		pEntrega2.add(radPremium);
+
+		pEntrega.add(txtEntrega);
+		pEntrega.add(pEntrega2);
+		
+		pRecog.add(txtRecog);
+		pRecog.add(pRecog2);
+		
+		pRecYEnt.add(pRecog);
+		pRecYEnt.add(pEntrega);
+		
+		pComo.add(pFEnvio);
+		pComo.add(pRecYEnt);
+
+		add(pComo);
 		
 		
 		//TAB PAGO
+		
+		
 		
 		//TAB REVISION
 		
