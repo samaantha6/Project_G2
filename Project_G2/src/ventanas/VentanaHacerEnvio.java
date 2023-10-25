@@ -26,13 +26,13 @@ public class VentanaHacerEnvio extends JFrame {
 	private JTabbedPane tabEnvios;
 	
 	private JLabel txtCrearEnvio,  
-					txtDesde, txtA, txtNom, txtDir, txtTel, txtCorreo, txtNomA, txtDirA, txtTelA, txtCorreoA,
+					txtDesde, txtHasta, txtNom, txtDir, txtTel, txtCorreo, txtNomHasta, txtDirHasta, txtTelHasta, txtCorreoHasta,
 					txtEmbalado, txtLargo, txtAncho, txtAlto, txtPeso, txtKg, txtValor, txtEur, txtInfo,
 					txtFEnvio, txtRecog, txtCasoRecog, txtEntrega,
 					txtQueEnvia, txtDescrip, txtTarj, txtFTarj, txtCVV, txtDni,
 					txtEnDesde, txtEnHasta, txtInfo2, txtPago, txtEnvios, txtRevPeso, txtRevLargo, txtRevAncho, txtRevAlto, txtRevKg;
 	
-	private JTextField	campoNom, campoDir, campoTel, campoCorreo, campoNomA, campoDirA, campoTelA, campoCorreoA, 
+	private JTextField	campoNom, campoDir, campoTel, campoCorreo, campoNomHasta, campoDirHasta, campoTelHasta, campoCorreoHasta, 
 						campoFenvio,
 						campoLargo, campoAncho, campoAlto, campoValor, campoPeso,
 						campoDescrip, campoTarj, campoFTarj, campoCVV, campoDni,
@@ -51,7 +51,7 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private JPanel pNorte, pNorte2, pNorte3,
 					pCentro, 
-					pDonde, ptxtDesde, ptxtA, pCamposDesde, pCamposA, pA, pDesde,
+					pDonde, ptxtDesde, ptxtHasta, pCamposDesde, pCamposHasta, pHasta, pDesde,
 					pQue, pAltLarAnc, pPeso, pEmbalaje, pValor, pNQue, pCQue,
 					pComo, pFEnvio, pRecog, pEntrega, pRecYEnt, pEntrega2, pRecog2,
 					pPago, pEnvio, pTarj, pContra, pRmtYDest, pTarj1, pTarj2, pFactura1, pFactura2,
@@ -88,7 +88,7 @@ public class VentanaHacerEnvio extends JFrame {
 		//TAB DONDE
 		
 		
-		txtA = new JLabel("A");
+		txtHasta = new JLabel("HASTA");
 		txtDesde = new JLabel("DESDE");
 			
 		txtNom = new JLabel("Nombre:");
@@ -96,27 +96,27 @@ public class VentanaHacerEnvio extends JFrame {
 		txtTel = new JLabel("Teléfono:");
 		txtCorreo = new JLabel("Correo:");
 		
-		txtNomA = new JLabel("Nombre:");
-		txtDirA = new JLabel("Dirección");
-		txtTelA = new JLabel("Teléfono:");
-		txtCorreoA = new JLabel("Correo:");
+		txtNomHasta = new JLabel("Nombre:");
+		txtDirHasta = new JLabel("Dirección");
+		txtTelHasta = new JLabel("Teléfono:");
+		txtCorreoHasta = new JLabel("Correo:");
 		
 		campoNom = new JTextField(20);
 		campoDir = new JTextField(20);
 		campoTel = new JTextField(20);
 		campoCorreo = new JTextField(20);
 		
-		campoNomA = new JTextField(20);
-		campoDirA = new JTextField(20);
-		campoTelA = new JTextField(20);
-		campoCorreoA = new JTextField(20);
+		campoNomHasta = new JTextField(20);
+		campoDirHasta = new JTextField(20);
+		campoTelHasta = new JTextField(20);
+		campoCorreoHasta = new JTextField(20);
 	
 		
 		ptxtDesde = new JPanel();
-		ptxtA = new JPanel();
+		ptxtHasta = new JPanel();
 		pCamposDesde = new JPanel(new GridLayout(4,2));
-		pCamposA = new JPanel(new GridLayout(4,2));
-		pA = new JPanel();
+		pCamposHasta = new JPanel(new GridLayout(4,2));
+		pHasta = new JPanel();
 		pDesde = new JPanel();
 
 		
@@ -131,25 +131,25 @@ public class VentanaHacerEnvio extends JFrame {
 		pCamposDesde.add(txtTel);
 		pCamposDesde.add(campoTel);
 		
-		ptxtA.add(txtA, BorderLayout.NORTH);
+		ptxtHasta.add(txtHasta, BorderLayout.NORTH);
 		
-		pCamposA.add(txtNomA);
-		pCamposA.add(campoNomA);
-		pCamposA.add(txtDirA);
-		pCamposA.add(campoDirA);
-		pCamposA.add(txtCorreoA);
-		pCamposA.add(campoCorreoA);
-		pCamposA.add(txtTelA);
-		pCamposA.add(campoTelA);
+		pCamposHasta.add(txtNomHasta);
+		pCamposHasta.add(campoNomHasta);
+		pCamposHasta.add(txtDirHasta);
+		pCamposHasta.add(campoDirHasta);
+		pCamposHasta.add(txtCorreoHasta);
+		pCamposHasta.add(campoCorreoHasta);
+		pCamposHasta.add(txtTelHasta);
+		pCamposHasta.add(campoTelHasta);
 		
 		
 		pDesde.add(ptxtDesde, BorderLayout.NORTH);
 		pDesde.add(pCamposDesde, BorderLayout.SOUTH);
-		pA.add(ptxtA, BorderLayout.NORTH);
-		pA.add(pCamposA, BorderLayout.SOUTH);
+		pHasta.add(ptxtHasta, BorderLayout.NORTH);
+		pHasta.add(pCamposHasta, BorderLayout.SOUTH);
 		
 		pDonde.add(pDesde);
-		pDonde.add(pA);
+		pDonde.add(pHasta);
 		
 		add(pDonde);
 		
