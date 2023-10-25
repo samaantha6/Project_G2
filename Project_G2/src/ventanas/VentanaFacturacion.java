@@ -84,16 +84,14 @@ import java.awt.event.ActionListener;
 	        panelPago.add(nPagado);
 	    	pOesteArriba.add(panelPago);
 
-	        pNorteArriba.add(btnatras);
+	        pNorte.add(btnatras);
 	    	pNorte.add(txtFact);
 	    	pNorte.add(labelImagenLogo);
 	        
 
 	        pOeste.add(pOesteArriba, BorderLayout.CENTER);
-	        pNorte.add(pNorteArriba, BorderLayout.WEST);
 	        
 	        add(pNorte, BorderLayout.NORTH);
-
 	        add(pCentro, BorderLayout.CENTER);
 	        add(pOeste, BorderLayout.WEST);
 	        add(pEste, BorderLayout.EAST);
