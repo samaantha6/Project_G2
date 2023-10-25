@@ -49,6 +49,18 @@ public class VentanaInicio extends JFrame{
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		
+		ImageIcon verEnvios = new ImageIcon(getClass().getResource("verEnvios.png"));
+		JLabel labelImagenVerEnvio = new JLabel(verEnvios);
+		labelImagenVerEnvio.setPreferredSize(new Dimension(verEnvios.getIconWidth(), verEnvios.getIconHeight()));
+		
+		ImageIcon Facturacion = new ImageIcon(getClass().getResource("Facturacion.png"));
+		JLabel labelImagenFacturacion = new JLabel(Facturacion);
+		labelImagenFacturacion.setPreferredSize(new Dimension(Facturacion.getIconWidth(), Facturacion.getIconHeight()));
+		
+		ImageIcon hacerEnvio = new ImageIcon(getClass().getResource("hacerEnvio.png"));
+		JLabel labelImagenhacerEnvio = new JLabel(hacerEnvio);
+		labelImagenhacerEnvio.setPreferredSize(new Dimension(hacerEnvio.getIconWidth(), hacerEnvio.getIconHeight()));
+		
 		btnVerEnvio = new JButton("VER ENVÍOS");
 		btnFac = new JButton("FACTURACION");
 		btnHacerEnvio = new JButton("HACER ENVÍO");
@@ -70,11 +82,11 @@ public class VentanaInicio extends JFrame{
 		pNorte.add(pNorteIzq, BorderLayout.WEST);
 		
 		pOesteArriba.add(btnVerEnvio);
-		//pOesteArriba.add(labelImagenLogo);
+		pOesteArriba.add(labelImagenVerEnvio);
+		pOesteCentro.add(labelImagenFacturacion);
 		pOesteCentro.add(btnFac);
-		//pOesteCentro.add(labelImagenLogo);
 		pOesteAbajo.add(btnHacerEnvio);
-		//pOesteAbajo.add(labelImagenLogo);
+		pOesteAbajo.add(labelImagenhacerEnvio);
 		
 		pOeste.add(pOesteArriba, BorderLayout.NORTH);
 		pOeste.add(pOesteCentro, BorderLayout.CENTER);
@@ -117,12 +129,12 @@ public class VentanaInicio extends JFrame{
 	}
 	public static void main(String[] args) {
 		
-		//VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
+		VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
 		//VentanaRegistro ventanaReg = new VentanaRegistro();
 		//VentanaModificarDatos ventanaMD = new VentanaModificarDatos();
 		//VentanaFacturacion ventanaFac = new VentanaFacturacion();
 		//VentanaInicio a = new VentanaInicio();
-		VentanaHacerEnvio b = new VentanaHacerEnvio();
+		//VentanaHacerEnvio b = new VentanaHacerEnvio();
 		//VentanaGestionEmpleados ventanaGesEmp = new VentanaGestionEmpleados();
 		
 	}
