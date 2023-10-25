@@ -16,8 +16,10 @@ import javax.swing.JTextField;
 
 public class VentanaInicio extends JFrame{
 	
-	private JPanel pNorte, pNorteIzq, pNorteDer, pSur, pEste, pEsteArriba, pEsteCentro, pEsteCentroArriba, pEsteCentroAbajo, pEsteAbajoArriba, pEsteAbajoAbajo, pEsteAbajo, pOeste, pOesteArriba, pOesteCentro, pOesteAbajo, pCentro;
-	private JButton btnVerEnvio, btnFac, btnHacerEnvio, btnCargar, btnCerrarSesion;
+	private JPanel pNorte, pNorteIzq, pNorteDer, pSur, pEste, pEsteArriba, pEsteCentro, pEsteCentroArriba, 
+					pEsteCentroAbajo, pEsteAbajoArriba, pEsteAbajoAbajo, pEsteAbajo, pOeste, pOesteArriba, 
+					pOesteCentro, pOesteAbajo, pCentro, pbtnCrear;
+	private JButton btnVerEnvio, btnFac, btnHacerEnvio, btnCrear, btnCerrarSesion;
 	private JTextField campoAlto, campoAncho, campoLargo, campoPeso, campoDesde, campoHasta;
 	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso, txtSeparador;
 
@@ -29,7 +31,7 @@ public class VentanaInicio extends JFrame{
 		pNorteDer = new JPanel();
 		pCentro = new JPanel(new GridLayout(3,4));
 		pSur = new JPanel();
-		pEste = new JPanel(new GridLayout(3,1));
+		pEste = new JPanel(new GridLayout(4,1));
 		pEsteArriba = new JPanel();
 		pEsteCentro = new JPanel(new GridLayout(2,1));
 		pEsteCentroArriba = new JPanel();
@@ -41,6 +43,7 @@ public class VentanaInicio extends JFrame{
 		pOesteArriba = new JPanel();
 		pOesteCentro = new JPanel();
 		pOesteAbajo = new JPanel();
+		pbtnCrear = new JPanel();
 		
 		txtBienvedida = new JLabel("Bienvenid@!");
 		txtCrearPre = new JLabel("Crear Presupuesto:");
@@ -70,7 +73,7 @@ public class VentanaInicio extends JFrame{
 		btnVerEnvio = new JButton("VER ENVÍOS");
 		btnFac = new JButton("FACTURACION");
 		btnHacerEnvio = new JButton("HACER ENVÍO");
-		btnCargar = new JButton("CREAR");
+		btnCrear = new JButton("CREAR");
 		btnCerrarSesion = new JButton("CERRAR SESIÓN");
 		
 		campoAlto = new JTextField(10);
@@ -126,10 +129,11 @@ public class VentanaInicio extends JFrame{
 		pEste.add(pEsteArriba, BorderLayout.NORTH);
 		pEste.add(pEsteCentro, BorderLayout.CENTER);
 		pEste.add(pEsteAbajo, BorderLayout.SOUTH);
+	
 		
-		//pCentro.add(pEste,BorderLayout.EAST);
+		pbtnCrear.add(btnCrear);
 		
-		pSur.add(btnCargar);
+		pEste.add(pbtnCrear);
 		
 		add(pCentro, BorderLayout.CENTER);
 		add(pNorte, BorderLayout.NORTH);
@@ -168,7 +172,7 @@ public class VentanaInicio extends JFrame{
 			}
 		});
 		
-		btnCargar.addActionListener(new ActionListener() {
+		btnCrear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaPresupuesto ventanaPresupuesto = new VentanaPresupuesto();
