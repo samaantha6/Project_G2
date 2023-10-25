@@ -104,7 +104,7 @@ public class VentanaGestionEmpleados extends JFrame {
     }
 
     public static void main(String[] args) {
-            VentanaGestionEmpleados ventana = new VentanaGestionEmpleados();
+            VentanaGestionEmpleados ventanaGesEmp = new VentanaGestionEmpleados();
         };
     
 }
