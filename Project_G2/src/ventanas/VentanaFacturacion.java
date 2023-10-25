@@ -98,6 +98,15 @@ import java.awt.event.ActionListener;
 	        add(pOeste, BorderLayout.WEST);
 	        add(pEste, BorderLayout.EAST);
 	        
+//EVENTOS
+			btnatras.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					VentanaInicio VI = new VentanaInicio();
+					dispose();			
+				}
+			});
+	        
 	        setTitle("Facturación");
 	        setBounds(350, 100, 600, 400); // Ajustar el ancho del marco
 	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);

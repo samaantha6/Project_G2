@@ -96,6 +96,15 @@ public class VentanaGestionEmpleados extends JFrame {
         JLabel labelAboveTable = new JLabel("     Envíos realizados");
         pSur.add(labelAboveTable, BorderLayout.NORTH); 
 
+//EVENTOS
+		btnatras.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
+				dispose();			
+			}
+		});
+        
         setTitle("Gestión");
         setBounds(300, 18, 600, 400); // Ajustar el ancho del marco
         setMinimumSize(new Dimension(700, 650)); // Configurar el tamaño mínimo de la ventana

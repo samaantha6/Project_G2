@@ -3,6 +3,8 @@ package ventanas;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -108,6 +110,24 @@ public class VentanaRegistro extends JFrame{
 		this.add(pCentro,BorderLayout.CENTER);
 		this.add(pEste,BorderLayout.EAST);
 		this.add(pOeste,BorderLayout.WEST);
+		
+//EVENTOS
+		btnVolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
+				dispose();			
+			}
+		});
+		
+		btnReg.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaInicio ventanaInicio = new VentanaInicio();
+				dispose();			
+			}
+		});
+		
 		
 		this.setTitle("Registro");
 		this.setBounds(300, 200, 600, 400);

@@ -3,12 +3,15 @@ package ventanas;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -88,6 +91,26 @@ public class VentanaModificarDatos extends JFrame{
 		this.add(pNorte, BorderLayout.NORTH);
 		this.add(pCentro, BorderLayout.CENTER);
 		this.add(pSur, BorderLayout.SOUTH);
+		
+//EVENTOS
+		
+		btnVolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
+				dispose();			
+			}
+		});
+		
+		btnModif.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaInicio ventanaInicio = new VentanaInicio();
+                JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				dispose();			
+			}
+		});
+		
 		
 	this.setTitle("Modificar Datos");
 	this.setBounds(300, 200, 600, 400);

@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -134,7 +136,45 @@ public class VentanaInicio extends JFrame{
 		add(pOeste, BorderLayout.WEST);
 		add(pEste, BorderLayout.EAST);
 		add(pSur, BorderLayout.SOUTH);
-
+//EVENTOS
+		btnCerrarSesion.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();			
+			}
+		});
+		
+		btnFac.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaFacturacion ventanaFac = new VentanaFacturacion();
+				dispose();			
+			}
+		});
+		
+		btnHacerEnvio.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio();
+				dispose();			
+			}
+		});
+		
+		btnVerEnvio.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaVerEnvios ventanaVerEnvios = new VentanaVerEnvios();
+				dispose();			
+			}
+		});
+		
+		btnCargar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaPresupuesto ventanaPresupuesto = new VentanaPresupuesto();
+				dispose();			
+			}
+		});
 		
 		setTitle("Pantalla inicio");
 		setBounds(300, 200, 600, 400);
