@@ -104,5 +104,8 @@ import java.awt.event.ActionListener;
 	        setVisible(true);
 	        
 	    }
-
+	    
+	    public static void main(String[] args) {
+            VentanaFacturacion ventanaFac = new VentanaFacturacion();
+        };
 }
