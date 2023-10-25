@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
 	    
 	    public VentanaFacturacion() {
 	    	
-	    	pNorte = new JPanel(new BorderLayout());
-			pNorteArriba = new JPanel(new GridLayout(-80,10));
+	    	pNorte = new JPanel();
+			pNorteArriba = new JPanel(new GridLayout(1,2));
 			pCentro = new JPanel(new GridLayout(14,14));
 			pOesteArriba = new JPanel(new GridLayout(4, 1));
 			pOeste = new JPanel(new GridLayout(3,2));
@@ -85,14 +85,14 @@ import java.awt.event.ActionListener;
 	    	pOesteArriba.add(panelPago);
 
 	        pNorteArriba.add(btnatras);
-	    	pNorteArriba.add(txtFact);
-	    	pNorteArriba.add(labelImagenLogo);
+	    	pNorte.add(txtFact);
+	    	pNorte.add(labelImagenLogo);
 	        
 
 	        pOeste.add(pOesteArriba, BorderLayout.CENTER);
+	        pNorte.add(pNorteArriba, BorderLayout.WEST);
 	        
 	        add(pNorte, BorderLayout.NORTH);
-	        add(pNorteArriba, BorderLayout.NORTH);
 
 	        add(pCentro, BorderLayout.CENTER);
 	        add(pOeste, BorderLayout.WEST);
