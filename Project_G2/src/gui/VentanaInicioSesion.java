@@ -1,4 +1,4 @@
-package ventanas;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,6 +18,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class VentanaInicioSesion extends JFrame{
+	
+	private static final long serialVersionUID = 1L;
 	
 	
 	private JPanel pNorte, pNorteIzq, pNorteDer, pSur, pOeste, pEste, pCentro, pCentroDer, pCentroIzq, pCentroCen;

@@ -1,4 +1,4 @@
-package ventanas;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -184,17 +184,6 @@ public class VentanaInicio extends JFrame{
 		setBounds(300, 200, 600, 400);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	}
-	public static void main(String[] args) {
-		
-		VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
-		//VentanaRegistro ventanaReg = new VentanaRegistro();
-		//VentanaModificarDatos ventanaMD = new VentanaModificarDatos();
-		//VentanaFacturacion ventanaFac = new VentanaFacturacion();
-		//VentanaInicio a = new VentanaInicio();
-		//VentanaHacerEnvio b = new VentanaHacerEnvio();
-		//VentanaGestionEmpleados ventanaGesEmp = new VentanaGestionEmpleados();
-		
 	}
 
 }
