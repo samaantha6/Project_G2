@@ -11,7 +11,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -40,13 +39,12 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private JButton btnVolver;
 	
-	private JCheckBox checkTerminos, checkFactura;
+	private JCheckBox checkTerminos, checkFactura, checkFragil;
 	
 	private JComboBox<String> comboEmbalaje,
 								comboRecog;
 	
-	private JRadioButton radFragil, 
-							radPtoRecog, radUsoDir,radEstandar, radSuper, radPremium,
+	private JRadioButton 	radPtoRecog, radUsoDir,radEstandar, radSuper, radPremium,
 							radTarj, radContrareembolso, radFacRemit, radFacDestinat;
 	
 	private JPanel pNorte, pNorte2, pNorte3,
@@ -54,12 +52,10 @@ public class VentanaHacerEnvio extends JFrame {
 					pDonde, ptxtDesde, ptxtHasta, pCamposDesde, pCamposHasta, pHasta, pDesde,
 					pQue, pAltLarAnc, pPeso, pEmbalaje, pValor, pNQue, pCQue,
 					pComo, pFEnvio, pRecog, pEntrega, pRecYEnt, pEntrega2, pRecog2,
-					pPago, pEnvio, pTarj, pContra, pRmtYDest, pTarj1, pTarj2, pFactura1, pFactura2,
+					pPago, pEnvio, pTarj, pFact, pTarjYContra, pFact2, pCamposTarjYCon, pDescrip, 
 					pRev, pRevEnvio, pInfo, pAltPesLrAn, pEnYPg;
 	
 	private ButtonGroup tipoEnvioGrupo, recogidaGrupo, pagoGrupo, facturaGrupo;
-	
-	
 	
 	
 	
@@ -157,13 +153,13 @@ public class VentanaHacerEnvio extends JFrame {
 		//TAB QUE
 		
 		
-		txtEmbalado = new JLabel("Embalaje:");
-		txtLargo = new JLabel("Largo:");
-		txtAncho = new JLabel("Alto:");
-		txtAlto = new JLabel("Ancho:");
-		txtPeso = new JLabel("Peso:");
+		txtEmbalado = new JLabel("Embalaje: ");
+		txtLargo = new JLabel("Largo: ");
+		txtAncho = new JLabel("Alto: ");
+		txtAlto = new JLabel("Ancho: ");
+		txtPeso = new JLabel("Peso: ");
 		txtKg = new JLabel("kg");
-		txtValor = new JLabel("Valor del paquete:");
+		txtValor = new JLabel("Valor del paquete: ");
 		txtEur = new JLabel("EUR");
 		txtInfo = new JLabel("El nº de referencia se asigna automáticamente.");
 		
@@ -173,7 +169,7 @@ public class VentanaHacerEnvio extends JFrame {
 		campoValor = new JTextField(10);
 		campoPeso = new JTextField(10);
 		
-		radFragil = new JRadioButton("¿Frágil?");
+		checkFragil = new JCheckBox("¿Frágil?");
 		
 		comboEmbalaje = new JComboBox<String>();
 		
@@ -206,7 +202,7 @@ public class VentanaHacerEnvio extends JFrame {
 		pNQue.add(pEmbalaje);
 		pNQue.add(pPeso);
 		pCQue.add(pValor);
-		pCQue.add(radFragil);
+		pCQue.add(checkFragil);
 		pQue.add(pNQue);
 		pQue.add(pAltLarAnc);
 		pQue.add(pCQue);
@@ -304,54 +300,53 @@ public class VentanaHacerEnvio extends JFrame {
 		pagoGrupo = new ButtonGroup();
 		facturaGrupo = new ButtonGroup();
 		
-		pRmtYDest = new JPanel(new GridLayout(2,1));
-		pContra = new JPanel();
+		pTarjYContra = new JPanel(new GridLayout(2,1));
+		pFact = new JPanel();
 		pTarj = new JPanel();
 		pEnvio = new JPanel();
-		pTarj1 = new JPanel();
-		pTarj2 = new JPanel();
-		pFactura1 = new JPanel();
-		pFactura2 = new JPanel();
+		pFact2 = new JPanel(new GridLayout(2,1));
+		pCamposTarjYCon = new JPanel(new GridLayout(2,1));
+		pDescrip = new JPanel();
 
+		
+		pFact2.add(radFacRemit);
+		pFact2.add(radFacDestinat);
+		
+		pFact.add(checkFactura);
+		pFact.add(pFact2);
+		pFact.add(txtDni);
+		pFact.add(campoDni);
+		
+		pTarj.add(txtTarj);
+		pTarj.add(campoTarj);
+		pTarj.add(txtFTarj);
+		pTarj.add(campoFTarj);
+		pTarj.add(txtCVV);
+		pTarj.add(campoCVV);
+		
+		pTarjYContra.add(radTarj);
+		pTarjYContra.add(radContrareembolso);
+
+		pCamposTarjYCon.add(pTarj);
+		pCamposTarjYCon.add(pFact);
+		
+		pEnvio.add(pTarjYContra);
+		pEnvio.add(pCamposTarjYCon);
+		
+		pDescrip.add(txtQueEnvia);
+		pDescrip.add(campoDescrip);
+		pDescrip.add(txtDescrip);
+		
+		
+		pPago.add(pDescrip);
+		pPago.add(pEnvio);
+		
 		pagoGrupo.add(radTarj);
 		pagoGrupo.add(radContrareembolso);
 		
 		facturaGrupo.add(radFacRemit);
 		facturaGrupo.add(radFacDestinat);
 		
-		pTarj1.add(txtTarj);
-		pTarj1.add(campoTarj);
-		
-		pTarj2.add(txtFTarj);
-		pTarj2.add(campoFTarj);
-		pTarj2.add(txtCVV);
-		pTarj2.add(campoCVV);
-		
-		pTarj.add(radTarj);
-		pTarj.add(pTarj1);
-		pTarj.add(pTarj2);
-		
-		pRmtYDest.add(radFacRemit);
-		pRmtYDest.add(radFacDestinat);
-		
-		pFactura1.add(checkFactura);
-		pFactura1.add(pRmtYDest);
-		
-		pFactura2.add(txtDni);
-		pFactura2.add(campoDni);
-		
-		pContra.add(radContrareembolso);
-		pContra.add(pFactura1);
-		pContra.add(pFactura2);
-		 
-		pEnvio.add(txtQueEnvia);
-		pEnvio.add(campoDescrip);
-		pEnvio.add(txtDescrip);
-		 
-		pPago.add(pEnvio);
-		pPago.add(pTarj);
-		pPago.add(pContra);
-		 
 		add(pPago);
 		 
 		 
