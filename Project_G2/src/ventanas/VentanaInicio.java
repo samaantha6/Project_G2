@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 public class VentanaInicio extends JFrame{
 	
-	private JPanel pNorte, pNorteIzq, pNorteDer, pSur, pEste, pEsteArriba, pEsteCentro, pEsteAbajo, pOeste, pOesteArriba, pOesteCentro, pOesteAbajo, pCentro;
+	private JPanel pNorte, pNorteIzq, pNorteDer, pSur, pEste, pEsteArriba, pEsteCentro, pEsteCentroArriba, pEsteCentroAbajo, pEsteAbajoArriba, pEsteAbajoAbajo, pEsteAbajo, pOeste, pOesteArriba, pOesteCentro, pOesteAbajo, pCentro;
 	private JButton btnVerEnvio, btnFac, btnHacerEnvio, btnCargar, btnCerrarSesion;
 	private JTextField campoAlto, campoAncho, campoLargo, campoPeso, campoDesde, campoHasta;
 	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso, txtSeparador;
@@ -29,8 +29,12 @@ public class VentanaInicio extends JFrame{
 		pSur = new JPanel();
 		pEste = new JPanel(new GridLayout(3,1));
 		pEsteArriba = new JPanel();
-		pEsteCentro = new JPanel(new GridLayout(2,2));
+		pEsteCentro = new JPanel(new GridLayout(2,1));
+		pEsteCentroArriba = new JPanel();
+		pEsteCentroAbajo = new JPanel();
 		pEsteAbajo = new JPanel(new GridLayout(2,4));
+		pEsteAbajoArriba = new JPanel();
+		pEsteAbajoAbajo = new JPanel();
 		pOeste = new JPanel(new GridLayout(3,1));
 		pOesteArriba = new JPanel();
 		pOesteCentro = new JPanel();
@@ -67,12 +71,12 @@ public class VentanaInicio extends JFrame{
 		btnCargar = new JButton("CREAR");
 		btnCerrarSesion = new JButton("CERRAR SESIÓN");
 		
-		campoAlto = new JTextField();
-		campoAncho = new JTextField();
-		campoLargo = new JTextField();
-		campoPeso = new JTextField();
-		campoDesde = new JTextField();
-		campoHasta = new JTextField();
+		campoAlto = new JTextField(10);
+		campoAncho = new JTextField(10);
+		campoLargo = new JTextField(10);
+		campoPeso = new JTextField(10);
+		campoDesde = new JTextField(20);
+		campoHasta = new JTextField(20);
 		
 		pNorteIzq.add(btnCerrarSesion);
 		pNorteDer.add(txtBienvedida);
@@ -94,31 +98,41 @@ public class VentanaInicio extends JFrame{
 		
 		pEsteArriba.add(txtCrearPre);
 
-		pEsteCentro.add(txtDesde);
-		pEsteCentro.add(campoDesde);
-		pEsteCentro.add(txtHasta);
-		pEsteCentro.add(campoHasta);
 		
-		pEsteAbajo.add(txtAlto);
-		pEsteAbajo.add(campoAlto);
-		pEsteAbajo.add(txtAncho);
-		pEsteAbajo.add(campoAncho);
-		pEsteAbajo.add(txtLargo);
-		pEsteAbajo.add(campoLargo);
-		pEsteAbajo.add(txtPeso);
-		pEsteAbajo.add(campoPeso);
+		pEsteCentroArriba.add(txtDesde);
+		pEsteCentroArriba.add(campoDesde);
+		pEsteCentro.add(pEsteCentroArriba);
+		
+		pEsteCentroAbajo.add(txtHasta);
+		pEsteCentroAbajo.add(campoHasta);
+		pEsteCentro.add(pEsteCentroAbajo);
+		
+		
+		
+		pEsteAbajoArriba.add(txtAlto);
+		pEsteAbajoArriba.add(campoAlto);
+		pEsteAbajoArriba.add(txtAncho);
+		pEsteAbajoArriba.add(campoAncho);
+		pEsteAbajo.add(pEsteAbajoArriba);
+		
+		pEsteAbajoAbajo.add(txtLargo);
+		pEsteAbajoAbajo.add(campoLargo);
+		pEsteAbajoAbajo.add(txtPeso);
+		pEsteAbajoAbajo.add(campoPeso);
+		pEsteAbajo.add(pEsteAbajoAbajo);
 		
 		pEste.add(pEsteArriba, BorderLayout.NORTH);
 		pEste.add(pEsteCentro, BorderLayout.CENTER);
 		pEste.add(pEsteAbajo, BorderLayout.SOUTH);
 		
-		pCentro.add(pEste,BorderLayout.EAST);
+		//pCentro.add(pEste,BorderLayout.EAST);
 		
 		pSur.add(btnCargar);
 		
 		add(pCentro, BorderLayout.CENTER);
 		add(pNorte, BorderLayout.NORTH);
 		add(pOeste, BorderLayout.WEST);
+		add(pEste, BorderLayout.EAST);
 		add(pSur, BorderLayout.SOUTH);
 
 		
