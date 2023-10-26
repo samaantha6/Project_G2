@@ -226,7 +226,7 @@ public class VentanaRegistro extends JFrame{
 		});
 		
 		this.setTitle("Registro");
-		this.setBounds(300, 200, 600, 400);
+		this.setBounds(300, 200, 700, 400);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
