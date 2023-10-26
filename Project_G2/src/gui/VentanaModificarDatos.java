@@ -18,11 +18,12 @@ import javax.swing.JTextField;
 
 public class VentanaModificarDatos extends JFrame{
 	
-	private JLabel txtModDatos, txtCorreo, txtTelefono, txtNewCon, txtVerifCon, txtNom, txtApel, txtPregSeg, txtRes;
+	private JLabel txtModDatos, txtCorreo, txtTelefono, txtNewCon, txtVerifCon, txtNom,
+					txtApel, txtPregSeg, txtRes;
 	private JTextField campoCorreo, campoTelefono, campoRes, campoNom, campoApel;
 	private JPasswordField campoCon, campoVerifCon;
-	private JButton btnElimCuen, btnModif, btnVolver;
-	private JPanel pNorte, pSur, pCentro;
+	private JButton btnElimCuen, btnModif, btnVolver, btnOjoCon, btnOjoConVen;
+	private JPanel pNorte, pSur, pCentro, pVenificaCon, pContrasenia;
 	private JComboBox<String> campoPregSeg;
 	
 	/**
@@ -35,6 +36,9 @@ public class VentanaModificarDatos extends JFrame{
 		pNorte = new JPanel(new GridLayout(1,2));
 		pSur = new JPanel(new GridLayout(1,3));
 		pCentro = new JPanel(new GridLayout(8,2));
+		pContrasenia = new JPanel();
+		pVenificaCon = new JPanel();
+
 		
 		txtNom = new JLabel("Nombre:");
 		txtApel = new JLabel("Apellido:");
@@ -45,6 +49,11 @@ public class VentanaModificarDatos extends JFrame{
 		txtRes = new JLabel("Respuesta:");
 		txtTelefono = new JLabel("Telefono::");
 		txtVerifCon = new JLabel("Verifica la contraseña:");
+		
+		ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("ojoAbierto.png"));
+		ImageIcon ojoCerrado = new ImageIcon(getClass().getResource("ojoCerrado.png"));
+		ImageIcon ojoAbierto1 = new ImageIcon(getClass().getResource("ojoAbierto.png"));
+		ImageIcon ojoCerrado1 = new ImageIcon(getClass().getResource("ojoCerrado.png"));
 		
 		campoNom = new JTextField();
 		campoApel = new JTextField();

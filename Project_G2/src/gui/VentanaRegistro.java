@@ -174,6 +174,8 @@ public class VentanaRegistro extends JFrame{
 					pContrasenia.revalidate();
 					pContrasenia.repaint();
 					btnOjoCon.setIcon(ojoCerrado);
+					pContrasenia.remove(btnOjoCon);
+					pContrasenia.add(btnOjoCon);
 				}
 				else {
 					String contrasenia = new String(campoContrasenia1.getText());
@@ -183,6 +185,8 @@ public class VentanaRegistro extends JFrame{
 					pContrasenia.revalidate();
 					pContrasenia.repaint();
 					btnOjoCon.setIcon(ojoAbierto);
+					pContrasenia.remove(btnOjoCon);
+					pContrasenia.add(btnOjoCon);
 				}
 				esOjoAbierto = !esOjoAbierto;
 			}
@@ -201,6 +205,8 @@ public class VentanaRegistro extends JFrame{
 					pVenificaCon.revalidate();
 					pVenificaCon.repaint();
 					btnOjoConVen.setIcon(ojoCerrado1);
+					pVenificaCon.remove(btnOjoConVen);
+					pVenificaCon.add(btnOjoConVen);
 				}
 				else {
 					String contrasenia = new String(campoVenificaCon1.getText());
@@ -210,6 +216,8 @@ public class VentanaRegistro extends JFrame{
 					pVenificaCon.revalidate();
 					pVenificaCon.repaint();
 					btnOjoConVen.setIcon(ojoAbierto1);
+					pVenificaCon.remove(btnOjoConVen);
+					pVenificaCon.add(btnOjoConVen);
 				}
 				esOjoAbierto = !esOjoAbierto;
 			}
