@@ -20,10 +20,13 @@ public class VentanaModificarDatos extends JFrame{
 	
 	private JLabel txtModDatos, txtCorreo, txtTelefono, txtNewCon, txtVerifCon, txtNom,
 					txtApel, txtPregSeg, txtRes;
-	private JTextField campoCorreo, campoTelefono, campoRes, campoNom, campoApel;
+	private JTextField campoCorreo, campoTelefono, campoRes, campoNom, campoApel, 
+						campoContrasenia1, campoVenificaCon1;
 	private JPasswordField campoCon, campoVerifCon;
 	private JButton btnElimCuen, btnModif, btnVolver, btnOjoCon, btnOjoConVen;
-	private JPanel pNorte, pSur, pCentro, pVenificaCon, pContrasenia;
+	private JPanel pNorte, pSur, pCentro, pVenificaCon, pContrasenia, pNombre,
+					pApellido, pRespuesta, pTelefono, pCorreo, 
+					pPregSeg;
 	private JComboBox<String> campoPregSeg;
 	
 	/**
@@ -35,10 +38,15 @@ public class VentanaModificarDatos extends JFrame{
 		
 		pNorte = new JPanel(new GridLayout(1,2));
 		pSur = new JPanel(new GridLayout(1,3));
-		pCentro = new JPanel(new GridLayout(8,2));
+		pCentro = new JPanel(new GridLayout(4,2));
 		pContrasenia = new JPanel();
 		pVenificaCon = new JPanel();
-
+		pNombre = new JPanel();
+		pApellido = new JPanel();
+		pRespuesta = new JPanel();
+		pTelefono = new JPanel();
+		pCorreo = new JPanel();
+		pPregSeg = new JPanel();
 		
 		txtNom = new JLabel("Nombre:");
 		txtApel = new JLabel("Apellido:");
@@ -47,23 +55,25 @@ public class VentanaModificarDatos extends JFrame{
 		txtNewCon = new JLabel("Nueva Contraseña:");
 		txtPregSeg = new JLabel("Pregunta de seguridad:");
 		txtRes = new JLabel("Respuesta:");
-		txtTelefono = new JLabel("Telefono::");
-		txtVerifCon = new JLabel("Verifica la contraseña:");
+		txtTelefono = new JLabel("Telefono:");
+		txtVerifCon = new JLabel("Repite contraseña:");
 		
 		ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("ojoAbierto.png"));
 		ImageIcon ojoCerrado = new ImageIcon(getClass().getResource("ojoCerrado.png"));
 		ImageIcon ojoAbierto1 = new ImageIcon(getClass().getResource("ojoAbierto.png"));
 		ImageIcon ojoCerrado1 = new ImageIcon(getClass().getResource("ojoCerrado.png"));
 		
-		campoNom = new JTextField();
-		campoApel = new JTextField();
-		campoCorreo = new JTextField();
-		campoTelefono = new JTextField();
-		campoRes = new JTextField();
+		campoNom = new JTextField(10);
+		campoApel = new JTextField(10);
+		campoCorreo = new JTextField(10);
+		campoTelefono = new JTextField(10);
+		campoRes = new JTextField(10);
+		campoContrasenia1 = new JTextField(10);
+		campoVenificaCon1 = new JTextField(10);
 		campoPregSeg = new JComboBox<>();
 
-		campoCon = new JPasswordField();
-		campoVerifCon = new JPasswordField();
+		campoCon = new JPasswordField(10);
+		campoVerifCon = new JPasswordField(10);
 		
 		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
@@ -72,27 +82,46 @@ public class VentanaModificarDatos extends JFrame{
 		btnModif = new JButton("MODIFICAR");
 		btnElimCuen = new JButton("ELIMINAR CUENTA");
 		btnVolver = new JButton("VOLVER");
+		btnOjoCon = new JButton(ojoAbierto);
+		btnOjoConVen = new JButton(ojoAbierto1);
 		
 		pNorte.add(txtModDatos);
 		pNorte.add(labelImagenLogo);
 		
-		pCentro.add(txtCorreo);		
-		pCentro.add(campoCorreo);		
-		pCentro.add(txtTelefono);		
-		pCentro.add(campoTelefono);		
-		pCentro.add(txtNewCon);		
-		pCentro.add(campoCon);		//ojo
-		pCentro.add(txtVerifCon);		
-		pCentro.add(campoVerifCon);	//ojo	
-		pCentro.add(txtPregSeg);		
-		pCentro.add(campoPregSeg);		
-		pCentro.add(txtRes);	
-		pCentro.add(campoRes);	
-		pCentro.add(txtNom);	
-		pCentro.add(campoNom);	
-		pCentro.add(txtApel);
-		pCentro.add(campoApel);
-				
+		pCorreo.add(txtCorreo);		
+		pCorreo.add(campoCorreo);
+		pCentro.add(pCorreo);
+		
+		pTelefono.add(txtTelefono);		
+		pTelefono.add(campoTelefono);
+		pCentro.add(pTelefono);
+
+		pContrasenia.add(txtNewCon);		
+		pContrasenia.add(campoCon);
+		pContrasenia.add(btnOjoCon);
+		pCentro.add(pContrasenia);
+		
+		pApellido.add(txtApel);
+		pApellido.add(campoApel);
+		pCentro.add(pApellido);
+
+		pPregSeg.add(txtPregSeg);		
+		pPregSeg.add(campoPregSeg);
+		pCentro.add(pPregSeg);
+
+		pRespuesta.add(txtRes);	
+		pRespuesta.add(campoRes);
+		pCentro.add(pRespuesta);
+
+		pNombre.add(txtNom);	
+		pNombre.add(campoNom);
+		pCentro.add(pNombre);
+
+		pVenificaCon.add(txtVerifCon);		
+		pVenificaCon.add(campoVerifCon);
+		pVenificaCon.add(btnOjoConVen);
+		pCentro.add(pVenificaCon);
+
 		pSur.add(btnElimCuen);
 		pSur.add(btnModif);
 		pSur.add(btnVolver);
@@ -120,6 +149,67 @@ public class VentanaModificarDatos extends JFrame{
 			}
 		});
 		
+		btnOjoCon.addActionListener(new ActionListener() {
+			boolean esOjoAbierto = true;
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (esOjoAbierto) {
+					String contrasenia = new String(campoCon.getPassword());
+					campoContrasenia1.setText(contrasenia);
+					pContrasenia.remove(campoCon);
+					pContrasenia.add(campoContrasenia1);
+					pContrasenia.revalidate();
+					pContrasenia.repaint();
+					btnOjoCon.setIcon(ojoCerrado);
+					pContrasenia.remove(btnOjoCon);
+					pContrasenia.add(btnOjoCon);
+				}
+				else {
+					String contrasenia = new String(campoContrasenia1.getText());
+					campoCon.setText(contrasenia);
+					pContrasenia.remove(campoContrasenia1);
+					pContrasenia.add(campoCon);
+					pContrasenia.revalidate();
+					pContrasenia.repaint();
+					btnOjoCon.setIcon(ojoAbierto);
+					pContrasenia.remove(btnOjoCon);
+					pContrasenia.add(btnOjoCon);
+				}
+				esOjoAbierto = !esOjoAbierto;
+			}
+		});
+		
+		btnOjoConVen.addActionListener(new ActionListener() {
+			boolean esOjoAbierto = true;
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (esOjoAbierto) {
+					String contrasenia = new String(campoVerifCon.getPassword());
+					campoVenificaCon1.setText(contrasenia);
+					pVenificaCon.remove(campoVerifCon);
+					pVenificaCon.add(campoVenificaCon1);
+					pVenificaCon.revalidate();
+					pVenificaCon.repaint();
+					btnOjoConVen.setIcon(ojoCerrado1);
+					pVenificaCon.remove(btnOjoConVen);
+					pVenificaCon.add(btnOjoConVen);
+				}
+				else {
+					String contrasenia = new String(campoVenificaCon1.getText());
+					campoVerifCon.setText(contrasenia);
+					pVenificaCon.remove(campoVenificaCon1);
+					pVenificaCon.add(campoVerifCon);
+					pVenificaCon.revalidate();
+					pVenificaCon.repaint();
+					btnOjoConVen.setIcon(ojoAbierto1);
+					pVenificaCon.remove(btnOjoConVen);
+					pVenificaCon.add(btnOjoConVen);
+				}
+				esOjoAbierto = !esOjoAbierto;
+			}
+		});
 		
 	this.setTitle("Modificar Datos");
 	this.setBounds(300, 200, 600, 400);

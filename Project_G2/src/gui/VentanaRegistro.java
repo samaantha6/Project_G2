@@ -26,7 +26,9 @@ public class VentanaRegistro extends JFrame{
 	private JButton btnReg, btnVolver, btnOjoCon, btnOjoConVen;
 	private JComboBox<String> pregSeg;
 	private JCheckBox Condiciones;
-	private JTextField campoReg, campoNombre, campoApellido, campoCorreo, campoTelefono, campoRespuesta, campoContrasenia1, campoVenificaCon1;
+	private JTextField campoReg, campoNombre, campoApellido, campoCorreo, 
+						campoTelefono, campoRespuesta, campoContrasenia1, 
+						campoVenificaCon1;
 	private JPasswordField campoContrasenia, campoVenificaCon;
 	
 
