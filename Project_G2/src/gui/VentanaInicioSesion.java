@@ -47,8 +47,8 @@ public class VentanaInicioSesion extends JFrame{
 	txtIS = new JLabel("INICIA SESIÓN:");
 	txtOlvidoCsnia = new JLabel("<html><u>¿Has olvidado tu contraseña?</u></html>");
 	txtOlvidoCsnia.setForeground(Color.BLUE);
-	txtCorreo = new JLabel("correo:");
-	txtContrasenia = new JLabel("contraseña:");
+	txtCorreo = new JLabel("correo:          ");
+	txtContrasenia = new JLabel("contraseña:  ");
 	txtNull = new JLabel("");
 	
 
