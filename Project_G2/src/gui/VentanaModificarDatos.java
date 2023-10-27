@@ -128,9 +128,9 @@ public class VentanaModificarDatos extends JFrame{
 		pSur.add(btnModif);
 		pSur.add(btnVolver);
 		
-		this.add(pNorte, BorderLayout.NORTH);
-		this.add(pCentro, BorderLayout.CENTER);
-		this.add(pSur, BorderLayout.SOUTH);
+		add(pNorte, BorderLayout.NORTH);
+		add(pCentro, BorderLayout.CENTER);
+		add(pSur, BorderLayout.SOUTH);
 		
 //EVENTOS
 		
