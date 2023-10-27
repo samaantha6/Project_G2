@@ -30,7 +30,7 @@ import java.awt.event.ActionListener;
 			labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 
 	        txtPrecio = new JLabel("Precio");
-	        txtRef = new JLabel("¿Envío?");
+	        txtRef = new JLabel("¿Envío?    ");
 	        txtDesc = new JLabel("Descripción");
 	        txtEstado = new JLabel("Estado");
 	        txtExport = new JLabel("Exportar en pdf");
