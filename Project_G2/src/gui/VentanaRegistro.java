@@ -161,6 +161,15 @@ public class VentanaRegistro extends JFrame{
 		btnReg.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				String nombre = campoNombre.getText();
+                String apellido = campoApellido.getText();
+                String correo = campoCorreo.getText();
+                String telefono = campoTelefono.getText();
+                String contrasenia = new String(campoContrasenia.getPassword());
+                String respuesta = campoRespuesta.getText();
+                String preguntaSeguridad = pregSeg.getSelectedItem().toString();
+                
 				VentanaInicio ventanaInicio = new VentanaInicio();
 				dispose();			
 			}
