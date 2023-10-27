@@ -21,7 +21,7 @@ public class VentanaInicio extends JFrame{
 	private JPanel pNorte, pNorteIzq, pNorteDer, pSur, pEste, pEsteArriba, pEsteCentro, pEsteCentroArriba, 
 					pEsteCentroAbajo, pEsteAbajoArriba, pEsteAbajoAbajo, pEsteAbajo, pOeste, pOesteArriba, 
 					pOesteCentro, pOesteAbajo, pCentro, pbtnCrear;
-	private JButton btnVerEnvio, btnFac, btnHacerEnvio, btnCrear, btnCerrarSesion;
+	private JButton btnVerEnvio, btnFac, btnHacerEnvio, btnCrear, btnCerrarSesion, btnModificar;
 	private JTextField campoAlto, campoAncho, campoLargo, campoPeso, campoDesde, campoHasta;
 	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso, txtSeparador;
 
@@ -77,6 +77,7 @@ public class VentanaInicio extends JFrame{
 		btnHacerEnvio = new JButton("HACER ENVÍO");
 		btnCrear = new JButton("CREAR");
 		btnCerrarSesion = new JButton("CERRAR SESIÓN");
+		btnModificar = new JButton("MODIFICAR DATOS");
 		
 		campoAlto = new JTextField(10);
 		campoAncho = new JTextField(10);
@@ -86,6 +87,7 @@ public class VentanaInicio extends JFrame{
 		campoHasta = new JTextField(20);
 		
 		pNorteIzq.add(btnCerrarSesion);
+		pNorteIzq.add(btnModificar);
 		pNorteDer.add(txtBienvedida);
 		
 		pNorte.add(labelImagenLogo);
@@ -146,6 +148,14 @@ public class VentanaInicio extends JFrame{
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				dispose();			
+			}
+		});
+		
+		btnModificar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaModificarDatos ventanaMD = new VentanaModificarDatos();
 				dispose();			
 			}
 		});

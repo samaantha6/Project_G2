@@ -168,7 +168,7 @@ public class VentanaRegistro extends JFrame{
                 String telefono = campoTelefono.getText();
                 String contrasenia = new String(campoContrasenia.getPassword());
                 String respuesta = campoRespuesta.getText();
-                String preguntaSeguridad = pregSeg.getSelectedItem().toString();
+                //String preguntaSeguridad = pregSeg.getSelectedItem().toString();
                 
 				VentanaInicio ventanaInicio = new VentanaInicio();
 				dispose();			
