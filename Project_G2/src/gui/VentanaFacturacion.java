@@ -8,10 +8,13 @@ import java.awt.event.ActionListener;
 
 	public class VentanaFacturacion extends JFrame {
 		
+		private static final long serialVersionUID = 1L;
+		
+		
 		private JPanel pNorte, pNorteArriba, pOesteArriba, pEste, pOeste, pCentro;
 	    private JButton btnatras, btnexportar;
 	    private JTextField nRef, nPrecio, nDesc, nPagado, nEstado;
-	    private JLabel txtPrecio, txtPagado, txtRef, txtDesc, txtFact, txtEstado, txtDetalles, txtExport, imagenLabel;
+	    private JLabel txtPrecio, txtPagado, txtRef, txtDesc, txtFact, txtEstado, txtDetalles, txtExport;
 	    
 	    public VentanaFacturacion() {
 	    	

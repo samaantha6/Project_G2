@@ -21,7 +21,8 @@ import javax.swing.JTextField;
 
 public class VentanaHacerEnvio extends JFrame {
 	
-	
+	private static final long serialVersionUID = 1L;
+
 	private JTabbedPane tabEnvios;
 	
 	private JLabel txtCrearEnvio,  

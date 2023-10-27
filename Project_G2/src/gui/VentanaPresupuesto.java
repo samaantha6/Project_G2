@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 
 public class VentanaPresupuesto extends JFrame{
 	
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel pNorte;
 	private JLabel txtPresupuesto, txtTipoEnvio;
 	private JCheckBox estandar, superior, premium;

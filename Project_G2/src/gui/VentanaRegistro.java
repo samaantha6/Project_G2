@@ -20,6 +20,9 @@ import javax.swing.border.EmptyBorder;
 
 public class VentanaRegistro extends JFrame{
 	
+
+	private static final long serialVersionUID = 1L;
+	
 	
 	private JPanel pNorte, pSur, pOeste, pEste, pCentro, pContrasenia, pNombre, pApellido, pCorreo, pTelefono, pPregSeg, pVenificaCon, pRespuesta;
 	private JLabel txtReg, txtNombre, txtApellido, txtCorreo, txtTelefono, txtContrasenia, txtPregSeg, txtVenificaCon, txtRespuesta;

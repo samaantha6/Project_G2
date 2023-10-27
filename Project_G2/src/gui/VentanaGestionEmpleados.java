@@ -10,10 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaGestionEmpleados extends JFrame {
-    private JPanel pNorte, pSur, pOeste, pEste, pCentro, pCentroDer, pCentroIzq, pCentroCen;
+    
+	private static final long serialVersionUID = 1L;
+	
+	private JPanel pNorte, pSur, pOeste, pEste, pCentro, pCentroDer, pCentroIzq, pCentroCen;
     private JButton btnatras, btneliminar;
     private JTextField nRef;
-    private JLabel txtEnv, txtRef, txtNull, imagenLabel;
+    private JLabel txtEnv, txtRef, txtNull;
     private JTable table;
 
     public VentanaGestionEmpleados() {

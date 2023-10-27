@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 
 public class VentanaModificarDatos extends JFrame{
 	
+	private static final long serialVersionUID = 1L;
+	
 	private JLabel txtModDatos, txtCorreo, txtTelefono, txtNewCon, txtVerifCon, txtNom,
 					txtApel, txtPregSeg, txtRes;
 	private JTextField campoCorreo, campoTelefono, campoRes, campoNom, campoApel, 
