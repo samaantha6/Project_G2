@@ -1,4 +1,4 @@
-package ventanas;
+package gui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
