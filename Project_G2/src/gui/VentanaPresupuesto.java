@@ -1,8 +1,12 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -14,7 +18,7 @@ public class VentanaPresupuesto extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel pNorte, pOeste, pEste, pBtnHcerEnvio, pBtnVolver;
-	private JLabel txtPresupuesto, txtTipoEnvio;
+	private JLabel txtPresupuesto, txtTipoEnvio, txtVacio;
 	private JCheckBox estandar, superior, premium;
 	private JButton btnHacerEnvio, btnVolver;
 	
@@ -24,10 +28,15 @@ public class VentanaPresupuesto extends JFrame{
 		pBtnHcerEnvio = new JPanel();
 		pBtnVolver = new JPanel();
 		pOeste = new JPanel(new GridLayout(4, 1));
-		pEste = new JPanel(new GridLayout(2, 1));
+		pEste = new JPanel(new GridLayout(3, 1));
+		
+		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		JLabel labelImagenLogo = new JLabel(logo);
+		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		
 		txtPresupuesto = new JLabel("Presupuesto");
 		txtTipoEnvio = new JLabel("Tipo Envio");
+		txtVacio = new JLabel(" ");
 
 		estandar = new JCheckBox("Estandar\n (En 8/12 dias)");
 		superior = new JCheckBox("Superior\n (En 6/10 dias");
@@ -37,12 +46,14 @@ public class VentanaPresupuesto extends JFrame{
 		btnVolver = new JButton("Volver");
 
 		pNorte.add(txtPresupuesto);
+		pNorte.add(labelImagenLogo);
 		
 		pOeste.add(txtTipoEnvio);
 		pOeste.add(estandar);
 		pOeste.add(superior);
 		pOeste.add(premium);
 		
+		pEste.add(txtVacio);
 		pBtnHcerEnvio.add(btnHacerEnvio);
 		pEste.add(pBtnHcerEnvio);
 		pBtnVolver.add(btnVolver);
@@ -51,6 +62,23 @@ public class VentanaPresupuesto extends JFrame{
 		add(pNorte, BorderLayout.NORTH); 
 		add(pOeste, BorderLayout.WEST); 
 		add(pEste, BorderLayout.EAST); 
+//EVENTOS
+		
+		btnVolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaInicio ventanaInicio = new VentanaInicio();
+				dispose();			
+			}
+		});
+		
+		btnHacerEnvio.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio();
+				dispose();			
+			}
+		});
 		
 	setTitle("Presupuesto");
 	setBounds(300, 200, 600, 400);
