@@ -3,6 +3,8 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -10,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,7 +22,7 @@ public class VentanaVerEnvios extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel pNorte, pNorteArriba, pNorteAbajo, pNReferencia, pBtnEliminarEnvio, pBtnVolver, pCentro, ptxtEnviosRealizados,  pSur;
+	private JPanel pNorte, pNorteArriba, pNorteAbajo, pNReferencia, pBtnEliminarEnvio, pBtnVolver, pCentro, ptxtEnviosRealizados;
 	private JLabel txtNReferencia, txtEnviosRealizados, txtRelleno;
 	private JButton btnVolver, btnEliminarEnvio;
 	private JComboBox<String> nReferencia;
@@ -31,7 +34,6 @@ public class VentanaVerEnvios extends JFrame{
 		
 		pNorte = new JPanel(new GridLayout(1, 4));
 		pCentro = new JPanel(new GridLayout(2, 1));
-		pSur = new JPanel(new GridLayout(14, 1));
 		pNReferencia = new JPanel();
 		pBtnEliminarEnvio = new JPanel();
 		pBtnVolver = new JPanel();
@@ -47,7 +49,14 @@ public class VentanaVerEnvios extends JFrame{
 		nReferencia = new JComboBox<String>();
 		
         String[] nombreColumnas = {"Nº referencia", "Fecha", "Precio", "Descripción", "Estado", "Fecha prevista"};
-        modeloTabla = new DefaultTableModel(nombreColumnas, 0);
+        Object[][] data = {
+                {"001", "2023-10-28", "$100", "Producto 1", "Activo", "2023-10-30"},
+                {"002", "2023-10-29", "$150", "Producto 2", "Inactivo", "2023-11-05"},
+                {"003", "2023-11-01", "$75", "Producto 3", "Activo", "2023-11-03"},
+                {"004", "2023-11-04", "$200", "Producto 4", "Inactivo", "2023-11-10"},
+                {"005", "2023-11-12", "$120", "Producto 5", "Activo", "2023-11-15"}
+            };
+        modeloTabla = new DefaultTableModel(data, nombreColumnas);
 
         tablaEnvios = new JTable(modeloTabla);
         
@@ -59,6 +68,8 @@ public class VentanaVerEnvios extends JFrame{
         
         Scroll = new JScrollPane(tablaEnvios);
 		
+        tablePanel.add(Scroll, BorderLayout.CENTER);
+        
 		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
@@ -76,11 +87,38 @@ public class VentanaVerEnvios extends JFrame{
 		pCentro.add(ptxtEnviosRealizados);
 		pCentro.add(Scroll);
 		
-		pSur.add(txtRelleno);
 
 		add(pNorte, BorderLayout.NORTH);
 		add(pCentro, BorderLayout.CENTER);
-		add(pSur, BorderLayout.SOUTH);
+		
+//EVENTOS
+		
+		btnVolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaInicio ventanaInicio = new VentanaInicio();
+				dispose();			
+			}
+		});
+		
+		btnEliminarEnvio.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int filaSeleccionada = tablaEnvios.getSelectedRow();
+		        if (filaSeleccionada != -1) {
+		            // Obtener el valor de "N referencia" de la fila seleccionada
+		            String nReferenciaABorrar = (String) tablaEnvios.getValueAt(filaSeleccionada, 0);
+
+		            // Eliminar la fila del modelo de tabla
+		            modeloTabla.removeRow(filaSeleccionada);
+
+		            // Aquí puedes realizar cualquier otra lógica relacionada con la eliminación, por ejemplo, en tu base de datos.
+		            System.out.println("Eliminando fila con Nº referencia: " + nReferenciaABorrar);
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Selecciona una fila para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+		        }		
+			}
+		});
 		
 	setTitle("Ver envios");
 	setBounds(300, 200, 600, 400);
