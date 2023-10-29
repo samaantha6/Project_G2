@@ -22,33 +22,34 @@ public class VentanaVerEnvios extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel pNorte, pNorteArriba, pNorteAbajo, pNReferencia, pBtnEliminarEnvio, pBtnVolver, pCentro, ptxtEnviosRealizados;
-	private JLabel txtNReferencia, txtEnviosRealizados, txtRelleno;
-	private JButton btnVolver, btnEliminarEnvio;
-	private JComboBox<String> nReferencia;
+	private JPanel pNorte, pCentro, pBtnVolver, pBtnEditar, pBtnEliminar;
+	private JLabel txtMisEnvios, txtEnviosRealizados, txtRelleno;
+	private JButton btnVolver, btnEditar, btnEliminar;
 	private DefaultTableModel modeloTabla;
 	private JTable tablaEnvios;
 	private JScrollPane Scroll;
 	
 	public VentanaVerEnvios() {
 		
-		pNorte = new JPanel(new GridLayout(1, 4));
+		pNorte = new JPanel(new GridLayout(1, 5));
 		pCentro = new JPanel(new GridLayout(2, 1));
-		pNReferencia = new JPanel();
-		pBtnEliminarEnvio = new JPanel();
 		pBtnVolver = new JPanel();
-		ptxtEnviosRealizados = new JPanel();
+		pBtnEditar = new JPanel();
+		pBtnEliminar = new JPanel();
 		
-		txtNReferencia = new JLabel("¿Nº Referencia?");
+		txtMisEnvios = new JLabel("Mis envíos");
 		txtEnviosRealizados = new JLabel("Envios realizados");
 		txtRelleno = new JLabel(" ");
 		
-		btnVolver = new JButton("<--");
-		btnEliminarEnvio = new JButton("ELIMINAR ENVIO");
+		ImageIcon editar = new ImageIcon(getClass().getResource("editar.png"));
+		ImageIcon eliminar = new ImageIcon(getClass().getResource("eliminar.png"));
 		
-		nReferencia = new JComboBox<String>();
+		btnVolver = new JButton("<--");
+		btnEditar = new JButton(editar);
+		btnEliminar = new JButton(eliminar);
 		
         String[] nombreColumnas = {"Nº referencia", "Fecha", "Precio", "Descripción", "Estado", "Fecha prevista"};
+        //son ejemplos
         Object[][] data = {
                 {"001", "2023-10-28", "$100", "Producto 1", "Activo", "2023-10-30"},
                 {"002", "2023-10-29", "$150", "Producto 2", "Inactivo", "2023-11-05"},
@@ -74,17 +75,16 @@ public class VentanaVerEnvios extends JFrame{
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		
+
 		pBtnVolver.add(btnVolver);
-		pNReferencia.add(txtNReferencia);
-		pNReferencia.add(nReferencia);
+		pBtnEditar.add(btnEditar);
+		pBtnEliminar.add(btnEliminar);
 		pNorte.add(pBtnVolver);
-		pNorte.add(pNReferencia);
-		pBtnEliminarEnvio.add(btnEliminarEnvio);
-		pNorte.add(pBtnEliminarEnvio);
+		pNorte.add(txtMisEnvios);
+		pNorte.add(pBtnEditar);
+		pNorte.add(pBtnEliminar);
 		pNorte.add(labelImagenLogo);
 		
-		ptxtEnviosRealizados.add(txtEnviosRealizados);
-		pCentro.add(ptxtEnviosRealizados);
 		pCentro.add(Scroll);
 		
 
@@ -101,7 +101,15 @@ public class VentanaVerEnvios extends JFrame{
 			}
 		});
 		
-		btnEliminarEnvio.addActionListener(new ActionListener() {
+		btnEditar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio();
+				dispose();			
+			}
+		});
+		
+		btnEliminar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int filaSeleccionada = tablaEnvios.getSelectedRow();
@@ -109,7 +117,7 @@ public class VentanaVerEnvios extends JFrame{
 		            // Obtener el valor de "N referencia" de la fila seleccionada
 		            String nReferenciaABorrar = (String) tablaEnvios.getValueAt(filaSeleccionada, 0);
 
-		            // Eliminar la fila del modelo de tabla
+		            //  la fila del modelo de tabla
 		            modeloTabla.removeRow(filaSeleccionada);
 
 		            // Aquí puedes realizar cualquier otra lógica relacionada con la eliminación, por ejemplo, en tu base de datos.

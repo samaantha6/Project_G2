@@ -13,15 +13,17 @@ public class VentanaGestionEmpleados extends JFrame {
     
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel pNorte, pSur, pOeste, pEste, pCentro, pCentroDer, pCentroIzq, pCentroCen;
-    private JButton btnatras, btneliminar;
-    private JTextField nRef;
-    private JLabel txtEnv, txtRef, txtNull;
-    private JTable table;
+	private JPanel pNorte, pSur, pOeste, pEste, pCentro, pCentroDer, pCentroIzq, pCentroCen, pNReferencia, pBtnEliminarEnvio, pBtnVolver;
+    private JButton btnatras, btnEliminarEnvio;
+	private JComboBox<String> nReferencia;
+    private JLabel txtEnv, txtNReferencia, txtNull;
+	private DefaultTableModel modeloTabla;
+	private JTable tablaEnvios;
+	private JScrollPane Scroll;
 
     public VentanaGestionEmpleados() {
     	
-        pNorte = new JPanel(new GridLayout(1, 2));
+		pNorte = new JPanel(new GridLayout(1, 4));
         pCentro = new JPanel(new GridLayout(6, 7)); 
         pSur = new JPanel(new BorderLayout());
         pCentroDer = new JPanel();
@@ -29,6 +31,9 @@ public class VentanaGestionEmpleados extends JFrame {
         pCentroCen = new JPanel();
         pOeste = new JPanel(new GridLayout(5,5));
         pEste = new JPanel();
+        pNReferencia = new JPanel();
+        pBtnEliminarEnvio = new JPanel();
+        pBtnVolver = new JPanel();
         
     	ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
     	JLabel labelImagenLogo = new JLabel(logo);
@@ -36,62 +41,52 @@ public class VentanaGestionEmpleados extends JFrame {
 
         txtEnv = new JLabel("Envíos realizados");
         txtNull = new JLabel("");
-        txtRef = new JLabel("Nº Referencia");
+		txtNReferencia = new JLabel("¿Nº Referencia?");
 
         btnatras = new JButton("<--");
-        btneliminar = new JButton("Eliminar Envío");
-        nRef = new JTextField(10);
-        
-
-        pOeste.add(btnatras);
-        
-        //pCentroCen.add(txtEnv);
-        pCentroDer.add(txtRef);
-        pCentroDer.add(nRef);
-        pCentroIzq.add(btneliminar);
-        pCentro.add(pCentroDer, BorderLayout.NORTH);
-        pCentro.add(pCentroIzq, BorderLayout.CENTER);
-        pCentro.add(pCentroCen, BorderLayout.SOUTH);
-        
+        btnEliminarEnvio = new JButton("ELIMINAR ENVIO");
+		nReferencia = new JComboBox<String>();
+                
+		pBtnVolver.add(btnatras);
+        pNorte.add(pBtnVolver);
+        pNReferencia.add(txtNReferencia);
+        pNReferencia.add(nReferencia);
+        pNorte.add(pNReferencia);
+        pNorte.add(btnEliminarEnvio);
+        pBtnEliminarEnvio.add(btnEliminarEnvio);
+        pNorte.add(pBtnEliminarEnvio);   
+        pNorte.add(labelImagenLogo);   
 
         add(pNorte, BorderLayout.NORTH);
         add(pSur, BorderLayout.SOUTH);
         add(pCentro, BorderLayout.CENTER);
         add(pEste, BorderLayout.EAST);
         add(pOeste, BorderLayout.WEST);
-
-        // Crear la tabla con el modelo de datos
-        DefaultTableModel model = new DefaultTableModel();
         
-        model.addColumn("Nº Referencia");
-        model.addColumn("Fecha");
-        model.addColumn("Precio");
-        model.addColumn("Descripción");
-        model.addColumn("Estado");
-        model.addColumn("Fecha Prevista");
-
+        String[] nombreColumnas = {"Nº referencia", "Fecha", "Precio", "Descripción", "Estado", "Fecha prevista"};
+        //son ejemplos para probar que todo funciona, no estaran en el proyecto final
+        Object[][] data = {
+                {"001", "2023-10-28", "$100", "Producto 1", "Activo", "2023-10-30"},
+                {"002", "2023-10-29", "$150", "Producto 2", "Inactivo", "2023-11-05"},
+                {"003", "2023-11-01", "$75", "Producto 3", "Activo", "2023-11-03"},
+                {"004", "2023-11-04", "$200", "Producto 4", "Inactivo", "2023-11-10"},
+                {"005", "2023-11-12", "$120", "Producto 5", "Activo", "2023-11-15"}
+            };
         
-        model.addRow(new Object[]{"", "", ""});
-        model.addRow(new Object[]{"", "", ""});
-        model.addRow(new Object[]{"", "", ""});
-        model.addRow(new Object[]{"", "", ""});
-        model.addRow(new Object[]{"", "", ""});
-        model.addRow(new Object[]{"", "", ""});
-        model.addRow(new Object[]{"", "", ""});
+        modeloTabla = new DefaultTableModel(data, nombreColumnas);
 
+        tablaEnvios = new JTable(modeloTabla);
         
-        table = new JTable(model);
-
         // Ajustar el alto de las filas
         int rowHeight = 30;  
-        table.setRowHeight(rowHeight);
+        tablaEnvios.setRowHeight(rowHeight);
         
         // Establecer márgenes
         JPanel tablePanel = new JPanel(new BorderLayout());
         tablePanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15)); 
         
-        JScrollPane scrollPane = new JScrollPane(table);
-        tablePanel.add(scrollPane, BorderLayout.CENTER);
+        Scroll = new JScrollPane(tablaEnvios);
+        tablePanel.add(Scroll, BorderLayout.CENTER);
 
         pSur.add(tablePanel, BorderLayout.CENTER);
         
@@ -107,12 +102,35 @@ public class VentanaGestionEmpleados extends JFrame {
 				dispose();			
 			}
 		});
+		
+		btnEliminarEnvio.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int filaSeleccionada = tablaEnvios.getSelectedRow();
+		        if (filaSeleccionada != -1) {
+		            // Obtener el valor de "N referencia" de la fila seleccionada
+		            String nReferenciaABorrar = (String) tablaEnvios.getValueAt(filaSeleccionada, 0);
+
+		            //  la fila del modelo de tabla
+		            modeloTabla.removeRow(filaSeleccionada);
+
+		            // Aquí puedes realizar cualquier otra lógica relacionada con la eliminación, por ejemplo, en tu base de datos.
+		            System.out.println("Eliminando fila con Nº referencia: " + nReferenciaABorrar);
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Selecciona una fila para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+		        }		
+			}
+		});
         
         setTitle("Gestión");
         setBounds(300, 18, 600, 400); // Ajustar el ancho del marco
         setMinimumSize(new Dimension(700, 650)); // Configurar el tamaño mínimo de la ventana
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
+    }
+    
+	public void agregarFila(Object[] nuevaFila) {
+		modeloTabla.addRow(nuevaFila);
     }
 
     public static void main(String[] args) {
