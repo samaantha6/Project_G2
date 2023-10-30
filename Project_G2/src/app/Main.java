@@ -1,4 +1,5 @@
-package main1;
+package app;
+
 import gui.VentanaInicioSesion;
 
 public class Main {
