@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 	public class VentanaFacturacion extends JFrame {
 		
@@ -15,6 +16,9 @@ import java.awt.event.ActionListener;
 	    private JButton btnatras, btnexportar;
 	    private JTextField nRef, nPrecio, nDesc, nPagado, nEstado;
 	    private JLabel txtPrecio, txtPagado, txtRef, txtDesc, txtFact, txtEstado, txtDetalles, txtExport;
+	    
+		private Logger logger = Logger.getLogger(VentanaFacturacion.class.getName());
+
 	    
 	    public VentanaFacturacion() {
 	    	

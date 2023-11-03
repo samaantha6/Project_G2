@@ -8,6 +8,7 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 public class VentanaGestionEmpleados extends JFrame {
     
@@ -20,6 +21,9 @@ public class VentanaGestionEmpleados extends JFrame {
 	private DefaultTableModel modeloTabla;
 	private JTable tablaEnvios;
 	private JScrollPane Scroll;
+	
+	private Logger logger = Logger.getLogger(VentanaGestionEmpleados.class.getName());
+
 
     public VentanaGestionEmpleados() {
     	
@@ -74,8 +78,9 @@ public class VentanaGestionEmpleados extends JFrame {
             };
         
         modeloTabla = new DefaultTableModel(data, nombreColumnas);
-
         tablaEnvios = new JTable(modeloTabla);
+        Scroll = new JScrollPane(tablaEnvios);
+
         
         // Ajustar el alto de las filas
         int rowHeight = 30;  
@@ -85,7 +90,6 @@ public class VentanaGestionEmpleados extends JFrame {
         JPanel tablePanel = new JPanel(new BorderLayout());
         tablePanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15)); 
         
-        Scroll = new JScrollPane(tablaEnvios);
         tablePanel.add(Scroll, BorderLayout.CENTER);
 
         pSur.add(tablePanel, BorderLayout.CENTER);

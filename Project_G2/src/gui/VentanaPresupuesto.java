@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +22,8 @@ public class VentanaPresupuesto extends JFrame{
 	private JLabel txtPresupuesto, txtTipoEnvio, txtVacio;
 	private JCheckBox estandar, superior, premium;
 	private JButton btnHacerEnvio, btnVolver;
+	
+	private Logger logger = Logger.getLogger(VentanaPresupuesto.class.getName());
 	
 	public VentanaPresupuesto() {
 		

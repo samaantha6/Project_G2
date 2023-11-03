@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -28,6 +29,8 @@ public class VentanaVerEnvios extends JFrame{
 	private DefaultTableModel modeloTabla;
 	private JTable tablaEnvios;
 	private JScrollPane Scroll;
+	
+	private Logger logger = Logger.getLogger(VentanaVerEnvios.class.getName());
 	
 	public VentanaVerEnvios() {
 		

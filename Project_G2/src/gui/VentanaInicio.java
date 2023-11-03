@@ -6,6 +6,7 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,6 +25,8 @@ public class VentanaInicio extends JFrame{
 	private JButton btnVerEnvio, btnFac, btnHacerEnvio, btnCrear, btnCerrarSesion, btnModificar;
 	private JTextField campoAlto, campoAncho, campoLargo, campoPeso, campoDesde, campoHasta;
 	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso, txtSeparador;
+
+	private Logger logger = Logger.getLogger(VentanaInicio.class.getName());
 
 	
 	public VentanaInicio() {

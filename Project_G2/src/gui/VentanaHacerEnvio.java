@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -57,6 +58,9 @@ public class VentanaHacerEnvio extends JFrame {
 					pRev, pRevEnvio, pInfo, pAltPesLrAn, pEnYPg;
 	
 	private ButtonGroup tipoEnvioGrupo, recogidaGrupo, pagoGrupo, facturaGrupo;
+	
+	
+	private Logger logger = Logger.getLogger(VentanaHacerEnvio.class.getName());
 	
 	
 	

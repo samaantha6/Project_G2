@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,15 +25,25 @@ public class VentanaRegistro extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	
-	private JPanel pNorte, pSur, pOeste, pEste, pCentro, pContrasenia, pNombre, pApellido, pCorreo, pTelefono, pPregSeg, pVenificaCon, pRespuesta;
-	private JLabel txtReg, txtNombre, txtApellido, txtCorreo, txtTelefono, txtContrasenia, txtPregSeg, txtVenificaCon, txtRespuesta;
+	private JPanel pNorte, pSur, pOeste, pEste, pCentro, pContrasenia, pNombre, pApellido, 
+					pCorreo, pTelefono, pPregSeg, pVenificaCon, pRespuesta;
+	
+	private JLabel txtReg, txtNombre, txtApellido, txtCorreo, txtTelefono, txtContrasenia,
+					txtPregSeg, txtVenificaCon, txtRespuesta;
+	
 	private JButton btnReg, btnVolver, btnOjoCon, btnOjoConVen;
+	
 	private JComboBox<String> pregSeg;
+	
 	private JCheckBox Condiciones;
+	
 	private JTextField campoReg, campoNombre, campoApellido, campoCorreo, 
 						campoTelefono, campoRespuesta, campoContrasenia1, 
 						campoVenificaCon1;
+	
 	private JPasswordField campoContrasenia, campoVenificaCon;
+	
+	private Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
 	
 
 	

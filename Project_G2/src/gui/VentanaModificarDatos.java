@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,14 +23,21 @@ public class VentanaModificarDatos extends JFrame{
 	
 	private JLabel txtModDatos, txtCorreo, txtTelefono, txtNewCon, txtVerifCon, txtNom,
 					txtApel, txtPregSeg, txtRes;
+	
 	private JTextField campoCorreo, campoTelefono, campoRes, campoNom, campoApel, 
 						campoContrasenia1, campoVenificaCon1;
+	
 	private JPasswordField campoCon, campoVerifCon;
+	
 	private JButton btnElimCuen, btnModif, btnVolver, btnOjoCon, btnOjoConVen;
+	
 	private JPanel pNorte, pSur, pCentro, pVenificaCon, pContrasenia, pNombre,
 					pApellido, pRespuesta, pTelefono, pCorreo, 
 					pPregSeg;
+	
 	private JComboBox<String> campoPregSeg;
+	
+	private Logger logger = Logger.getLogger(VentanaModificarDatos.class.getName());
 	
 	/**
 	 * Meotodo samdksada
