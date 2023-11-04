@@ -13,21 +13,19 @@ public class Main {
 		VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
 	
 	
-	/**Cargamos la configuración del logger*/
-	try {
-		FileInputStream fis = new FileInputStream("conf/logger.properties");
-		LogManager.getLogManager().readConfiguration(fis);
-		
-	} catch (FileNotFoundException e1) {
-		e1.printStackTrace();
-		
-	} catch (SecurityException e1) {
-		e1.printStackTrace();
-		
-	} catch (IOException e1) {
-		e1.printStackTrace();
+		/**Cargamos la configuración del logger*/
+		try {
+			FileInputStream fis = new FileInputStream("conf/logger.properties");
+			LogManager.getLogManager().readConfiguration(fis);
+			
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+			
+		} catch (SecurityException e1) {
+			e1.printStackTrace();
+			
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
-	}
-	
-	
 }
