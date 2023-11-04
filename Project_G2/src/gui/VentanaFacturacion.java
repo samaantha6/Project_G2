@@ -31,14 +31,15 @@ import java.util.logging.Logger;
 	    
 	    public VentanaFacturacion() {
 	    	
-//	    	PDDocument a = new PDDocument();
-//	    	try {
-//				a.save("ejemplo");
-//				a.close();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+/**	    	PDDocument a = new PDDocument();
+	    	try {
+				a.save("ejemplo");
+				a.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+ */
 	    	
 	    	
 	    	
