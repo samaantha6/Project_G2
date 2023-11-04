@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 			pOesteArriba = new JPanel(new GridLayout(4, 1));
 			pOeste = new JPanel(new GridLayout(3,2));
 			pEste = new JPanel(new GridLayout(7,1));
+			logger.info("Paneles creados");
 	        
 			ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
 			JLabel labelImagenLogo = new JLabel(logo);
@@ -41,15 +42,18 @@ import java.util.logging.Logger;
 	        txtFact = new JLabel("  FACTURACIÓN");
 	        txtDetalles = new JLabel("Detalles" );
 	        txtPagado = new JLabel("¿Pagado?");
-
+	        logger.info("JLabels creados");
+	        
 	        btnatras = new JButton("<--");
 	        btnexportar = new JButton("Exportar");
+	        logger.info("JButtons creados");
 	        
 	        nRef = new JTextField(10);
 	        nPrecio = new JTextField(10);
 	        nDesc = new JTextField(10);
 	        nEstado = new JTextField(10);
 	        nPagado = new JTextField(10);
+	        logger.info("JTextFields creados");
 	    	
 	    	pEste.add(txtDetalles);
 	    	
@@ -106,7 +110,7 @@ import java.util.logging.Logger;
 	        add(pOeste, BorderLayout.WEST);
 	        add(pEste, BorderLayout.EAST);
 	        
-//EVENTOS
+	        //EVENTOS
 			btnatras.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -114,7 +118,9 @@ import java.util.logging.Logger;
 					dispose();			
 				}
 			});
-	        
+			logger.info("Evento botón atras creado");
+			
+			
 	        setTitle("Facturación");
 	        setBounds(350, 100, 600, 400); // Ajustar el ancho del marco
 	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
