@@ -8,6 +8,10 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class VentanaGestionEmpleados extends JFrame {
@@ -125,6 +129,24 @@ public class VentanaGestionEmpleados extends JFrame {
 		        }		
 			}
 		});
+		
+		/**Cargamos la configuración del logger*/
+		try {
+			FileInputStream fis = new FileInputStream("conf/logger.properties");
+			LogManager.getLogManager().readConfiguration(fis);
+			
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		} catch (SecurityException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         
         setTitle("Gestión");
         setBounds(300, 18, 600, 400); // Ajustar el ancho del marco

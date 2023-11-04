@@ -5,6 +5,10 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
@@ -82,6 +86,24 @@ public class VentanaPresupuesto extends JFrame{
 				dispose();			
 			}
 		});
+		
+		/**Cargamos la configuración del logger*/
+		try {
+			FileInputStream fis = new FileInputStream("conf/logger.properties");
+			LogManager.getLogManager().readConfiguration(fis);
+			
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		} catch (SecurityException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	setTitle("Presupuesto");
 	setBounds(300, 200, 600, 400);
