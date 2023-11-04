@@ -131,15 +131,12 @@ import java.util.logging.Logger;
 				LogManager.getLogManager().readConfiguration(fis);
 				
 			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 				
 			} catch (SecurityException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 				
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
