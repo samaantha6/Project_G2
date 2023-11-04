@@ -67,12 +67,13 @@ public class VentanaRegistro extends JFrame{
 		pPregSeg = new JPanel();
 		pVenificaCon = new JPanel();
 		pRespuesta = new JPanel();
+		logger.info("JPanel creados");
 		
 		ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("ojoAbierto.png"));
 		ImageIcon ojoCerrado = new ImageIcon(getClass().getResource("ojoCerrado.png"));
 		ImageIcon ojoAbierto1 = new ImageIcon(getClass().getResource("ojoAbierto.png"));
 		ImageIcon ojoCerrado1 = new ImageIcon(getClass().getResource("ojoCerrado.png"));
-		
+		logger.info("Imagenes creadas");
 		
 		txtReg = new JLabel("REGISTRATE:");
 		txtNombre = new JLabel("Nombre:");
@@ -83,15 +84,18 @@ public class VentanaRegistro extends JFrame{
 		txtPregSeg = new JLabel("Pregunta de Seguridad:");
 		txtVenificaCon = new JLabel("Repite contraseña:");
 		txtRespuesta = new JLabel("Respuesta:");
+		logger.info("JLabel creados");
 		
 
 		btnReg = new JButton("REGISTRARSE");
 		btnVolver = new JButton("VOLVER");
 		btnOjoCon = new JButton(ojoAbierto);
 		btnOjoConVen = new JButton(ojoAbierto1);
+		logger.info("JButtons creados");
 		
 		campoContrasenia = new JPasswordField(10);
 		campoVenificaCon = new JPasswordField(10);
+		logger.info("JPaswordFields creados");
 		
 		campoReg = new JTextField(10);
 		campoVenificaCon1 = new JTextField(10);
@@ -101,14 +105,18 @@ public class VentanaRegistro extends JFrame{
 		campoCorreo = new JTextField(10);
 		campoTelefono = new JTextField(10);
 		campoRespuesta = new JTextField(10);
+		logger.info("JTextFields creados");
 		
 		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
-
+		logger.info("Imagen creada");
+		
 		Condiciones = new JCheckBox("Acepto condiciones y términos de seguridad");
+		logger.info("JCheckBox creado");
 		
 		pregSeg = new JComboBox<>();
+		logger.info("JComboBox creado");
 		
 		pNorte.add(txtReg, BorderLayout.NORTH);
 		
@@ -252,20 +260,7 @@ public class VentanaRegistro extends JFrame{
 			}
 		});
 		
-		/**Cargamos la configuración del logger*/
-		try {
-			FileInputStream fis = new FileInputStream("conf/logger.properties");
-			LogManager.getLogManager().readConfiguration(fis);
-			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-			
-		} catch (SecurityException e1) {
-			e1.printStackTrace();
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+
 		
 		this.setTitle("Registro");
 		this.setBounds(300, 200, 700, 400);

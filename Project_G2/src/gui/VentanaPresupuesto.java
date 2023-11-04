@@ -36,21 +36,26 @@ public class VentanaPresupuesto extends JFrame{
 		pBtnVolver = new JPanel();
 		pOeste = new JPanel(new GridLayout(4, 1));
 		pEste = new JPanel(new GridLayout(3, 1));
+		logger.info("JPanels creados");
 		
 		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
+		logger.info("Imagen creada");
 		
 		txtPresupuesto = new JLabel("Presupuesto");
 		txtTipoEnvio = new JLabel("Tipo Envio");
 		txtVacio = new JLabel(" ");
+		logger.info("JLabel creados");
 
 		estandar = new JCheckBox("Estandar\n (En 8/12 dias)");
 		superior = new JCheckBox("Superior\n (En 6/10 dias");
 		premium = new JCheckBox("Premium\n (En 2 dias");
+		logger.info("JCheckBox creados");
 		
 		btnHacerEnvio = new JButton("Hacer Envio");
 		btnVolver = new JButton("Volver");
+		logger.info("JButtons creados");
 
 		pNorte.add(txtPresupuesto);
 		pNorte.add(labelImagenLogo);
@@ -86,21 +91,7 @@ public class VentanaPresupuesto extends JFrame{
 				dispose();			
 			}
 		});
-		
-		/**Cargamos la configuración del logger*/
-		try {
-			FileInputStream fis = new FileInputStream("conf/logger.properties");
-			LogManager.getLogManager().readConfiguration(fis);
-			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-			
-		} catch (SecurityException e1) {
-			e1.printStackTrace();
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+
 		
 	setTitle("Presupuesto");
 	setBounds(300, 200, 600, 400);

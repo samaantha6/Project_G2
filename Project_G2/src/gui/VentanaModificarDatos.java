@@ -56,6 +56,7 @@ public class VentanaModificarDatos extends JFrame{
 		pTelefono = new JPanel();
 		pCorreo = new JPanel();
 		pPregSeg = new JPanel();
+		logger.info("JPanel creados");
 		
 		txtNom = new JLabel("Nombre:");
 		txtApel = new JLabel("Apellido:");
@@ -66,11 +67,13 @@ public class VentanaModificarDatos extends JFrame{
 		txtRes = new JLabel("Respuesta:");
 		txtTelefono = new JLabel("Telefono:");
 		txtVerifCon = new JLabel("Repite contraseña:");
+		logger.info("JLabel creados");
 		
 		ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("ojoAbierto.png"));
 		ImageIcon ojoCerrado = new ImageIcon(getClass().getResource("ojoCerrado.png"));
 		ImageIcon ojoAbierto1 = new ImageIcon(getClass().getResource("ojoAbierto.png"));
 		ImageIcon ojoCerrado1 = new ImageIcon(getClass().getResource("ojoCerrado.png"));
+		logger.info("Imagenes creadoa");
 		
 		campoNom = new JTextField(10);
 		campoApel = new JTextField(10);
@@ -79,20 +82,26 @@ public class VentanaModificarDatos extends JFrame{
 		campoRes = new JTextField(10);
 		campoContrasenia1 = new JTextField(10);
 		campoVenificaCon1 = new JTextField(10);
+		logger.info("JTextFields creados");
+		
 		campoPregSeg = new JComboBox<>();
+		logger.info("JComboBox creado");
 
 		campoCon = new JPasswordField(10);
 		campoVerifCon = new JPasswordField(10);
+		logger.info("JPaswordFields creados");
 		
 		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
+		
 		
 		btnModif = new JButton("MODIFICAR");
 		btnElimCuen = new JButton("ELIMINAR CUENTA");
 		btnVolver = new JButton("VOLVER");
 		btnOjoCon = new JButton(ojoAbierto);
 		btnOjoConVen = new JButton(ojoAbierto1);
+		logger.info("JButtons creados");
 		
 		pNorte.add(txtModDatos);
 		pNorte.add(labelImagenLogo);
@@ -220,20 +229,7 @@ public class VentanaModificarDatos extends JFrame{
 			}
 		});
 		
-		/**Cargamos la configuración del logger*/
-		try {
-			FileInputStream fis = new FileInputStream("conf/logger.properties");
-			LogManager.getLogManager().readConfiguration(fis);
-			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-			
-		} catch (SecurityException e1) {
-			e1.printStackTrace();
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+
 		
 	this.setTitle("Modificar Datos");
 	this.setBounds(300, 200, 600, 400);

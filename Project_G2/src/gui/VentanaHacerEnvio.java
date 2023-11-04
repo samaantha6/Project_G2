@@ -95,26 +95,31 @@ public class VentanaHacerEnvio extends JFrame {
 		
 		txtHasta = new JLabel("HASTA");
 		txtDesde = new JLabel("DESDE");
-			
+		logger.info("JLabels de tab 'DONDE' creados");
+		
 		txtNom = new JLabel("Nombre:");
 		txtDir = new JLabel("Dirección");
 		txtTel = new JLabel("Teléfono:");
 		txtCorreo = new JLabel("Correo:");
+		logger.info("JLabels 2 de tab 'DONDE' creados");
 		
 		txtNomHasta = new JLabel("Nombre:");
 		txtDirHasta = new JLabel("Dirección");
 		txtTelHasta = new JLabel("Teléfono:");
 		txtCorreoHasta = new JLabel("Correo:");
+		logger.info("JLabels 3 de tab 'DONDE' creados");
 		
 		campoNom = new JTextField(20);
 		campoDir = new JTextField(20);
 		campoTel = new JTextField(20);
 		campoCorreo = new JTextField(20);
+		logger.info("JTextFields de tab 'DONDE' creados");
 		
 		campoNomHasta = new JTextField(20);
 		campoDirHasta = new JTextField(20);
 		campoTelHasta = new JTextField(20);
 		campoCorreoHasta = new JTextField(20);
+		logger.info("JTextFields 2 de tab 'DONDE' creados");
 	
 		
 		ptxtDesde = new JPanel();
@@ -123,6 +128,7 @@ public class VentanaHacerEnvio extends JFrame {
 		pCamposHasta = new JPanel(new GridLayout(4,2));
 		pHasta = new JPanel();
 		pDesde = new JPanel();
+		logger.info("JPanels de tab 'DONDE' creados");
 
 		
 		ptxtDesde.add(txtDesde, BorderLayout.NORTH);
@@ -171,16 +177,20 @@ public class VentanaHacerEnvio extends JFrame {
 		txtValor = new JLabel("Valor del paquete: ");
 		txtEur = new JLabel("EUR");
 		txtInfo = new JLabel("El nº de referencia se asigna automáticamente.");
+		logger.info("JLabels de tab 'QUE' creados");
 		
 		campoLargo = new JTextField(10);
 		campoAncho = new JTextField(10);
 		campoAlto = new JTextField(10);
 		campoValor = new JTextField(10);
 		campoPeso = new JTextField(10);
+		logger.info("JTextFields de tab 'QUE' creados");
 		
 		checkFragil = new JCheckBox("¿Frágil?");
+		logger.info("JCheckBox de tab 'QUE' creado");
 		
 		comboEmbalaje = new JComboBox<String>();
+		logger.info("JComboBox de tab 'QUE' creado");
 		
 		pEmbalaje = new JPanel(new GridLayout(1,2));
 		pAltLarAnc = new JPanel();
@@ -188,6 +198,7 @@ public class VentanaHacerEnvio extends JFrame {
 		pValor = new JPanel();
 		pNQue = new JPanel();
 		pCQue = new JPanel();
+		logger.info("JPanels de tab 'QUE' creados");
 		
 		pEmbalaje.add(txtEmbalado);
 		pEmbalaje.add(comboEmbalaje);
@@ -227,19 +238,24 @@ public class VentanaHacerEnvio extends JFrame {
 		txtRecog = new JLabel("Recogida:");
 		txtCasoRecog = new JLabel("(En caso de ir a recoger el \n paquete a domicilio.)");
 		txtEntrega = new JLabel("¿Cuando se entrega?");
+		logger.info("JLabels de tab 'COMO' creados");
 		
 		campoFenvio = new JTextField(10);
+		logger.info("JTextFields de tab 'COMO' creado");
 		
 		radPtoRecog = new JRadioButton("Punto de recogida");
 		radUsoDir = new JRadioButton("Usar mi direccion");
 		radEstandar = new JRadioButton("Estandar");
 		radSuper = new JRadioButton("Superior");
 		radPremium = new JRadioButton("Premium");
+		logger.info("JRadioButton de tab 'COMO' creados");
 		
 		comboRecog = new JComboBox<String>();
+		logger.info("JComboBox de tab 'COMO' creados");
 		
 		tipoEnvioGrupo = new ButtonGroup();
 		recogidaGrupo = new ButtonGroup();
+		logger.info("JButtons de tab 'COMO' creados");
 		
 		pFEnvio = new JPanel();
 		pRecog = new JPanel();
@@ -247,9 +263,11 @@ public class VentanaHacerEnvio extends JFrame {
 		pRecYEnt = new JPanel();
 		pEntrega2 = new JPanel(new GridLayout(3,1));
 		pRecog2 = new JPanel(new GridLayout(3,1));
+		logger.info("JPanels de tab 'COMO' creados");
 		
 		recogidaGrupo.add(radPtoRecog);
 		recogidaGrupo.add(radUsoDir);
+		
 		
 		tipoEnvioGrupo.add(radEstandar);
 		tipoEnvioGrupo.add(radPremium);
@@ -292,22 +310,27 @@ public class VentanaHacerEnvio extends JFrame {
 		txtFTarj = new JLabel("Fecha de caducidad:");
 		txtCVV = new JLabel("CVV:");
 		txtDni = new JLabel("DNI:");
+		logger.info("JLabels de tab 'PAGO' creados");
 		
 		campoDescrip = new JTextField(30);
 		campoTarj = new JTextField(10);
 		campoFTarj = new JTextField(5);
 		campoCVV = new JTextField(5);
 		campoDni = new JTextField(10);
+		logger.info("JTextFields de tab 'PAGO' creados");
 		
 		checkFactura = new JCheckBox("¿Factura?");
+		logger.info("JCheckBox de tab 'PAGO' creados");
 		
 		radTarj = new JRadioButton("Tarjeta");
 		radContrareembolso = new JRadioButton("Contrareembolso");
 		radFacRemit = new JRadioButton("Remitente");
 		radFacDestinat = new JRadioButton("Destinatario");
+		logger.info("JRadioButton de tab 'PAGO' creados");
 		
 		pagoGrupo = new ButtonGroup();
 		facturaGrupo = new ButtonGroup();
+		logger.info("ButtonGroup de tab 'PAGO' creados");
 		
 		pTarjYContra = new JPanel(new GridLayout(2,1));
 		pFact = new JPanel();
@@ -316,8 +339,8 @@ public class VentanaHacerEnvio extends JFrame {
 		pFact2 = new JPanel(new GridLayout(2,1));
 		pCamposTarjYCon = new JPanel(new GridLayout(2,1));
 		pDescrip = new JPanel();
+		logger.info("JPanels de tab 'PAGO' creados");
 
-		
 		pFact2.add(radFacRemit);
 		pFact2.add(radFacDestinat);
 		
@@ -372,6 +395,7 @@ public class VentanaHacerEnvio extends JFrame {
 		txtRevAncho = new JLabel("Ancho:");
 		txtRevAlto = new JLabel("Alto:");
 		txtRevKg = new JLabel("kg");
+		logger.info("JLabels de tab 'REVISION' creados");
 		 
 		campoEnDesde = new JTextField(10);
 		campoEnHasta = new JTextField(10);
@@ -381,14 +405,17 @@ public class VentanaHacerEnvio extends JFrame {
 		campoRevAlto = new JTextField(5);
 		campoRevPeso = new JTextField(5);
 		campoEnvios = new JTextField(10);
+		logger.info("JTextFields de tab 'REVISION' creados");
 	 
 		checkTerminos = new JCheckBox("<html><u>Aceptas terminos y condiciones de uso</u></html>");
+		logger.info("JCheckBox de tab 'REVISION' creado");
 		
 		
 		pRevEnvio = new JPanel(new GridLayout(2,4));
 		pInfo = new JPanel();
 		pAltPesLrAn = new JPanel(new GridLayout(4,2));
 		pEnYPg = new JPanel(new GridLayout(2,2));
+		logger.info("JPanel de tab 'REVISION' creados");
 		 
 		 
 		 pRevEnvio.add(txtEnDesde);
@@ -446,20 +473,7 @@ public class VentanaHacerEnvio extends JFrame {
 			}
 		});
 		
-		/**Cargamos la configuración del logger*/
-		try {
-			FileInputStream fis = new FileInputStream("conf/logger.properties");
-			LogManager.getLogManager().readConfiguration(fis);
-			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-			
-		} catch (SecurityException e1) {
-			e1.printStackTrace();
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+
 		
 		setTitle("Hacer envío");
 		setBounds(300, 200, 800, 400);

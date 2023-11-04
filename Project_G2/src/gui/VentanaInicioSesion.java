@@ -49,6 +49,7 @@ public class VentanaInicioSesion extends JFrame{
 	pCentroCen = new JPanel();
 	pOeste = new JPanel();
 	pEste = new JPanel();
+	logger.info("JPanel creados");
 
 	imagenLabel = new JLabel();
 	txtIS = new JLabel("INICIA SESIÓN:");
@@ -57,17 +58,21 @@ public class VentanaInicioSesion extends JFrame{
 	txtCorreo = new JLabel("correo:          ");
 	txtContrasenia = new JLabel("contraseña:  ");
 	txtNull = new JLabel("");
+	logger.info("JLabel creados");
 	
 
 	ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
 	JLabel labelImagenLogo = new JLabel(logo);
 	labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
+	logger.info("Imagenes creadas");
 	
 	btnIS = new JButton("INICIAR SESIÓN");
 	btnReg = new JButton("REGISTRARSE");
+	logger.info("JButtons creados");
 	 
 	campoContrasenia = new JPasswordField(20);
 	campoCorreo = new JTextField(20);
+	logger.info("JPasword creado");
 	
 	pNorteIzq.add(txtIS);
 	pNorteDer.add(labelImagenLogo);
@@ -123,8 +128,6 @@ public class VentanaInicioSesion extends JFrame{
 	});
 	
 	
-	
-	
 	add(pNorte,BorderLayout.NORTH);
 	add(pSur,BorderLayout.SOUTH);
 	add(pCentro,BorderLayout.CENTER);
@@ -133,19 +136,7 @@ public class VentanaInicioSesion extends JFrame{
 	//pCentro.add(pCentroDer);
 	
 	/**Cargamos la configuración del logger*/
-	try {
-		FileInputStream fis = new FileInputStream("conf/logger.properties");
-		LogManager.getLogManager().readConfiguration(fis);
-		
-	} catch (FileNotFoundException e1) {
-		e1.printStackTrace();
-		
-	} catch (SecurityException e1) {
-		e1.printStackTrace();
-		
-	} catch (IOException e1) {
-		e1.printStackTrace();
-	}
+
 	
 	setTitle("Inicio Sesión");
 	setBounds(300, 200, 600, 300);

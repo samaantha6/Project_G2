@@ -53,6 +53,7 @@ public class VentanaInicio extends JFrame{
 		pOesteCentro = new JPanel();
 		pOesteAbajo = new JPanel();
 		pbtnCrear = new JPanel();
+		logger.info("JPanel creados");
 		
 		txtBienvedida = new JLabel("Bienvenid@!");
 		txtCrearPre = new JLabel("Crear Presupuesto:");
@@ -62,6 +63,7 @@ public class VentanaInicio extends JFrame{
 		txtAncho = new JLabel("Ancho");
 		txtLargo = new JLabel("Largo");
 		txtPeso = new JLabel("Peso");
+		logger.info("JLabel creados");
 		
 		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
@@ -78,6 +80,7 @@ public class VentanaInicio extends JFrame{
 		ImageIcon hacerEnvio = new ImageIcon(getClass().getResource("hacerEnvio.png"));
 		JLabel labelImagenhacerEnvio = new JLabel(hacerEnvio);
 		labelImagenhacerEnvio.setPreferredSize(new Dimension(hacerEnvio.getIconWidth(), hacerEnvio.getIconHeight()));
+		logger.info("Imagenes creadas");
 		
 		btnVerEnvio = new JButton("VER ENVÍOS");
 		btnFac = new JButton("FACTURACION");
@@ -85,6 +88,7 @@ public class VentanaInicio extends JFrame{
 		btnCrear = new JButton("CREAR");
 		btnCerrarSesion = new JButton("CERRAR SESIÓN");
 		btnModificar = new JButton("MODIFICAR DATOS");
+		logger.info("JButtons creados");
 		
 		campoAlto = new JTextField(10);
 		campoAncho = new JTextField(10);
@@ -92,6 +96,7 @@ public class VentanaInicio extends JFrame{
 		campoPeso = new JTextField(10);
 		campoDesde = new JTextField(20);
 		campoHasta = new JTextField(20);
+		logger.info("JTextFields creados");
 		
 		pNorteIzq.add(btnCerrarSesion);
 		pNorteIzq.add(btnModificar);
@@ -200,20 +205,6 @@ public class VentanaInicio extends JFrame{
 			}
 		});
 		
-		/**Cargamos la configuración del logger*/
-		try {
-			FileInputStream fis = new FileInputStream("conf/logger.properties");
-			LogManager.getLogManager().readConfiguration(fis);
-			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-			
-		} catch (SecurityException e1) {
-			e1.printStackTrace();
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		
 		setTitle("Pantalla inicio");
 		setBounds(300, 200, 600, 400);

@@ -42,18 +42,22 @@ public class VentanaGestionEmpleados extends JFrame {
         pNReferencia = new JPanel();
         pBtnEliminarEnvio = new JPanel();
         pBtnVolver = new JPanel();
+        logger.info("JPanels creados");
         
     	ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
     	JLabel labelImagenLogo = new JLabel(logo);
     	labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
+    	logger.info("Imagen creada");
 
         txtEnv = new JLabel("Envíos realizados");
         txtNull = new JLabel("");
 		txtNReferencia = new JLabel("¿Nº Referencia?");
+		logger.info("JLabels creados");
 
         btnatras = new JButton("<--");
         btnEliminarEnvio = new JButton("ELIMINAR ENVIO");
 		nReferencia = new JComboBox<String>();
+		logger.info("JButtons creados");
                 
 		pBtnVolver.add(btnatras);
         pNorte.add(pBtnVolver);
@@ -71,6 +75,8 @@ public class VentanaGestionEmpleados extends JFrame {
         add(pEste, BorderLayout.EAST);
         add(pOeste, BorderLayout.WEST);
         
+        
+        /** CREACION DE TABLA */
         String[] nombreColumnas = {"Nº referencia", "Fecha", "Precio", "Descripción", "Estado", "Fecha prevista"};
         //son ejemplos para probar que todo funciona, no estaran en el proyecto final
         Object[][] data = {
@@ -84,6 +90,7 @@ public class VentanaGestionEmpleados extends JFrame {
         modeloTabla = new DefaultTableModel(data, nombreColumnas);
         tablaEnvios = new JTable(modeloTabla);
         Scroll = new JScrollPane(tablaEnvios);
+        logger.info("JTable creada");
 
         
         // Ajustar el alto de las filas
@@ -130,20 +137,6 @@ public class VentanaGestionEmpleados extends JFrame {
 			}
 		});
 		
-		/**Cargamos la configuración del logger*/
-		try {
-			FileInputStream fis = new FileInputStream("conf/logger.properties");
-			LogManager.getLogManager().readConfiguration(fis);
-			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-			
-		} catch (SecurityException e1) {
-			e1.printStackTrace();
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
         
         setTitle("Gestión");
         setBounds(300, 18, 600, 400); // Ajustar el ancho del marco

@@ -125,22 +125,6 @@ import java.util.logging.Logger;
 			logger.info("Evento botón atras creado");
 			
 			
-			/**Cargamos la configuración del logger*/
-			try {
-				FileInputStream fis = new FileInputStream("conf/logger.properties");
-				LogManager.getLogManager().readConfiguration(fis);
-				
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-				
-			} catch (SecurityException e1) {
-				e1.printStackTrace();
-				
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			
-			
 	        setTitle("Facturación");
 	        setBounds(350, 100, 600, 400); // Ajustar el ancho del marco
 	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -43,18 +43,24 @@ public class VentanaVerEnvios extends JFrame{
 		pBtnVolver = new JPanel();
 		pBtnEditar = new JPanel();
 		pBtnEliminar = new JPanel();
+		logger.info("JPanel creados");
 		
 		txtMisEnvios = new JLabel("Mis envíos");
 		txtEnviosRealizados = new JLabel("Envios realizados");
 		txtRelleno = new JLabel(" ");
+		logger.info("JLabel creados");
 		
 		ImageIcon editar = new ImageIcon(getClass().getResource("editar.png"));
 		ImageIcon eliminar = new ImageIcon(getClass().getResource("eliminar.png"));
+		logger.info("Imagenes creadas");
 		
 		btnVolver = new JButton("<--");
 		btnEditar = new JButton(editar);
 		btnEliminar = new JButton(eliminar);
+		logger.info("JButton creados");
 		
+		
+		/**CREACION JTABLE*/
         String[] nombreColumnas = {"Nº referencia", "Fecha", "Precio", "Descripción", "Estado", "Fecha prevista"};
         //son ejemplos
         Object[][] data = {
@@ -67,6 +73,7 @@ public class VentanaVerEnvios extends JFrame{
         modeloTabla = new DefaultTableModel(data, nombreColumnas);
 
         tablaEnvios = new JTable(modeloTabla);
+        logger.info("Jtable creada");
         
         int rowHeight = 30;  
         tablaEnvios.setRowHeight(rowHeight);
@@ -75,6 +82,7 @@ public class VentanaVerEnvios extends JFrame{
         tablePanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15)); 
         
         Scroll = new JScrollPane(tablaEnvios);
+        logger.info("JScrollPane creado");
 		
         tablePanel.add(Scroll, BorderLayout.CENTER);
         
@@ -135,20 +143,6 @@ public class VentanaVerEnvios extends JFrame{
 			}
 		});
 		
-		/**Cargamos la configuración del logger*/
-		try {
-			FileInputStream fis = new FileInputStream("conf/logger.properties");
-			LogManager.getLogManager().readConfiguration(fis);
-			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-			
-		} catch (SecurityException e1) {
-			e1.printStackTrace();
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 		
 	setTitle("Ver envios");
 	setBounds(300, 200, 600, 400);
