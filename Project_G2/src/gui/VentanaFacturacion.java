@@ -2,6 +2,11 @@ package gui;
 
 import javax.swing.*;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDDocumentInformation;
+import org.apache.pdfbox.tools.PDFBox;
+import org.apache.pdfbox.tools.PrintPDF;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +30,17 @@ import java.util.logging.Logger;
 
 	    
 	    public VentanaFacturacion() {
+	    	
+//	    	PDDocument a = new PDDocument();
+//	    	try {
+//				a.save("ejemplo");
+//				a.close();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+	    	
+	    	
 	    	
 	    	pNorte = new JPanel();
 			pNorteArriba = new JPanel(new GridLayout(1,2));
