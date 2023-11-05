@@ -160,7 +160,7 @@ public class VentanaInicio extends JFrame{
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
+				VentanaInicioSesion ventanaIS = new VentanaInicioSesion(null);
 				dispose();			
 			}
 		});

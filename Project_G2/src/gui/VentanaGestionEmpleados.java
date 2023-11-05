@@ -113,7 +113,7 @@ public class VentanaGestionEmpleados extends JFrame {
 		btnatras.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
+				VentanaInicio ventanaInicio = new VentanaInicio();
 				dispose();			
 			}
 		});

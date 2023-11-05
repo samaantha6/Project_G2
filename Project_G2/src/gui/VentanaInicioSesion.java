@@ -11,6 +11,9 @@ import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -18,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -31,14 +35,17 @@ public class VentanaInicioSesion extends JFrame{
 	private JButton btnReg, btnIS;
 	private JTextField campoCorreo;
 	private JPasswordField campoContrasenia;
-	private JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull, imagenLabel;
+	private JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull;
+	
+    private Map<String, List<String>> usuarios = new HashMap<>();
 	
 	private Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
 	
 	
-	public VentanaInicioSesion() {
+	public VentanaInicioSesion(Map<String, List<String>> usuarios) {
 	
-	 
+	this.usuarios = usuarios;
+		
 	pNorte = new JPanel(new GridLayout(1,2));
 	pNorteIzq = new JPanel();
 	pNorteDer = new JPanel();
@@ -51,7 +58,6 @@ public class VentanaInicioSesion extends JFrame{
 	pEste = new JPanel();
 	logger.info("JPanel creados");
 
-	imagenLabel = new JLabel();
 	txtIS = new JLabel("INICIA SESIÓN:");
 	txtOlvidoCsnia = new JLabel("<html><u>¿Has olvidado tu contraseña?</u></html>");
 	txtOlvidoCsnia.setForeground(Color.BLUE);
@@ -113,7 +119,7 @@ public class VentanaInicioSesion extends JFrame{
 	
 	btnIS.addActionListener(new ActionListener() {
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e) {	
 			VentanaInicio VI = new VentanaInicio();
 			dispose();			
 		}
@@ -122,7 +128,7 @@ public class VentanaInicioSesion extends JFrame{
 	btnReg.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			VentanaRegistro VR = new VentanaRegistro();
+			VentanaRegistro VR = new VentanaRegistro(null);
 			dispose();			
 		}
 	});

@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -47,12 +50,16 @@ public class VentanaRegistro extends JFrame{
 	
 	private JPasswordField campoContrasenia, campoVenificaCon;
 	
+    private Map<String, List<String>> usuarios = new HashMap<>();
+    
+	boolean esOjoAbierto = true;
+	boolean esOjoAbiertoVen = true;
+	
 	private Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
 	
-
-	
-	
-	public VentanaRegistro() {
+	public VentanaRegistro(Map<String, List<String>> usuarios) {
+		
+		this.usuarios = usuarios;
 		
 		pNorte = new JPanel(new BorderLayout());
 		pCentro = new JPanel(new GridLayout(4,2));
@@ -166,17 +173,18 @@ public class VentanaRegistro extends JFrame{
 		pNorte.add(pCentro);
 		pNorte.add(labelImagenLogo);
 		
-		this.add(pNorte,BorderLayout.NORTH);
-		this.add(pSur,BorderLayout.SOUTH);
-		this.add(pCentro,BorderLayout.CENTER);
-		this.add(pEste,BorderLayout.EAST);
-		this.add(pOeste,BorderLayout.WEST);
+		add(pNorte,BorderLayout.NORTH);
+		add(pSur,BorderLayout.SOUTH);
+		add(pCentro,BorderLayout.CENTER);
+		add(pEste,BorderLayout.EAST);
+		add(pOeste,BorderLayout.WEST);
 		
 //EVENTOS
+		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
+				VentanaInicioSesion ventanaIS = new VentanaInicioSesion(null);
 				dispose();			
 			}
 		});
@@ -198,9 +206,7 @@ public class VentanaRegistro extends JFrame{
 			}
 		});
 		
-		btnOjoCon.addActionListener(new ActionListener() {
-			boolean esOjoAbierto = true;
-			
+		btnOjoCon.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (esOjoAbierto) {
@@ -225,16 +231,14 @@ public class VentanaRegistro extends JFrame{
 					pContrasenia.remove(btnOjoCon);
 					pContrasenia.add(btnOjoCon);
 				}
-				esOjoAbierto = !esOjoAbierto;
+				esOjoAbierto = boolContrario(esOjoAbierto);
 			}
 		});
 		
-		btnOjoConVen.addActionListener(new ActionListener() {
-			boolean esOjoAbierto = true;
-			
+		btnOjoConVen.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (esOjoAbierto) {
+				if (esOjoAbiertoVen) {
 					String contrasenia = new String(campoVenificaCon.getPassword());
 					campoVenificaCon1.setText(contrasenia);
 					pVenificaCon.remove(campoVenificaCon);
@@ -256,16 +260,18 @@ public class VentanaRegistro extends JFrame{
 					pVenificaCon.remove(btnOjoConVen);
 					pVenificaCon.add(btnOjoConVen);
 				}
-				esOjoAbierto = !esOjoAbierto;
+				esOjoAbiertoVen = boolContrario(esOjoAbiertoVen);
 			}
 		});
-		
-
 		
 		this.setTitle("Registro");
 		this.setBounds(300, 200, 700, 400);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	}
+	
+	private boolean boolContrario(boolean buleano) {
+		return !buleano;
 	}
 	
 }
