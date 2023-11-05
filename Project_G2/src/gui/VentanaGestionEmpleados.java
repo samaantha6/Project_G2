@@ -5,12 +5,16 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import domain.Usuario;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -25,6 +29,8 @@ public class VentanaGestionEmpleados extends JFrame {
 	private DefaultTableModel modeloTabla;
 	private JTable tablaEnvios;
 	private JScrollPane Scroll;
+	
+    private List<Usuario> usuarios = new ArrayList<>();
 	
 	private Logger logger = Logger.getLogger(VentanaGestionEmpleados.class.getName());
 
@@ -113,7 +119,7 @@ public class VentanaGestionEmpleados extends JFrame {
 		btnatras.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio();
+				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
 				dispose();			
 			}
 		});

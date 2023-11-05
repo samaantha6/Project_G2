@@ -14,7 +14,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 	    List<Usuario> usuarios = new ArrayList<>();
-	    
+	    usuarios.add(new Usuario("prueba", "prueba", "prueba", "prueba", "prueba", "prueba", "prueba"));
 		
 		VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
 	

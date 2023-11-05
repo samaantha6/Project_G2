@@ -115,7 +115,7 @@ public class VentanaInicioSesion extends JFrame{
 	txtOlvidoCsnia.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			VentanaModificarDatos VMD = new VentanaModificarDatos();
+			VentanaModificarDatos VMD = new VentanaModificarDatos(usuarios);
 			dispose();
 		}
 	});
@@ -123,7 +123,7 @@ public class VentanaInicioSesion extends JFrame{
 	btnIS.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {	
-			VentanaInicio VI = new VentanaInicio();
+			VentanaInicio VI = new VentanaInicio(usuarios);
 			dispose();			
 		}
 	});

@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -18,6 +20,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import domain.Usuario;
+
 public class VentanaPresupuesto extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
@@ -26,6 +30,8 @@ public class VentanaPresupuesto extends JFrame{
 	private JLabel txtPresupuesto, txtTipoEnvio, txtVacio;
 	private JCheckBox estandar, superior, premium;
 	private JButton btnHacerEnvio, btnVolver;
+	
+    private List<Usuario> usuarios = new ArrayList<>();
 	
 	private Logger logger = Logger.getLogger(VentanaPresupuesto.class.getName());
 	
@@ -79,7 +85,7 @@ public class VentanaPresupuesto extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio();
+				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
 				dispose();			
 			}
 		});

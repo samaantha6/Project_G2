@@ -64,9 +64,7 @@ public class VentanaRegistro extends JFrame{
 	public VentanaRegistro(List<Usuario> usuariosS) {
 		
 		usuarios = usuariosS;
-		
-		usuarios.add(null);
-		
+				
 		pNorte = new JPanel(new BorderLayout());
 		pCentro = new JPanel(new GridLayout(4,2));
 		pSur = new JPanel();
@@ -201,7 +199,6 @@ public class VentanaRegistro extends JFrame{
 		btnReg.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
 				String nombre = campoNombre.getText();
                 String apellido = campoApellido.getText();
                 String correo = campoCorreo.getText();
@@ -211,26 +208,22 @@ public class VentanaRegistro extends JFrame{
                 String preguntaSeguridad = pregSeg.getSelectedItem().toString();
                 
                 boolean usuarioExistente = false;
-                //for (Usuario usuario : usuarios) {
-                  //  if (usuario.getCorreo().equals(correo)) {
-                    //    usuarioExistente = true;
-                      //  break;
-                   // }
-               // }
+                for (Usuario usuario : usuarios) {
+                    if (usuario.getCorreo().equals(correo)) {
+                        usuarioExistente = true;
+                        break;
+                    }
+                }
 
                 if (usuarioExistente) {
-                    JOptionPane.showMessageDialog(null, "El usuario ya existe");
+                    JOptionPane.showMessageDialog(null, "El usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
                     usuarios.add(nuevoUsuario);
-                    JOptionPane.showMessageDialog(null, "Registro exitoso");
+                    JOptionPane.showMessageDialog(null, "Registro exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
+    				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
+    				dispose();
                 }
-                
-				VentanaInicio ventanaInicio = new VentanaInicio();
-				dispose();	
-				}catch (Exception ex) {
-					ex.printStackTrace();
-				}
 				
 			}
 		});

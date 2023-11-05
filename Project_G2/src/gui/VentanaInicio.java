@@ -38,8 +38,10 @@ public class VentanaInicio extends JFrame{
 
 	private Logger logger = Logger.getLogger(VentanaInicio.class.getName());
 	
-	public VentanaInicio() {
+	public VentanaInicio(List<Usuario> usuariosS) {
 		
+		usuarios = usuariosS;
+
 		pNorte = new JPanel();
 		pNorteIzq = new JPanel();
 		pNorteDer = new JPanel();
@@ -173,7 +175,7 @@ public class VentanaInicio extends JFrame{
 		btnModificar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaModificarDatos ventanaMD = new VentanaModificarDatos();
+				VentanaModificarDatos ventanaMD = new VentanaModificarDatos(usuarios);
 				dispose();			
 			}
 		});
