@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -18,6 +20,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import domain.Usuario;
 
 public class VentanaInicio extends JFrame{
 
@@ -29,9 +33,10 @@ public class VentanaInicio extends JFrame{
 	private JButton btnVerEnvio, btnFac, btnHacerEnvio, btnCrear, btnCerrarSesion, btnModificar;
 	private JTextField campoAlto, campoAncho, campoLargo, campoPeso, campoDesde, campoHasta;
 	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso, txtSeparador;
+	
+    private List<Usuario> usuarios = new ArrayList<>();
 
 	private Logger logger = Logger.getLogger(VentanaInicio.class.getName());
-
 	
 	public VentanaInicio() {
 		
@@ -160,7 +165,7 @@ public class VentanaInicio extends JFrame{
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicioSesion ventanaIS = new VentanaInicioSesion(null);
+				VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
 				dispose();			
 			}
 		});

@@ -3,14 +3,20 @@ package app;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.LogManager;
 
+import domain.Usuario;
 import gui.VentanaInicioSesion;
 
 public class Main {
 	public static void main(String[] args) {
 		
-		VentanaInicioSesion ventanaIS = new VentanaInicioSesion(null);
+	    List<Usuario> usuarios = new ArrayList<>();
+	    
+		
+		VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
 	
 	
 		/**Cargamos la configuración del logger*/

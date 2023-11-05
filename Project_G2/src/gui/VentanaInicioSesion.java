@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import domain.Usuario;
+
 public class VentanaInicioSesion extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
@@ -37,12 +40,12 @@ public class VentanaInicioSesion extends JFrame{
 	private JPasswordField campoContrasenia;
 	private JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull;
 	
-    private Map<String, List<String>> usuarios = new HashMap<>();
+    private List<Usuario> usuarios = new ArrayList<>();
 	
 	private Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
 	
 	
-	public VentanaInicioSesion(Map<String, List<String>> usuarios) {
+	public VentanaInicioSesion(List<Usuario> usuarios) {
 	
 	this.usuarios = usuarios;
 		
@@ -128,7 +131,7 @@ public class VentanaInicioSesion extends JFrame{
 	btnReg.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			VentanaRegistro VR = new VentanaRegistro(null);
+			VentanaRegistro VR = new VentanaRegistro(usuarios);
 			dispose();			
 		}
 	});

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +22,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import domain.Usuario;
 
 public class VentanaRegistro extends JFrame{
 	
@@ -50,16 +54,18 @@ public class VentanaRegistro extends JFrame{
 	
 	private JPasswordField campoContrasenia, campoVenificaCon;
 	
-    private Map<String, List<String>> usuarios = new HashMap<>();
+    public List<Usuario> usuarios = new ArrayList<>();
     
 	boolean esOjoAbierto = true;
 	boolean esOjoAbiertoVen = true;
 	
 	private Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
 	
-	public VentanaRegistro(Map<String, List<String>> usuarios) {
+	public VentanaRegistro(List<Usuario> usuariosS) {
 		
-		this.usuarios = usuarios;
+		usuarios = usuariosS;
+		
+		usuarios.add(null);
 		
 		pNorte = new JPanel(new BorderLayout());
 		pCentro = new JPanel(new GridLayout(4,2));
@@ -123,6 +129,9 @@ public class VentanaRegistro extends JFrame{
 		logger.info("JCheckBox creado");
 		
 		pregSeg = new JComboBox<>();
+		pregSeg.addItem("¿Cuál es el nombre de tu mascota?");
+		pregSeg.addItem("¿Cuál es tu color favorito?");
+		pregSeg.addItem("¿Cuál es tu película favorita?");
 		logger.info("JComboBox creado");
 		
 		pNorte.add(txtReg, BorderLayout.NORTH);
@@ -192,17 +201,37 @@ public class VentanaRegistro extends JFrame{
 		btnReg.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
 				String nombre = campoNombre.getText();
                 String apellido = campoApellido.getText();
                 String correo = campoCorreo.getText();
                 String telefono = campoTelefono.getText();
                 String contrasenia = new String(campoContrasenia.getPassword());
                 String respuesta = campoRespuesta.getText();
-                //String preguntaSeguridad = pregSeg.getSelectedItem().toString();
+                String preguntaSeguridad = pregSeg.getSelectedItem().toString();
+                
+                boolean usuarioExistente = false;
+                //for (Usuario usuario : usuarios) {
+                  //  if (usuario.getCorreo().equals(correo)) {
+                    //    usuarioExistente = true;
+                      //  break;
+                   // }
+               // }
+
+                if (usuarioExistente) {
+                    JOptionPane.showMessageDialog(null, "El usuario ya existe");
+                } else {
+                    Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
+                    usuarios.add(nuevoUsuario);
+                    JOptionPane.showMessageDialog(null, "Registro exitoso");
+                }
                 
 				VentanaInicio ventanaInicio = new VentanaInicio();
-				dispose();			
+				dispose();	
+				}catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				
 			}
 		});
 		
