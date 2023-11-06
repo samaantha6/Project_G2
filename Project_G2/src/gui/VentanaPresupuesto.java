@@ -19,6 +19,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import domain.Usuario;
 
@@ -70,6 +71,9 @@ public class VentanaPresupuesto extends JFrame{
 		pOeste.add(estandar);
 		pOeste.add(superior);
 		pOeste.add(premium);
+		
+		/** AÑADIMOS MARGENES AL PANEL POESTE*/
+		pOeste.setBorder(new EmptyBorder(0, 30, 0, 30));
 		
 		pEste.add(txtVacio);
 		pBtnHcerEnvio.add(btnHacerEnvio);
