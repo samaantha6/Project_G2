@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -20,6 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import domain.Usuario;
 
 public class VentanaModificarDatos extends JFrame{
 	
@@ -41,9 +45,13 @@ public class VentanaModificarDatos extends JFrame{
 	
 	private JComboBox<String> campoPregSeg;
 	
+    private List<Usuario> usuarios = new ArrayList<>();
+	
 	private Logger logger = Logger.getLogger(VentanaModificarDatos.class.getName());
 	
-	public VentanaModificarDatos() {
+	public VentanaModificarDatos(List<Usuario> usuariosS) {
+		
+	    usuarios = usuariosS;
 		
 		pNorte = new JPanel(new GridLayout(1,2));
 		pSur = new JPanel(new GridLayout(1,3));
@@ -153,7 +161,7 @@ public class VentanaModificarDatos extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
+				VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
 				dispose();			
 			}
 		});
@@ -161,7 +169,7 @@ public class VentanaModificarDatos extends JFrame{
 		btnModif.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio();
+				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
                 JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				dispose();			
 			}

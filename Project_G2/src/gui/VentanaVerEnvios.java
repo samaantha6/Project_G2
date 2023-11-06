@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -23,6 +25,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import domain.Usuario;
+
 public class VentanaVerEnvios extends JFrame{
 
 	private static final long serialVersionUID = 1L;
@@ -33,6 +37,8 @@ public class VentanaVerEnvios extends JFrame{
 	private DefaultTableModel modeloTabla;
 	private JTable tablaEnvios;
 	private JScrollPane Scroll;
+	
+    private List<Usuario> usuarios = new ArrayList<>();
 	
 	private Logger logger = Logger.getLogger(VentanaVerEnvios.class.getName());
 	
@@ -111,7 +117,7 @@ public class VentanaVerEnvios extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio();
+				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
 				dispose();			
 			}
 		});

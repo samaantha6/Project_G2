@@ -6,18 +6,16 @@ public class Usuario {
 	private String telefono;
 	private String correo;
 	private String respuesta;
-	private String pregunta;
 	private String PreguntaSeg;
 	private String contrasenia;
 	
-	public Usuario(String nombre, String apellido, String telefono, String correo, String respuesta, String pregunta,
+	public Usuario(String nombre, String apellido, String telefono, String correo, String respuesta,
 			String preguntaSeg, String contrasenia) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
 		this.correo = correo;
 		this.respuesta = respuesta;
-		this.pregunta = pregunta;
 		this.PreguntaSeg = preguntaSeg;
 		this.contrasenia = contrasenia;
 	}
@@ -62,14 +60,6 @@ public class Usuario {
 		this.respuesta = respuesta;
 	}
 
-	public String getPregunta() {
-		return pregunta;
-	}
-
-	public void setPregunta(String pregunta) {
-		this.pregunta = pregunta;
-	}
-
 	public String getPreguntaSeg() {
 		return PreguntaSeg;
 	}
@@ -89,7 +79,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", correo=" + correo
-				+ ", respuesta=" + respuesta + ", pregunta=" + pregunta + ", PreguntaSeg=" + PreguntaSeg
+				+ ", respuesta=" + respuesta + ", pregunta=" + ", PreguntaSeg=" + PreguntaSeg
 				+ ", contrasenia=" + contrasenia + "]";
 	}
 	

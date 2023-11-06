@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -23,6 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+
+import domain.Usuario;
 
 public class VentanaHacerEnvio extends JFrame {
 	
@@ -63,14 +67,11 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private ButtonGroup tipoEnvioGrupo, recogidaGrupo, pagoGrupo, facturaGrupo;
 	
+    private List<Usuario> usuarios = new ArrayList<>();
 	
 	private Logger logger = Logger.getLogger(VentanaHacerEnvio.class.getName());
 	
-	
-	
 	public VentanaHacerEnvio() {
-	
-		
 		
 		tabEnvios = new JTabbedPane();
 		
@@ -468,7 +469,7 @@ public class VentanaHacerEnvio extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio VI = new VentanaInicio();
+				VentanaInicio VI = new VentanaInicio(usuarios);
 				dispose();			
 			}
 		});

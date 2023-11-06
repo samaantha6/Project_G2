@@ -7,12 +7,16 @@ import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.tools.PDFBox;
 import org.apache.pdfbox.tools.PrintPDF;
 
+import domain.Usuario;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -25,6 +29,8 @@ import java.util.logging.Logger;
 	    private JButton btnatras, btnexportar;
 	    private JTextField nRef, nPrecio, nDesc, nPagado, nEstado;
 	    private JLabel txtPrecio, txtPagado, txtRef, txtDesc, txtFact, txtEstado, txtDetalles, txtExport;
+	    
+	    private List<Usuario> usuarios = new ArrayList<>();
 	    
 		private Logger logger = Logger.getLogger(VentanaFacturacion.class.getName());
 
@@ -133,7 +139,7 @@ import java.util.logging.Logger;
 			btnatras.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					VentanaInicio VI = new VentanaInicio();
+					VentanaInicio VI = new VentanaInicio(usuarios);
 					dispose();			
 				}
 			});

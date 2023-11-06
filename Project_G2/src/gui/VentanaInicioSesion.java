@@ -11,6 +11,10 @@ import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -18,9 +22,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import domain.Usuario;
 
 public class VentanaInicioSesion extends JFrame{
 	
@@ -31,14 +38,17 @@ public class VentanaInicioSesion extends JFrame{
 	private JButton btnReg, btnIS;
 	private JTextField campoCorreo;
 	private JPasswordField campoContrasenia;
-	private JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull, imagenLabel;
+	private JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull;
+	
+    private List<Usuario> usuarios = new ArrayList<>();
 	
 	private Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
 	
 	
-	public VentanaInicioSesion() {
+	public VentanaInicioSesion(List<Usuario> usuarios) {
 	
-	 
+	this.usuarios = usuarios;
+		
 	pNorte = new JPanel(new GridLayout(1,2));
 	pNorteIzq = new JPanel();
 	pNorteDer = new JPanel();
@@ -51,7 +61,6 @@ public class VentanaInicioSesion extends JFrame{
 	pEste = new JPanel();
 	logger.info("JPanel creados");
 
-	imagenLabel = new JLabel();
 	txtIS = new JLabel("INICIA SESIÓN:");
 	txtOlvidoCsnia = new JLabel("<html><u>¿Has olvidado tu contraseña?</u></html>");
 	txtOlvidoCsnia.setForeground(Color.BLUE);
@@ -106,15 +115,15 @@ public class VentanaInicioSesion extends JFrame{
 	txtOlvidoCsnia.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			VentanaModificarDatos VMD = new VentanaModificarDatos();
+			VentanaModificarDatos VMD = new VentanaModificarDatos(usuarios);
 			dispose();
 		}
 	});
 	
 	btnIS.addActionListener(new ActionListener() {
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			VentanaInicio VI = new VentanaInicio();
+		public void actionPerformed(ActionEvent e) {	
+			VentanaInicio VI = new VentanaInicio(usuarios);
 			dispose();			
 		}
 	});
@@ -122,7 +131,7 @@ public class VentanaInicioSesion extends JFrame{
 	btnReg.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			VentanaRegistro VR = new VentanaRegistro();
+			VentanaRegistro VR = new VentanaRegistro(usuarios);
 			dispose();			
 		}
 	});
