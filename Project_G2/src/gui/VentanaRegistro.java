@@ -56,15 +56,17 @@ public class VentanaRegistro extends JFrame{
 	
     public List<Usuario> usuarios = new ArrayList<>();
     
-	boolean esOjoAbierto = true;
-	boolean esOjoAbiertoVen = true;
+	boolean esOjoAbierto = false;
+	boolean esOjoAbiertoVen = false;
+	
+    String contrasenia;
 	
 	private Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
 	
 	public VentanaRegistro(List<Usuario> usuariosS) {
 		
 		usuarios = usuariosS;
-				
+		
 		pNorte = new JPanel(new BorderLayout());
 		pCentro = new JPanel(new GridLayout(4,2));
 		pSur = new JPanel();
@@ -203,10 +205,14 @@ public class VentanaRegistro extends JFrame{
                 String apellido = campoApellido.getText();
                 String correo = campoCorreo.getText();
                 String telefono = campoTelefono.getText();
-                String contrasenia = new String(campoContrasenia.getPassword());
+                if (esOjoAbierto) {
+                	contrasenia = campoContrasenia1.getText();
+                } else {
+                	contrasenia = new String(campoContrasenia.getPassword());
+                }
+            	System.out.println(contrasenia);
                 String respuesta = campoRespuesta.getText();
                 String preguntaSeguridad = pregSeg.getSelectedItem().toString();
-                
                 boolean usuarioExistente = false;
                 for (Usuario usuario : usuarios) {
                     if (usuario.getCorreo().equals(correo)) {
@@ -218,10 +224,8 @@ public class VentanaRegistro extends JFrame{
                 if (usuarioExistente) {
                     JOptionPane.showMessageDialog(null, "El usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
+					Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
                     usuarios.add(nuevoUsuario);
-                    System.out.println(nuevoUsuario);
-                    System.out.println(usuarios);
                     JOptionPane.showMessageDialog(null, "Registro exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
     				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
     				dispose();
@@ -233,8 +237,8 @@ public class VentanaRegistro extends JFrame{
 		btnOjoCon.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (esOjoAbierto) {
-					String contrasenia = new String(campoContrasenia.getPassword());
+				if (!esOjoAbierto) {
+					contrasenia = new String(campoContrasenia.getPassword());
 					campoContrasenia1.setText(contrasenia);
 					pContrasenia.remove(campoContrasenia);
 					pContrasenia.add(campoContrasenia1);
@@ -245,7 +249,7 @@ public class VentanaRegistro extends JFrame{
 					pContrasenia.add(btnOjoCon);
 				}
 				else {
-					String contrasenia = new String(campoContrasenia1.getText());
+					contrasenia = new String(campoContrasenia1.getText());
 					campoContrasenia.setText(contrasenia);
 					pContrasenia.remove(campoContrasenia1);
 					pContrasenia.add(campoContrasenia);
@@ -262,8 +266,8 @@ public class VentanaRegistro extends JFrame{
 		btnOjoConVen.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (esOjoAbiertoVen) {
-					String contrasenia = new String(campoVenificaCon.getPassword());
+				if (!esOjoAbiertoVen) {
+					contrasenia = new String(campoVenificaCon.getPassword());
 					campoVenificaCon1.setText(contrasenia);
 					pVenificaCon.remove(campoVenificaCon);
 					pVenificaCon.add(campoVenificaCon1);
@@ -274,7 +278,7 @@ public class VentanaRegistro extends JFrame{
 					pVenificaCon.add(btnOjoConVen);
 				}
 				else {
-					String contrasenia = new String(campoVenificaCon1.getText());
+					contrasenia = new String(campoVenificaCon1.getText());
 					campoVenificaCon.setText(contrasenia);
 					pVenificaCon.remove(campoVenificaCon1);
 					pVenificaCon.add(campoVenificaCon);
