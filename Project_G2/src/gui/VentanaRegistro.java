@@ -145,31 +145,31 @@ public class VentanaRegistro extends JFrame{
 		pCorreo.add(campoCorreo);
 		pCentro.add(pCorreo);
 		
+		pApellido.add(txtApellido);
+		pApellido.add(campoApellido);
+		pCentro.add(pApellido);
+		
+		pPregSeg.add(txtPregSeg);
+		pPregSeg.add(pregSeg);
+		pCentro.add(pPregSeg);
+		
 		pContrasenia.add(txtContrasenia);
 		pContrasenia.add(campoContrasenia);
 		pContrasenia.add(btnOjoCon);
 		pCentro.add(pContrasenia);
 		
-		pPregSeg.add(txtPregSeg);
-		pPregSeg.add(pregSeg);
-		pCentro.add(pPregSeg);
-
-		pApellido.add(txtApellido);
-		pApellido.add(campoApellido);
-		pCentro.add(pApellido);
-
-		pTelefono.add(txtTelefono);
-		pTelefono.add(campoTelefono);
-		pCentro.add(pTelefono);
+		pRespuesta.add(txtRespuesta);
+		pRespuesta.add(campoRespuesta);
+		pCentro.add(pRespuesta);
 
 		pVenificaCon.add(txtVenificaCon);
 		pVenificaCon.add(campoVenificaCon);
 		pVenificaCon.add(btnOjoConVen);
 		pCentro.add(pVenificaCon);
 		
-		pRespuesta.add(txtRespuesta);
-		pRespuesta.add(campoRespuesta);
-		pCentro.add(pRespuesta);
+		pTelefono.add(txtTelefono);
+		pTelefono.add(campoTelefono);
+		pCentro.add(pTelefono);
 
 		pSur.add(Condiciones);
 		
