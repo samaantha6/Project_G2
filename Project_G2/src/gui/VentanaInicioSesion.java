@@ -35,19 +35,22 @@ public class VentanaInicioSesion extends JFrame{
 	
 	
 	private JPanel pNorte, pNorteIzq, pNorteDer, pSur, pOeste, pEste, pCentro, pCentroDer, pCentroIzq, pCentroCen;
-	private JButton btnReg, btnIS;
-	private JTextField campoCorreo;
+	private JButton btnReg, btnIS, btnOjoCon;
+	private JTextField campoCorreo, campoContrasenia1;
 	private JPasswordField campoContrasenia;
 	private JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull;
 	
     private List<Usuario> usuarios = new ArrayList<>();
+    
+	boolean esOjoAbierto = false;
+	
+    String contrasenia;
 	
 	private Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
 	
+	public VentanaInicioSesion(List<Usuario> usuariosS) {
 	
-	public VentanaInicioSesion(List<Usuario> usuarios) {
-	
-	this.usuarios = usuarios;
+	usuarios = usuariosS;
 		
 	pNorte = new JPanel(new GridLayout(1,2));
 	pNorteIzq = new JPanel();
@@ -64,12 +67,13 @@ public class VentanaInicioSesion extends JFrame{
 	txtIS = new JLabel("INICIA SESIÓN:");
 	txtOlvidoCsnia = new JLabel("<html><u>¿Has olvidado tu contraseña?</u></html>");
 	txtOlvidoCsnia.setForeground(Color.BLUE);
-	txtCorreo = new JLabel("correo:          ");
+	txtCorreo = new JLabel("correo:  ");
 	txtContrasenia = new JLabel("contraseña:  ");
 	txtNull = new JLabel("");
 	logger.info("JLabel creados");
 	
-
+	ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("ojoAbierto.png"));
+	ImageIcon ojoCerrado = new ImageIcon(getClass().getResource("ojoCerrado.png"));
 	ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
 	JLabel labelImagenLogo = new JLabel(logo);
 	labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
@@ -77,9 +81,11 @@ public class VentanaInicioSesion extends JFrame{
 	
 	btnIS = new JButton("INICIAR SESIÓN");
 	btnReg = new JButton("REGISTRARSE");
+	btnOjoCon = new JButton(ojoAbierto);
 	logger.info("JButtons creados");
 	 
 	campoContrasenia = new JPasswordField(20);
+	campoContrasenia1 = new JTextField(20);
 	campoCorreo = new JTextField(20);
 	logger.info("JPasword creado");
 	
@@ -92,10 +98,11 @@ public class VentanaInicioSesion extends JFrame{
 	
 	pCentroDer.add(txtCorreo);
 	pCentroDer.add(campoCorreo);
-	//pCentro.add(txtNull);
+	
 	pCentroIzq.add(txtContrasenia);
 	pCentroIzq.add(campoContrasenia);
-	//pCentro.add(txtNull);
+	pCentroIzq.add(btnOjoCon);
+	
 	pCentroCen.add(txtOlvidoCsnia);
 	pCentroCen.add(txtNull);
 	
@@ -125,7 +132,11 @@ public class VentanaInicioSesion extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			
 			String correo = campoCorreo.getText();
-			String contrasenia = new String(campoContrasenia.getPassword());
+            if (esOjoAbierto) {
+            	contrasenia = campoContrasenia1.getText();
+            } else {
+            	contrasenia = new String(campoContrasenia.getPassword());
+            }
 
             boolean credencialesCorrectas = false;
             for (Usuario usuario : usuarios) {
@@ -154,6 +165,34 @@ public class VentanaInicioSesion extends JFrame{
 		}
 	});
 	
+	btnOjoCon.addActionListener(new ActionListener() {			
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (!esOjoAbierto) {
+				contrasenia = new String(campoContrasenia.getPassword());
+				campoContrasenia1.setText(contrasenia);
+				pCentroIzq.remove(campoContrasenia);
+				pCentroIzq.add(campoContrasenia1);
+				pCentroIzq.revalidate();
+				pCentroIzq.repaint();
+				btnOjoCon.setIcon(ojoCerrado);
+				pCentroIzq.remove(btnOjoCon);
+				pCentroIzq.add(btnOjoCon);
+			}
+			else {
+				contrasenia = new String(campoContrasenia1.getText());
+				campoContrasenia.setText(contrasenia);
+				pCentroIzq.remove(campoContrasenia1);
+				pCentroIzq.add(campoContrasenia);
+				pCentroIzq.revalidate();
+				pCentroIzq.repaint();
+				btnOjoCon.setIcon(ojoAbierto);
+				pCentroIzq.remove(btnOjoCon);
+				pCentroIzq.add(btnOjoCon);
+			}
+			esOjoAbierto = boolContrario(esOjoAbierto);
+		}
+	});
 	
 	add(pNorte,BorderLayout.NORTH);
 	add(pSur,BorderLayout.SOUTH);
@@ -170,4 +209,9 @@ public class VentanaInicioSesion extends JFrame{
 	setVisible(true);
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
+	
+	private boolean boolContrario(boolean buleano) {
+		return !buleano;
+	}
+	
 }
