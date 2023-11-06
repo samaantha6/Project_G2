@@ -220,6 +220,8 @@ public class VentanaRegistro extends JFrame{
                 } else {
                     Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
                     usuarios.add(nuevoUsuario);
+                    System.out.println(nuevoUsuario);
+                    System.out.println(usuarios);
                     JOptionPane.showMessageDialog(null, "Registro exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
     				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
     				dispose();

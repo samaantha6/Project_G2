@@ -122,9 +122,27 @@ public class VentanaInicioSesion extends JFrame{
 	
 	btnIS.addActionListener(new ActionListener() {
 		@Override
-		public void actionPerformed(ActionEvent e) {	
-			VentanaInicio VI = new VentanaInicio(usuarios);
-			dispose();			
+		public void actionPerformed(ActionEvent e) {
+			
+			String correo = campoCorreo.getText();
+			String contrasenia = new String(campoContrasenia.getPassword());
+
+            boolean credencialesCorrectas = false;
+            for (Usuario usuario : usuarios) {
+                if (usuario.getCorreo().equals(correo) && usuario.getContrasenia().equals(contrasenia)) {
+                    credencialesCorrectas = true;
+                    break;
+                }
+            }
+
+            if (credencialesCorrectas) {
+                JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
+    			VentanaInicio VI = new VentanaInicio(usuarios);
+    			dispose();	
+            } else {
+                JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+		
 		}
 	});
 	
