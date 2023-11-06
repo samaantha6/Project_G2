@@ -33,7 +33,7 @@ public class VentanaModificarDatos extends JFrame{
 					txtApel, txtPregSeg, txtRes;
 	
 	private JTextField campoCorreo, campoTelefono, campoRes, campoNom, campoApel, 
-						campoContrasenia1, campoVenificaCon1;
+						campoContrasenia1, campoVenificaCon1, campoPregSeg;
 	
 	private JPasswordField campoCon, campoVerifCon;
 	
@@ -42,8 +42,6 @@ public class VentanaModificarDatos extends JFrame{
 	private JPanel pNorte, pSur, pCentro, pVenificaCon, pContrasenia, pNombre,
 					pApellido, pRespuesta, pTelefono, pCorreo, 
 					pPregSeg;
-	
-	private JComboBox<String> campoPregSeg;
 	
     private List<Usuario> usuarios = new ArrayList<>();
 	
@@ -90,11 +88,9 @@ public class VentanaModificarDatos extends JFrame{
 		campoRes = new JTextField(10);
 		campoContrasenia1 = new JTextField(10);
 		campoVenificaCon1 = new JTextField(10);
+		campoPregSeg = new JTextField(10);
 		logger.info("JTextFields creados");
 		
-		campoPregSeg = new JComboBox<>();
-		logger.info("JComboBox creado");
-
 		campoCon = new JPasswordField(10);
 		campoVerifCon = new JPasswordField(10);
 		logger.info("JPaswordFields creados");
@@ -127,9 +123,10 @@ public class VentanaModificarDatos extends JFrame{
 		pContrasenia.add(btnOjoCon);
 		pCentro.add(pContrasenia);
 		
-		pApellido.add(txtApel);
-		pApellido.add(campoApel);
-		pCentro.add(pApellido);
+		pVenificaCon.add(txtVerifCon);		
+		pVenificaCon.add(campoVerifCon);
+		pVenificaCon.add(btnOjoConVen);
+		pCentro.add(pVenificaCon);
 
 		pPregSeg.add(txtPregSeg);		
 		pPregSeg.add(campoPregSeg);
@@ -143,11 +140,10 @@ public class VentanaModificarDatos extends JFrame{
 		pNombre.add(campoNom);
 		pCentro.add(pNombre);
 
-		pVenificaCon.add(txtVerifCon);		
-		pVenificaCon.add(campoVerifCon);
-		pVenificaCon.add(btnOjoConVen);
-		pCentro.add(pVenificaCon);
-
+		pApellido.add(txtApel);
+		pApellido.add(campoApel);
+		pCentro.add(pApellido);
+		
 		pSur.add(btnElimCuen);
 		pSur.add(btnModif);
 		pSur.add(btnVolver);
