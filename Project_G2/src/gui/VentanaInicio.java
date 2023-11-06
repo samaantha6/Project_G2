@@ -136,7 +136,6 @@ public class VentanaInicio extends JFrame{
 		pEsteCentro.add(pEsteCentroAbajo);
 		
 		
-		
 		pEsteAbajoArriba.add(txtAlto);
 		pEsteAbajoArriba.add(campoAlto);
 		pEsteAbajoArriba.add(txtAncho);
@@ -163,7 +162,12 @@ public class VentanaInicio extends JFrame{
 		add(pOeste, BorderLayout.WEST);
 		add(pEste, BorderLayout.EAST);
 		add(pSur, BorderLayout.SOUTH);
-//EVENTOS
+		
+		
+		
+/** EVENTOS */
+		
+		
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -91,8 +91,7 @@ public class VentanaHacerEnvio extends JFrame {
 		pNorte3 = new JPanel();
 
 
-		//TAB DONDE
-		
+/** TAB DONDE */
 		
 		txtHasta = new JLabel("HASTA");
 		txtDesde = new JLabel("DESDE");
@@ -166,8 +165,7 @@ public class VentanaHacerEnvio extends JFrame {
 		add(pDonde);
 		
 		
-		//TAB QUE
-		
+/** TAB QUE */
 		
 		txtEmbalado = new JLabel("Embalaje: ");
 		txtLargo = new JLabel("Largo: ");
@@ -232,8 +230,7 @@ public class VentanaHacerEnvio extends JFrame {
 		add(pQue);
 			
 		
-		//TAB COMO
-		
+/** TAB COMO */		
 		
 		txtFEnvio = new JLabel("Fecha de envío:");
 		txtRecog = new JLabel("Recogida:");
@@ -302,8 +299,7 @@ public class VentanaHacerEnvio extends JFrame {
 		add(pComo);
 		
 		
-		//TAB PAGO
-		
+/** TAB PAGO */
 		
 		txtQueEnvia = new JLabel("¿Que estás enviando?");
 		txtDescrip = new JLabel("(Descripción breve)");
@@ -383,7 +379,7 @@ public class VentanaHacerEnvio extends JFrame {
 		add(pPago);
 		 
 		 
-		//TAB REVISION
+/** TAB REVISION */
 		 
 		 
 		txtEnDesde = new JLabel("Enviar desde:");
@@ -465,7 +461,7 @@ public class VentanaHacerEnvio extends JFrame {
 		add(pNorte, BorderLayout.NORTH);
 		add(tabEnvios, BorderLayout.CENTER);
 		
-		//EVENTOS
+/** EVENTOS */
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

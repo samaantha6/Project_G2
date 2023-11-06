@@ -152,7 +152,7 @@ public class VentanaModificarDatos extends JFrame{
 		add(pCentro, BorderLayout.CENTER);
 		add(pSur, BorderLayout.SOUTH);
 		
-		//EVENTOS
+/** EVENTOS */
 		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override

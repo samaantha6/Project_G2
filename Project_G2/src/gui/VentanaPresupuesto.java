@@ -84,7 +84,8 @@ public class VentanaPresupuesto extends JFrame{
 		add(pNorte, BorderLayout.NORTH); 
 		add(pOeste, BorderLayout.WEST); 
 		add(pEste, BorderLayout.EAST); 
-//EVENTOS
+
+/** EVENTOS */
 		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override

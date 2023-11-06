@@ -188,7 +188,7 @@ public class VentanaRegistro extends JFrame{
 		add(pEste,BorderLayout.EAST);
 		add(pOeste,BorderLayout.WEST);
 		
-//EVENTOS
+/** EVENTOS */
 		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override

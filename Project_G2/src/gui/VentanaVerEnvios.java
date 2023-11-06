@@ -112,7 +112,7 @@ public class VentanaVerEnvios extends JFrame{
 		add(pNorte, BorderLayout.NORTH);
 		add(pCentro, BorderLayout.CENTER);
 		
-//EVENTOS
+/** EVENTOS */
 		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override

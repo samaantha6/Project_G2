@@ -118,7 +118,7 @@ public class VentanaInicioSesion extends JFrame{
 	
 	
 	
-	//EVENTOS
+/** EVENTOS */
 	txtOlvidoCsnia.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -199,10 +199,7 @@ public class VentanaInicioSesion extends JFrame{
 	add(pCentro,BorderLayout.CENTER);
 	add(pEste,BorderLayout.EAST);
 	add(pOeste,BorderLayout.WEST);
-	//pCentro.add(pCentroDer);
 	
-	/**Cargamos la configuración del logger*/
-
 	
 	setTitle("Inicio Sesión");
 	setBounds(300, 200, 600, 300);

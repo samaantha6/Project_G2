@@ -46,7 +46,7 @@ import java.util.logging.Logger;
 				e.printStackTrace();
 			} 
  */
-	    		    	
+	    	
 	    	pNorte = new JPanel();
 			pNorteArriba = new JPanel(new GridLayout(1,2));
 			pCentro = new JPanel(new GridLayout(14,14));
