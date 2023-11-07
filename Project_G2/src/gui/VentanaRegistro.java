@@ -92,11 +92,11 @@ public class VentanaRegistro extends JFrame{
 		logger.info("Imagenes creadas");
 		
 		txtReg = new JLabel("REGISTRATE:");
-		txtNombre = new JLabel("Nombre:");
-		txtApellido = new JLabel("Apellido:");
+		txtNombre = new JLabel("     Nombre:");
+		txtApellido = new JLabel("     Apellido:");
 		txtCorreo = new JLabel("Correo:");
 		txtTelefono = new JLabel("Telefono:");
-		txtContrasenia = new JLabel("Contraseña:");
+		txtContrasenia = new JLabel("             Contraseña:");
 		txtPregSeg = new JLabel("Pregunta de Seguridad:");
 		txtVenificaCon = new JLabel("Repite contraseña:");
 		txtRespuesta = new JLabel("Respuesta:");
@@ -144,35 +144,38 @@ public class VentanaRegistro extends JFrame{
 		pNombre.add(campoNombre);
 		pCentro.add(pNombre);
 		
-		pCorreo.add(txtCorreo);
-		pCorreo.add(campoCorreo);
-		pCentro.add(pCorreo);
-		
 		pApellido.add(txtApellido);
 		pApellido.add(campoApellido);
 		pCentro.add(pApellido);
 		
-		pPregSeg.add(txtPregSeg);
-		pPregSeg.add(pregSeg);
-		pCentro.add(pPregSeg);
+		pCorreo.add(txtCorreo);
+		pCorreo.add(campoCorreo);
+		pCentro.add(pCorreo);
+		
+		pTelefono.add(txtTelefono);
+		pTelefono.add(campoTelefono);
+		pCentro.add(pTelefono);
+		
+
 		
 		pContrasenia.add(txtContrasenia);
 		pContrasenia.add(campoContrasenia);
 		pContrasenia.add(btnOjoCon);
 		pCentro.add(pContrasenia);
 		
-		pRespuesta.add(txtRespuesta);
-		pRespuesta.add(campoRespuesta);
-		pCentro.add(pRespuesta);
-
 		pVenificaCon.add(txtVenificaCon);
 		pVenificaCon.add(campoVenificaCon);
 		pVenificaCon.add(btnOjoConVen);
 		pCentro.add(pVenificaCon);
 		
-		pTelefono.add(txtTelefono);
-		pTelefono.add(campoTelefono);
-		pCentro.add(pTelefono);
+		pPregSeg.add(txtPregSeg);
+		pPregSeg.add(pregSeg);
+		pCentro.add(pPregSeg);
+		
+		pRespuesta.add(txtRespuesta);
+		pRespuesta.add(campoRespuesta);
+		pCentro.add(pRespuesta);
+
 
 		pSur.add(Condiciones);
 		
