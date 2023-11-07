@@ -130,6 +130,11 @@ public class VentanaGestionEmpleados extends JFrame {
 			}
 		});
         
+		
+		
+
+		
+		
         setTitle("Gestión");
         setBounds(300, 18, 600, 400); // Ajustar el ancho del marco
         setMinimumSize(new Dimension(700, 650)); // Configurar el tamaño mínimo de la ventana

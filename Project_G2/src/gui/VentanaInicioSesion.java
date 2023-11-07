@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -203,7 +204,7 @@ public class VentanaInicioSesion extends JFrame{
 	add(pEste,BorderLayout.EAST);
 	add(pOeste,BorderLayout.WEST);
 	
-	
+
 	setTitle("Inicio Sesión");
 	setBounds(300, 200, 600, 300);
 	setVisible(true);
