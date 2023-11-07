@@ -46,13 +46,16 @@ public class VentanaModificarDatos extends JFrame{
     private List<Usuario> usuarios = new ArrayList<>();
     
     private boolean aIniciadoSesion;
+    
+    private String correoUsuario;
 	
 	private Logger logger = Logger.getLogger(VentanaModificarDatos.class.getName());
 	
-	public VentanaModificarDatos(List<Usuario> usuariosS, boolean aIniciadoSesionN) {
+	public VentanaModificarDatos(List<Usuario> usuariosS, boolean aIniciadoSesionN, String correoUsuarioO) {
 		
 	    usuarios = usuariosS;
 	    aIniciadoSesion = aIniciadoSesionN;
+	    correoUsuario = correoUsuarioO;
 		
 		pNorte = new JPanel(new GridLayout(1,2));
 		pSur = new JPanel(new GridLayout(1,3));
@@ -168,7 +171,7 @@ public class VentanaModificarDatos extends JFrame{
 		btnModif.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
+				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
                 JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				dispose();			
 			}

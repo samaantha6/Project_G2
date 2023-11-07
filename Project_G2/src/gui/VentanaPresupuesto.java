@@ -33,10 +33,14 @@ public class VentanaPresupuesto extends JFrame{
 	private JButton btnHacerEnvio, btnVolver;
 	
     private List<Usuario> usuarios = new ArrayList<>();
+    
+    private String correoUsuario;
 	
 	private Logger logger = Logger.getLogger(VentanaPresupuesto.class.getName());
 	
-	public VentanaPresupuesto() {
+	public VentanaPresupuesto(List<Usuario> usuariosS, String correoUsuarioO) {
+		
+		correoUsuario = correoUsuarioO;
 		
 		pNorte = new JPanel();
 		pBtnHcerEnvio = new JPanel();
@@ -90,7 +94,7 @@ public class VentanaPresupuesto extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
+				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
 				dispose();			
 			}
 		});
@@ -98,7 +102,7 @@ public class VentanaPresupuesto extends JFrame{
 		btnHacerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio();
+				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio(usuarios, correoUsuario);
 				dispose();			
 			}
 		});

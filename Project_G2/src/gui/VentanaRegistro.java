@@ -56,15 +56,17 @@ public class VentanaRegistro extends JFrame{
 	
     public List<Usuario> usuarios = new ArrayList<>();
     
-	boolean esOjoAbierto = false;
-	boolean esOjoAbiertoVen = false;
+    private boolean esOjoAbierto = false;
+    private boolean esOjoAbiertoVen = false;
 	
-    String contrasenia;
-    String contraseniaVen;
+	private  String contrasenia;
+	private String contraseniaVen;
+	
+	private String correoUsuario;
 	
 	private Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
 	
-	public VentanaRegistro(List<Usuario> usuariosS) {
+	public VentanaRegistro(List<Usuario> usuariosS, String correoUsuarioO) {
 		
 		usuarios = usuariosS;
 		
@@ -204,7 +206,7 @@ public class VentanaRegistro extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String nombre = campoNombre.getText();
                 String apellido = campoApellido.getText();
-                String correo = campoCorreo.getText();
+                correoUsuario = campoCorreo.getText();
                 String telefono = campoTelefono.getText();
                 if (esOjoAbierto) {
                 	contrasenia = campoContrasenia1.getText();
@@ -221,7 +223,7 @@ public class VentanaRegistro extends JFrame{
                 if (contrasenia.equals(contraseniaVen)) {
                 	boolean usuarioExistente = false;
                 	for (Usuario usuario : usuarios) {
-                    	if (usuario.getCorreo().equals(correo)) {
+                    	if (usuario.getCorreo().equals(correoUsuario)) {
                         	usuarioExistente = true;
                         	break;
                     	}
@@ -230,10 +232,10 @@ public class VentanaRegistro extends JFrame{
                 	if (usuarioExistente) {
                     	JOptionPane.showMessageDialog(null, "El usuario ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
                 	} else {
-						Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
+						Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correoUsuario, respuesta, preguntaSeguridad, contrasenia);
 						usuarios.add(nuevoUsuario);
                     	JOptionPane.showMessageDialog(null, "Registro exitoso.", "Información", JOptionPane.INFORMATION_MESSAGE);
-    					VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
+    					VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
     					dispose();
                 	}
                 } else {

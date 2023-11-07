@@ -42,10 +42,11 @@ public class VentanaInicioSesion extends JFrame{
 	
     private List<Usuario> usuarios = new ArrayList<>();
     
-	boolean esOjoAbierto = false;
+	private boolean esOjoAbierto = false;
 	private boolean aIniciadoSesion;
 	
-    String contrasenia;
+    private String contrasenia;
+    private String correoUsuario;
 	
 	private Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
 	
@@ -124,7 +125,7 @@ public class VentanaInicioSesion extends JFrame{
 	txtOlvidoCsnia.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			VentanaModificarDatos VMD = new VentanaModificarDatos(usuarios, aIniciadoSesion);
+			VentanaModificarDatos VMD = new VentanaModificarDatos(usuarios, aIniciadoSesion, null);
 			dispose();
 		}
 	});
@@ -133,7 +134,7 @@ public class VentanaInicioSesion extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			String correo = campoCorreo.getText();
+			correoUsuario = campoCorreo.getText();
             if (esOjoAbierto) {
             	contrasenia = campoContrasenia1.getText();
             } else {
@@ -142,7 +143,7 @@ public class VentanaInicioSesion extends JFrame{
 
             boolean credencialesCorrectas = false;
             for (Usuario usuario : usuarios) {
-                if (usuario.getCorreo().equals(correo) && usuario.getContrasenia().equals(contrasenia)) {
+                if (usuario.getCorreo().equals(correoUsuario) && usuario.getContrasenia().equals(contrasenia)) {
                     credencialesCorrectas = true;
                     break;
                 }
@@ -150,7 +151,7 @@ public class VentanaInicioSesion extends JFrame{
 
             if (credencialesCorrectas) {
                 JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
-    			VentanaInicio VI = new VentanaInicio(usuarios);
+    			VentanaInicio VI = new VentanaInicio(usuarios, correoUsuario);
     			dispose();	
             } else {
                 JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
@@ -162,7 +163,7 @@ public class VentanaInicioSesion extends JFrame{
 	btnReg.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			VentanaRegistro VR = new VentanaRegistro(usuarios);
+			VentanaRegistro VR = new VentanaRegistro(usuarios, correoUsuario);
 			dispose();			
 		}
 	});

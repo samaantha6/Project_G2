@@ -37,12 +37,15 @@ public class VentanaInicio extends JFrame{
     private List<Usuario> usuarios = new ArrayList<>();
     
     private boolean aIniciadoSesion;
+    
+    String correoUsuario;
 
 	private Logger logger = Logger.getLogger(VentanaInicio.class.getName());
 	
-	public VentanaInicio(List<Usuario> usuariosS) {
+	public VentanaInicio(List<Usuario> usuariosS, String correoUsuarioO) {
 		
 		usuarios = usuariosS;
+		correoUsuario = correoUsuarioO;
 		aIniciadoSesion = true;
 
 		pNorte = new JPanel();
@@ -182,7 +185,7 @@ public class VentanaInicio extends JFrame{
 		btnModificar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaModificarDatos ventanaMD = new VentanaModificarDatos(usuarios, aIniciadoSesion);
+				VentanaModificarDatos ventanaMD = new VentanaModificarDatos(usuarios, aIniciadoSesion, correoUsuario);
 				dispose();			
 			}
 		});
@@ -190,7 +193,7 @@ public class VentanaInicio extends JFrame{
 		btnFac.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaFacturacion ventanaFac = new VentanaFacturacion();
+				VentanaFacturacion ventanaFac = new VentanaFacturacion(usuarios, correoUsuario);
 				dispose();			
 			}
 		});
@@ -198,7 +201,7 @@ public class VentanaInicio extends JFrame{
 		btnHacerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio();
+				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio(usuarios, correoUsuario);
 				dispose();			
 			}
 		});
@@ -206,7 +209,7 @@ public class VentanaInicio extends JFrame{
 		btnVerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaVerEnvios ventanaVerEnvios = new VentanaVerEnvios();
+				VentanaVerEnvios ventanaVerEnvios = new VentanaVerEnvios(usuarios, correoUsuario);
 				dispose();			
 			}
 		});
@@ -214,7 +217,7 @@ public class VentanaInicio extends JFrame{
 		btnCrear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPresupuesto ventanaPresupuesto = new VentanaPresupuesto();
+				VentanaPresupuesto ventanaPresupuesto = new VentanaPresupuesto(usuarios, correoUsuario);
 				dispose();			
 			}
 		});

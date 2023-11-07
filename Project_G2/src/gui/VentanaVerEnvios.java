@@ -39,10 +39,14 @@ public class VentanaVerEnvios extends JFrame{
 	private JScrollPane Scroll;
 	
     private List<Usuario> usuarios = new ArrayList<>();
+    
+    private String correoUsuario;
 	
 	private Logger logger = Logger.getLogger(VentanaVerEnvios.class.getName());
 	
-	public VentanaVerEnvios() {
+	public VentanaVerEnvios(List<Usuario> usuariosS, String correoUsuarioO) {
+		
+		correoUsuario = correoUsuarioO;
 		
 		pNorte = new JPanel(new GridLayout(1, 5));
 		pCentro = new JPanel(new GridLayout(2, 1));
@@ -117,7 +121,7 @@ public class VentanaVerEnvios extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
+				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
 				dispose();			
 			}
 		});
@@ -125,7 +129,7 @@ public class VentanaVerEnvios extends JFrame{
 		btnEditar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio();
+				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio(usuarios, correoUsuario);
 				dispose();			
 			}
 		});
