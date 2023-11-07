@@ -5,18 +5,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import domain.Usuario;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 public class VentanaGestionEmpleados extends JFrame {
     
@@ -29,11 +20,6 @@ public class VentanaGestionEmpleados extends JFrame {
 	private DefaultTableModel modeloTabla;
 	private JTable tablaEnvios;
 	private JScrollPane Scroll;
-	
-    private List<Usuario> usuarios = new ArrayList<>();
-	
-	private Logger logger = Logger.getLogger(VentanaGestionEmpleados.class.getName());
-
 
     public VentanaGestionEmpleados() {
     	
@@ -48,22 +34,18 @@ public class VentanaGestionEmpleados extends JFrame {
         pNReferencia = new JPanel();
         pBtnEliminarEnvio = new JPanel();
         pBtnVolver = new JPanel();
-        logger.info("JPanels creados");
         
     	ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
     	JLabel labelImagenLogo = new JLabel(logo);
     	labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
-    	logger.info("Imagen creada");
 
         txtEnv = new JLabel("Envíos realizados");
         txtNull = new JLabel("");
 		txtNReferencia = new JLabel("¿Nº Referencia?");
-		logger.info("JLabels creados");
 
         btnatras = new JButton("<--");
         btnEliminarEnvio = new JButton("ELIMINAR ENVIO");
 		nReferencia = new JComboBox<String>();
-		logger.info("JButtons creados");
                 
 		pBtnVolver.add(btnatras);
         pNorte.add(pBtnVolver);
@@ -81,8 +63,6 @@ public class VentanaGestionEmpleados extends JFrame {
         add(pEste, BorderLayout.EAST);
         add(pOeste, BorderLayout.WEST);
         
-        
-        /** CREACION DE TABLA */
         String[] nombreColumnas = {"Nº referencia", "Fecha", "Precio", "Descripción", "Estado", "Fecha prevista"};
         //son ejemplos para probar que todo funciona, no estaran en el proyecto final
         Object[][] data = {
@@ -94,10 +74,8 @@ public class VentanaGestionEmpleados extends JFrame {
             };
         
         modeloTabla = new DefaultTableModel(data, nombreColumnas);
-        tablaEnvios = new JTable(modeloTabla);
-        Scroll = new JScrollPane(tablaEnvios);
-        logger.info("JTable creada");
 
+        tablaEnvios = new JTable(modeloTabla);
         
         // Ajustar el alto de las filas
         int rowHeight = 30;  
@@ -107,6 +85,7 @@ public class VentanaGestionEmpleados extends JFrame {
         JPanel tablePanel = new JPanel(new BorderLayout());
         tablePanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15)); 
         
+        Scroll = new JScrollPane(tablaEnvios);
         tablePanel.add(Scroll, BorderLayout.CENTER);
 
         pSur.add(tablePanel, BorderLayout.CENTER);
@@ -119,7 +98,7 @@ public class VentanaGestionEmpleados extends JFrame {
 		btnatras.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
+				VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
 				dispose();			
 			}
 		});
@@ -142,7 +121,6 @@ public class VentanaGestionEmpleados extends JFrame {
 		        }		
 			}
 		});
-		
         
         setTitle("Gestión");
         setBounds(300, 18, 600, 400); // Ajustar el ancho del marco

@@ -4,6 +4,9 @@ import javax.swing.*;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.tools.PDFBox;
 import org.apache.pdfbox.tools.PrintPDF;
 
@@ -37,15 +40,6 @@ import java.util.logging.Logger;
 	    
 	    public VentanaFacturacion() {
 	    	
-/**	    	PDDocument a = new PDDocument();
-	    	try {
-				a.save("ejemplo");
-				a.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
- */
 	    	
 	    	pNorte = new JPanel();
 			pNorteArriba = new JPanel(new GridLayout(1,2));
@@ -140,7 +134,45 @@ import java.util.logging.Logger;
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					VentanaInicio VI = new VentanaInicio(usuarios);
-					dispose();			
+					dispose();	
+					
+					PDDocument a = new PDDocument();
+			    	
+			    	String precio = nPrecio.getText();
+			    	String descripcion = nDesc.getText();
+			    	String estado = nEstado.getText();
+			    	String pagado = nPagado.getText();
+			    	String referencia = nRef.getText();
+			    	
+			    	PDPage page = new PDPage();
+			    	a.addPage(page);
+			    	
+			    	try {
+			    		
+			    		PDPageContentStream contentStream = new PDPageContentStream(a, page);
+			    	    contentStream.newLineAtOffset(50, 700);
+			    	    contentStream.showText("Precio: " + precio);
+			    	    contentStream.newLine();
+			    	    contentStream.showText("Descripción: " + descripcion);
+			    	    contentStream.newLine();
+			    	    contentStream.showText("Estado: " + estado);
+			    	    contentStream.newLine();
+			    	    contentStream.showText("¿Pagado?: " + pagado);
+			    	    contentStream.newLine();
+			    	    contentStream.showText("¿Envío?: " + referencia);
+			    	    contentStream.close();
+
+			    	 // Guardar el documento PDF en un archivo
+			    	    a.save("factura.pdf");
+			    	    a.close();
+			    	    
+			    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Exportación exitosa a factura.pdf");
+			    	} catch (IOException ex) {
+			    	    ex.printStackTrace();
+			    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Error al exportar a PDF");
+					} 
+						    
+	
 				}
 			});
 			logger.info("Evento botón atras creado");
