@@ -5,9 +5,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import domain.Usuario;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VentanaGestionEmpleados extends JFrame {
     
@@ -20,8 +24,12 @@ public class VentanaGestionEmpleados extends JFrame {
 	private DefaultTableModel modeloTabla;
 	private JTable tablaEnvios;
 	private JScrollPane Scroll;
+	
+    private List<Usuario> usuarios = new ArrayList<>();
 
-    public VentanaGestionEmpleados() {
+    public VentanaGestionEmpleados(List<Usuario> usuariosS) {
+    	
+		usuarios = usuariosS;
     	
 		pNorte = new JPanel(new GridLayout(1, 4));
         pCentro = new JPanel(new GridLayout(6, 7)); 
@@ -98,7 +106,7 @@ public class VentanaGestionEmpleados extends JFrame {
 		btnatras.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicioSesion ventanaIS = new VentanaInicioSesion();
+				VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
 				dispose();			
 			}
 		});
@@ -133,8 +141,6 @@ public class VentanaGestionEmpleados extends JFrame {
 		modeloTabla.addRow(nuevaFila);
     }
 
-    public static void main(String[] args) {
-            VentanaGestionEmpleados ventanaGesEmp = new VentanaGestionEmpleados();
-        };
     
 }
+
