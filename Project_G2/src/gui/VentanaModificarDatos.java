@@ -44,12 +44,15 @@ public class VentanaModificarDatos extends JFrame{
 					pPregSeg;
 	
     private List<Usuario> usuarios = new ArrayList<>();
+    
+    private boolean aIniciadoSesion;
 	
 	private Logger logger = Logger.getLogger(VentanaModificarDatos.class.getName());
 	
-	public VentanaModificarDatos(List<Usuario> usuariosS) {
+	public VentanaModificarDatos(List<Usuario> usuariosS, boolean aIniciadoSesionN) {
 		
 	    usuarios = usuariosS;
+	    aIniciadoSesion = aIniciadoSesionN;
 		
 		pNorte = new JPanel(new GridLayout(1,2));
 		pSur = new JPanel(new GridLayout(1,3));

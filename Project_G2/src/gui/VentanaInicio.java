@@ -35,12 +35,15 @@ public class VentanaInicio extends JFrame{
 	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso, txtSeparador;
 	
     private List<Usuario> usuarios = new ArrayList<>();
+    
+    private boolean aIniciadoSesion;
 
 	private Logger logger = Logger.getLogger(VentanaInicio.class.getName());
 	
 	public VentanaInicio(List<Usuario> usuariosS) {
 		
 		usuarios = usuariosS;
+		aIniciadoSesion = true;
 
 		pNorte = new JPanel();
 		pNorteIzq = new JPanel();
@@ -179,7 +182,7 @@ public class VentanaInicio extends JFrame{
 		btnModificar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaModificarDatos ventanaMD = new VentanaModificarDatos(usuarios);
+				VentanaModificarDatos ventanaMD = new VentanaModificarDatos(usuarios, aIniciadoSesion);
 				dispose();			
 			}
 		});

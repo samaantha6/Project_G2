@@ -43,6 +43,7 @@ public class VentanaInicioSesion extends JFrame{
     private List<Usuario> usuarios = new ArrayList<>();
     
 	boolean esOjoAbierto = false;
+	private boolean aIniciadoSesion;
 	
     String contrasenia;
 	
@@ -51,6 +52,7 @@ public class VentanaInicioSesion extends JFrame{
 	public VentanaInicioSesion(List<Usuario> usuariosS) {
 	
 	usuarios = usuariosS;
+	aIniciadoSesion = false;
 		
 	pNorte = new JPanel(new GridLayout(1,2));
 	pNorteIzq = new JPanel();
@@ -122,7 +124,7 @@ public class VentanaInicioSesion extends JFrame{
 	txtOlvidoCsnia.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			VentanaModificarDatos VMD = new VentanaModificarDatos(usuarios);
+			VentanaModificarDatos VMD = new VentanaModificarDatos(usuarios, aIniciadoSesion);
 			dispose();
 		}
 	});
