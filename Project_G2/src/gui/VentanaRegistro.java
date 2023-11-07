@@ -60,6 +60,7 @@ public class VentanaRegistro extends JFrame{
 	boolean esOjoAbiertoVen = false;
 	
     String contrasenia;
+    String contraseniaVen;
 	
 	private Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
 	
@@ -210,25 +211,33 @@ public class VentanaRegistro extends JFrame{
                 } else {
                 	contrasenia = new String(campoContrasenia.getPassword());
                 }
-            	System.out.println(contrasenia);
+                if (esOjoAbierto) {
+                	contraseniaVen = campoVenificaCon1.getText();
+                } else {
+                	contraseniaVen = new String(campoVenificaCon.getPassword());
+                }
                 String respuesta = campoRespuesta.getText();
                 String preguntaSeguridad = pregSeg.getSelectedItem().toString();
-                boolean usuarioExistente = false;
-                for (Usuario usuario : usuarios) {
-                    if (usuario.getCorreo().equals(correo)) {
-                        usuarioExistente = true;
-                        break;
-                    }
-                }
+                if (contrasenia.equals(contraseniaVen)) {
+                	boolean usuarioExistente = false;
+                	for (Usuario usuario : usuarios) {
+                    	if (usuario.getCorreo().equals(correo)) {
+                        	usuarioExistente = true;
+                        	break;
+                    	}
+                	}
 
-                if (usuarioExistente) {
-                    JOptionPane.showMessageDialog(null, "El usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+                	if (usuarioExistente) {
+                    	JOptionPane.showMessageDialog(null, "El usuario ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                	} else {
+						Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
+						usuarios.add(nuevoUsuario);
+                    	JOptionPane.showMessageDialog(null, "Registro exitoso.", "Información", JOptionPane.INFORMATION_MESSAGE);
+    					VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
+    					dispose();
+                	}
                 } else {
-					Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
-                    usuarios.add(nuevoUsuario);
-                    JOptionPane.showMessageDialog(null, "Registro exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
-    				VentanaInicio ventanaInicio = new VentanaInicio(usuarios);
-    				dispose();
+                	JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 				
 			}
