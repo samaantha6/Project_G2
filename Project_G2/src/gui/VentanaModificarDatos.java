@@ -60,7 +60,7 @@ public class VentanaModificarDatos extends JFrame{
 	    correoUsuario = correoUsuarioO;
 		
 		pNorte = new JPanel(new GridLayout(1,2));
-		pSur = new JPanel(new GridLayout(1,3));
+		pSur = new JPanel();
 		pCentro = new JPanel(new GridLayout(4,2));
 		pContrasenia = new JPanel();
 		pVenificaCon = new JPanel();
@@ -118,6 +118,15 @@ public class VentanaModificarDatos extends JFrame{
 		pNorte.add(txtModDatos);
 		pNorte.add(labelImagenLogo);
 		
+		
+		pNombre.add(txtNom);	
+		pNombre.add(campoNom);
+		pCentro.add(pNombre);
+		
+		pApellido.add(txtApel);
+		pApellido.add(campoApel);
+		pCentro.add(pApellido);
+		
 		pCorreo.add(txtCorreo);		
 		pCorreo.add(campoCorreo);
 		pCentro.add(pCorreo);
@@ -144,13 +153,6 @@ public class VentanaModificarDatos extends JFrame{
 		pRespuesta.add(campoRes);
 		pCentro.add(pRespuesta);
 
-		pNombre.add(txtNom);	
-		pNombre.add(campoNom);
-		pCentro.add(pNombre);
-
-		pApellido.add(txtApel);
-		pApellido.add(campoApel);
-		pCentro.add(pApellido);
 		
 		pSur.add(btnElimCuen);
 		pSur.add(btnModif);

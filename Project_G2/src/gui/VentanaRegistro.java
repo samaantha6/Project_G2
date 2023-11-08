@@ -216,7 +216,7 @@ public class VentanaRegistro extends JFrame{
                 } else {
                 	contrasenia = new String(campoContrasenia.getPassword());
                 }
-                if (esOjoAbierto) {
+                if (esOjoAbiertoVen) {
                 	contraseniaVen = campoVenificaCon1.getText();
                 } else {
                 	contraseniaVen = new String(campoVenificaCon.getPassword());
