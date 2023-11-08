@@ -199,7 +199,7 @@ public class VentanaRegistro extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicioSesion ventanaIS = new VentanaInicioSesion(null);
+				VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
 				dispose();			
 			}
 		});

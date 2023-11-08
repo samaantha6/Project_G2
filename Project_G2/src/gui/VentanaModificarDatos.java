@@ -47,6 +47,8 @@ public class VentanaModificarDatos extends JFrame{
     
     private boolean aIniciadoSesion;
     
+    private Usuario usuario;
+    
     private String correoUsuario;
 	
 	private Logger logger = Logger.getLogger(VentanaModificarDatos.class.getName());
@@ -159,21 +161,42 @@ public class VentanaModificarDatos extends JFrame{
 		add(pSur, BorderLayout.SOUTH);
 		
 /** EVENTOS */
-		
+		if (aIniciadoSesion) {
+	        for (Usuario usuario : usuarios) {
+	            if (usuario.getCorreo().equals(correoUsuario)) {
+	            	this.usuario = usuario;
+	                break;
+	            }
+	        }
+			campoNom.setText(usuario.getNombre());
+			campoApel.setText(usuario.getApellido());
+			campoCorreo.setText(usuario.getCorreo());
+			campoPregSeg.setText(usuario.getPreguntaSeg());
+			campoTelefono.setText(usuario.getTelefono());
+
+		} else {
+			
+		}
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
-				dispose();			
+				if (aIniciadoSesion) {
+				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+				dispose();
+				
+				} else {
+					VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
+					dispose();
+				}
 			}
 		});
 		
 		btnModif.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
-                JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-				dispose();			
+					VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+					JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 			}
 		});
 		
