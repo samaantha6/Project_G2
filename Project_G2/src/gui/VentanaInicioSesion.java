@@ -204,7 +204,7 @@ public class VentanaInicioSesion extends JFrame{
 	add(pEste,BorderLayout.EAST);
 	add(pOeste,BorderLayout.WEST);
 	
-
+	
 	setTitle("Inicio Sesión");
 	setBounds(300, 200, 600, 300);
 	setVisible(true);
