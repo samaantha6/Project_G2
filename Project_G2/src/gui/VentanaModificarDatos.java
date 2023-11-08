@@ -50,6 +50,12 @@ public class VentanaModificarDatos extends JFrame{
     private Usuario usuario;
     
     private String correoUsuario;
+    
+    private boolean esOjoAbierto = false;
+    private boolean esOjoAbiertoVen = false;
+	
+	private  String contrasenia;
+	private String contraseniaVen;
 	
 	private Logger logger = Logger.getLogger(VentanaModificarDatos.class.getName());
 	
@@ -97,6 +103,7 @@ public class VentanaModificarDatos extends JFrame{
 		campoContrasenia1 = new JTextField(10);
 		campoVenificaCon1 = new JTextField(10);
 		campoPregSeg = new JTextField(10);
+		campoPregSeg.setEditable(false);;
 		logger.info("JTextFields creados");
 		
 		campoCon = new JPasswordField(10);
@@ -162,6 +169,7 @@ public class VentanaModificarDatos extends JFrame{
 		add(pSur, BorderLayout.SOUTH);
 		
 /** EVENTOS */
+		
 		if (aIniciadoSesion) {
 	        for (Usuario usuario : usuarios) {
 	            if (usuario.getCorreo().equals(correoUsuario)) {
@@ -169,21 +177,22 @@ public class VentanaModificarDatos extends JFrame{
 	                break;
 	            }
 	        }
+		
 			campoNom.setText(usuario.getNombre());
 			campoApel.setText(usuario.getApellido());
 			campoCorreo.setText(usuario.getCorreo());
 			campoPregSeg.setText(usuario.getPreguntaSeg());
 			campoTelefono.setText(usuario.getTelefono());
-
 		} else {
-			
-		}
+			JOptionPane.showMessageDialog(null, "Como no has iniciado sesión tienes que escribir tu correo para poder ubicar tu usuario.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+	    }
+		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (aIniciadoSesion) {
-				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
-				dispose();
+					VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+					dispose();
 				
 				} else {
 					VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
@@ -193,20 +202,67 @@ public class VentanaModificarDatos extends JFrame{
 		});
 		
 		btnModif.addActionListener(new ActionListener() {
+			private Usuario usuario;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
-					JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-					dispose();
+				
+				String nombre = campoNom.getText();
+                String apellido = campoApel.getText();
+                correoUsuario = campoCorreo.getText();
+                String telefono = campoTelefono.getText();
+                if (esOjoAbierto) {
+                	contrasenia = campoContrasenia1.getText();
+                } else {
+                	contrasenia = new String(campoCon.getPassword());
+                }
+                if (esOjoAbiertoVen) {
+                	contraseniaVen = campoVenificaCon1.getText();
+                } else {
+                	contraseniaVen = new String(campoVerifCon.getPassword());
+                }
+                String respuesta = campoRes.getText();
+                
+    	        for (Usuario usuario : usuarios) {
+    	            if (usuario.getCorreo().equals(correoUsuario)) {
+    	            	this.usuario = usuario;
+    	                break;
+    	            }
+    	        }
+                
+    	        System.out.println(usuario);
+    	        if (usuario != null) {
+    	        	if (usuario.getRespuesta().equals(respuesta)) {
+    	        		if (contrasenia.equals(contraseniaVen)) {
+    	        			usuario.setApellido(apellido);
+    	        			usuario.setContrasenia(contrasenia);
+    	        			if (usuario != null) {
+    	        				usuario.setCorreo(correoUsuario);
+    	        			}
+    	        			usuario.setTelefono(telefono);
+    	        			usuario.setNombre(nombre);
+    	        			System.out.println(correoUsuario);
+        	            	System.out.println(usuario);
+    	        			VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+    	        			JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+    	        			dispose();
+    	        		} else {
+    	        			JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
+    	        		}
+    	        	} else {
+                	JOptionPane.showMessageDialog(null, "La respuesta no es correcta.", "Error", JOptionPane.ERROR_MESSAGE);
+    	        	}
+    	        } else {
+    	        	JOptionPane.showMessageDialog(null, "No existe ningun usuario con ese correo.", "Error", JOptionPane.ERROR_MESSAGE);
+    	        }
 			}
 		});
 		
 		btnOjoCon.addActionListener(new ActionListener() {
-			boolean esOjoAbierto = true;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (esOjoAbierto) {
+				if (!esOjoAbierto) {
 					String contrasenia = new String(campoCon.getPassword());
 					campoContrasenia1.setText(contrasenia);
 					pContrasenia.remove(campoCon);
@@ -233,11 +289,10 @@ public class VentanaModificarDatos extends JFrame{
 		});
 		
 		btnOjoConVen.addActionListener(new ActionListener() {
-			boolean esOjoAbierto = true;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (esOjoAbierto) {
+				if (!esOjoAbierto) {
 					String contrasenia = new String(campoVerifCon.getPassword());
 					campoVenificaCon1.setText(contrasenia);
 					pVenificaCon.remove(campoVerifCon);

@@ -242,7 +242,7 @@ public class VentanaRegistro extends JFrame{
     					dispose();
                 	}
                 } else {
-                	JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.", "Error", JOptionPane.ERROR_MESSAGE);
+                	JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 				
 			}
