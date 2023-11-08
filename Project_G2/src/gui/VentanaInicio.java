@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import domain.Usuario;
 
@@ -129,7 +130,7 @@ public class VentanaInicio extends JFrame{
 		pOeste.add(pOesteArriba, BorderLayout.NORTH);
 		pOeste.add(pOesteCentro, BorderLayout.CENTER);
 		pOeste.add(pOesteAbajo, BorderLayout.SOUTH);
-		
+		pOeste.setBorder(new EmptyBorder(0, 30, 0, 30));
 		pEsteArriba.add(txtCrearPre);
 
 		
@@ -157,6 +158,7 @@ public class VentanaInicio extends JFrame{
 		pEste.add(pEsteArriba, BorderLayout.NORTH);
 		pEste.add(pEsteCentro, BorderLayout.CENTER);
 		pEste.add(pEsteAbajo, BorderLayout.SOUTH);
+		pEste.setBorder(new EmptyBorder(0, 20, 0, 20));
 	
 		
 		pbtnCrear.add(btnCrear);

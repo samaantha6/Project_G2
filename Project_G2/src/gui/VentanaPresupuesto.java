@@ -13,12 +13,14 @@ import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
 import domain.Usuario;
@@ -29,8 +31,9 @@ public class VentanaPresupuesto extends JFrame{
 	
 	private JPanel pNorte, pOeste, pEste, pBtnHcerEnvio, pBtnVolver;
 	private JLabel txtPresupuesto, txtTipoEnvio, txtVacio;
-	private JCheckBox estandar, superior, premium;
+	private JRadioButton estandar, superior, premium;
 	private JButton btnHacerEnvio, btnVolver;
+	private ButtonGroup tipoEnvio;
 	
     private List<Usuario> usuarios = new ArrayList<>();
     
@@ -41,6 +44,8 @@ public class VentanaPresupuesto extends JFrame{
 	public VentanaPresupuesto(List<Usuario> usuariosS, String correoUsuarioO) {
 		
 		correoUsuario = correoUsuarioO;
+		
+		tipoEnvio = new ButtonGroup();
 		
 		pNorte = new JPanel();
 		pBtnHcerEnvio = new JPanel();
@@ -59,9 +64,9 @@ public class VentanaPresupuesto extends JFrame{
 		txtVacio = new JLabel(" ");
 		logger.info("JLabel creados");
 
-		estandar = new JCheckBox("Estandar\n (En 8/12 dias)");
-		superior = new JCheckBox("Superior\n (En 6/10 dias");
-		premium = new JCheckBox("Premium\n (En 2 dias");
+		estandar = new JRadioButton("Estandar\n (En 8/12 dias)");
+		superior = new JRadioButton("Superior\n (En 6/10 dias");
+		premium = new JRadioButton("Premium\n (En 2 dias");
 		logger.info("JCheckBox creados");
 		
 		btnHacerEnvio = new JButton("Hacer Envio");
@@ -70,6 +75,11 @@ public class VentanaPresupuesto extends JFrame{
 
 		pNorte.add(txtPresupuesto);
 		pNorte.add(labelImagenLogo);
+		
+		
+		tipoEnvio.add(estandar);
+		tipoEnvio.add(superior);
+		tipoEnvio.add(premium);
 		
 		pOeste.add(txtTipoEnvio);
 		pOeste.add(estandar);

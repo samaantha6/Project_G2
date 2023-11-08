@@ -153,7 +153,6 @@ public class VentanaModificarDatos extends JFrame{
 		pRespuesta.add(campoRes);
 		pCentro.add(pRespuesta);
 
-		
 		pSur.add(btnElimCuen);
 		pSur.add(btnModif);
 		pSur.add(btnVolver);
