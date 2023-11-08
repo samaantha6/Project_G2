@@ -138,7 +138,15 @@ import java.util.logging.Logger;
 				public void actionPerformed(ActionEvent e) {
 					VentanaInicio VI = new VentanaInicio(usuarios, correoUsuario);
 					dispose();	
-					
+						    
+				}
+			});
+			
+			btnexportar.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+
 					PDDocument a = new PDDocument();
 			    	
 			    	String precio = nPrecio.getText();
@@ -174,10 +182,13 @@ import java.util.logging.Logger;
 			    	    ex.printStackTrace();
 			    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Error al exportar a PDF");
 					} 
-						    
-	
+					
 				}
+				
+				
+				
 			});
+			
 			logger.info("Evento botón atras creado");
 			
 			
