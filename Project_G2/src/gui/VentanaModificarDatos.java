@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -56,6 +58,9 @@ public class VentanaModificarDatos extends JFrame{
 	
 	private  String contrasenia;
 	private String contraseniaVen;
+	
+	private Thread hilo;
+	private boolean hiloEjecutando;
 	
 	private Logger logger = Logger.getLogger(VentanaModificarDatos.class.getName());
 	
@@ -169,8 +174,36 @@ public class VentanaModificarDatos extends JFrame{
 		add(pSur, BorderLayout.SOUTH);
 		
 /** EVENTOS */
-		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				hilo = new Thread() {
+				private Usuario usuario;
+				private String RevisionCorreo;
+
+				public void run() {
+					while(hiloEjecutando) {
+						RevisionCorreo = campoCorreo.getText();
+				        for (Usuario usuario : usuarios) {
+				            if (usuario.getCorreo().equals(RevisionCorreo)) {
+				            	this.usuario = usuario;
+				                break;
+				            }
+				        }
+				        if (usuario != null) {
+						campoPregSeg.setText(usuario.getPreguntaSeg());
+				        }
+					}
+				}
+				};
+				hiloEjecutando = true;
+				hilo.start();
+			}
+		});
 		if (aIniciadoSesion) {
+			hiloEjecutando = false;
+
 	        for (Usuario usuario : usuarios) {
 	            if (usuario.getCorreo().equals(correoUsuario)) {
 	            	this.usuario = usuario;
@@ -192,10 +225,13 @@ public class VentanaModificarDatos extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if (aIniciadoSesion) {
 					VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+					hiloEjecutando = false;
+
 					dispose();
 				
 				} else {
 					VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
+					hiloEjecutando = false;
 					dispose();
 				}
 			}
@@ -244,6 +280,7 @@ public class VentanaModificarDatos extends JFrame{
     	        			System.out.println(correoUsuario);
         	            	System.out.println(usuario);
     	        			VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+    						hiloEjecutando = false;
     	        			JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     	        			dispose();
     	        		} else {
