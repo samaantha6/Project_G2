@@ -12,11 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -67,7 +65,7 @@ public class VentanaPresupuesto extends JFrame{
 		estandar = new JRadioButton("Estandar\n (En 8/12 dias)");
 		superior = new JRadioButton("Superior\n (En 6/10 dias");
 		premium = new JRadioButton("Premium\n (En 2 dias");
-		logger.info("JCheckBox creados");
+		logger.info("JRadioButton creados");
 		
 		btnHacerEnvio = new JButton("Hacer Envio");
 		btnVolver = new JButton("Volver");
