@@ -94,6 +94,7 @@ public class VentanaInicioSesion extends JFrame{
 	campoCorreo = new JTextField(20);
 	logger.info("JPasword creado");
 	
+	
 	pNorteIzq.add(txtIS);
 	pNorteDer.add(labelImagenLogo);
 	
