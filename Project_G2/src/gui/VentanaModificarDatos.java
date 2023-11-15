@@ -211,7 +211,7 @@ public class VentanaModificarDatos extends JFrame{
 	                break;
 	            }
 	        }
-		
+		System.out.println(usuario);
 			campoNom.setText(usuario.getNombre());
 			campoApel.setText(usuario.getApellido());
 			campoCorreo.setText(usuario.getCorreo());
@@ -239,8 +239,6 @@ public class VentanaModificarDatos extends JFrame{
 		});
 		
 		btnModif.addActionListener(new ActionListener() {
-			private Usuario usuario;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
@@ -260,9 +258,9 @@ public class VentanaModificarDatos extends JFrame{
                 }
                 String respuesta = campoRes.getText();
                 
-    	        for (Usuario usuario : usuarios) {
-    	            if (usuario.getCorreo().equals(correoUsuario)) {
-    	            	this.usuario = usuario;
+    	        for (Usuario usuarioO : usuarios) {
+    	            if (usuarioO.getCorreo().equals(correoUsuario)) {
+    	            	usuario = usuarioO;
     	                break;
     	            }
     	        }
