@@ -174,6 +174,7 @@ public class VentanaModificarDatos extends JFrame{
 		add(pSur, BorderLayout.SOUTH);
 		
 /** EVENTOS */
+		
 		addWindowListener(new WindowAdapter() {
 			
 			@Override

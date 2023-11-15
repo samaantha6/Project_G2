@@ -85,13 +85,15 @@ public class VentanaPresupuesto extends JFrame{
 		pOeste.add(premium);
 		
 		/** AÑADIMOS MARGENES AL PANEL POESTE*/
-		pOeste.setBorder(new EmptyBorder(0, 30, 0, 30));
+		pOeste.setBorder(new EmptyBorder(0, 70, 0, 70));
 		
 		pEste.add(txtVacio);
 		pBtnHcerEnvio.add(btnHacerEnvio);
 		pEste.add(pBtnHcerEnvio);
 		pBtnVolver.add(btnVolver);
 		pEste.add(pBtnVolver);
+		
+		pEste.setBorder(new EmptyBorder(0, 70, 0, 70));
 		
 		add(pNorte, BorderLayout.NORTH); 
 		add(pOeste, BorderLayout.WEST); 
