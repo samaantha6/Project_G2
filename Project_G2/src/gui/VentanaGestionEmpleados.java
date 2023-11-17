@@ -26,10 +26,13 @@ public class VentanaGestionEmpleados extends JFrame {
 	private JScrollPane Scroll;
 	
     private List<Usuario> usuarios = new ArrayList<>();
+    
+    String correoUsuario;
 
-    public VentanaGestionEmpleados(List<Usuario> usuariosS) {
+    public VentanaGestionEmpleados(List<Usuario> usuariosS, String correoUsuarioO) {
     	
 		usuarios = usuariosS;
+		correoUsuario = correoUsuarioO;
     	
 		pNorte = new JPanel(new GridLayout(1, 4));
         pCentro = new JPanel(new GridLayout(6, 7)); 
@@ -142,6 +145,7 @@ public class VentanaGestionEmpleados extends JFrame {
         setVisible(true);
     }
     
+
 	public void agregarFila(Object[] nuevaFila) {
 		modeloTabla.addRow(nuevaFila);
     }

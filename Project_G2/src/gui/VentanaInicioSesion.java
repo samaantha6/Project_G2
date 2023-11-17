@@ -28,7 +28,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import domain.Dominios;
 import domain.Usuario;
+import domain.DominioValido;
 
 public class VentanaInicioSesion extends JFrame{
 	
@@ -150,16 +152,30 @@ public class VentanaInicioSesion extends JFrame{
                     break;
                 }
             }
-
-            if (credencialesCorrectas) {
-                JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
-    			VentanaInicio VI = new VentanaInicio(usuarios, correoUsuario);
-    			dispose();	
-            } else {
-                JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
+            	
+            //if (DominioValido.verificarDominio(correoUsuario).equals("Empleado")) {
+            	
+            	if (credencialesCorrectas) {
+                	JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
+                	VentanaGestionEmpleados VGE = new VentanaGestionEmpleados(usuarios, correoUsuario);
+    				dispose();
+            	} else {
+                	JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
+            	}
+            //} else if (correoUsuario.endsWith(dominio.getDominio())) {
+            	if (credencialesCorrectas) {
+                	JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
+    				VentanaInicio VI = new VentanaInicio(usuarios, correoUsuario);
+    				dispose();
+            	} else {
+                	JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
+            	}
+            //} else {
+            	JOptionPane.showMessageDialog(null, "Dominio no registrado", "Error", JOptionPane.ERROR_MESSAGE);
             }
+            
+            //}
 		
-		}
 	});
 	
 	btnReg.addActionListener(new ActionListener() {

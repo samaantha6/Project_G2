@@ -14,7 +14,9 @@ public class Main {
 	public static void main(String[] args) {
 		
 	    List<Usuario> usuarios = new ArrayList<>();
-	    usuarios.add(new Usuario("prueba", "prueba", "prueba", "prueba", "prueba", "prueba", "prueba"));
+	    usuarios.add(new Usuario("b", "b", "b", "@gmail.com", "b", "b", "b"));
+	    usuarios.add(new Usuario("c", "c", "c", "@hotmail.com", "c", "c", "c"));
+	    usuarios.add(new Usuario("a", "a", "a", "@hermes.es", "a", "a", "a"));
 		
 		VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
 	
