@@ -27,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import domain.Dominios;
 import domain.Usuario;
@@ -129,7 +130,7 @@ public class VentanaInicioSesion extends JFrame{
 	txtOlvidoCsnia.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			VentanaModificarDatos VMD = new VentanaModificarDatos(usuarios, aIniciadoSesion, null);
+			SwingUtilities.invokeLater(() -> new VentanaModificarDatos(usuarios, aIniciadoSesion, null));
 			dispose();
 		}
 	});

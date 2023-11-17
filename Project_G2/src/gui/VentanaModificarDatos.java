@@ -211,6 +211,7 @@ public class VentanaModificarDatos extends JFrame{
 	                break;
 	            }
 	        }
+	        
 		System.out.println(usuario);
 			campoNom.setText(usuario.getNombre());
 			campoApel.setText(usuario.getApellido());
@@ -218,7 +219,9 @@ public class VentanaModificarDatos extends JFrame{
 			campoPregSeg.setText(usuario.getPreguntaSeg());
 			campoTelefono.setText(usuario.getTelefono());
 		} else {
-			JOptionPane.showMessageDialog(null, "Como no has iniciado sesión tienes que escribir tu correo para poder ubicar tu usuario.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+			
+			
+			JOptionPane.showMessageDialog(null, "Al no haber iniciado sesión debe escribir su correo para asi ubicar su correo.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 	    }
 		
 		btnVolver.addActionListener(new ActionListener() {

@@ -6,6 +6,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,13 +23,23 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.UndoableEditListener;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.swing.text.Position;
+import javax.swing.text.Segment;
 
 import domain.Usuario;
 
@@ -46,7 +59,7 @@ public class VentanaRegistro extends JFrame{
 	
 	private JComboBox<String> pregSeg;
 	
-	private JCheckBox Condiciones;
+	private JCheckBox condiciones;
 	
 	private JTextField campoReg, campoNombre, campoApellido, campoCorreo, 
 						campoTelefono, campoRespuesta, campoContrasenia1, 
@@ -128,7 +141,8 @@ public class VentanaRegistro extends JFrame{
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		logger.info("Imagen creada");
 		
-		Condiciones = new JCheckBox("Acepto condiciones y términos de seguridad");
+		condiciones = new JCheckBox();
+		JLabel aceptarCond = new JLabel("Acepto condiciones y términos de seguridad");
 		logger.info("JCheckBox creado");
 		
 		pregSeg = new JComboBox<>();
@@ -177,8 +191,8 @@ public class VentanaRegistro extends JFrame{
 		pCentro.add(pRespuesta);
 
 
-		pSur.add(Condiciones);
-		
+		pSur.add(condiciones);
+		pSur.add(aceptarCond);
 		
 		pSur.add(btnReg);
 		pSur.add(btnVolver);	
@@ -193,7 +207,7 @@ public class VentanaRegistro extends JFrame{
 		add(pCentro,BorderLayout.CENTER);
 		add(pEste,BorderLayout.EAST);
 		add(pOeste,BorderLayout.WEST);
-		
+				
 /** EVENTOS */
 		
 		btnVolver.addActionListener(new ActionListener() {
@@ -245,6 +259,20 @@ public class VentanaRegistro extends JFrame{
                 	JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 				
+			}
+		});
+		
+		
+		
+		aceptarCond.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				condiciones.setEnabled(true);
+				int seleccion = JOptionPane.showConfirmDialog(null, "texto", "¿ACEPTAS LAS CONDICIONES?", JOptionPane.YES_NO_OPTION);
+				if (seleccion == JOptionPane.OK_OPTION) {
+					condiciones.setSelected(true);
+				}
 			}
 		});
 		
@@ -314,6 +342,13 @@ public class VentanaRegistro extends JFrame{
 	
 	private boolean boolContrario(boolean buleano) {
 		return !buleano;
+	}
+	
+	private JTextArea cargarDatosTextArea() {
+		JTextArea area = new JTextArea();
+		
+		// Cargar datos
+		return area;
 	}
 	
 }
