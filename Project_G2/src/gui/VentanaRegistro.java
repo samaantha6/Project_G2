@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -348,6 +349,13 @@ public class VentanaRegistro extends JFrame{
 		JTextArea area = new JTextArea();
 		
 		// Cargar datos
+		try {
+			FileReader a = new FileReader("T&C.txt");
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return area;
 	}
 	
