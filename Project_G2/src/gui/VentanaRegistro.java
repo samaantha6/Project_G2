@@ -41,6 +41,7 @@ import javax.swing.text.Element;
 import javax.swing.text.Position;
 import javax.swing.text.Segment;
 
+import domain.Dominios;
 import domain.Usuario;
 
 public class VentanaRegistro extends JFrame{
@@ -244,15 +245,22 @@ public class VentanaRegistro extends JFrame{
                         	break;
                     	}
                 	}
-
-                	if (usuarioExistente) {
-                    	JOptionPane.showMessageDialog(null, "El usuario ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                	if (!verificarDominio(correoUsuario).equals("Empleado")) {
+                		if (verificarDominio(correoUsuario).equals("Cliente")) {
+                			if (usuarioExistente) {
+                				JOptionPane.showMessageDialog(null, "El usuario ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                			} else {
+                				Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correoUsuario, respuesta, preguntaSeguridad, contrasenia);
+                				usuarios.add(nuevoUsuario);
+                				JOptionPane.showMessageDialog(null, "Registro exitoso.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+                				dispose();
+                			}
+                		} else {
+            				JOptionPane.showMessageDialog(null, "El dominio del correo empleado no esta registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                		}
                 	} else {
-						Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correoUsuario, respuesta, preguntaSeguridad, contrasenia);
-						usuarios.add(nuevoUsuario);
-                    	JOptionPane.showMessageDialog(null, "Registro exitoso.", "Información", JOptionPane.INFORMATION_MESSAGE);
-    					VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
-    					dispose();
+                    	JOptionPane.showMessageDialog(null, "No te puedes registrar con un correo de empleado.", "Error", JOptionPane.ERROR_MESSAGE);
                 	}
                 } else {
                 	JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -343,7 +351,17 @@ public class VentanaRegistro extends JFrame{
 		return !buleano;
 	}
 	
-
+    public String verificarDominio(String correoUsuario) {
+        this.correoUsuario = correoUsuario;
+        for (Dominios dominio : Dominios.values()) {
+            if (correoUsuario.endsWith("@hermes.es")) {
+                return "Empleado";
+            } else if (correoUsuario.endsWith(dominio.getDominio())) {
+                return "Cliente";
+            } 
+        }
+        return "Desconocido";
+    }
 	
 }
 

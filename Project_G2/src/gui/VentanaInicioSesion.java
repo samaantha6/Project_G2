@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.BorderLayout;
+import java.awt.BorderLayout; 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -31,7 +31,6 @@ import javax.swing.SwingUtilities;
 
 import domain.Dominios;
 import domain.Usuario;
-import domain.DominioValido;
 
 public class VentanaInicioSesion extends JFrame{
 	
