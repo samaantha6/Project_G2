@@ -244,7 +244,6 @@ public class VentanaRegistro extends JFrame{
                         	break;
                     	}
                 	}
-
                 	if (usuarioExistente) {
                     	JOptionPane.showMessageDialog(null, "El usuario ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
                 	} else {
