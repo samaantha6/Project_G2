@@ -30,7 +30,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentListener;
@@ -79,6 +78,7 @@ public class VentanaRegistro extends JFrame{
 	private String correoUsuario;
 	
 	private Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
+	
 	
 	public VentanaRegistro(List<Usuario> usuariosS, String correoUsuarioO) {
 		
@@ -170,9 +170,7 @@ public class VentanaRegistro extends JFrame{
 		pTelefono.add(txtTelefono);
 		pTelefono.add(campoTelefono);
 		pCentro.add(pTelefono);
-		
-
-		
+	
 		pContrasenia.add(txtContrasenia);
 		pContrasenia.add(campoContrasenia);
 		pContrasenia.add(btnOjoCon);
@@ -270,7 +268,7 @@ public class VentanaRegistro extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				condiciones.setEnabled(true);
-				int seleccion = JOptionPane.showConfirmDialog(null, "texto", "¿ACEPTAS LAS CONDICIONES?", JOptionPane.YES_NO_OPTION);
+				int seleccion = JOptionPane.showConfirmDialog(null, "terminos y condiciones" , "¿ACEPTAS LAS CONDICIONES?", JOptionPane.YES_NO_OPTION);
 				if (seleccion == JOptionPane.OK_OPTION) {
 					condiciones.setSelected(true);
 				}
@@ -345,19 +343,7 @@ public class VentanaRegistro extends JFrame{
 		return !buleano;
 	}
 	
-	private JTextArea cargarDatosTextArea() {
-		JTextArea area = new JTextArea();
-		
-		// Cargar datos
-		try {
-			FileReader a = new FileReader("T&C.txt");
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return area;
-	}
+
 	
 }
 
