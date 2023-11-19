@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -31,6 +32,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.UndoableEditListener;
@@ -145,6 +147,8 @@ public class VentanaRegistro extends JFrame{
 		
 		condiciones = new JCheckBox();
 		JLabel aceptarCond = new JLabel("Acepto condiciones y términos de seguridad");
+		aceptarCond.setOpaque(true);
+		condiciones.setEnabled(false);
 		logger.info("JCheckBox creado");
 		
 		pregSeg = new JComboBox<>();
@@ -237,7 +241,12 @@ public class VentanaRegistro extends JFrame{
                 }
                 String respuesta = campoRespuesta.getText();
                 String preguntaSeguridad = pregSeg.getSelectedItem().toString();
-                if (contrasenia.equals(contraseniaVen)) {
+                if (contrasenia.equals(contraseniaVen) || !contrasenia.isEmpty() || !contraseniaVen.isEmpty()) {
+                	campoContrasenia.setBackground(UIManager.getColor("TextField.background"));
+                	campoContrasenia1.setBackground(UIManager.getColor("TextField.background"));
+                	campoVenificaCon.setBackground(UIManager.getColor("TextField.background"));
+                	campoVenificaCon1.setBackground(UIManager.getColor("TextField.background"));
+                	
                 	boolean usuarioExistente = false;
                 	for (Usuario usuario : usuarios) {
                     	if (usuario.getCorreo().equals(correoUsuario)) {
@@ -245,24 +254,62 @@ public class VentanaRegistro extends JFrame{
                         	break;
                     	}
                 	}
+                	
                 	if (!verificarDominio(correoUsuario).equals("Empleado")) {
+                		campoCorreo.setBackground(UIManager.getColor("TextField.background"));
                 		if (verificarDominio(correoUsuario).equals("Cliente")) {
+                			campoCorreo.setBackground(UIManager.getColor("TextField.background"));
                 			if (usuarioExistente) {
-                				JOptionPane.showMessageDialog(null, "El usuario ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                            	campoContrasenia.setBackground(Color.RED);
+                            	campoContrasenia1.setBackground(Color.RED);
+                            	campoVenificaCon.setBackground(Color.RED);
+                            	campoVenificaCon1.setBackground(Color.RED);
+                    			campoCorreo.setBackground(Color.RED);
+                    			campoApellido.setBackground(Color.RED);
+                    			campoReg.setBackground(Color.RED);
+                    			campoTelefono.setBackground(Color.RED);
+                    			campoNombre.setBackground(Color.RED);
+                    			campoRespuesta.setBackground(Color.RED);
+                    			
+                				JOptionPane.showMessageDialog(null, "El usuario no es valido.", "Error", JOptionPane.ERROR_MESSAGE);
                 			} else {
-                				Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correoUsuario, respuesta, preguntaSeguridad, contrasenia);
-                				usuarios.add(nuevoUsuario);
-                				JOptionPane.showMessageDialog(null, "Registro exitoso.", "Información", JOptionPane.INFORMATION_MESSAGE);
-                				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
-                				dispose();
+                            	campoContrasenia.setBackground(UIManager.getColor("TextField.background"));
+                            	campoContrasenia1.setBackground(UIManager.getColor("TextField.background"));
+                            	campoVenificaCon.setBackground(UIManager.getColor("TextField.background"));
+                            	campoVenificaCon1.setBackground(UIManager.getColor("TextField.background"));
+                    			campoCorreo.setBackground(UIManager.getColor("TextField.background"));
+                    			campoApellido.setBackground(UIManager.getColor("TextField.background"));
+                    			campoReg.setBackground(UIManager.getColor("TextField.background"));
+                    			campoTelefono.setBackground(UIManager.getColor("TextField.background"));
+                    			campoNombre.setBackground(UIManager.getColor("TextField.background"));
+                    			campoRespuesta.setBackground(UIManager.getColor("TextField.background"));
+                    			
+                    			if (condiciones.isSelected()) {
+                    				aceptarCond.setBackground(UIManager.getColor("TextField.background"));
+                    				Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correoUsuario, respuesta, preguntaSeguridad, contrasenia);
+                    				usuarios.add(nuevoUsuario);
+                    				JOptionPane.showMessageDialog(null, "Registro exitoso.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                    				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+                    				dispose();
+                    			} else {
+                    				aceptarCond.setBackground(Color.RED);
+                    				JOptionPane.showMessageDialog(null, "Desbes acceptar los terminos y condiciones.", "Error", JOptionPane.ERROR_MESSAGE);
+                    			}
                 			}
                 		} else {
+                			campoCorreo.setBackground(Color.RED);
             				JOptionPane.showMessageDialog(null, "El dominio del correo empleado no esta registrado.", "Error", JOptionPane.ERROR_MESSAGE);
                 		}
                 	} else {
+                		campoCorreo.setBackground(Color.RED);
                     	JOptionPane.showMessageDialog(null, "No te puedes registrar con un correo de empleado.", "Error", JOptionPane.ERROR_MESSAGE);
                 	}
                 } else {
+                	campoContrasenia.setBackground(Color.RED);
+                	campoContrasenia1.setBackground(Color.RED);
+                	campoVenificaCon.setBackground(Color.RED);
+                	campoVenificaCon1.setBackground(Color.RED);
+                	
                 	JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 				
@@ -275,7 +322,6 @@ public class VentanaRegistro extends JFrame{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				condiciones.setEnabled(true);
 				int seleccion = JOptionPane.showConfirmDialog(null, "terminos y condiciones" , "¿ACEPTAS LAS CONDICIONES?", JOptionPane.YES_NO_OPTION);
 				if (seleccion == JOptionPane.OK_OPTION) {
 					condiciones.setSelected(true);
@@ -361,6 +407,15 @@ public class VentanaRegistro extends JFrame{
             } 
         }
         return "Desconocido";
+    }
+    
+    private boolean esNumero(String numero) {
+        try {
+            Integer.parseInt(numero);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 	
 }
