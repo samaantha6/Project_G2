@@ -154,7 +154,7 @@ public class VentanaInicioSesion extends JFrame{
                 }
             }
             	
-            //if (DominioValido.verificarDominio(correoUsuario).equals("Empleado")) {
+            if (verificarDominio(correoUsuario).equals("Empleado")) {
             	
             	if (credencialesCorrectas) {
                 	JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -163,7 +163,7 @@ public class VentanaInicioSesion extends JFrame{
             	} else {
                 	JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
             	}
-            //} else if (correoUsuario.endsWith(dominio.getDominio())) {
+            } else if (verificarDominio(correoUsuario).equals("Cliente")) {
             	if (credencialesCorrectas) {
                 	JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
     				VentanaInicio VI = new VentanaInicio(usuarios, correoUsuario);
@@ -171,11 +171,11 @@ public class VentanaInicioSesion extends JFrame{
             	} else {
                 	JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
             	}
-            //} else {
+            } else {
             	JOptionPane.showMessageDialog(null, "Dominio no registrado", "Error", JOptionPane.ERROR_MESSAGE);
             }
             
-            //}
+            }
 		
 	});
 	
@@ -232,5 +232,17 @@ public class VentanaInicioSesion extends JFrame{
 	private boolean boolContrario(boolean buleano) {
 		return !buleano;
 	}
+	
+    public String verificarDominio(String correoUsuario) {
+        this.correoUsuario = correoUsuario;
+        for (Dominios dominio : Dominios.values()) {
+            if (correoUsuario.endsWith("@hermes.es")) {
+                return "Empleado";
+            } else if (correoUsuario.endsWith(dominio.getDominio())) {
+                return "Cliente";
+            } 
+        }
+        return "Desconocido";
+    }
 	
 }
