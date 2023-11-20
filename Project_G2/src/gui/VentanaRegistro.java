@@ -322,7 +322,7 @@ public class VentanaRegistro extends JFrame{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int seleccion = JOptionPane.showConfirmDialog(null, "terminos y condiciones" , "¿ACEPTAS LAS CONDICIONES?", JOptionPane.YES_NO_OPTION);
+				int seleccion = JOptionPane.showConfirmDialog(null, "terminos y condiciones" , "¿Aceptas las condiciones?", JOptionPane.YES_NO_OPTION);
 				if (seleccion == JOptionPane.OK_OPTION) {
 					condiciones.setSelected(true);
 				}
