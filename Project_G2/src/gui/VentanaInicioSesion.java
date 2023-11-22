@@ -223,7 +223,7 @@ public class VentanaInicioSesion extends JFrame{
 	
 	
 	setTitle("Inicio Sesión");
-	setBounds(300, 200, 600, 300);
+	setBounds(300, 200, 600, 325);
 	setVisible(true);
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
