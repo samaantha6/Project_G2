@@ -26,6 +26,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import com.toedter.calendar.JCalendar;
+
 import domain.Usuario;
 
 public class VentanaHacerEnvio extends JFrame {
@@ -66,6 +68,7 @@ public class VentanaHacerEnvio extends JFrame {
 					pRev, pRevEnvio, pInfo, pAltPesLrAn, pEnYPg;
 	
 	private ButtonGroup tipoEnvioGrupo, recogidaGrupo, pagoGrupo, facturaGrupo;
+	
 	
     private List<Usuario> usuarios = new ArrayList<>();
     
@@ -474,6 +477,8 @@ public class VentanaHacerEnvio extends JFrame {
 				dispose();			
 			}
 		});
+		
+		
 		
 
 		

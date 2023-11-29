@@ -20,6 +20,7 @@ public class Principal {
 	    usuarios.add(new Usuario("b", "b", "b", "@gmail.com", "b", "b", "b"));
 	    usuarios.add(new Usuario("c", "c", "c", "@hotmail.com", "c", "c", "c"));
 	    usuarios.add(new Usuario("a", "a", "a", "@hermes.es", "a", "a", "a"));
+	    usuarios.add(new Usuario("", "", "", "", "", "", ""));
 			
 		/**Cargamos la configuración del logger*/
 		try {

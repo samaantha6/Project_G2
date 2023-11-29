@@ -125,9 +125,9 @@ import java.util.logging.Logger;
 	        
 
 	        pOeste.add(pOesteArriba, BorderLayout.CENTER);
-	        pOeste.setBorder(new EmptyBorder(0, 70, 0, 0));
+	        pOeste.setBorder(new EmptyBorder(20, 70, 0, 0));
 	        pNorte.add(pNorteArriba, BorderLayout.WEST);
-	        pEste.setBorder(new EmptyBorder(0, 70, 0, 70));
+	        pEste.setBorder(new EmptyBorder(20, 70, 0, 70));
 	        
 	        add(pNorte, BorderLayout.NORTH);
 
@@ -135,7 +135,11 @@ import java.util.logging.Logger;
 	        add(pOeste, BorderLayout.WEST);
 	        add(pEste, BorderLayout.EAST);
 	        
-	        //EVENTOS
+	        
+
+/*EVENTOS*/
+	        
+	        
 			btnatras.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {

@@ -7,7 +7,8 @@ public enum Dominios {
 	OUTLOOK("@outlook.com"),
 	AOL("@aol.com"),
 	APPLE("@icloud.com"),
-	YAHOO("@yahoo.com");
+	YAHOO("@yahoo.com"),
+	PRUEBA("");
 	
     private String dominio;
 
