@@ -5,6 +5,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JDateChooserCellEditor;
+
 import domain.Usuario;
 
 import java.awt.*;
@@ -24,12 +27,15 @@ public class VentanaGestionEmpleados extends JFrame {
 	private DefaultTableModel modeloTabla;
 	private JTable tablaEnvios;
 	private JScrollPane Scroll;
+	private JDateChooser calendario;
 	
     private List<Usuario> usuarios = new ArrayList<>();
     
     String correoUsuario;
 
     public VentanaGestionEmpleados(List<Usuario> usuariosS, String correoUsuarioO) {
+    	
+    
     	
 		usuarios = usuariosS;
 		correoUsuario = correoUsuarioO;
@@ -103,9 +109,14 @@ public class VentanaGestionEmpleados extends JFrame {
         
         // Agregar una etiqueta encima de la tabla
         JLabel labelAboveTable = new JLabel("     Envíos realizados");
+
         pSur.add(labelAboveTable, BorderLayout.NORTH); 
 
-//EVENTOS
+        
+        
+/*EVENTOS*/
+        
+        
 		btnatras.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
