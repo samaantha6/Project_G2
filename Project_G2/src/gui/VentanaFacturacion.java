@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
@@ -114,7 +115,7 @@ import java.util.logging.Logger;
 	    	pOesteArriba.add(panelEnvio);
 	    	
 	    	JPanel panelPago = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	        panelPago.add(txtPagado);
+	    	panelPago.add(txtPagado);
 	        panelPago.add(nPagado);
 	    	pOesteArriba.add(panelPago);
 
@@ -124,7 +125,9 @@ import java.util.logging.Logger;
 	        
 
 	        pOeste.add(pOesteArriba, BorderLayout.CENTER);
+	        pOeste.setBorder(new EmptyBorder(0, 70, 0, 0));
 	        pNorte.add(pNorteArriba, BorderLayout.WEST);
+	        pEste.setBorder(new EmptyBorder(0, 70, 0, 70));
 	        
 	        add(pNorte, BorderLayout.NORTH);
 
@@ -193,7 +196,7 @@ import java.util.logging.Logger;
 			
 			
 	        setTitle("Facturación");
-	        setBounds(350, 100, 600, 400); // Ajustar el ancho del marco
+	        setBounds(300, 200, 600, 400); // Ajustar el ancho del marco
 	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	        setVisible(true);
 	        

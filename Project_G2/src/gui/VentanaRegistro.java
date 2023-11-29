@@ -109,13 +109,13 @@ public class VentanaRegistro extends JFrame{
 		logger.info("Imagenes creadas");
 		
 		txtReg = new JLabel("REGISTRATE:");
-		txtNombre = new JLabel("     Nombre:");
-		txtApellido = new JLabel("     Apellido:");
-		txtCorreo = new JLabel("Correo:");
-		txtTelefono = new JLabel("Telefono:");
-		txtContrasenia = new JLabel("             Contraseña:");
+		txtNombre = new JLabel("  Nombre:");
+		txtApellido = new JLabel("   Apellido:");
+		txtCorreo = new JLabel("    Correo:");
+		txtTelefono = new JLabel("   Telefono:");
+		txtContrasenia = new JLabel("           Contraseña:");
 		txtPregSeg = new JLabel("Pregunta de Seguridad:");
-		txtVenificaCon = new JLabel("Repite contraseña:");
+		txtVenificaCon = new JLabel(" Repite contraseña:");
 		txtRespuesta = new JLabel("Respuesta:");
 		logger.info("JLabel creados");
 		

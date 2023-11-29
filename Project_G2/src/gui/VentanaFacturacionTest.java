@@ -1,5 +1,17 @@
 package gui;
 
+
+
+
+
+
+/*Dejad esta clase para entender las JUnit*/
+
+
+
+
+
+
 import static org.junit.Assert.*;
 
 import java.sql.Connection;

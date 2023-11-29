@@ -83,15 +83,15 @@ public class VentanaModificarDatos extends JFrame{
 		pPregSeg = new JPanel();
 		logger.info("JPanel creados");
 		
-		txtNom = new JLabel("Nombre:");
-		txtApel = new JLabel("Apellido:");
+		txtNom = new JLabel("    Nombre:");
+		txtApel = new JLabel("     Apellido:");
 		txtModDatos = new JLabel("MODIFICAR DATOS:");
-		txtCorreo = new JLabel("Correo:");
+		txtCorreo = new JLabel("      Correo:");
 		txtNewCon = new JLabel("Nueva Contraseña:");
 		txtPregSeg = new JLabel("Pregunta de seguridad:");
 		txtRes = new JLabel("Respuesta:");
-		txtTelefono = new JLabel("Telefono:");
-		txtVerifCon = new JLabel("Repite contraseña:");
+		txtTelefono = new JLabel("    Telefono:");
+		txtVerifCon = new JLabel("  Repite contraseña:");
 		logger.info("JLabel creados");
 		
 		ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("ojoAbierto.png"));
@@ -173,7 +173,7 @@ public class VentanaModificarDatos extends JFrame{
 		add(pCentro, BorderLayout.CENTER);
 		add(pSur, BorderLayout.SOUTH);
 		
-/** EVENTOS */
+/* EVENTOS */
 		
 		addWindowListener(new WindowAdapter() {
 			
