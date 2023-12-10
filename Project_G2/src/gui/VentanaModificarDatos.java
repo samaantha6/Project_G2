@@ -94,10 +94,10 @@ public class VentanaModificarDatos extends JFrame{
 		txtVerifCon = new JLabel("  Repite contraseña:");
 		logger.info("JLabel creados");
 		
-		ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("ojoAbierto.png"));
-		ImageIcon ojoCerrado = new ImageIcon(getClass().getResource("ojoCerrado.png"));
-		ImageIcon ojoAbierto1 = new ImageIcon(getClass().getResource("ojoAbierto.png"));
-		ImageIcon ojoCerrado1 = new ImageIcon(getClass().getResource("ojoCerrado.png"));
+		ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("/Images/ojoAbierto.png"));
+		ImageIcon ojoCerrado = new ImageIcon(getClass().getResource("/Images/ojoCerrado.png"));
+		ImageIcon ojoAbierto1 = new ImageIcon(getClass().getResource("/Images/ojoAbierto.png"));
+		ImageIcon ojoCerrado1 = new ImageIcon(getClass().getResource("/Images/ojoCerrado.png"));
 		logger.info("Imagenes creadoa");
 		
 		campoNom = new JTextField(10);
@@ -115,7 +115,7 @@ public class VentanaModificarDatos extends JFrame{
 		campoVerifCon = new JPasswordField(10);
 		logger.info("JPaswordFields creados");
 		
-		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		ImageIcon logo = new ImageIcon(getClass().getResource("/Images/logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		

@@ -60,8 +60,8 @@ public class VentanaVerEnvios extends JFrame{
 		txtRelleno = new JLabel(" ");
 		logger.info("JLabel creados");
 		
-		ImageIcon editar = new ImageIcon(getClass().getResource("editar.png"));
-		ImageIcon eliminar = new ImageIcon(getClass().getResource("eliminar.png"));
+		ImageIcon editar = new ImageIcon(getClass().getResource("/Images/editar.png"));
+		ImageIcon eliminar = new ImageIcon(getClass().getResource("/Images/eliminar.png"));
 		logger.info("Imagenes creadas");
 		
 		btnVolver = new JButton("<--");
@@ -96,7 +96,7 @@ public class VentanaVerEnvios extends JFrame{
 		
         tablePanel.add(Scroll, BorderLayout.CENTER);
         
-		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		ImageIcon logo = new ImageIcon(getClass().getResource("/Images/logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		

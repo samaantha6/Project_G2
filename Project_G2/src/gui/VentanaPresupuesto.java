@@ -52,7 +52,7 @@ public class VentanaPresupuesto extends JFrame{
 		pEste = new JPanel(new GridLayout(3, 1));
 		logger.info("JPanels creados");
 		
-		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		ImageIcon logo = new ImageIcon(getClass().getResource("/Images/logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		logger.info("Imagen creada");

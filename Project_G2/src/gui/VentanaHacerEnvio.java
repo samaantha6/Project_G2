@@ -457,7 +457,7 @@ public class VentanaHacerEnvio extends JFrame {
 		tabEnvios.addTab("PAGO", pPago);
 		tabEnvios.addTab("REVISIÓN", pRev);
 		
-		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		ImageIcon logo = new ImageIcon(getClass().getResource("/Images/logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		

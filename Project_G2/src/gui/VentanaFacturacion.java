@@ -53,7 +53,7 @@ import java.util.logging.Logger;
 			pEste = new JPanel(new GridLayout(7,1));
 			logger.info("Paneles creados");
 	        
-			ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+			ImageIcon logo = new ImageIcon(getClass().getResource("/Images/logoPngNegro.png"));
 			JLabel labelImagenLogo = new JLabel(logo);
 			labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 

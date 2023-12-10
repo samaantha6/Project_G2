@@ -80,9 +80,9 @@ public class VentanaInicioSesion extends JFrame{
 	txtNull = new JLabel("");
 	logger.info("JLabel creados");
 	
-	ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("ojoAbierto.png"));
-	ImageIcon ojoCerrado = new ImageIcon(getClass().getResource("ojoCerrado.png"));
-	ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+	ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("/Images/ojoAbierto.png"));
+	ImageIcon ojoCerrado = new ImageIcon(getClass().getResource("/Images/ojoCerrado.png"));
+	ImageIcon logo = new ImageIcon(getClass().getResource("/Images/logoPngNegro.png"));
 	JLabel labelImagenLogo = new JLabel(logo);
 	labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 	logger.info("Imagenes creadas");

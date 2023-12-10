@@ -104,10 +104,10 @@ public class VentanaRegistro extends JFrame{
 		pRespuesta = new JPanel();
 		logger.info("JPanel creados");
 		
-		ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("ojoAbierto.png"));
-		ImageIcon ojoCerrado = new ImageIcon(getClass().getResource("ojoCerrado.png"));
-		ImageIcon ojoAbierto1 = new ImageIcon(getClass().getResource("ojoAbierto.png"));
-		ImageIcon ojoCerrado1 = new ImageIcon(getClass().getResource("ojoCerrado.png"));
+		ImageIcon ojoAbierto = new ImageIcon(getClass().getResource("/Images/ojoAbierto.png"));
+		ImageIcon ojoCerrado = new ImageIcon(getClass().getResource("/Images/ojoCerrado.png"));
+		ImageIcon ojoAbierto1 = new ImageIcon(getClass().getResource("/Images/ojoAbierto.png"));
+		ImageIcon ojoCerrado1 = new ImageIcon(getClass().getResource("/Images/ojoCerrado.png"));
 		logger.info("Imagenes creadas");
 		
 		txtReg = new JLabel("REGISTRATE:");
@@ -142,7 +142,7 @@ public class VentanaRegistro extends JFrame{
 		campoRespuesta = new JTextField(10);
 		logger.info("JTextFields creados");
 		
-		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		ImageIcon logo = new ImageIcon(getClass().getResource("/Images/logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		logger.info("Imagen creada");

@@ -52,7 +52,7 @@ public class VentanaGestionEmpleados extends JFrame {
         pBtnEliminarEnvio = new JPanel();
         pBtnVolver = new JPanel();
         
-    	ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+    	ImageIcon logo = new ImageIcon(getClass().getResource("/Images/logoPngNegro.png"));
     	JLabel labelImagenLogo = new JLabel(logo);
     	labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 

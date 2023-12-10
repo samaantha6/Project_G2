@@ -79,19 +79,19 @@ public class VentanaInicio extends JFrame{
 		txtPeso = new JLabel("Peso");
 		logger.info("JLabel creados");
 		
-		ImageIcon logo = new ImageIcon(getClass().getResource("logoPngNegro.png"));
+		ImageIcon logo = new ImageIcon(getClass().getResource("/Images/logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
 		labelImagenLogo.setPreferredSize(new Dimension(logo.getIconWidth(), logo.getIconHeight()));
 		
-		ImageIcon verEnvios = new ImageIcon(getClass().getResource("verEnvios.png"));
+		ImageIcon verEnvios = new ImageIcon(getClass().getResource("/Images/verEnvios.png"));
 		JLabel labelImagenVerEnvio = new JLabel(verEnvios);
 		labelImagenVerEnvio.setPreferredSize(new Dimension(verEnvios.getIconWidth(), verEnvios.getIconHeight()));
 		
-		ImageIcon Facturacion = new ImageIcon(getClass().getResource("Facturacion.png"));
+		ImageIcon Facturacion = new ImageIcon(getClass().getResource("/Images/Facturacion.png"));
 		JLabel labelImagenFacturacion = new JLabel(Facturacion);
 		labelImagenFacturacion.setPreferredSize(new Dimension(Facturacion.getIconWidth(), Facturacion.getIconHeight()));
 		
-		ImageIcon hacerEnvio = new ImageIcon(getClass().getResource("hacerEnvio.png"));
+		ImageIcon hacerEnvio = new ImageIcon(getClass().getResource("/Images/hacerEnvio.png"));
 		JLabel labelImagenhacerEnvio = new JLabel(hacerEnvio);
 		labelImagenhacerEnvio.setPreferredSize(new Dimension(hacerEnvio.getIconWidth(), hacerEnvio.getIconHeight()));
 		logger.info("Imagenes creadas");
