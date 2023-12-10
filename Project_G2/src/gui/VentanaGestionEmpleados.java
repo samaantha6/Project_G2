@@ -31,14 +31,12 @@ public class VentanaGestionEmpleados extends JFrame {
 	
     private List<Usuario> usuarios = new ArrayList<>();
     
-    String correoUsuario;
+    Usuario usuario;
 
-    public VentanaGestionEmpleados(List<Usuario> usuariosS, String correoUsuarioO) {
-    	
-    
+    public VentanaGestionEmpleados(List<Usuario> usuariosS, Usuario usuarioO) {
     	
 		usuarios = usuariosS;
-		correoUsuario = correoUsuarioO;
+		usuario = usuarioO;
     	
 		pNorte = new JPanel(new GridLayout(1, 4));
         pCentro = new JPanel(new GridLayout(6, 7)); 

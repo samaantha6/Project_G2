@@ -72,13 +72,13 @@ public class VentanaHacerEnvio extends JFrame {
 	
     private List<Usuario> usuarios = new ArrayList<>();
     
-    String correoUsuario;
+    Usuario usuario;
 	
 	private Logger logger = Logger.getLogger(VentanaHacerEnvio.class.getName());
 	
-	public VentanaHacerEnvio(List<Usuario> usuariosS, String correoUsuarioO) {
+	public VentanaHacerEnvio(List<Usuario> usuariosS, Usuario usuarioO) {
 		
-		correoUsuario = correoUsuarioO;
+		usuario = usuarioO;
 		usuarios = usuariosS;
 		
 		tabEnvios = new JTabbedPane();
@@ -473,7 +473,7 @@ public class VentanaHacerEnvio extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio VI = new VentanaInicio(usuarios, correoUsuario);
+				VentanaInicio VI = new VentanaInicio(usuarios, usuario);
 				dispose();			
 			}
 		});

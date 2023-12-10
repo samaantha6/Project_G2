@@ -50,9 +50,7 @@ public class VentanaModificarDatos extends JFrame{
     private boolean aIniciadoSesion;
     
     private Usuario usuario;
-    
-    private String correoUsuario;
-    
+        
     private boolean esOjoAbierto = false;
     private boolean esOjoAbiertoVen = false;
 	
@@ -64,11 +62,11 @@ public class VentanaModificarDatos extends JFrame{
 	
 	private Logger logger = Logger.getLogger(VentanaModificarDatos.class.getName());
 	
-	public VentanaModificarDatos(List<Usuario> usuariosS, boolean aIniciadoSesionN, String correoUsuarioO) {
+	public VentanaModificarDatos(List<Usuario> usuariosS, boolean aIniciadoSesionN, Usuario usuarioO) {
 		
 	    usuarios = usuariosS;
 	    aIniciadoSesion = aIniciadoSesionN;
-	    correoUsuario = correoUsuarioO;
+	    usuario = usuarioO;
 		
 		pNorte = new JPanel(new GridLayout(1,2));
 		pSur = new JPanel();
@@ -180,15 +178,14 @@ public class VentanaModificarDatos extends JFrame{
 			@Override
 			public void windowOpened(WindowEvent e) {
 				hilo = new Thread() {
-				private Usuario usuario;
 				private String RevisionCorreo;
 
 				public void run() {
 					while(hiloEjecutando) {
 						RevisionCorreo = campoCorreo.getText();
-				        for (Usuario usuario : usuarios) {
+				        for (Usuario usuarioO : usuarios) {
 				            if (usuario.getCorreo().equals(RevisionCorreo)) {
-				            	this.usuario = usuario;
+				            	usuario = usuarioO;
 				                break;
 				            }
 				        }
@@ -204,13 +201,6 @@ public class VentanaModificarDatos extends JFrame{
 		});
 		if (aIniciadoSesion) {
 			hiloEjecutando = false;
-
-	        for (Usuario usuario : usuarios) {
-	            if (usuario.getCorreo().equals(correoUsuario)) {
-	            	this.usuario = usuario;
-	                break;
-	            }
-	        }
 	        
 		System.out.println(usuario);
 			campoNom.setText(usuario.getNombre());
@@ -228,7 +218,7 @@ public class VentanaModificarDatos extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (aIniciadoSesion) {
-					VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+					VentanaInicio ventanaInicio = new VentanaInicio(usuarios, usuario);
 					hiloEjecutando = false;
 
 					dispose();
@@ -247,7 +237,7 @@ public class VentanaModificarDatos extends JFrame{
 				
 				String nombre = campoNom.getText();
                 String apellido = campoApel.getText();
-                correoUsuario = campoCorreo.getText();
+                String correo = campoCorreo.getText();
                 String telefono = campoTelefono.getText();
                 if (esOjoAbierto) {
                 	contrasenia = campoContrasenia1.getText();
@@ -260,28 +250,18 @@ public class VentanaModificarDatos extends JFrame{
                 	contraseniaVen = new String(campoVerifCon.getPassword());
                 }
                 String respuesta = campoRes.getText();
-                
-    	        for (Usuario usuarioO : usuarios) {
-    	            if (usuarioO.getCorreo().equals(correoUsuario)) {
-    	            	usuario = usuarioO;
-    	                break;
-    	            }
-    	        }
-                
+
     	        System.out.println(usuario);
     	        if (usuario != null) {
     	        	if (usuario.getRespuesta().equals(respuesta)) {
     	        		if (contrasenia.equals(contraseniaVen)) {
     	        			usuario.setApellido(apellido);
     	        			usuario.setContrasenia(contrasenia);
-    	        			if (usuario != null) {
-    	        				usuario.setCorreo(correoUsuario);
-    	        			}
+    	        			usuario.setCorreo(correo);
     	        			usuario.setTelefono(telefono);
     	        			usuario.setNombre(nombre);
-    	        			System.out.println(correoUsuario);
         	            	System.out.println(usuario);
-    	        			VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+    	        			VentanaInicio ventanaInicio = new VentanaInicio(usuarios, usuario);
     						hiloEjecutando = false;
     	        			JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     	        			dispose();

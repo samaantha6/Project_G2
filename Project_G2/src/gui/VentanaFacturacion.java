@@ -36,14 +36,15 @@ import java.util.logging.Logger;
 	    
 	    private List<Usuario> usuarios = new ArrayList<>();
 	    
-	    private String correoUsuario;
+	    private Usuario usuario;
 	    
 		private Logger logger = Logger.getLogger(VentanaFacturacion.class.getName());
 
 	    
-	    public VentanaFacturacion(List<Usuario> usuariosS, String correoUsuarioO) {
+	    public VentanaFacturacion(List<Usuario> usuariosS, Usuario usuarioO) {
 	    	
-	    	correoUsuario = correoUsuarioO;
+	    	usuarios = usuariosS;
+	    	usuario = usuarioO;
 	    	
 	    	pNorte = new JPanel();
 			pNorteArriba = new JPanel(new GridLayout(1,2));
@@ -143,7 +144,7 @@ import java.util.logging.Logger;
 			btnatras.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					VentanaInicio VI = new VentanaInicio(usuarios, correoUsuario);
+					VentanaInicio VI = new VentanaInicio(usuarios, usuario);
 					dispose();	
 						    
 				}

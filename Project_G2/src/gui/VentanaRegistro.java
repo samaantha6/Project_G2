@@ -78,14 +78,13 @@ public class VentanaRegistro extends JFrame{
 	private  String contrasenia;
 	private String contraseniaVen;
 	
-	private String correoUsuario;
 	
 	private Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
 	
 	private WindowMaster windowMaster = new WindowMaster();
 
 	
-	public VentanaRegistro(List<Usuario> usuariosS, String correoUsuarioO) {
+	public VentanaRegistro(List<Usuario> usuariosS) {
 		
 		usuarios = usuariosS;
 		
@@ -229,7 +228,7 @@ public class VentanaRegistro extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String nombre = campoNombre.getText();
                 String apellido = campoApellido.getText();
-                correoUsuario = campoCorreo.getText();
+                String correo = campoCorreo.getText();
                 String telefono = campoTelefono.getText();
                 if (esOjoAbierto) {
                 	contrasenia = campoContrasenia1.getText();
@@ -251,15 +250,15 @@ public class VentanaRegistro extends JFrame{
                 	
                 	boolean usuarioExistente = false;
                 	for (Usuario usuario : usuarios) {
-                    	if (usuario.getCorreo().equals(correoUsuario)) {
+                    	if (usuario.getCorreo().equals(correo)) {
                         	usuarioExistente = true;
                         	break;
                     	}
                 	}
                 	
-                	if (!windowMaster.verificarDominio(correoUsuario).equals("Empleado")) {
+                	if (!windowMaster.verificarDominio(correo).equals("Empleado")) {
                 		campoCorreo.setBackground(UIManager.getColor("TextField.background"));
-                		if (windowMaster.verificarDominio(correoUsuario).equals("Cliente")) {
+                		if (windowMaster.verificarDominio(correo).equals("Cliente")) {
                 			campoCorreo.setBackground(UIManager.getColor("TextField.background"));
                 			if (usuarioExistente) {
                             	campoContrasenia.setBackground(Color.RED);
@@ -288,10 +287,10 @@ public class VentanaRegistro extends JFrame{
                     			
                     			if (condiciones.isSelected()) {
                     				aceptarCond.setBackground(UIManager.getColor("TextField.background"));
-                    				Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correoUsuario, respuesta, preguntaSeguridad, contrasenia);
+                    				Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
                     				usuarios.add(nuevoUsuario);
                     				JOptionPane.showMessageDialog(null, "Registro exitoso.", "Información", JOptionPane.INFORMATION_MESSAGE);
-                    				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+                    				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, nuevoUsuario);
                     				dispose();
                     			} else {
                     				aceptarCond.setBackground(Color.RED);

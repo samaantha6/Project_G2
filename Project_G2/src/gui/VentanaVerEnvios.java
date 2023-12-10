@@ -40,13 +40,14 @@ public class VentanaVerEnvios extends JFrame{
 	
     private List<Usuario> usuarios = new ArrayList<>();
     
-    private String correoUsuario;
+    private Usuario usuario;
 	
 	private Logger logger = Logger.getLogger(VentanaVerEnvios.class.getName());
 	
-	public VentanaVerEnvios(List<Usuario> usuariosS, String correoUsuarioO) {
+	public VentanaVerEnvios(List<Usuario> usuariosS, Usuario usuarioO) {
 		
-		correoUsuario = correoUsuarioO;
+		usuarios = usuariosS;
+		usuario = usuarioO;
 		
 		pNorte = new JPanel(new GridLayout(1, 5));
 		pCentro = new JPanel(new GridLayout(2, 1));
@@ -121,7 +122,7 @@ public class VentanaVerEnvios extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, correoUsuario);
+				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, usuario);
 				dispose();			
 			}
 		});
@@ -129,7 +130,7 @@ public class VentanaVerEnvios extends JFrame{
 		btnEditar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio(usuarios, correoUsuario);
+				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio(usuarios, usuario);
 				dispose();			
 			}
 		});
