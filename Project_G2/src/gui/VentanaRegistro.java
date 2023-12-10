@@ -82,6 +82,8 @@ public class VentanaRegistro extends JFrame{
 	
 	private Logger logger = Logger.getLogger(VentanaRegistro.class.getName());
 	
+	private WindowMaster windowMaster = new WindowMaster();
+
 	
 	public VentanaRegistro(List<Usuario> usuariosS, String correoUsuarioO) {
 		
@@ -255,9 +257,9 @@ public class VentanaRegistro extends JFrame{
                     	}
                 	}
                 	
-                	if (!verificarDominio(correoUsuario).equals("Empleado")) {
+                	if (!windowMaster.verificarDominio(correoUsuario).equals("Empleado")) {
                 		campoCorreo.setBackground(UIManager.getColor("TextField.background"));
-                		if (verificarDominio(correoUsuario).equals("Cliente")) {
+                		if (windowMaster.verificarDominio(correoUsuario).equals("Cliente")) {
                 			campoCorreo.setBackground(UIManager.getColor("TextField.background"));
                 			if (usuarioExistente) {
                             	campoContrasenia.setBackground(Color.RED);
@@ -354,7 +356,7 @@ public class VentanaRegistro extends JFrame{
 					pContrasenia.remove(btnOjoCon);
 					pContrasenia.add(btnOjoCon);
 				}
-				esOjoAbierto = boolContrario(esOjoAbierto);
+				esOjoAbierto = !esOjoAbierto;
 			}
 		});
 		
@@ -383,7 +385,7 @@ public class VentanaRegistro extends JFrame{
 					pVenificaCon.remove(btnOjoConVen);
 					pVenificaCon.add(btnOjoConVen);
 				}
-				esOjoAbiertoVen = boolContrario(esOjoAbiertoVen);
+				esOjoAbiertoVen = !esOjoAbiertoVen;
 			}
 		});
 		
@@ -393,30 +395,6 @@ public class VentanaRegistro extends JFrame{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
-	private boolean boolContrario(boolean buleano) {
-		return !buleano;
-	}
-	
-    public String verificarDominio(String correoUsuario) {
-        this.correoUsuario = correoUsuario;
-        for (Dominios dominio : Dominios.values()) {
-            if (correoUsuario.endsWith("@hermes.es")) {
-                return "Empleado";
-            } else if (correoUsuario.endsWith(dominio.getDominio())) {
-                return "Cliente";
-            } 
-        }
-        return "Desconocido";
-    }
-    
-    private boolean esNumero(String numero) {
-        try {
-            Integer.parseInt(numero);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 	
 }
 

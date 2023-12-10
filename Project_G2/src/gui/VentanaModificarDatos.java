@@ -364,14 +364,5 @@ public class VentanaModificarDatos extends JFrame{
 	this.setVisible(true);
 	this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
-	
-    private boolean esNumero(String numero) {
-        try {
-            Integer.parseInt(numero);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 
 }

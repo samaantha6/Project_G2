@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.BorderLayout; 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -52,6 +52,8 @@ public class VentanaInicioSesion extends JFrame{
     private String correoUsuario;
 	
 	private Logger logger = Logger.getLogger(VentanaInicioSesion.class.getName());
+	
+	private WindowMaster windowMaster = new WindowMaster();
 	
 	public VentanaInicioSesion(List<Usuario> usuariosS) {
 	
@@ -153,7 +155,7 @@ public class VentanaInicioSesion extends JFrame{
                 }
             }
             	
-            if (verificarDominio(correoUsuario).equals("Empleado")) {
+            if (windowMaster.verificarDominio(correoUsuario).equals("Empleado")) {
             	
             	if (credencialesCorrectas) {
                 	JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -162,7 +164,7 @@ public class VentanaInicioSesion extends JFrame{
             	} else {
                 	JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
             	}
-            } else if (verificarDominio(correoUsuario).equals("Cliente")) {
+            } else if (windowMaster.verificarDominio(correoUsuario).equals("Cliente")) {
             	if (credencialesCorrectas) {
                 	JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
     				VentanaInicio VI = new VentanaInicio(usuarios, correoUsuario);
@@ -211,7 +213,7 @@ public class VentanaInicioSesion extends JFrame{
 				pCentroIzq.remove(btnOjoCon);
 				pCentroIzq.add(btnOjoCon);
 			}
-			esOjoAbierto = boolContrario(esOjoAbierto);
+			esOjoAbierto = !esOjoAbierto;
 		}
 	});
 	
@@ -227,21 +229,6 @@ public class VentanaInicioSesion extends JFrame{
 	setVisible(true);
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
-	
-	private boolean boolContrario(boolean buleano) {
-		return !buleano;
-	}
-	
-    public String verificarDominio(String correoUsuario) {
-        this.correoUsuario = correoUsuario;
-        for (Dominios dominio : Dominios.values()) {
-            if (correoUsuario.endsWith("@hermes.es")) {
-                return "Empleado";
-            } else if (correoUsuario.endsWith(dominio.getDominio())) {
-                return "Cliente";
-            } 
-        }
-        return "Desconocido";
-    }
+
 	
 }
