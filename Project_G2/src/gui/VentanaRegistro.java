@@ -55,7 +55,7 @@ public class VentanaRegistro extends JFrame{
 	private JPanel pNorte, pSur, pOeste, pEste, pCentro, pContrasenia, pNombre, pApellido, 
 					pCorreo, pTelefono, pPregSeg, pVenificaCon, pRespuesta;
 	
-	private JLabel txtReg, txtNombre, txtApellido, txtCorreo, txtTelefono, txtContrasenia,
+	private JLabel txtNombre, txtApellido, txtCorreo, txtTelefono, txtContrasenia,
 					txtPregSeg, txtVenificaCon, txtRespuesta;
 	
 	private JButton btnReg, btnVolver, btnOjoCon, btnOjoConVen;
@@ -109,7 +109,7 @@ public class VentanaRegistro extends JFrame{
 		ImageIcon ojoCerrado1 = new ImageIcon(getClass().getResource("/Images/ojoCerrado.png"));
 		logger.info("Imagenes creadas");
 		
-		txtReg = new JLabel("REGISTRATE:");
+		
 		txtNombre = new JLabel("  Nombre:");
 		txtApellido = new JLabel("   Apellido:");
 		txtCorreo = new JLabel("    Correo:");
@@ -158,7 +158,6 @@ public class VentanaRegistro extends JFrame{
 		pregSeg.addItem("¿Cuál es tu película favorita?");
 		logger.info("JComboBox creado");
 		
-		pNorte.add(txtReg, BorderLayout.NORTH);
 		
 		
 		pNombre.add(txtNombre);
