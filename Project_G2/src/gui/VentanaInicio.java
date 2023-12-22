@@ -71,8 +71,8 @@ public class VentanaInicio extends JFrame{
 		
 		txtBienvedida = new JLabel("Bienvenid@!");
 		txtCrearPre = new JLabel("Crear Presupuesto:");
-		txtDesde = new JLabel("desde");
-		txtHasta = new JLabel("hasta");
+		txtDesde = new JLabel("Desde");
+		txtHasta = new JLabel("Hasta");
 		txtAlto = new JLabel("Alto");
 		txtAncho = new JLabel("Ancho");
 		txtLargo = new JLabel("Largo");
