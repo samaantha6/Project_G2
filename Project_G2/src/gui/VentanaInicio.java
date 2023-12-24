@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -225,16 +226,29 @@ public class VentanaInicio extends JFrame{
 		btnCrear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPresupuesto ventanaPresupuesto = new VentanaPresupuesto(usuarios, usuario, VentanaInicio.this);
-				dispose();		
+				String alto2 = campoAlto.getText();
+				String ancho2 = campoAncho.getText();
+				String largo2 = campoLargo.getText();
 				
-				
-				int alto = Integer.parseInt(campoAlto.getText());
-				int ancho = Integer.parseInt(campoAncho.getText());
-				int largo = Integer.parseInt(campoLargo.getText());
-				
-				precioBase = (PrecioBaseAlto(alto) + PrecioBaseAncho(ancho) + PrecioBaseLargo(largo))/2;
-				System.out.println(precioBase);
+				if (alto2.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+				} else if (ancho2.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+				} else if (largo2.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+				} else {
+					VentanaPresupuesto ventanaPresupuesto = new VentanaPresupuesto(usuarios, usuario, VentanaInicio.this);
+					dispose();		
+					
+					
+					int alto = Integer.parseInt(campoAlto.getText());
+					int ancho = Integer.parseInt(campoAncho.getText());
+					int largo = Integer.parseInt(campoLargo.getText());
+					
+					precioBase = (PrecioBaseAlto(alto) + PrecioBaseAncho(ancho) + PrecioBaseLargo(largo))/2;
+					System.out.println(precioBase);
+				}
+												
 			}
 		});
 		
