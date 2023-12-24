@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -32,8 +33,10 @@ public class VentanaInicio extends JFrame{
 					pEsteCentroAbajo, pEsteAbajoArriba, pEsteAbajoAbajo, pEsteAbajo, pOeste, pOesteArriba, 
 					pOesteCentro, pOesteAbajo, pCentro, pbtnCrear;
 	private JButton btnVerEnvio, btnFac, btnHacerEnvio, btnCrear, btnCerrarSesion, btnModificar;
-	private JTextField campoAlto, campoAncho, campoLargo, campoPeso, campoDesde, campoHasta;
-	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso, txtSeparador;
+	private JTextField campoAlto, campoAncho, campoLargo, campoPeso, campoDesde, campoHasta, campoPrecio;
+	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso;
+	
+	public double precioBase;
 	
     private List<Usuario> usuarios = new ArrayList<>();
     
@@ -104,6 +107,9 @@ public class VentanaInicio extends JFrame{
 		btnModificar = new JButton("MODIFICAR DATOS");
 		logger.info("JButtons creados");
 		
+
+		
+
 		campoAlto = new JTextField(10);
 		campoAncho = new JTextField(10);
 		campoLargo = new JTextField(10);
@@ -160,10 +166,10 @@ public class VentanaInicio extends JFrame{
 		pEste.add(pEsteAbajo, BorderLayout.SOUTH);
 		pEste.setBorder(new EmptyBorder(0, 20, 0, 20));
 	
-		
+
 		pbtnCrear.add(btnCrear);
-		
-		pEste.add(pbtnCrear);
+				
+		pEste.add(pbtnCrear);		
 		
 		add(pCentro, BorderLayout.CENTER);
 		add(pNorte, BorderLayout.NORTH);
@@ -219,10 +225,19 @@ public class VentanaInicio extends JFrame{
 		btnCrear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPresupuesto ventanaPresupuesto = new VentanaPresupuesto(usuarios, usuario);
-				dispose();			
+				VentanaPresupuesto ventanaPresupuesto = new VentanaPresupuesto(usuarios, usuario, VentanaInicio.this);
+				dispose();		
+				
+				
+				int alto = Integer.parseInt(campoAlto.getText());
+				int ancho = Integer.parseInt(campoAncho.getText());
+				int largo = Integer.parseInt(campoLargo.getText());
+				
+				precioBase = (PrecioBaseAlto(alto) + PrecioBaseAncho(ancho) + PrecioBaseLargo(largo))/2;
+				System.out.println(precioBase);
 			}
 		});
+		
 		
 		
 		setTitle("Pantalla inicio");
@@ -230,5 +245,38 @@ public class VentanaInicio extends JFrame{
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
-
+	
+	private static int PrecioBaseAlto(int medida) {
+        if (medida <= 15) {
+            return 2;
+        } else if (medida <= 30) {
+            return 4;
+        } else {
+            return 10;
+        }
+    }
+	
+	private static int PrecioBaseAncho(int medida) {
+        if (medida <= 15) {
+            return 3;
+        } else if (medida <= 30) {
+            return 5;
+        } else {
+            return 7;
+        }
+    }
+	
+	private static int PrecioBaseLargo(int medida) {
+        if (medida <= 15) {
+            return 2;
+        } else if (medida <= 30) {
+            return 3;
+        } else {
+            return 11;
+        }
+    }
+	
+	public double getPrecio() {
+		return precioBase;
+	}
 }
