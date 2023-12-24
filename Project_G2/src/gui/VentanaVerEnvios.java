@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import domain.Usuario;
@@ -113,6 +114,7 @@ public class VentanaVerEnvios extends JFrame{
 		
 		pCentro.add(Scroll);
 		
+		pCentro.setBorder(new EmptyBorder(30, 20, 0, 20));
 
 		add(pNorte, BorderLayout.NORTH);
 		add(pCentro, BorderLayout.CENTER);
