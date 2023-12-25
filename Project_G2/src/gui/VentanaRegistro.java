@@ -229,24 +229,14 @@ public class VentanaRegistro extends JFrame{
                 String apellido = campoApellido.getText();
                 String correo = campoCorreo.getText();
                 String telefono = campoTelefono.getText();
-                if (esOjoAbierto) {
-                	contrasenia = campoContrasenia1.getText();
-                } else {
-                	contrasenia = new String(campoContrasenia.getPassword());
-                }
-                if (esOjoAbiertoVen) {
-                	contraseniaVen = campoVenificaCon1.getText();
-                } else {
-                	contraseniaVen = new String(campoVenificaCon.getPassword());
-                }
+                contrasenia = windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoContrasenia, esOjoAbierto).getText();
+                contraseniaVen = windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVenificaCon, esOjoAbiertoVen).getText();
                 String respuesta = campoRespuesta.getText();
                 String preguntaSeguridad = pregSeg.getSelectedItem().toString();
-                if (contrasenia.equals(contraseniaVen) || !contrasenia.isEmpty() || !contraseniaVen.isEmpty()) {
-                	campoContrasenia.setBackground(UIManager.getColor("TextField.background"));
-                	campoContrasenia1.setBackground(UIManager.getColor("TextField.background"));
-                	campoVenificaCon.setBackground(UIManager.getColor("TextField.background"));
-                	campoVenificaCon1.setBackground(UIManager.getColor("TextField.background"));
-                	
+                
+                if (contrasenia.equals(contraseniaVen)) {
+                	List<JTextField> camposVacios = windowMaster.camposVacios(windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoContrasenia, esOjoAbierto), windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVenificaCon, esOjoAbiertoVen));
+                	windowMaster.cambiarFondoCampos(camposVacios);
                 	boolean usuarioExistente = false;
                 	for (Usuario usuario : usuarios) {
                     	if (usuario.getCorreo().equals(correo)) {
