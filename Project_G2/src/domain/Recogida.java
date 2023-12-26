@@ -2,22 +2,22 @@ package domain;
 
 public class Recogida {
 
-	String fechaDeEnvio;
+	String fechaDeRecogida;
 	String lugarDeRecogida;
 	String tipoDeEnvio;
 	
-	public Recogida(String fechaDeEnvio, String lugarDeRecogida, String tipoDeEnvio) {
-		this.fechaDeEnvio = fechaDeEnvio;
+	public Recogida(String fechaDeRecogida, String lugarDeRecogida, String tipoDeEnvio) {
+		this.fechaDeRecogida = fechaDeRecogida;
 		this.lugarDeRecogida = lugarDeRecogida;
 		this.tipoDeEnvio = tipoDeEnvio;
 	}
 
 	public String getFechaDeEnvio() {
-		return fechaDeEnvio;
+		return fechaDeRecogida;
 	}
 
-	public void setFechaDeEnvio(String fechaDeEnvio) {
-		this.fechaDeEnvio = fechaDeEnvio;
+	public void setFechaDeEnvio(String fechaDeRecogida) {
+		this.fechaDeRecogida = fechaDeRecogida;
 	}
 
 	public String getLugarDeRecogida() {
@@ -38,7 +38,7 @@ public class Recogida {
 
 	@Override
 	public String toString() {
-		return "Recogida [fechaDeEnvio=" + fechaDeEnvio + ", lugarDeRecogida=" + lugarDeRecogida + ", tipoDeEnvio="
+		return "Recogida [fechaDeEnvio=" + fechaDeRecogida + ", lugarDeRecogida=" + lugarDeRecogida + ", tipoDeEnvio="
 				+ tipoDeEnvio + "]";
 	}
 	

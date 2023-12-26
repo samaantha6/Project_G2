@@ -30,10 +30,12 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 import com.toedter.calendar.JCalendar;
 
 import domain.Paquete;
+import domain.Recogida;
 import domain.Trayecto;
 import domain.Usuario;
 
@@ -87,7 +89,9 @@ public class VentanaHacerEnvio extends JFrame {
 	
     private HashMap<JTextField, Color> fondosOriginales = new HashMap<>();
 
-	
+    private String lugarDeRecogida;
+    private String tipoDeEnvio;
+    
 	private Logger logger = Logger.getLogger(VentanaHacerEnvio.class.getName());
 	
 	public VentanaHacerEnvio(List<Usuario> usuariosS, Usuario usuarioO) {
@@ -261,7 +265,7 @@ public class VentanaHacerEnvio extends JFrame {
 		
 /** TAB COMO */		
 		
-		txtFEnvio = new JLabel("Fecha de envío:");
+		txtFEnvio = new JLabel("Fecha de recogida:");
 		txtRecog = new JLabel("Recogida:");
 		txtCasoRecog = new JLabel("(En caso de ir a recoger el \n paquete a domicilio.)");
 		txtEntrega = new JLabel("¿Cuando se entrega?");
@@ -278,6 +282,7 @@ public class VentanaHacerEnvio extends JFrame {
 		logger.info("JRadioButton de tab 'COMO' creados");
 		
 		comboRecog = new JComboBox<String>();
+		comboRecog.addItem("ejemplo");
 		logger.info("JComboBox de tab 'COMO' creados");
 		
 		tipoEnvioGrupo = new ButtonGroup();
@@ -294,7 +299,6 @@ public class VentanaHacerEnvio extends JFrame {
 		
 		recogidaGrupo.add(radPtoRecog);
 		recogidaGrupo.add(radUsoDir);
-		
 		
 		tipoEnvioGrupo.add(radEstandar);
 		tipoEnvioGrupo.add(radPremium);
@@ -522,6 +526,24 @@ public class VentanaHacerEnvio extends JFrame {
 				String valor = campoValor.getText();
                 boolean seleccionado = checkFragil.isSelected();
                 String fragil = seleccionado ? "Si" : "No";
+                
+                String fechaDeRecogida = campoFenvio.getText();
+                if (radPtoRecog.isSelected()) {
+                    lugarDeRecogida = comboRecog.getSelectedItem().toString();
+                } else if (radUsoDir.isSelected()) {
+                    lugarDeRecogida = direccionOrigen;
+                } else {
+                    lugarDeRecogida = "";
+                }
+                if (radEstandar.isSelected()) {
+                	tipoDeEnvio = "Estandar";
+                } else if (radPremium.isSelected()) {
+                	tipoDeEnvio = "Premium";
+                } else if (radSuper.isSelected()) {
+                	tipoDeEnvio = "Super";
+                } else {
+                	tipoDeEnvio = "";
+                }
 				
 				List<JTextField> camposVacios =  windowMaster.camposVacios(campoNom, campoDir, campoTel, campoCorreo, campoNomHasta, campoDirHasta, campoTelHasta, campoCorreoHasta);
 				if (camposVacios.isEmpty()) {
@@ -531,7 +553,37 @@ public class VentanaHacerEnvio extends JFrame {
 					if (camposVacios.isEmpty()) {
 						windowMaster.restaurarFondo(fondosOriginales);
 						Paquete paquete = new Paquete(nReferencia, embalaje, peso, largo, ancho, alto, valor, fragil);
-						camposVacios =  windowMaster.camposVacios(campoPeso, campoLargo, campoAncho, campoAlto, campoValor);
+						camposVacios =  windowMaster.camposVacios(campoFenvio);
+						if (camposVacios.isEmpty() && lugarDeRecogida != "" && tipoDeEnvio != "") {
+							windowMaster.restaurarFondo(fondosOriginales);
+							radPtoRecog.setOpaque(false);
+							radUsoDir.setOpaque(false);
+							radEstandar.setOpaque(false);
+							radPremium.setOpaque(false);
+							radSuper.setOpaque(false);
+							Recogida recogida = new Recogida(fechaDeRecogida, lugarDeRecogida, tipoDeEnvio);
+							System.out.println(recogida.toString());
+							camposVacios =  windowMaster.camposVacios(campoPeso, campoLargo, campoAncho, campoAlto, campoValor);
+						} else {
+							fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
+							if (lugarDeRecogida == "") {
+								radPtoRecog.setBackground(Color.RED);
+								radUsoDir.setBackground(Color.RED);
+							} else {
+								radPtoRecog.setOpaque(false);
+								radUsoDir.setOpaque(false);
+							}
+							if (tipoDeEnvio == "") {
+								radEstandar.setBackground(Color.RED);
+								radPremium.setBackground(Color.RED);
+								radSuper.setBackground(Color.RED);
+							} else {
+								radEstandar.setOpaque(false);
+								radPremium.setOpaque(false);
+								radSuper.setOpaque(false);
+							}
+							JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos del apartado 'Como'.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
 					} else {
 						fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
 						JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos del apartado 'Que'.", "Error", JOptionPane.ERROR_MESSAGE);
