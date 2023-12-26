@@ -120,7 +120,6 @@ public class VentanaRegistro extends JFrame{
 		txtRespuesta = new JLabel("Respuesta:");
 		logger.info("JLabel creados");
 		
-
 		btnReg = new JButton("REGISTRARSE");
 		btnVolver = new JButton("VOLVER");
 		btnOjoCon = new JButton(ojoAbierto);
@@ -201,8 +200,6 @@ public class VentanaRegistro extends JFrame{
 		pSur.add(btnReg);
 		pSur.add(btnVolver);	
 		
-		
-		
 		pNorte.add(pCentro);
 		pNorte.add(labelImagenLogo);
 		
@@ -236,7 +233,8 @@ public class VentanaRegistro extends JFrame{
                 
                 if (contrasenia.equals(contraseniaVen)) {
                 	List<JTextField> camposVacios = windowMaster.camposVacios(windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoContrasenia, esOjoAbierto), windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVenificaCon, esOjoAbiertoVen));
-                	windowMaster.cambiarFondoCampos(camposVacios);
+                	Map<JTextField, Color> fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
+                	
                 	boolean usuarioExistente = false;
                 	for (Usuario usuario : usuarios) {
                     	if (usuario.getCorreo().equals(correo)) {
@@ -315,6 +313,8 @@ public class VentanaRegistro extends JFrame{
 				int seleccion = JOptionPane.showConfirmDialog(null, "terminos y condiciones" , "¿Aceptas las condiciones?", JOptionPane.YES_NO_OPTION);
 				if (seleccion == JOptionPane.OK_OPTION) {
 					condiciones.setSelected(true);
+				} else {
+					condiciones.setSelected(false);
 				}
 			}
 		});

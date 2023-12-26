@@ -13,7 +13,7 @@ import domain.Dominios;
 
 public class WindowMaster {
 
-    private final Map<JTextField, Color> fondosOriginales = new HashMap<>();
+    private HashMap<JTextField, Color> fondosOriginales = new HashMap<>();
 	
     public String verificarDominio(String correoUsuario) {
         for (Dominios dominio : Dominios.values()) {
@@ -47,7 +47,7 @@ public class WindowMaster {
         return camposVacios;
     }
     
-    public Map<JTextField, Color> cambiarFondoCampos(List<JTextField> campos) {
+    public HashMap<JTextField, Color> cambiarFondoCampos(List<JTextField> campos) {
         // Cambiar el fondo de los campos vacíos a rojo
         for (JTextField campo : campos) {
         	fondosOriginales.put(campo, campo.getBackground());

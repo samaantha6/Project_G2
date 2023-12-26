@@ -2,6 +2,7 @@ package gui;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -10,7 +11,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -21,6 +25,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
@@ -28,6 +33,8 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JCalendar;
 
+import domain.Paquete;
+import domain.Trayecto;
 import domain.Usuario;
 
 public class VentanaHacerEnvio extends JFrame {
@@ -49,7 +56,9 @@ public class VentanaHacerEnvio extends JFrame {
 						campoDescrip, campoTarj, campoFTarj, campoCVV, campoDni,
 						campoEnDesde, campoEnHasta, campoPago, campoRevLargo, campoRevAncho, campoRevAlto, campoRevPeso, campoEnvios;
 	
-	private JButton btnVolver;
+	private JButton btnVolver, btnAnterior, btnSiguiente, btnFinalizar;
+    
+    private int indiceActual = 0;
 	
 	private JCheckBox checkTerminos, checkFactura, checkFragil;
 	
@@ -60,7 +69,7 @@ public class VentanaHacerEnvio extends JFrame {
 							radTarj, radContrareembolso, radFacRemit, radFacDestinat;
 	
 	private JPanel pNorte, pNorte2, pNorte3,
-					pCentro, 
+					pCentro, pSur, pBtnAnterior, pBtnSiguiente, pBtnFinalizar, 
 					pDonde, ptxtDesde, ptxtHasta, pCamposDesde, pCamposHasta, pHasta, pDesde,
 					pQue, pAltLarAnc, pPeso, pEmbalaje, pValor, pNQue, pCQue,
 					pComo, pFEnvio, pRecog, pEntrega, pRecYEnt, pEntrega2, pRecog2,
@@ -72,7 +81,12 @@ public class VentanaHacerEnvio extends JFrame {
 	
     private List<Usuario> usuarios = new ArrayList<>();
     
-    Usuario usuario;
+    private Usuario usuario;
+    
+	private WindowMaster windowMaster = new WindowMaster();
+	
+    private HashMap<JTextField, Color> fondosOriginales = new HashMap<>();
+
 	
 	private Logger logger = Logger.getLogger(VentanaHacerEnvio.class.getName());
 	
@@ -82,6 +96,8 @@ public class VentanaHacerEnvio extends JFrame {
 		usuarios = usuariosS;
 		
 		tabEnvios = new JTabbedPane();
+        btnAnterior = new JButton("Anterior");
+        btnSiguiente = new JButton("Siguiente");
 		
 		txtCrearEnvio = new JLabel("CREAR ENVÍO:");
 		
@@ -98,6 +114,9 @@ public class VentanaHacerEnvio extends JFrame {
 		pNorte2 = new JPanel();
 		pNorte3 = new JPanel();
 
+		pSur = new JPanel(new GridLayout(1,2));
+		pBtnAnterior = new JPanel();
+		pBtnSiguiente = new JPanel();
 
 /** TAB DONDE */
 		
@@ -197,6 +216,8 @@ public class VentanaHacerEnvio extends JFrame {
 		logger.info("JCheckBox de tab 'QUE' creado");
 		
 		comboEmbalaje = new JComboBox<String>();
+		comboEmbalaje.addItem("Necesita embalaje");
+		comboEmbalaje.addItem("No necesita embalaje");
 		logger.info("JComboBox de tab 'QUE' creado");
 		
 		pEmbalaje = new JPanel(new GridLayout(1,2));
@@ -389,6 +410,7 @@ public class VentanaHacerEnvio extends JFrame {
 		 
 /** TAB REVISION */
 		 
+		btnFinalizar = new JButton("Finalizar");
 		 
 		txtEnDesde = new JLabel("Enviar desde:");
 		txtEnHasta = new JLabel("Hasta:");
@@ -420,6 +442,7 @@ public class VentanaHacerEnvio extends JFrame {
 		pInfo = new JPanel();
 		pAltPesLrAn = new JPanel(new GridLayout(4,2));
 		pEnYPg = new JPanel(new GridLayout(2,2));
+		pBtnFinalizar = new JPanel();
 		logger.info("JPanel de tab 'REVISION' creados");
 		 
 		 
@@ -442,14 +465,15 @@ public class VentanaHacerEnvio extends JFrame {
 		 pEnYPg.add(txtPago);
 		 pEnYPg.add(campoPago);
 		 
+		 pBtnFinalizar.add(btnFinalizar);
+		 
 		 pRev.add(pRevEnvio);
 		 pRev.add(pEnYPg);
 		 pRev.add(pAltPesLrAn);
 		 pRev.add(checkTerminos);
+		 pRev.add(pBtnFinalizar);
 		 
 		 add(pRev);
-		 
-		 	 
 		
 		tabEnvios.addTab("DONDE", pDonde);
 		tabEnvios.addTab("QUE", pQue);
@@ -466,10 +490,72 @@ public class VentanaHacerEnvio extends JFrame {
 		pNorte3.add(labelImagenLogo);
 		pNorte.add(pNorte2);
 		pNorte.add(pNorte3);
+		pBtnAnterior.add(btnAnterior);
+		pBtnSiguiente.add(btnSiguiente);
+		pSur.add(pBtnAnterior);
+		pSur.add(pBtnSiguiente);
 		add(pNorte, BorderLayout.NORTH);
 		add(tabEnvios, BorderLayout.CENTER);
+		add(pSur, BorderLayout.SOUTH);
 		
 /** EVENTOS */
+		
+		btnFinalizar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String nombreOrigen = campoNom.getText();
+				String direccionOrigen = campoDir.getText();
+				String correoOrigen = campoTel.getText();
+				String telefonoOrigen = campoCorreo.getText();
+				String nombreDestino = campoNomHasta.getText();
+				String direccionDestino = campoDirHasta.getText();
+				String correoDestino = campoTelHasta.getText();
+				String telefonoDestino = campoCorreoHasta.getText();
+				
+				String nReferencia = generarNumeroReferencia();
+				String embalaje = comboEmbalaje.getSelectedItem().toString();
+				String peso = campoPeso.getText();
+				String largo = campoLargo.getText();
+				String ancho = campoAncho.getText();
+				String alto = campoAlto.getText();
+				String valor = campoValor.getText();
+                boolean seleccionado = checkFragil.isSelected();
+                String fragil = seleccionado ? "Si" : "No";
+				
+				List<JTextField> camposVacios =  windowMaster.camposVacios(campoNom, campoDir, campoTel, campoCorreo, campoNomHasta, campoDirHasta, campoTelHasta, campoCorreoHasta);
+				if (camposVacios.isEmpty()) {
+					windowMaster.restaurarFondo(fondosOriginales);
+					Trayecto trayecto = new Trayecto(nombreOrigen, direccionOrigen, correoOrigen, telefonoOrigen, nombreDestino, direccionDestino, correoDestino, telefonoDestino);
+					camposVacios =  windowMaster.camposVacios(campoPeso, campoLargo, campoAncho, campoAlto, campoValor);
+					if (camposVacios.isEmpty()) {
+						windowMaster.restaurarFondo(fondosOriginales);
+						Paquete paquete = new Paquete(nReferencia, embalaje, peso, largo, ancho, alto, valor, fragil);
+						camposVacios =  windowMaster.camposVacios(campoPeso, campoLargo, campoAncho, campoAlto, campoValor);
+					} else {
+						fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
+						JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos del apartado 'Que'.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
+					JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos del apartado 'Donde'.", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}});
+		
+		btnAnterior.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambiarPestana(-1);
+            }
+        });
+
+        btnSiguiente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambiarPestana(1);
+            }
+        });
+		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -480,11 +566,36 @@ public class VentanaHacerEnvio extends JFrame {
 		
 		
 		
-
-		
 		setTitle("Hacer envío");
 		setBounds(300, 200, 800, 400);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
+	
+    private void cambiarPestana(int incremento) {
+        int nuevoIndice = indiceActual + incremento;
+        if (nuevoIndice >= 0 && nuevoIndice < tabEnvios.getTabCount()) {
+            tabEnvios.setSelectedIndex(nuevoIndice);
+            indiceActual = nuevoIndice;
+        }
+    }
+    
+	private static List<String> numerosGenerados = new ArrayList<>();
+    private static String generarNumeroReferencia() {
+        Random random = new Random();
+        int minimo = 100000000;
+        int maximo = 999999999;
+        int numeroReferencia = random.nextInt(maximo - minimo + 1) + minimo;
+        String referenciaComoString = Integer.toString(numeroReferencia);
+        if (!numerosGenerados.contains(referenciaComoString)) {
+        	numerosGenerados.add(referenciaComoString);
+        	return referenciaComoString;
+        } else if (numerosGenerados.size() == 10) {
+        	System.out.println("Se han generado el maximo de numeros");
+        	return "";
+        } else {
+        	return generarNumeroReferencia();
+        }
+    }
+    
 }
