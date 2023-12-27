@@ -129,13 +129,13 @@ public class VentanaHacerEnvio extends JFrame {
 		logger.info("JLabels de tab 'DONDE' creados");
 		
 		txtNom = new JLabel("Nombre:");
-		txtDir = new JLabel("Dirección");
+		txtDir = new JLabel("Dirección:");
 		txtTel = new JLabel("Teléfono:");
 		txtCorreo = new JLabel("Correo:");
 		logger.info("JLabels 2 de tab 'DONDE' creados");
 		
 		txtNomHasta = new JLabel("Nombre:");
-		txtDirHasta = new JLabel("Dirección");
+		txtDirHasta = new JLabel("Dirección:");
 		txtTelHasta = new JLabel("Teléfono:");
 		txtCorreoHasta = new JLabel("Correo:");
 		logger.info("JLabels 3 de tab 'DONDE' creados");
