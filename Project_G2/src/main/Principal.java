@@ -3,6 +3,7 @@ package main;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.LogManager;
@@ -10,6 +11,7 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
+import db.BaseDatosConfig;
 import domain.Usuario;
 import gui.VentanaInicioSesion;
 
@@ -40,5 +42,9 @@ public class Principal {
 		
 		SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuarios));
 
+		
+		Connection con = BaseDatosConfig.initBD("hermes.db");
+		BaseDatosConfig.crearTablas(con);
+		BaseDatosConfig.closeBD(con);
 	}
 }
