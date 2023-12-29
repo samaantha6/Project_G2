@@ -7,16 +7,26 @@ public class Pago {
 	String fechaCaducidad;
 	String CVV;
 	String remitenteDestinatario;
+	String factura;
 	String DNI;
 	
 	public Pago(String descripcion, String numeroTrajeta, String fechaCaducidad, String CVV,
-			String remitenteDestinatario, String DNI) {
+			String remitenteDestinatario, String factura, String DNI) {
 		super();
 		this.descripcion = descripcion;
 		this.numeroTrajeta = numeroTrajeta;
 		this.fechaCaducidad = fechaCaducidad;
 		this.CVV = CVV;
 		this.remitenteDestinatario = remitenteDestinatario;
+		this.factura = factura;
+		this.DNI = DNI;
+	}
+
+	public Pago(String descripcion, String remitenteDestinatario, String factura, String DNI) {
+		super();
+		this.descripcion = descripcion;
+		this.remitenteDestinatario = remitenteDestinatario;
+		this.factura = factura;
 		this.DNI = DNI;
 	}
 
@@ -26,6 +36,14 @@ public class Pago {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	public String getFactura() {
+		return factura;
+	}
+
+	public void setFactura(String factura) {
+		this.factura = factura;
 	}
 
 	public String getNumeroTrajeta() {
