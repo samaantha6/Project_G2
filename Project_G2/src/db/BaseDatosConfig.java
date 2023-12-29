@@ -64,6 +64,8 @@ public class BaseDatosConfig {
 		String sql = "CREATE TABLE IF NOT EXISTS Persona (dni String, nom String)";
 		String sql2 = "CREATE TABLE IF NOT EXISTS Articulo (id Integer, precio Double)";
 		String sql3 = "CREATE TABLE IF NOT EXISTS Compra(dni String, id Integer, unidades Integer, fecha String, idC Integer)";
+		/*ESTAS TRES SON EJEMPLOS DE UN EJERCICIO, HAY QUE CAMBIARLAS POR LAS NUESTRAS*/
+		
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
