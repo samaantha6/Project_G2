@@ -7,6 +7,10 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,12 +32,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import com.toedter.calendar.JCalendar;
 
+import domain.Envio;
+import domain.Pago;
 import domain.Paquete;
 import domain.Recogida;
 import domain.Trayecto;
@@ -48,7 +56,7 @@ public class VentanaHacerEnvio extends JFrame {
 	private JLabel txtCrearEnvio,  
 					txtDesde, txtHasta, txtNom, txtDir, txtTel, txtCorreo, txtNomHasta, txtDirHasta, txtTelHasta, txtCorreoHasta,
 					txtEmbalado, txtLargo, txtAncho, txtAlto, txtPeso, txtKg, txtValor, txtEur, txtInfo,
-					txtFEnvio, txtRecog, txtCasoRecog, txtEntrega,
+					txtFEnvio, txtRecog, txtCasoRecog, txtEntrega, aceptarCond,
 					txtQueEnvia, txtDescrip, txtTarj, txtFTarj, txtCVV, txtDni,
 					txtEnDesde, txtEnHasta, txtPago, txtEnvios, txtRevPeso, txtRevLargo, txtRevAncho, txtRevAlto, txtRevKg, txtInfo2;
 	
@@ -64,6 +72,9 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private JCheckBox checkTerminos, checkFactura, checkFragil;
 	
+	private  JTextArea textTYC;
+	private JScrollPane scrollTYC;
+	
 	private JComboBox<String> comboEmbalaje,
 								comboRecog;
 	
@@ -76,21 +87,24 @@ public class VentanaHacerEnvio extends JFrame {
 					pQue, pAltLarAnc, pPeso, pEmbalaje, pValor, pNQue, pCQue,
 					pComo, pFEnvio, pRecog, pEntrega, pRecYEnt, pEntrega2, pRecog2,
 					pPago, pEnvio, pTarj, pFact, pTarjYContra, pFact2, pCamposTarjYCon, pDescrip, 
-					pRev, pRevEnvio, pInfo, pAltPesLrAn, pEnYPg;
+					pRev, pRevEnvio, pInfo, pAltPesLrAn, pEnYPg, pTYC;
 	
 	private ButtonGroup tipoEnvioGrupo, recogidaGrupo, pagoGrupo, facturaGrupo;
 	
+	private Pago pago;
 	
     private List<Usuario> usuarios = new ArrayList<>();
     
     private Usuario usuario;
     
+	private Thread hilo;
+	private boolean hiloEjecutando;
+    
 	private WindowMaster windowMaster = new WindowMaster();
 	
     private HashMap<JTextField, Color> fondosOriginales = new HashMap<>();
 
-    private String lugarDeRecogida;
-    private String tipoDeEnvio;
+    private String lugarDeRecogida, tipoDeEnvio, remitenteDestinatario, factura, tarjetaContrareembolso, textoTYC;
     
 	private Logger logger = Logger.getLogger(VentanaHacerEnvio.class.getName());
 	
@@ -436,9 +450,21 @@ public class VentanaHacerEnvio extends JFrame {
 		campoRevAlto = new JTextField(5);
 		campoRevPeso = new JTextField(5);
 		campoEnvios = new JTextField(10);
+		
+		campoEnDesde.setEditable(false);
+		campoEnHasta.setEditable(false);
+		campoPago.setEditable(false);
+		campoRevLargo.setEditable(false);
+		campoRevAncho.setEditable(false);
+		campoRevAlto.setEditable(false);
+		campoRevPeso.setEditable(false);
+		campoEnvios.setEditable(false);
+		
 		logger.info("JTextFields de tab 'REVISION' creados");
 	 
-		checkTerminos = new JCheckBox("<html><u>Aceptas terminos y condiciones de uso</u></html>");
+		checkTerminos = new JCheckBox();
+		aceptarCond = new JLabel("<html><u>Aceptas terminos y condiciones de uso</u></html>");
+		checkTerminos.setEnabled(false);
 		logger.info("JCheckBox de tab 'REVISION' creado");
 		
 		
@@ -447,6 +473,7 @@ public class VentanaHacerEnvio extends JFrame {
 		pAltPesLrAn = new JPanel(new GridLayout(4,2));
 		pEnYPg = new JPanel(new GridLayout(2,2));
 		pBtnFinalizar = new JPanel();
+		pTYC = new JPanel();
 		logger.info("JPanel de tab 'REVISION' creados");
 		 
 		 
@@ -469,12 +496,15 @@ public class VentanaHacerEnvio extends JFrame {
 		 pEnYPg.add(txtPago);
 		 pEnYPg.add(campoPago);
 		 
+		 pTYC.add(checkTerminos);
+		 pTYC.add(aceptarCond);
+		 
 		 pBtnFinalizar.add(btnFinalizar);
 		 
 		 pRev.add(pRevEnvio);
 		 pRev.add(pEnYPg);
 		 pRev.add(pAltPesLrAn);
-		 pRev.add(checkTerminos);
+		 pRev.add(pTYC);
 		 pRev.add(pBtnFinalizar);
 		 
 		 add(pRev);
@@ -503,6 +533,23 @@ public class VentanaHacerEnvio extends JFrame {
 		add(pSur, BorderLayout.SOUTH);
 		
 /** EVENTOS */
+		
+		addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				hilo = new Thread() {
+
+				public void run() {
+					while(hiloEjecutando) {
+
+					}
+				}
+				};
+				hiloEjecutando = true;
+				hilo.start();
+			}
+		});
 		
 		btnFinalizar.addActionListener(new ActionListener() {
 
@@ -544,6 +591,31 @@ public class VentanaHacerEnvio extends JFrame {
                 } else {
                 	tipoDeEnvio = "";
                 }
+                
+                String descripcion = campoDescrip.getText();
+                String numeroTrajeta = campoTarj.getText();
+                String fechaCaducidad = campoFTarj.getText();
+                String CVV = campoCVV.getText();
+                if (radFacRemit.isSelected()) {
+                	remitenteDestinatario = "Remitente";
+                } else if (radFacDestinat.isSelected()) {
+                	remitenteDestinatario = "Destinatario";
+                } else {
+                	remitenteDestinatario = "";
+                }
+                if (checkFactura.isSelected()) {
+                	factura = "Si";
+                } else {
+                	factura = "No";
+                }
+                String DNI = campoDni.getText();
+                if (radTarj.isSelected()) {
+                	tarjetaContrareembolso = "Tarjeta";
+                } else if (radContrareembolso.isSelected()) {
+                	tarjetaContrareembolso = "Contrareembolso";
+                } else {
+                	tarjetaContrareembolso = "";
+                }
 				
 				List<JTextField> camposVacios =  windowMaster.camposVacios(campoNom, campoDir, campoTel, campoCorreo, campoNomHasta, campoDirHasta, campoTelHasta, campoCorreoHasta);
 				if (camposVacios.isEmpty()) {
@@ -562,8 +634,57 @@ public class VentanaHacerEnvio extends JFrame {
 							radPremium.setOpaque(false);
 							radSuper.setOpaque(false);
 							Recogida recogida = new Recogida(fechaDeRecogida, lugarDeRecogida, tipoDeEnvio);
-							System.out.println(recogida.toString());
-							camposVacios =  windowMaster.camposVacios(campoPeso, campoLargo, campoAncho, campoAlto, campoValor);
+							camposVacios =  windowMaster.camposVacios(campoDescrip, campoTarj, campoFTarj, campoCVV, campoDni);
+							if (camposVacios.isEmpty() && remitenteDestinatario != "" && tarjetaContrareembolso != "") {
+								windowMaster.restaurarFondo(fondosOriginales);
+								radFacRemit.setOpaque(false);
+								radFacDestinat.setOpaque(false);
+								radTarj.setOpaque(false);
+								radContrareembolso.setOpaque(false);
+								if (radTarj.isSelected()) {
+									pago = new Pago(descripcion, numeroTrajeta, fechaCaducidad, CVV, remitenteDestinatario, factura, DNI);
+								} else {
+									pago = new Pago(descripcion, remitenteDestinatario, factura, DNI);
+								}								
+								campoEnDesde.setText(direccionOrigen);
+								campoEnHasta.setText(direccionDestino);
+								campoPago.setText(direccionDestino);
+								campoRevLargo.setText(largo);
+								campoRevAncho.setText(ancho);
+								campoRevAlto.setText(alto);
+								campoRevPeso.setText(peso);
+								campoEnvios.setText(tipoDeEnvio);
+								if (checkTerminos.isSelected()) {
+						        	int seguro = JOptionPane.showOptionDialog(
+						        			null,
+						        			"¿Estas seguro que has rellenado todos los apartados de forma correcta?", "Aviso", 
+						        			JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Aceptar", "Rechazar"}, "Aceptar");
+						        	if (seguro == JOptionPane.OK_OPTION) {
+						        		Envio envio = new Envio(trayecto, paquete, recogida, pago);
+										VentanaInicio VI = new VentanaInicio(usuarios, usuario);
+										dispose();
+						        	}
+								} else {
+                    				JOptionPane.showMessageDialog(null, "Desbes acceptar los terminos y condiciones.", "Error", JOptionPane.ERROR_MESSAGE);
+								}
+							} else {
+								fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
+								if (remitenteDestinatario == "") {
+									radFacRemit.setBackground(Color.RED);
+									radFacDestinat.setBackground(Color.RED);
+								} else {
+									radFacRemit.setOpaque(false);
+									radFacDestinat.setOpaque(false);
+								}
+								if (tarjetaContrareembolso == "") {
+									radTarj.setBackground(Color.RED);
+									radContrareembolso.setBackground(Color.RED);
+								} else {
+									radTarj.setOpaque(false);
+									radContrareembolso.setOpaque(false);
+								}
+								JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos del apartado 'Pago'.", "Error", JOptionPane.ERROR_MESSAGE);
+							}
 						} else {
 							fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
 							if (lugarDeRecogida == "") {
@@ -594,6 +715,30 @@ public class VentanaHacerEnvio extends JFrame {
 				}
 			}});
 		
+        aceptarCond.addMouseListener(new MouseAdapter() {
+			
+				@Override
+				public void mouseClicked(MouseEvent e) {
+				
+					textTYC = new JTextArea(textoTYC);
+
+			        	scrollTYC = new JScrollPane(textTYC);
+			        	scrollTYC.setPreferredSize(new Dimension(400, 300));
+
+			        	int option = JOptionPane.showOptionDialog(
+			        			null,
+			        			scrollTYC,
+			        			"Términos y Condiciones",
+			        			JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Aceptar", "Rechazar"}, "Aceptar");
+
+			        	if (option == JOptionPane.OK_OPTION) {
+			        		checkTerminos.setSelected(true);
+			        	} else {
+			        		checkTerminos.setSelected(false);
+			        	}
+				}
+			});
+		
 		btnAnterior.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -622,6 +767,39 @@ public class VentanaHacerEnvio extends JFrame {
 		setBounds(300, 200, 800, 400);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		textoTYC = new String("Aceptación de Términos y Condiciones de uso:\r\n"
+				+ "\r\n"
+				+ "Al utilizar nuestro sistema, el usuario acepta estos términos y condiciones y se compromete a cumplir con ellos. Estos términos pueden ser modificados en cualquier momento, y el usuario se compromete a revisarlos regularmente para estar al tanto de cualquier cambio.\r\n"
+				+ "\r\n"
+				+ "Los usuarios pueden necesitar registrarse para utilizar ciertas funciones del sistema. La información proporcionada durante el registro debe ser precisa y completa.\r\n"
+				+ "Los usuarios son responsables de mantener la confidencialidad de sus credenciales de inicio de sesión y notificar a Hermes de cualquier uso no autorizado de su cuenta.\r\n"
+				+ "\r\n"
+				+ "Los usuarios se comprometen a utilizar el sistema de manera adecuada y legal, sin infringir derechos de terceros.\r\n"
+				+ "No se permite el uso del sistema para actividades ilegales o fraudulentas.\r\n"
+				+ "\r\n"
+				+ "Los usuarios son responsables de la exactitud de la información proporcionada al sistema, incluyendo datos de contacto y direcciones de envío.\r\n"
+				+ "Los usuarios son responsables de asegurarse de que los paquetes y envíos cumplan con las restricciones y regulaciones aplicables.\r\n"
+				+ "\r\n"
+				+ "Los usuarios aceptan pagar las tarifas correspondientes a los servicios utilizados, según las tarifas publicadas por Hermes.\r\n"
+				+ "Los pagos se pueden realizar a través de los métodos de pago aceptados por el sistema.\r\n"
+				+ "\r\n"
+				+ "Hermes se compromete a proteger la privacidad y los datos de los usuarios de acuerdo con las leyes aplicables.\r\n"
+				+ "\r\n"
+				+ "Hermes no se hará responsable de daños indirectos, consecuentes o incidentales.\r\n"
+				+ "La responsabilidad de Hermes se limita a los términos establecidos en acuerdos específicos.\r\n"
+				+ "\r\n"
+				+ "Las políticas de cancelación y devolución se basan en las tarifas y políticas específicas de Hermes.\r\n"
+				+ "Los usuarios deben revisar nuestras políticas de cancelación y devolución antes de utilizar el sistema.\r\n"
+				+ "\r\n"
+				+ "Hermes se reserva el derecho de suspender o cancelar la cuenta de cualquier usuario que incumpla estos términos y condiciones.\r\n"
+				+ "\r\n"
+				+ "Estos términos y condiciones se rigen por las leyes del país (en este caso España) y cualquier disputa se resolverá mediante arbitraje de conformidad con las reglas de Hermes o ante los tribunales competentes en España.\r\n"
+				+ "\r\n"
+				+ "Si tiene alguna pregunta o inquietud acerca de estos términos y condiciones, por favor contáctenos a través de support@hermes.es.\r\n"
+				+ "\r\n"
+				+ "Al utilizar el Sistema de Paquetería de Hermes, usted acepta y comprende estos términos y condiciones. Le recomendamos que imprima o descargue una copia de este documento para su referencia futura.");
+		
 	}
 	
     private void cambiarPestana(int incremento) {
@@ -630,6 +808,7 @@ public class VentanaHacerEnvio extends JFrame {
             tabEnvios.setSelectedIndex(nuevoIndice);
             indiceActual = nuevoIndice;
         }
+        
     }
     
 	private static List<String> numerosGenerados = new ArrayList<>();

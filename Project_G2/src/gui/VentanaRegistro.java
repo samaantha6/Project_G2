@@ -58,7 +58,7 @@ public class VentanaRegistro extends JFrame{
 					pCorreo, pTelefono, pPregSeg, pVenificaCon, pRespuesta;
 	
 	private JLabel txtNombre, txtApellido, txtCorreo, txtTelefono, txtContrasenia,
-					txtPregSeg, txtVenificaCon, txtRespuesta;
+					txtPregSeg, txtVenificaCon, txtRespuesta, aceptarCond;
 	
 	private JButton btnReg, btnVolver, btnOjoCon, btnOjoConVen;
 	
@@ -71,7 +71,6 @@ public class VentanaRegistro extends JFrame{
 						campoVenificaCon1;
 	private String textoTYC;
 
-	
 	private JPasswordField campoContrasenia, campoVenificaCon;
 	
     public List<Usuario> usuarios = new ArrayList<>();
@@ -152,8 +151,7 @@ public class VentanaRegistro extends JFrame{
 		logger.info("Imagen creada");
 		
 		condiciones = new JCheckBox();
-		JLabel aceptarCond = new JLabel("Acepto condiciones y términos de seguridad");
-		aceptarCond.setOpaque(true);
+		aceptarCond = new JLabel("<html><u>Aceptas terminos y condiciones de uso</u></html>");
 		condiciones.setEnabled(false);
 		logger.info("JCheckBox creado");
 		
