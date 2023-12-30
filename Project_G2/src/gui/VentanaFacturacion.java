@@ -7,9 +7,11 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts.FontName;
 import org.apache.pdfbox.tools.PDFBox;
-import org.apache.pdfbox.tools.PrintPDF;
+
 
 import domain.Usuario;
 
@@ -24,7 +26,7 @@ import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-	public class VentanaFacturacion extends JFrame {
+	public class VentanaFacturacion extends JFrame  {
 		
 		private static final long serialVersionUID = 1L;
 		
@@ -33,6 +35,7 @@ import java.util.logging.Logger;
 	    private JButton btnatras, btnexportar;
 	    private JTextField nRef, nPrecio, nDesc, nPagado, nEstado;
 	    private JLabel txtPrecio, txtPagado, txtRef, txtDesc, txtFact, txtEstado, txtDetalles, txtExport;
+	    private PDType1Font fuente;
 	    
 	    private List<Usuario> usuarios = new ArrayList<>();
 	    
@@ -53,6 +56,7 @@ import java.util.logging.Logger;
 			pOeste = new JPanel(new GridLayout(3,2));
 			pEste = new JPanel(new GridLayout(7,1));
 			logger.info("Paneles creados");
+			fuente = new PDType1Font(FontName.HELVETICA_BOLD);
 	        
 			ImageIcon logo = new ImageIcon(getClass().getResource("/Images/logoPngNegro.png"));
 			JLabel labelImagenLogo = new JLabel(logo);
@@ -81,7 +85,7 @@ import java.util.logging.Logger;
 	    	
 	    	pEste.add(txtDetalles);
 	    	
-	    	// Paneles  para alinear los componentes horizontalmente
+	    	
 	    	JPanel precioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
 	        precioPanel.add(txtPrecio);
 	        precioPanel.add(nPrecio);
@@ -157,36 +161,83 @@ import java.util.logging.Logger;
 
 					PDDocument a = new PDDocument();
 			    	
-			    	String precio = nPrecio.getText();
-			    	String descripcion = nDesc.getText();
-			    	String estado = nEstado.getText();
-			    	String pagado = nPagado.getText();
-			    	String referencia = nRef.getText();
-			    	
 			    	PDPage page = new PDPage();
 			    	a.addPage(page);
 			    	
 			    	try {
-			    		
 			    		PDPageContentStream contentStream = new PDPageContentStream(a, page);
-			    	    contentStream.newLineAtOffset(50, 700);
-			    	    contentStream.showText("Precio: " + precio);
+			    		
+			    		
+			    		contentStream.beginText();
+			    		
+			    		contentStream.setFont(fuente, 12);
+			    	    //contentStream.newLineAtOffset(50, 700);
+			    	    
+		                String precio = nPrecio.getText();
+		                String descripcion = nDesc.getText();
+		                String estado = nEstado.getText();
+		                String pagado = nPagado.getText();
+		                String referencia = nRef.getText();
+		                
+		                
+		                
+		                /*ESCRIBE DE ARRIBA HACIA ABAJO*/
+		                		
+		                
+			    	    contentStream.newLineAtOffset(50,620);
+			    	    if (estado != null && !estado.isEmpty()) {
+			    	    	contentStream.showText("Estado: " + estado);
+			    	    } else {
+			    	        contentStream.showText("Estado: No disponible");
+			    	    }
+			    	    
 			    	    contentStream.newLine();
-			    	    contentStream.showText("Descripción: " + descripcion);
+			    	    
+			    	    
+			    	    contentStream.newLineAtOffset(0,30);
+			    	    if (pagado != null && !pagado.isEmpty()) {
+			    	    	contentStream.showText("¿Pagado?: " + pagado);
+			    	    } else {
+			    	        contentStream.showText("Pagado: No disponible");
+			    	    }
+			    	    
 			    	    contentStream.newLine();
-			    	    contentStream.showText("Estado: " + estado);
+			    	    
+		                contentStream.newLineAtOffset(0,30);
+			    	    if (precio != null && !precio.isEmpty()) {
+			    	        contentStream.showText("Precio: " + precio);
+			    	    } else {
+			    	        contentStream.showText("Precio: No disponible");
+			    	    }
+			    	    
 			    	    contentStream.newLine();
-			    	    contentStream.showText("¿Pagado?: " + pagado);
+			    	    
+			    	    contentStream.newLineAtOffset(0,30);
+			    	    if (descripcion != null && !descripcion.isEmpty()) {
+			    	    	contentStream.showText("Descripción: " + descripcion);
+			    	    } else {
+			    	        contentStream.showText("Descripción: No disponible");
+			    	    }
+			    	    
 			    	    contentStream.newLine();
-			    	    contentStream.showText("¿Envío?: " + referencia);
+			    	    
+
+			    	    contentStream.newLineAtOffset(0,40);
+			    	    contentStream.showText("FACTURA ENVIO CON Nº REFERENCIA:   " + referencia);
+			    	    contentStream.newLine();
+
+			    	    
+			    	    contentStream.endText();
 			    	    contentStream.close();
 
-			    	 // Guardar el documento PDF en un archivo
 			    	    a.save("factura.pdf");
 			    	    a.close();
 			    	    
 			    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Exportación exitosa a factura.pdf");
+			    	    
 			    	} catch (IOException ex) {
+			    		
+			    		
 			    	    ex.printStackTrace();
 			    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Error al exportar a PDF");
 					} 
