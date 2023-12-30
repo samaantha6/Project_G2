@@ -813,14 +813,7 @@ public class VentanaHacerEnvio extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					
-			    	if (radEstandar.isSelected()) {
-		                precioBase += 2.99;
-		            } else if (radSuper.isSelected()) {
-		                precioBase += 3.99;
-		            } else if (radPremium.isSelected()) {
-		                precioBase += 7.99;
-		            }	
-		            
+					precioBase += 2.99;
 		            campoPrecio.setText(precioBase + "€");
 		            
 				} catch (NumberFormatException e2) {
@@ -835,15 +828,9 @@ public class VentanaHacerEnvio extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 								    			    				    	
-		            if (radEstandar.isSelected()) {
-		                precioBase += 2.99;
-		            } else if (radSuper.isSelected()) {
-		                precioBase += 3.99;
-		            } else if (radPremium.isSelected()) {
-		                precioBase += 7.99;
-		            }	
-		            
+					precioBase += 3.99;
 		            campoPrecio.setText(precioBase + "€");
+		            
 				} catch (NumberFormatException e2) {
 					campoPrecio.setText("Error");
 					
@@ -855,16 +842,10 @@ public class VentanaHacerEnvio extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-								    			    				    	
-		            if (radEstandar.isSelected()) {
-		                precioBase += 2.99;
-		            } else if (radSuper.isSelected()) {
-		                precioBase += 3.99;
-		            } else if (radPremium.isSelected()) {
-		                precioBase += 7.99;
-		            }	
-		            
+					
+					precioBase += 7.99;
 		            campoPrecio.setText(precioBase + "€");
+		            
 				} catch (NumberFormatException e2) {
 					campoPrecio.setText("Error");
 					
