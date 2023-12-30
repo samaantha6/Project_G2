@@ -812,9 +812,9 @@ public class VentanaHacerEnvio extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
-					precioBase += 2.99;
-		            campoPrecio.setText(precioBase + "€");
+					double precioFinal = precioBase;
+					precioFinal += 2.99;
+		            campoPrecio.setText(precioFinal + "€");
 		            
 				} catch (NumberFormatException e2) {
 					campoPrecio.setText("Error");
@@ -827,9 +827,10 @@ public class VentanaHacerEnvio extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-								    			    				    	
-					precioBase += 3.99;
-		            campoPrecio.setText(precioBase + "€");
+					
+					double precioFinal = precioBase;			    			    				    	
+					precioFinal += 3.99;
+		            campoPrecio.setText(precioFinal + "€");
 		            
 				} catch (NumberFormatException e2) {
 					campoPrecio.setText("Error");
@@ -842,9 +843,9 @@ public class VentanaHacerEnvio extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
-					precioBase += 7.99;
-		            campoPrecio.setText(precioBase + "€");
+					double precioFinal = precioBase;
+					precioFinal += 7.99;
+		            campoPrecio.setText(precioFinal + "€");
 		            
 				} catch (NumberFormatException e2) {
 					campoPrecio.setText("Error");
