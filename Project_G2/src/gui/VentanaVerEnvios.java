@@ -141,17 +141,14 @@ public class VentanaVerEnvios extends JFrame{
 		btnEliminar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int filaSeleccionada = tablaEnvios.getSelectedRow();
-		        if (filaSeleccionada != -1) {
-		            // Obtener el valor de "N referencia" de la fila seleccionada
-		            String nReferenciaABorrar = (String) tablaEnvios.getValueAt(filaSeleccionada, 0);
+				int fila = tablaEnvios.getSelectedRow();
+		        if (fila != -1) {
+		            
+		            String nRefe = (String) tablaEnvios.getValueAt(fila, 0);
 
-		            //  la fila del modelo de tabla
-		            modeloTabla.removeRow(filaSeleccionada);
+		            modeloTabla.removeRow(fila);
 
-		            // Aquí puedes realizar cualquier otra lógica relacionada con la eliminación, por ejemplo, en tu base de datos.
-		            System.out.println("Eliminando fila con Nº referencia: " + nReferenciaABorrar);
-		        } else {
+		            } else {
 		            JOptionPane.showMessageDialog(null, "Selecciona una fila para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
 		        }		
 			}
