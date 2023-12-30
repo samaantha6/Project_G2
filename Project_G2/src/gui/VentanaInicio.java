@@ -34,7 +34,7 @@ public class VentanaInicio extends JFrame{
 					pEsteCentroAbajo, pEsteAbajoArriba, pEsteAbajoAbajo, pEsteAbajo, pOeste, pOesteArriba, 
 					pOesteCentro, pOesteAbajo, pCentro, pbtnCrear;
 	private JButton btnVerEnvio, btnFac, btnHacerEnvio, btnCrear, btnCerrarSesion, btnModificar;
-	private JTextField campoAlto, campoAncho, campoLargo, campoPeso, campoDesde, campoHasta, campoPrecio;
+	private JTextField campoAlto, campoAncho, campoLargo, campoPeso, campoDesde, campoHasta;
 	private JLabel txtBienvedida, txtCrearPre, txtDesde, txtHasta, txtAlto, txtAncho, txtLargo, txtPeso;
 	
 	public double precioBase;
@@ -246,7 +246,7 @@ public class VentanaInicio extends JFrame{
 					int largo = Integer.parseInt(campoLargo.getText());
 					
 					precioBase = (PrecioBaseAlto(alto) + PrecioBaseAncho(ancho) + PrecioBaseLargo(largo))/2;
-					System.out.println(precioBase);
+					
 				}
 												
 			}

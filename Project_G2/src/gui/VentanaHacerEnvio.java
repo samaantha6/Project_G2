@@ -106,6 +106,9 @@ public class VentanaHacerEnvio extends JFrame {
 
     private String lugarDeRecogida, tipoDeEnvio, remitenteDestinatario, factura, tarjetaContrareembolso, textoTYC;
     
+	private double precioBase;
+	private JLabel campoPrecio;
+    
 	private Logger logger = Logger.getLogger(VentanaHacerEnvio.class.getName());
 	
 	public VentanaHacerEnvio(List<Usuario> usuariosS, Usuario usuarioO) {
@@ -228,6 +231,8 @@ public class VentanaHacerEnvio extends JFrame {
 		campoAlto = new JTextField(10);
 		campoValor = new JTextField(10);
 		campoPeso = new JTextField(10);
+		
+		
 		logger.info("JTextFields de tab 'QUE' creados");
 		
 		checkFragil = new JCheckBox("¿Frágil?");
@@ -275,7 +280,7 @@ public class VentanaHacerEnvio extends JFrame {
 		pQue.add(txtInfo);
 		
 		add(pQue);
-			
+
 		
 /** TAB COMO */		
 		
@@ -290,9 +295,10 @@ public class VentanaHacerEnvio extends JFrame {
 		
 		radPtoRecog = new JRadioButton("Punto de recogida");
 		radUsoDir = new JRadioButton("Usar mi direccion");
-		radEstandar = new JRadioButton("Estandar");
-		radSuper = new JRadioButton("Superior");
-		radPremium = new JRadioButton("Premium");
+		
+		radEstandar = new JRadioButton("Estandar\n (En 8/12 dias)");
+		radSuper = new JRadioButton("Superior\n (En 6/10 dias)");
+		radPremium = new JRadioButton("Premium\n (En 2 dias)");
 		logger.info("JRadioButton de tab 'COMO' creados");
 		
 		comboRecog = new JComboBox<String>();
@@ -310,6 +316,8 @@ public class VentanaHacerEnvio extends JFrame {
 		pEntrega2 = new JPanel(new GridLayout(3,1));
 		pRecog2 = new JPanel(new GridLayout(3,1));
 		logger.info("JPanels de tab 'COMO' creados");
+		
+		campoPrecio = new JLabel();
 		
 		recogidaGrupo.add(radPtoRecog);
 		recogidaGrupo.add(radUsoDir);
@@ -333,6 +341,8 @@ public class VentanaHacerEnvio extends JFrame {
 
 		pEntrega.add(txtEntrega);
 		pEntrega.add(pEntrega2);
+		pEntrega.add(campoPrecio);
+		
 		
 		pRecog.add(txtRecog);
 		pRecog.add(pRecog2);
@@ -514,6 +524,7 @@ public class VentanaHacerEnvio extends JFrame {
 		tabEnvios.addTab("COMO", pComo);
 		tabEnvios.addTab("PAGO", pPago);
 		tabEnvios.addTab("REVISIÓN", pRev);
+		tabEnvios.setEnabled(false);
 		
 		ImageIcon logo = new ImageIcon(getClass().getResource("/Images/logoPngNegro.png"));
 		JLabel labelImagenLogo = new JLabel(logo);
@@ -750,6 +761,39 @@ public class VentanaHacerEnvio extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cambiarPestana(1);
+                
+                int pestañaActual = tabEnvios.getSelectedIndex();
+                
+                if (pestañaActual == 2) {
+                	String altoPrecio1 = campoAlto.getText();
+            		String anchoPrecio1 = campoAncho.getText();
+            		String largoPrecio1 = campoLargo.getText();
+            		if (!altoPrecio1.isEmpty() && !anchoPrecio1.isEmpty() && !largoPrecio1.isEmpty()) {
+            			try {
+            				int altoPrecio = Integer.parseInt(altoPrecio1);
+            				int anchoPrecio = Integer.parseInt(anchoPrecio1);
+            				int largoPrecio = Integer.parseInt(largoPrecio1);
+            				
+            				precioBase = (PrecioBaseAlto(altoPrecio) + PrecioBaseAncho(anchoPrecio) + PrecioBaseLargo(largoPrecio))/2;
+
+            				System.out.println(precioBase);
+            			} catch (Exception e2) {
+            				JOptionPane.showMessageDialog(null, "Introduzca un número válido", "Error", JOptionPane.ERROR_MESSAGE);
+            				cambiarPestana(-1);
+            			}
+
+            		} else {
+            			JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            			cambiarPestana(-1);
+            			
+            		}
+            		
+				} else {
+					
+				}
+                
+                
+
             }
         });
 		
@@ -760,6 +804,74 @@ public class VentanaHacerEnvio extends JFrame {
 				dispose();			
 			}
 		});
+		
+		
+		
+		
+		radEstandar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+			    	if (radEstandar.isSelected()) {
+		                precioBase += 2.99;
+		            } else if (radSuper.isSelected()) {
+		                precioBase += 3.99;
+		            } else if (radPremium.isSelected()) {
+		                precioBase += 7.99;
+		            }	
+		            
+		            campoPrecio.setText(precioBase + "€");
+		            
+				} catch (NumberFormatException e2) {
+					campoPrecio.setText("Error");
+					
+				}
+			}
+		});
+		
+		radSuper.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+								    			    				    	
+		            if (radEstandar.isSelected()) {
+		                precioBase += 2.99;
+		            } else if (radSuper.isSelected()) {
+		                precioBase += 3.99;
+		            } else if (radPremium.isSelected()) {
+		                precioBase += 7.99;
+		            }	
+		            
+		            campoPrecio.setText(precioBase + "€");
+				} catch (NumberFormatException e2) {
+					campoPrecio.setText("Error");
+					
+				}
+			}
+		});
+		
+		radPremium.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+								    			    				    	
+		            if (radEstandar.isSelected()) {
+		                precioBase += 2.99;
+		            } else if (radSuper.isSelected()) {
+		                precioBase += 3.99;
+		            } else if (radPremium.isSelected()) {
+		                precioBase += 7.99;
+		            }	
+		            
+		            campoPrecio.setText(precioBase + "€");
+				} catch (NumberFormatException e2) {
+					campoPrecio.setText("Error");
+					
+				}
+			}
+		});
+		
 		
 		
 		
@@ -826,6 +938,36 @@ public class VentanaHacerEnvio extends JFrame {
         	return "";
         } else {
         	return generarNumeroReferencia();
+        }
+    }
+    
+	private static int PrecioBaseAlto(int medida) {
+        if (medida <= 15) {
+            return 2;
+        } else if (medida <= 30) {
+            return 4;
+        } else {
+            return 10;
+        }
+    }
+	
+	private static int PrecioBaseAncho(int medida) {
+        if (medida <= 15) {
+            return 3;
+        } else if (medida <= 30) {
+            return 5;
+        } else {
+            return 7;
+        }
+    }
+	
+	private static int PrecioBaseLargo(int medida) {
+        if (medida <= 15) {
+            return 2;
+        } else if (medida <= 30) {
+            return 3;
+        } else {
+            return 11;
         }
     }
     

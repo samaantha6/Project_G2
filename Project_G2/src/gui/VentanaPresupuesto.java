@@ -120,10 +120,7 @@ public class VentanaPresupuesto extends JFrame{
 
         
 /** EVENTOS */
-		
-		
-
-        
+		        
 		estandar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
