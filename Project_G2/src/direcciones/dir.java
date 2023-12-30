@@ -69,19 +69,19 @@ public class dir {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaFichero))) {
             for (int i = 0; i < provincias.length; i++) {
                 // Escribir la provincia
-                writer.write(provincias[i] + " - ");
+                writer.write(provincias[i] + ";");
 
                 // Escribir una dirección
                 writer.write(direcciones[i * 3]);
                 writer.newLine(); 
 
                 // Escribir una segunda dirección
-                writer.write(provincias[i] + " - ");
+                writer.write(provincias[i] + ";");
                 writer.write(direcciones[i * 3 + 1]);
                 writer.newLine();
 
                 // Escribir una tercera dirección
-                writer.write(provincias[i] + " - ");
+                writer.write(provincias[i] + ";");
                 writer.write(direcciones[i * 3 + 2]);
                 writer.newLine();
             }
