@@ -45,11 +45,15 @@ public class WindowMaster {
                 char letraCalculada = calcularLetraDNI(numerosInt);
 
                 if (letra == letraCalculada) {
+            		textFieldNumero.setBackground(UIManager.getColor("TextField.background"));
                     return true;
                 } else {
                     textFieldNumero.setBackground(Color.RED);
                     JOptionPane.showMessageDialog(null, "Tines que ingresar un DNI existente.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+        	} else if (tipo == "DNI" && numero.length() != 9) {
+                textFieldNumero.setBackground(Color.RED);
+                JOptionPane.showMessageDialog(null, "Tines que ingresar un DNI existente.", "Error", JOptionPane.ERROR_MESSAGE);
         	} else if (tipo == "Telefono" && numero.length() != 9) {
         		textFieldNumero.setBackground(Color.RED);
 				JOptionPane.showMessageDialog(null, "Tienes que ingresar un telefono valido.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -105,7 +109,7 @@ public class WindowMaster {
     }
     
     private static char calcularLetraDNI(int parteNumerica) {
-        String letras = "QWERTYUIOPASDFGHJKLÑZXCVBNM";
+        String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
         int indiceLetra = parteNumerica % 23;
         return letras.charAt(indiceLetra);
     }

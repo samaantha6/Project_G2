@@ -661,7 +661,8 @@ public class VentanaHacerEnvio extends JFrame {
 							radSuper.setOpaque(false);
 							Recogida recogida = new Recogida(fechaDeRecogida, lugarDeRecogida, tipoDeEnvio);
 							camposVacios =  windowMaster.camposVacios(campoDescrip, campoTarj, campoFTarj, campoCVV, campoDni);
-							if (camposVacios.isEmpty() && remitenteDestinatario != "" && tarjetaContrareembolso != "") {
+							boolean dniValido = windowMaster.esNumero(campoDni, "DNI");
+							if (camposVacios.isEmpty() && remitenteDestinatario != "" && tarjetaContrareembolso != "" && dniValido) {
 								windowMaster.restaurarFondo(fondosOriginales);
 								radFacRemit.setOpaque(false);
 								radFacDestinat.setOpaque(false);
@@ -693,7 +694,7 @@ public class VentanaHacerEnvio extends JFrame {
 								} else {
                     				JOptionPane.showMessageDialog(null, "Desbes acceptar los terminos y condiciones.", "Error", JOptionPane.ERROR_MESSAGE);
 								}
-							} else {
+							} else if (dniValido == true) {
 								fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
 								if (remitenteDestinatario == "") {
 									radFacRemit.setBackground(Color.RED);
