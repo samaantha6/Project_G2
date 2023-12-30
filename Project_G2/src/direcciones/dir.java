@@ -56,36 +56,31 @@ public class dir {
 
         };
 
-        // Ruta del fichero
-        String rutaFichero = "provincias_direcciones.txt";
+        String rutaFich = "provincias_direcciones.txt";
         
        
 
-        // Escribir en el fichero
-        escribirProvinciasYDireccionesEnFichero(provincias, direcciones, rutaFichero);
+        escribirProvinciasYDireccionesEnFichero(provincias, direcciones, rutaFich);
     }
 
    private static void escribirProvinciasYDireccionesEnFichero(String[] provincias, String[] direcciones, String rutaFichero) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaFichero))) {
             for (int i = 0; i < provincias.length; i++) {
-                // Escribir la provincia
+                
                 writer.write(provincias[i] + ";");
 
-                // Escribir una dirección
                 writer.write(direcciones[i * 3]);
                 writer.newLine(); 
 
-                // Escribir una segunda dirección
                 writer.write(provincias[i] + ";");
                 writer.write(direcciones[i * 3 + 1]);
                 writer.newLine();
 
-                // Escribir una tercera dirección
                 writer.write(provincias[i] + ";");
                 writer.write(direcciones[i * 3 + 2]);
                 writer.newLine();
             }
-            System.out.println("Fichero creado exitosamente.");
+            System.out.println("Fichero creado");
             
         } catch (IOException e) {
             e.printStackTrace();
