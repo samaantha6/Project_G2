@@ -35,6 +35,8 @@ public class WindowMaster {
         }
     }
     
+    
+    /*Comprobar campos vacios*/
     public static List<JTextField> camposVacios(JTextField... textFields) {
         List<JTextField> camposVacios = new ArrayList<>();
 
@@ -47,8 +49,11 @@ public class WindowMaster {
         return camposVacios;
     }
     
+    
+    
+    /*Cambiar el fondo de los campos vacíos a rojo*/
     public HashMap<JTextField, Color> cambiarFondoCampos(List<JTextField> campos) {
-        // Cambiar el fondo de los campos vacíos a rojo
+        
         for (JTextField campo : campos) {
         	fondosOriginales.put(campo, campo.getBackground());
             campo.setBackground(Color.RED);
