@@ -14,7 +14,9 @@ import java.awt.event.WindowEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +42,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 
 import domain.Envio;
 import domain.Pago;
@@ -109,6 +112,8 @@ public class VentanaHacerEnvio extends JFrame {
     
 	private double precioBase;
 	private JLabel campoPrecio;
+	
+	private JDateChooser dateChooser;
     
 	private Logger logger = Logger.getLogger(VentanaHacerEnvio.class.getName());
 	
@@ -292,6 +297,7 @@ public class VentanaHacerEnvio extends JFrame {
 		logger.info("JLabels de tab 'COMO' creados");
 		
 		campoFenvio = new JTextField(10);
+		campoFenvio.setEditable(false);
 		logger.info("JTextFields de tab 'COMO' creado");
 		
 		radPtoRecog = new JRadioButton("Punto de recogida");
@@ -320,6 +326,9 @@ public class VentanaHacerEnvio extends JFrame {
 		
 		campoPrecio = new JLabel();
 		
+		dateChooser = new JDateChooser();
+		dateChooser.setDateFormatString("dd/MM/yyyy");
+		
 		recogidaGrupo.add(radPtoRecog);
 		recogidaGrupo.add(radUsoDir);
 		
@@ -328,7 +337,7 @@ public class VentanaHacerEnvio extends JFrame {
 		tipoEnvioGrupo.add(radSuper);
 		
 		pFEnvio.add(txtFEnvio);
-		pFEnvio.add(campoFenvio);
+		pFEnvio.add(dateChooser);
 		pFEnvio.add(txtCasoRecog);
 		
 		pRecog2.add(radPtoRecog);
@@ -851,7 +860,20 @@ public class VentanaHacerEnvio extends JFrame {
 			}
 		});
 		
-		
+		dateChooser.getDateEditor().setEnabled(false);
+		dateChooser.getDateEditor().addPropertyChangeListener(e -> {
+            if ("date".equals(e.getPropertyName())) {
+                Date date = dateChooser.getDate();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                if (date != null && date.before(new Date())) {
+                    JOptionPane.showMessageDialog(null, "La fecha seleccionada es anterior a la actual", "Error", JOptionPane.ERROR_MESSAGE);
+                    campoFenvio.setText(sdf.format(date));
+                    
+                } else {
+                    campoFenvio.setText(sdf.format(date));
+                }
+            }
+        });
 		
 		
 		setTitle("Hacer envío");
