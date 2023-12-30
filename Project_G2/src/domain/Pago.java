@@ -8,10 +8,10 @@ public class Pago {
 	String CVV;
 	String remitenteDestinatario;
 	String factura;
-	String DNI;
+	String Dni;
 	
 	public Pago(String descripcion, String numeroTrajeta, String fechaCaducidad, String CVV,
-			String remitenteDestinatario, String factura, String DNI) {
+			String remitenteDestinatario, String factura, String Dni) {
 		super();
 		this.descripcion = descripcion;
 		this.numeroTrajeta = numeroTrajeta;
@@ -19,15 +19,15 @@ public class Pago {
 		this.CVV = CVV;
 		this.remitenteDestinatario = remitenteDestinatario;
 		this.factura = factura;
-		this.DNI = DNI;
+		this.Dni = Dni;
 	}
 
-	public Pago(String descripcion, String remitenteDestinatario, String factura, String DNI) {
+	public Pago(String descripcion, String remitenteDestinatario, String factura, String Dni) {
 		super();
 		this.descripcion = descripcion;
 		this.remitenteDestinatario = remitenteDestinatario;
 		this.factura = factura;
-		this.DNI = DNI;
+		this.Dni = Dni;
 	}
 
 	public String getDescripcion() {
@@ -78,18 +78,18 @@ public class Pago {
 		this.remitenteDestinatario = remitenteDestinatario;
 	}
 
-	public String getDNI() {
-		return DNI;
+	public String getDni() {
+		return Dni;
 	}
 
-	public void setDNI(String DNI) {
-		this.DNI = DNI;
+	public void setDni(String Dni) {
+		this.Dni = Dni;
 	}
 
 	@Override
 	public String toString() {
 		return "Pago [descripcion=" + descripcion + ", numeroTrajeta=" + numeroTrajeta + ", fechaCaducidad="
-				+ fechaCaducidad + ", CVV=" + CVV + ", remitenteDestinatario=" + remitenteDestinatario + ", DNI=" + DNI
+				+ fechaCaducidad + ", CVV=" + CVV + ", remitenteDestinatario=" + remitenteDestinatario + ", Dni=" + Dni
 				+ "]";
 	}
 	

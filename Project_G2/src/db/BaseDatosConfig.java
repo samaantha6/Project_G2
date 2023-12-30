@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import domain.Pago;
+import domain.Paquete;
+import domain.Recogida;
+import domain.Trayecto;
+
 
 public class BaseDatosConfig {
 	
@@ -61,16 +66,22 @@ public class BaseDatosConfig {
 	
 	
 	public static void crearTablas(Connection con) {
-		String sql = "CREATE TABLE IF NOT EXISTS Persona (dni String, nom String)";
-		String sql2 = "CREATE TABLE IF NOT EXISTS Articulo (id Integer, precio Double)";
-		String sql3 = "CREATE TABLE IF NOT EXISTS Compra(dni String, id Integer, unidades Integer, fecha String, idC Integer)";
-		/*ESTAS TRES SON EJEMPLOS DE UN EJERCICIO, HAY QUE CAMBIARLAS POR LAS NUESTRAS*/
+		String sql = "CREATE TABLE IF NOT EXISTS Usuario (nombre String, apellido String, telefono String, correo String, respuesta String, preguntaSeg String, contrasenia String)";
+		String sql2 = "CREATE TABLE IF NOT EXISTS Pago (descripcion String, numeroTarjeta String, fechaCaducudad String, CVV String, remitenteDestinatario String, factura String, Dni String)";
+		String sql3 = "CREATE TABLE IF NOT EXISTS Paquete (nReferencia String, embalaje String, peso String, largo String, ancho String, alto String, valor String, fragil String)";
+		String sql4 = "CREATE TABLE IF NOT EXISTS Recogida (fechaRecogida String, lugarDeRecogida String, tipoDeEnvio String)";
+		String sql5 = "CREATE TABLE IF NOT EXISTS Trayecto (nombreOrigen String, direccionOrigen String, telefonoOrigen String, nombreDestino String, direccionDestino String, telefonoDestino String)";
+		String sql6 = "CREATE TABLE IF NOT EXISTS Envio (direccionOrigen String, direccionDestinoString, nReferencia String, fechaRecogida String, Dni String)";
+
 		
 		try {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
 			st.executeUpdate(sql2);
 			st.executeUpdate(sql3);
+			st.executeUpdate(sql4);
+			st.executeUpdate(sql5);
+			st.executeUpdate(sql6);
 			st.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
