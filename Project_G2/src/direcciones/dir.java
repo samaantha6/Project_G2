@@ -3,6 +3,7 @@ package direcciones;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class dir {
 
@@ -55,8 +56,8 @@ public class dir {
 
 
         };
-
-        String rutaFich = "provincias_direcciones.txt";
+        
+        String rutaFich = "resources//provincias_direcciones.txt";
         
        
 
