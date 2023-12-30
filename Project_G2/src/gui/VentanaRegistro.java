@@ -75,9 +75,13 @@ public class VentanaRegistro extends JFrame{
 	private JPasswordField campoContrasenia, campoVenificaCon;
 	
     public List<Usuario> usuarios = new ArrayList<>();
+
+    private HashMap<JTextField, Color> campoCambiados, campoContraniasCam;
     
     private boolean esOjoAbierto = false;
     private boolean esOjoAbiertoVen = false;
+    
+    private List<JTextField> todosLosCampos, camposContrasenias;
 	
 	private  String contrasenia;
 	private String contraseniaVen;
@@ -93,6 +97,9 @@ public class VentanaRegistro extends JFrame{
 	public VentanaRegistro(List<Usuario> usuariosS) {
 		
 		usuarios = usuariosS;
+		
+		todosLosCampos = new ArrayList<>();
+		camposContrasenias = new ArrayList<>();
 		
 		pNorte = new JPanel(new BorderLayout());
 		pCentro = new JPanel(new GridLayout(4,2));
@@ -162,7 +169,21 @@ public class VentanaRegistro extends JFrame{
 		pregSeg.addItem("¿Cuál es tu película favorita?");
 		logger.info("JComboBox creado");
 		
+		todosLosCampos.add(campoApellido);
+		todosLosCampos.add(campoContrasenia1);
+		todosLosCampos.add(campoCorreo);
+		todosLosCampos.add(campoNombre);
+		todosLosCampos.add(campoReg);
+		todosLosCampos.add(campoRespuesta);
+		todosLosCampos.add(campoTelefono);
+		todosLosCampos.add(campoVenificaCon1);
+		todosLosCampos.add(campoContrasenia);
+		todosLosCampos.add(campoVenificaCon);
 		
+		camposContrasenias.add(campoContrasenia);
+		camposContrasenias.add(campoContrasenia1);
+		camposContrasenias.add(campoVenificaCon);
+		camposContrasenias.add(campoVenificaCon1);
 		
 		pNombre.add(txtNombre);
 		pNombre.add(campoNombre);
@@ -237,6 +258,7 @@ public class VentanaRegistro extends JFrame{
                 String preguntaSeguridad = pregSeg.getSelectedItem().toString();
                 
                 if (contrasenia.equals(contraseniaVen)) {
+                	windowMaster.restaurarFondo(campoContraniasCam);
                 	List<JTextField> camposVacios = windowMaster.camposVacios(windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoContrasenia, esOjoAbierto), windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVenificaCon, esOjoAbiertoVen));
                 	Map<JTextField, Color> fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
                 	
@@ -253,37 +275,19 @@ public class VentanaRegistro extends JFrame{
                 		if (windowMaster.verificarDominio(correo).equals("Cliente")) {
                 			campoCorreo.setBackground(UIManager.getColor("TextField.background"));
                 			if (usuarioExistente) {
-                            	campoContrasenia.setBackground(Color.RED);
-                            	campoContrasenia1.setBackground(Color.RED);
-                            	campoVenificaCon.setBackground(Color.RED);
-                            	campoVenificaCon1.setBackground(Color.RED);
-                    			campoCorreo.setBackground(Color.RED);
-                    			campoApellido.setBackground(Color.RED);
-                    			campoReg.setBackground(Color.RED);
-                    			campoTelefono.setBackground(Color.RED);
-                    			campoNombre.setBackground(Color.RED);
-                    			campoRespuesta.setBackground(Color.RED);
-                    			
+                				campoCambiados = windowMaster.cambiarFondoCampos(todosLosCampos);
                 				JOptionPane.showMessageDialog(null, "El usuario no es valido.", "Error", JOptionPane.ERROR_MESSAGE);
                 			} else {
-                            	campoContrasenia.setBackground(UIManager.getColor("TextField.background"));
-                            	campoContrasenia1.setBackground(UIManager.getColor("TextField.background"));
-                            	campoVenificaCon.setBackground(UIManager.getColor("TextField.background"));
-                            	campoVenificaCon1.setBackground(UIManager.getColor("TextField.background"));
-                    			campoCorreo.setBackground(UIManager.getColor("TextField.background"));
-                    			campoApellido.setBackground(UIManager.getColor("TextField.background"));
-                    			campoReg.setBackground(UIManager.getColor("TextField.background"));
-                    			campoTelefono.setBackground(UIManager.getColor("TextField.background"));
-                    			campoNombre.setBackground(UIManager.getColor("TextField.background"));
-                    			campoRespuesta.setBackground(UIManager.getColor("TextField.background"));
+                            	windowMaster.restaurarFondo(campoCambiados);
                     			
-                    			if (condiciones.isSelected()) {
+                    			if (condiciones.isSelected() && windowMaster.esNumero(campoTelefono, "Telefono")) {
                     				aceptarCond.setBackground(UIManager.getColor("TextField.background"));
                     				Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
                     				usuarios.add(nuevoUsuario);
                     				JOptionPane.showMessageDialog(null, "Registro exitoso.", "Información", JOptionPane.INFORMATION_MESSAGE);
                     				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, nuevoUsuario);
                     				dispose();
+                    			} else if (windowMaster.esNumero(campoTelefono, "Telefono") == false) {
                     			} else {
                     				aceptarCond.setBackground(Color.RED);
                     				JOptionPane.showMessageDialog(null, "Desbes acceptar los terminos y condiciones.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -298,10 +302,7 @@ public class VentanaRegistro extends JFrame{
                     	JOptionPane.showMessageDialog(null, "No te puedes registrar con un correo de empleado.", "Error", JOptionPane.ERROR_MESSAGE);
                 	}
                 } else {
-                	campoContrasenia.setBackground(Color.RED);
-                	campoContrasenia1.setBackground(Color.RED);
-                	campoVenificaCon.setBackground(Color.RED);
-                	campoVenificaCon1.setBackground(Color.RED);
+                	campoContraniasCam = windowMaster.cambiarFondoCampos(camposContrasenias);
                 	
                 	JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
