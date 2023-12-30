@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -97,12 +98,16 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private Pago pago;
 	
+	private double precioFinal;
+	
     private List<Usuario> usuarios = new ArrayList<>();
     
     private Usuario usuario;
     
 	private Thread hilo;
 	private boolean hiloEjecutando;
+	
+	private DecimalFormat formato = new DecimalFormat("#.##");
     
 	private WindowMaster windowMaster = new WindowMaster();
 	
@@ -563,7 +568,7 @@ public class VentanaHacerEnvio extends JFrame {
 
 				public void run() {
 					while(hiloEjecutando) {
-
+						
 					}
 				}
 				};
@@ -669,7 +674,7 @@ public class VentanaHacerEnvio extends JFrame {
 								}								
 								campoEnDesde.setText(direccionOrigen);
 								campoEnHasta.setText(direccionDestino);
-								campoPago.setText(direccionDestino);
+								campoPago.setText(formato.format(precioFinal));
 								campoRevLargo.setText(largo);
 								campoRevAncho.setText(ancho);
 								campoRevAlto.setText(alto);
@@ -815,14 +820,23 @@ public class VentanaHacerEnvio extends JFrame {
 			}
 		});
 		
-		
-		
+		radContrareembolso.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				campoTarj.setText("");
+				campoFTarj.setText("");
+				campoCVV.setText("");
+				campoTarj.setEditable(false);
+				campoFTarj.setEditable(false);
+				campoCVV.setEditable(false);
+			}
+		});
 		
 		radEstandar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					double precioFinal = precioBase;
+					precioFinal = precioBase;
 					precioFinal += 2.99;
 		            campoPrecio.setText(precioFinal + "€");
 		            
@@ -837,7 +851,7 @@ public class VentanaHacerEnvio extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					
-					double precioFinal = precioBase;			    			    				    	
+					precioFinal = precioBase;			    			    				    	
 					precioFinal += 3.99;
 		            campoPrecio.setText(precioFinal + "€");
 		            
@@ -851,7 +865,7 @@ public class VentanaHacerEnvio extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					double precioFinal = precioBase;
+					precioFinal = precioBase;
 					precioFinal += 7.99;
 		            campoPrecio.setText(precioFinal + "€");
 		            

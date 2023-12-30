@@ -68,7 +68,6 @@ public class WindowMaster {
             }
         }
     }
-    //new String(contraseniaPasswordField.getPassword()
     public JTextField distinguirCampoContrasenia(JTextField contraseniaTextField, JPasswordField contraseniaPasswordField, boolean distincion) {
     	if (distincion) {
         	return contraseniaTextField;
