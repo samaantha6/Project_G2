@@ -144,7 +144,7 @@ import java.util.logging.Logger;
 			btnatras.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					VentanaInicio VI = new VentanaInicio(usuarios, usuario);
+					SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios,usuario));
 					dispose();	
 						    
 				}

@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import domain.Usuario;
@@ -186,7 +187,7 @@ public class VentanaInicio extends JFrame{
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
+				SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuarios));
 				dispose();			
 			}
 		});
@@ -194,7 +195,7 @@ public class VentanaInicio extends JFrame{
 		btnModificar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaModificarDatos ventanaMD = new VentanaModificarDatos(usuarios, aIniciadoSesion, usuario);
+				SwingUtilities.invokeLater(() -> new VentanaModificarDatos(usuarios, aIniciadoSesion, usuario));
 				dispose();			
 			}
 		});
@@ -202,7 +203,7 @@ public class VentanaInicio extends JFrame{
 		btnFac.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaFacturacion ventanaFac = new VentanaFacturacion(usuarios, usuario);
+				SwingUtilities.invokeLater(() -> new VentanaFacturacion(usuarios, usuario));
 				dispose();			
 			}
 		});
@@ -210,7 +211,7 @@ public class VentanaInicio extends JFrame{
 		btnHacerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio(usuarios, usuario);
+				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuarios, usuario));
 				dispose();			
 			}
 		});
@@ -218,7 +219,7 @@ public class VentanaInicio extends JFrame{
 		btnVerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaVerEnvios ventanaVerEnvios = new VentanaVerEnvios(usuarios, usuario);
+				SwingUtilities.invokeLater(() -> new VentanaVerEnvios(usuarios, usuario));
 				dispose();			
 			}
 		});
@@ -237,7 +238,7 @@ public class VentanaInicio extends JFrame{
 				} else if (largo2.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					VentanaPresupuesto ventanaPresupuesto = new VentanaPresupuesto(usuarios, usuario, VentanaInicio.this);
+					SwingUtilities.invokeLater(() -> new VentanaPresupuesto(usuarios, usuario, VentanaInicio.this));
 					dispose();		
 					
 					

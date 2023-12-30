@@ -34,6 +34,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentListener;
@@ -218,7 +219,7 @@ public class VentanaRegistro extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
+				SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuarios));
 				dispose();			
 			}
 		});

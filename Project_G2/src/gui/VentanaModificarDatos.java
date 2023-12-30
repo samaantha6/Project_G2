@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import domain.Usuario;
 
@@ -218,13 +219,13 @@ public class VentanaModificarDatos extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (aIniciadoSesion) {
-					VentanaInicio ventanaInicio = new VentanaInicio(usuarios, usuario);
+					SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios, usuario));
 					hiloEjecutando = false;
 
 					dispose();
 				
 				} else {
-					VentanaInicioSesion ventanaIS = new VentanaInicioSesion(usuarios);
+					SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuarios));
 					hiloEjecutando = false;
 					dispose();
 				}
@@ -261,7 +262,7 @@ public class VentanaModificarDatos extends JFrame{
     	        			usuario.setTelefono(telefono);
     	        			usuario.setNombre(nombre);
         	            	System.out.println(usuario);
-    	        			VentanaInicio ventanaInicio = new VentanaInicio(usuarios, usuario);
+    	        			SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios, usuario));
     						hiloEjecutando = false;
     	        			JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     	        			dispose();

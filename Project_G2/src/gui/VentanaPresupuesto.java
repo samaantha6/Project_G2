@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import domain.Usuario;
@@ -193,7 +194,7 @@ public class VentanaPresupuesto extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, usuario);
+				SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios, usuario));
 				dispose();			
 			}
 		});
@@ -201,7 +202,7 @@ public class VentanaPresupuesto extends JFrame{
 		btnHacerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio(usuarios, usuario);
+				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuarios, usuario));
 				dispose();			
 			}
 		});

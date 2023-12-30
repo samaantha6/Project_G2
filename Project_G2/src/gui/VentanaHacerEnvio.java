@@ -36,6 +36,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import com.toedter.calendar.JCalendar;
@@ -672,7 +673,7 @@ public class VentanaHacerEnvio extends JFrame {
 						        			JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Aceptar", "Rechazar"}, "Aceptar");
 						        	if (seguro == JOptionPane.OK_OPTION) {
 						        		Envio envio = new Envio(trayecto, paquete, recogida, pago);
-										VentanaInicio VI = new VentanaInicio(usuarios, usuario);
+										SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios,usuario));
 										dispose();
 						        	}
 								} else {
@@ -800,7 +801,7 @@ public class VentanaHacerEnvio extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio VI = new VentanaInicio(usuarios, usuario);
+				SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios,usuario));
 				dispose();			
 			}
 		});
@@ -818,7 +819,6 @@ public class VentanaHacerEnvio extends JFrame {
 		            
 				} catch (NumberFormatException e2) {
 					campoPrecio.setText("Error");
-					
 				}
 			}
 		});
@@ -834,7 +834,6 @@ public class VentanaHacerEnvio extends JFrame {
 		            
 				} catch (NumberFormatException e2) {
 					campoPrecio.setText("Error");
-					
 				}
 			}
 		});
@@ -848,9 +847,7 @@ public class VentanaHacerEnvio extends JFrame {
 		            campoPrecio.setText(precioFinal + "€");
 		            
 				} catch (NumberFormatException e2) {
-					campoPrecio.setText("Error");
-					
-				}
+					campoPrecio.setText("Error");}
 			}
 		});
 		

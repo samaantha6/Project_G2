@@ -40,11 +40,10 @@ public class Principal {
 			e1.printStackTrace();
 		}
 		
-		SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuarios));
-
-		
 		Connection con = BaseDatosConfig.initBD("hermes.db");
 		BaseDatosConfig.crearTablas(con);
 		BaseDatosConfig.closeBD(con);
+		
+		SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuarios));
 	}
 }

@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -124,7 +125,7 @@ public class VentanaVerEnvios extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, usuario);
+				SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios, usuario));
 				dispose();			
 			}
 		});
@@ -132,7 +133,7 @@ public class VentanaVerEnvios extends JFrame{
 		btnEditar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaHacerEnvio ventanaHacerEnvio = new VentanaHacerEnvio(usuarios, usuario);
+				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuarios, usuario));
 				dispose();			
 			}
 		});

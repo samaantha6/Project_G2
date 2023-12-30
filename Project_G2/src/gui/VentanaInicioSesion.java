@@ -161,7 +161,7 @@ public class VentanaInicioSesion extends JFrame{
             	
             	if (credencialesCorrectas) {
                 	JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
-                	VentanaGestionEmpleados VGE = new VentanaGestionEmpleados(usuarios, usuario);
+                	SwingUtilities.invokeLater(() -> new VentanaGestionEmpleados(usuarios, usuario));
     				dispose();
             	} else {
                 	JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
@@ -169,7 +169,7 @@ public class VentanaInicioSesion extends JFrame{
             } else if (windowMaster.verificarDominio(correo).equals("Cliente")) {
             	if (credencialesCorrectas) {
                 	JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
-    				VentanaInicio VI = new VentanaInicio(usuarios, usuario);
+    				SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios, usuario));		
     				dispose();
             	} else {
                 	JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
@@ -185,7 +185,7 @@ public class VentanaInicioSesion extends JFrame{
 	btnReg.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			VentanaRegistro VR = new VentanaRegistro(usuarios);
+			SwingUtilities.invokeLater(() -> new VentanaRegistro(usuarios));
 			dispose();			
 		}
 	});
