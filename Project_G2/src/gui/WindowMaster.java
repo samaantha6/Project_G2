@@ -23,9 +23,7 @@ public class WindowMaster {
                 return "Empleado";
             } else if (correoUsuario.endsWith(dominio.getDominio())) {
                 return "Cliente";
-            } else {
-                return "Desconocido";
-            }
+            } 
         }
 		return "Desconocido";
     }
