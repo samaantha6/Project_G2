@@ -3,6 +3,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -24,7 +25,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,16 +41,19 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
-
 import domain.Envio;
 import domain.Pago;
 import domain.Paquete;
 import domain.Recogida;
 import domain.Trayecto;
 import domain.Usuario;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class VentanaHacerEnvio extends JFrame {
 	
@@ -314,7 +317,6 @@ public class VentanaHacerEnvio extends JFrame {
 		logger.info("JRadioButton de tab 'COMO' creados");
 		
 		comboRecog = new JComboBox<String>();
-		comboRecog.addItem("ejemplo");
 		logger.info("JComboBox de tab 'COMO' creados");
 		
 		tipoEnvioGrupo = new ButtonGroup();
@@ -810,6 +812,41 @@ public class VentanaHacerEnvio extends JFrame {
                 
                 
 
+        		/*para meter las direcciones en el JCombobox*/
+        		String ruta = "resources//provincias_direcciones.txt";
+        		try {
+                    File provYDir = new File(ruta);
+                    FileReader fr = new FileReader(provYDir);
+                    BufferedReader br = new BufferedReader(fr);
+
+                    String linea;
+                    while ((linea = br.readLine()) != null) {
+
+                    	Scanner sc = new Scanner(linea);
+                        sc.useDelimiter(";");
+                        
+                        String provincia = sc.next();
+                        String establecimiento = sc.next();
+                        
+                        
+
+                        if (pestañaActual == 2) {
+                        	
+                        	if (campoDir.getText().contains(provincia)) {
+                        		comboRecog.addItem(establecimiento);
+                        	} else {
+                        		
+                        	}
+                        		
+                        } else {
+                        	comboRecog.removeAllItems();
+                        }
+                    }
+
+                    br.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 		
@@ -889,6 +926,12 @@ public class VentanaHacerEnvio extends JFrame {
                 }
             }
         });
+		
+		
+		
+		
+
+		
 		
 		
 		setTitle("Hacer envío");
@@ -986,5 +1029,10 @@ public class VentanaHacerEnvio extends JFrame {
             return 11;
         }
     }
+	
+	
+		 
+    
+	
     
 }
