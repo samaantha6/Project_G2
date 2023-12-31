@@ -89,7 +89,7 @@ public class Paquete {
 
 	@Override
 	public String toString() {
-		return "Envio [nReferencia=" + nReferencia + ", embalaje=" + embalaje + ", peso=" + peso + ", largo=" + largo
+		return "Paquete [nReferencia=" + nReferencia + ", embalaje=" + embalaje + ", peso=" + peso + ", largo=" + largo
 				+ ", ancho=" + ancho + ", alto=" + alto + ", valor=" + valor + ", fragil=" + fragil + "]";
 	}
 	

@@ -26,7 +26,6 @@ public class Principal {
 	public static void main(String[] args) {
 		
 	    List<Usuario> usuarios = new ArrayList<>();
-	    List<Envio> envios = new ArrayList<>();
 	    Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
 
 	    usuarios.add(new Usuario("b", "b", "b", "@gmail.com", "b", "b", "b"));
@@ -34,17 +33,16 @@ public class Principal {
 	    usuarios.add(new Usuario("a", "a", "a", "@hermes.es", "a", "a", "a"));
 	    usuarios.add(new Usuario("", "", "", "", "", "", ""));
 	    
-    	Pago pago = new Pago("a", "a", "a", "a");
+    	Pago pago = new Pago("a", "a", "a", "a", "a");
     	Paquete paquete = new Paquete("b", "b", "b", "b", "b", "b", "b", "b");
     	Recogida recogida = new Recogida("c", "c", "c");
     	Trayecto trayecto = new Trayecto("d", "d", "d", "d", "d", "d", "d", "d");
         Envio envio = new Envio(trayecto, paquete, recogida, pago);
-        envios.add(envio);
-        envios.add(envio);
-	    
+        
 	    for (Usuario usuario : usuarios) {
-	    	usuariosPorEnvios.put(usuario, envios);
+	    	usuariosPorEnvios.put(usuario, new ArrayList<>());
         }
+	    
 			
 		/**Cargamos la configuración del logger*/
 		try {

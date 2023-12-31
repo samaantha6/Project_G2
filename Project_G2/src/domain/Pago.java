@@ -9,9 +9,10 @@ public class Pago {
 	String remitenteDestinatario;
 	String factura;
 	String Dni;
+	String precio;
 	
 	public Pago(String descripcion, String numeroTrajeta, String fechaCaducidad, String CVV,
-			String remitenteDestinatario, String factura, String Dni) {
+			String remitenteDestinatario, String factura, String Dni, String precio) {
 		super();
 		this.descripcion = descripcion;
 		this.numeroTrajeta = numeroTrajeta;
@@ -20,14 +21,16 @@ public class Pago {
 		this.remitenteDestinatario = remitenteDestinatario;
 		this.factura = factura;
 		this.Dni = Dni;
+		this.precio = precio;
 	}
 
-	public Pago(String descripcion, String remitenteDestinatario, String factura, String Dni) {
+	public Pago(String descripcion, String remitenteDestinatario, String factura, String Dni, String precio) {
 		super();
 		this.descripcion = descripcion;
 		this.remitenteDestinatario = remitenteDestinatario;
 		this.factura = factura;
 		this.Dni = Dni;
+		this.precio = precio;
 	}
 
 	public String getDescripcion() {
@@ -85,12 +88,20 @@ public class Pago {
 	public void setDni(String Dni) {
 		this.Dni = Dni;
 	}
+	
+	public String getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(String precio) {
+		this.precio = precio;
+	}
 
 	@Override
 	public String toString() {
 		return "Pago [descripcion=" + descripcion + ", numeroTrajeta=" + numeroTrajeta + ", fechaCaducidad="
 				+ fechaCaducidad + ", CVV=" + CVV + ", remitenteDestinatario=" + remitenteDestinatario + ", Dni=" + Dni
-				+ "]";
+				+ ", precio= "+ precio + "]";
 	}
 	
 }

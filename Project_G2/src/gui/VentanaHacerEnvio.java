@@ -672,9 +672,9 @@ public class VentanaHacerEnvio extends JFrame {
 								radTarj.setOpaque(false);
 								radContrareembolso.setOpaque(false);
 								if (radTarj.isSelected()) {
-									pago = new Pago(descripcion, numeroTrajeta, fechaCaducidad, CVV, remitenteDestinatario, factura, DNI);
+									pago = new Pago(descripcion, numeroTrajeta, fechaCaducidad, CVV, remitenteDestinatario, factura, DNI, Double.toString(precioFinal));
 								} else {
-									pago = new Pago(descripcion, remitenteDestinatario, factura, DNI);
+									pago = new Pago(descripcion, remitenteDestinatario, factura, DNI, Double.toString(precioFinal));
 								}								
 								campoEnDesde.setText(direccionOrigen);
 								campoEnHasta.setText(direccionDestino);
@@ -691,15 +691,8 @@ public class VentanaHacerEnvio extends JFrame {
 						        			JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Aceptar", "Rechazar"}, "Aceptar");
 						        	if (seguro == JOptionPane.OK_OPTION) {
 						        		Envio envio = new Envio(trayecto, paquete, recogida, pago);
-						        	    for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
-						                    Usuario usuarioO = UsuarioYenvios.getKey();
-						                    List<Envio> envios = UsuarioYenvios.getValue();
-						                    if (usuarioO.equals(usuario)) {
-						                    	envios.add(envio);
-						                    	usuariosPorEnvios.put(usuario, envios);
-						                        break;
-						                    }
-						                }
+						        		List<Envio> envios = usuariosPorEnvios.get(usuario);
+						        		envios.add(envio);
 										SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios,usuario));
 										dispose();
 						        	}

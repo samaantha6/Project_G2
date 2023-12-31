@@ -105,7 +105,6 @@ public class VentanaInicioSesion extends JFrame{
 	
 	pNorte.add(pNorteIzq,BorderLayout.EAST);
 	pNorte.add(pNorteDer,BorderLayout.WEST);
-	//añadir imagen
 	
 	pCentroDer.add(txtCorreo);
 	pCentroDer.add(campoCorreo);

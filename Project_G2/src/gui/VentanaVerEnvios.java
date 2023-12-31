@@ -78,15 +78,7 @@ public class VentanaVerEnvios extends JFrame{
 		
 		/**CREACION JTABLE*/
         String[] nombreColumnas = {"Nº referencia", "Fecha", "Precio", "Descripción", "Estado", "Fecha prevista"};
-        //son ejemplos
-        Object[][] data = {
-                {"001", "2023-10-28", "$100", "Producto 1", "Activo", "2023-10-30"},
-                {"002", "2023-10-29", "$150", "Producto 2", "Inactivo", "2023-11-05"},
-                {"003", "2023-11-01", "$75", "Producto 3", "Activo", "2023-11-03"},
-                {"004", "2023-11-04", "$200", "Producto 4", "Inactivo", "2023-11-10"},
-                {"005", "2023-11-12", "$120", "Producto 5", "Activo", "2023-11-15"}
-            };
-        modeloTabla = new DefaultTableModel(data, nombreColumnas);
+        modeloTabla = new DefaultTableModel(null, nombreColumnas);
 
         tablaEnvios = new JTable(modeloTabla);
         logger.info("Jtable creada");
@@ -124,6 +116,8 @@ public class VentanaVerEnvios extends JFrame{
 		add(pCentro, BorderLayout.CENTER);
 		
 /** EVENTOS */
+		
+		cargarDatosEnTabla(usuariosPorEnvios);
 		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
@@ -164,8 +158,17 @@ public class VentanaVerEnvios extends JFrame{
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 	
-			public void agregarFila(Object[] nuevaFila) {
-				modeloTabla.addRow(nuevaFila);
-		    }
+    private void cargarDatosEnTabla(Map<Usuario, List<Envio>> usuariosPorEnvios) {
+    	Object[] rowData;
+        for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
+            Usuario usuario = UsuarioYenvios.getKey();
+            List<Envio> envios = UsuarioYenvios.getValue();
+            for (Envio envio : envios) {
+            	rowData = new Object[]{envio.getPaquete().getnReferencia(), envio.getRecogida().getFechaDeEnvio(), envio.getPago().getPrecio(), envio.getPago().getDescripcion(), "En reparto", ""};
+                ((DefaultTableModel) tablaEnvios.getModel()).addRow(rowData);
+            }
+        }
+    }
+	
 			
 }
