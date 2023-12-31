@@ -177,86 +177,83 @@ import java.util.logging.Logger;
 					
 					
 					if (guardarComo == JFileChooser.APPROVE_OPTION) {
-			            try {
+						PDDocument doc = new PDDocument();
+				    	PDPage page = new PDPage();
+				    	doc.addPage(page);
+				    	
+			            try  {
+			            	PDPageContentStream contentStream = new PDPageContentStream(doc, page);
 			                String fpath = guardar.getSelectedFile().getAbsolutePath();
 			                
 			                if (!fpath.toLowerCase().endsWith(".pdf")) {
 			                    fpath += ".pdf";
 			                }
 
-			                PDDocument doc = new PDDocument();
-					    	PDPage page = new PDPage();
-					    	doc.addPage(page);
-
-			                try (PDPageContentStream contentStream = new PDPageContentStream(doc, page)) {
-			                	contentStream.beginText();
-					    		contentStream.setFont(fuente, 12);
+			                contentStream.beginText();
+					    	contentStream.setFont(fuente, 12);
 					    	    
-				                String precio = nPrecio.getText();
-				                String descripcion = nDesc.getText();
-				                String estado = nEstado.getText();
-				                String pagado = nPagado.getText();
-				                String referencia = nRef.getText();
+				            String precio = nPrecio.getText();
+				            String descripcion = nDesc.getText();
+			                String estado = nEstado.getText();
+			                String pagado = nPagado.getText();
+			                String referencia = nRef.getText();
 				                
 				                
 				                
-				                /*ESCRIBE DE ARRIBA HACIA ABAJO*/
+				            /*ESCRIBE DE ARRIBA HACIA ABAJO*/
 				                		
 				                
-					    	    contentStream.newLineAtOffset(50,620);
-					    	    if (estado != null && !estado.isEmpty()) {
-					    	    	contentStream.showText("Estado: " + estado);
-					    	    } else {
-					    	        contentStream.showText("Estado: No disponible");
-					    	    }
+				    	    contentStream.newLineAtOffset(50,620);
+				    	    if (estado != null && !estado.isEmpty()) {
+				    	    	contentStream.showText("Estado: " + estado);
+				    	    } else {
+				    	        contentStream.showText("Estado: No disponible");
+				    	    }
+				    	    
+				    	    contentStream.newLine();
+				    	    
+				    	    
+				    	    contentStream.newLineAtOffset(0,30);
+				    	    if (pagado != null && !pagado.isEmpty()) {
+				    	    	contentStream.showText("¿Pagado?: " + pagado);
+				    	    } else {
+				    	        contentStream.showText("Pagado: No disponible");
+				    	    }
+				    	    
+				    	    contentStream.newLine();
+				    	    
+			                contentStream.newLineAtOffset(0,30);
+				    	    if (precio != null && !precio.isEmpty()) {
+				    	        contentStream.showText("Precio: " + precio);
+				    	    } else {
+				    	        contentStream.showText("Precio: No disponible");
+				    	    }
+				    	    
+				    	    contentStream.newLine();
+				    	    
+				    	    contentStream.newLineAtOffset(0,30);
+				    	    if (descripcion != null && !descripcion.isEmpty()) {
+				    	    	contentStream.showText("Descripción: " + descripcion);
+				    	    } else {
+				    	        contentStream.showText("Descripción: No disponible");
+				    	    }
+				    	    
+				    	    contentStream.newLine();
+				    	    
+				    	    contentStream.newLineAtOffset(0,40);
+				    	    contentStream.showText("FACTURA ENVIO CON Nº REFERENCIA:   " + referencia);
+				    	    contentStream.newLine();
 					    	    
-					    	    contentStream.newLine();
-					    	    
-					    	    
-					    	    contentStream.newLineAtOffset(0,30);
-					    	    if (pagado != null && !pagado.isEmpty()) {
-					    	    	contentStream.showText("¿Pagado?: " + pagado);
-					    	    } else {
-					    	        contentStream.showText("Pagado: No disponible");
-					    	    }
-					    	    
-					    	    contentStream.newLine();
-					    	    
-				                contentStream.newLineAtOffset(0,30);
-					    	    if (precio != null && !precio.isEmpty()) {
-					    	        contentStream.showText("Precio: " + precio);
-					    	    } else {
-					    	        contentStream.showText("Precio: No disponible");
-					    	    }
-					    	    
-					    	    contentStream.newLine();
-					    	    
-					    	    contentStream.newLineAtOffset(0,30);
-					    	    if (descripcion != null && !descripcion.isEmpty()) {
-					    	    	contentStream.showText("Descripción: " + descripcion);
-					    	    } else {
-					    	        contentStream.showText("Descripción: No disponible");
-					    	    }
-					    	    
-					    	    contentStream.newLine();
-					    	    
-
-					    	    contentStream.newLineAtOffset(0,40);
-					    	    contentStream.showText("FACTURA ENVIO CON Nº REFERENCIA:   " + referencia);
-					    	    contentStream.newLine();
-
-					    	    
-					    	    contentStream.endText();
-					    	    contentStream.close();
-					    	    
-					    	    doc.save(fpath);
-					    	    doc.close();
-					    	    
-					    	    
-
-					    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Exportación correcta");
-			            } 		                
-			              
+				    	    contentStream.endText();
+				    	    contentStream.close();
+				    	    
+				    	    doc.save(fpath);
+				    	    doc.close();
+				    	    
+				    	    
+				    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Exportación correcta");
+		                  
+		              
 			        } catch (IOException ex) {
 		                ex.printStackTrace();
 		                JOptionPane.showMessageDialog(VentanaFacturacion.this, "Error al exportar a PDF");
