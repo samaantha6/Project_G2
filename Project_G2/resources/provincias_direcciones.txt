@@ -1,0 +1,150 @@
+alava;Mercería Lourdes
+alava;Estanco del Bosque
+alava;Cafetería El Mirador
+albacete;Supermercado La Estrella
+albacete;Librería El Sabio
+albacete;Papelería La Pluma Dorada
+alicante;Panadería El Horno Mágico
+alicante;Tienda de Ropa Elegancia
+alicante;Joyería Brillante
+almería;Farmacia San José
+almería;Estanco El Humo
+almería;Mercería La Aguja de Oro
+asturias;Supermercado El Ahorro
+asturias;Panadería El Trigo Dorado
+asturias;Cafetería Aroma Fresco
+ávila;Librería La Imaginación
+ávila;Estanco del Puerto
+ávila;Tienda de Ropa Fashion City
+badajoz;Farmacia La Salud Total
+badajoz;Supermercado El Mercado Feliz
+badajoz;Cafetería La Buena Taza
+barcelona;Panadería El Horno Creativo
+barcelona;Librería La Página Dorada
+barcelona;Mercería La Lana Suave
+burgos;Estanco del Bosque
+burgos;Joyería Diamante Azul
+burgos;Cafetería La Vista al Mar
+cáceres;Panadería El Rincón del Pan
+cáceres;Supermercado El Ahorro Total
+cáceres;Tienda de Ropa Fashion Street
+cádiz;Mercería La Lana Creativa
+cádiz;Estanco del Humo Dulce
+cádiz;Librería La Imaginación Infinita
+cantabria;Farmacia La Salud Perfecta
+cantabria;Joyería La Joya Eterna
+cantabria;Panadería La Masa Dorada
+castellón;Cafetería El Café Aromático
+castellón;Supermercado La Canasta Feliz
+castellón;Tienda de Ropa Fashion Style
+ciudad real;Estanco del Aire Puro
+ciudad real;Mercería La Lana Colorida
+ciudad real;Librería La Página en Blanco
+córdoba;Panadería El Rincón del Panadero
+córdoba;Cafetería El Rincón del Café
+córdoba;Joyería La Perla del Oro
+cuenca;Farmacia La Salud Natural
+cuenca;Supermercado El Mercado Fresco
+cuenca;Tienda de Ropa Fashion Trends
+girona;Estanco del Aire Fresco
+girona;Mercería La Aguja Mágica
+girona;Tienda de Electrónica TechCity
+granada;Café de la Esquina
+granada;Librería Imaginaria
+granada;Supermercado Fresco y Feliz
+guadalajara;Estanco del Bosque Verde
+guadalajara;Joyería Diamante Brillante
+guadalajara;Panadería La Masa Dorada
+gipuzkoa;Mercería Color y Estilo
+gipuzkoa;Farmacia La Salud Perfecta
+gipuzkoa;Moda Elegante Boutique
+huelva;Restaurante Sabor Gourmet
+huelva;Estudio de Tatuajes Arte en Piel
+huelva;Peluquería Estilo Creativo
+huesca;Centro de Fitness ActivaMente
+huesca;Cafetería Aroma Fresco
+huesca;Tienda de Juguetes Sonrisas Infinitas
+islas baleares;Estanco del Humo Dulce
+islas baleares;Centro de Belleza Belleza Natural
+islas baleares;Supermercado EcoVida
+jaén;Gimnasio Fuerza y Forma
+jaén;Panadería El Rincón del Panadero
+jaén;Boutique de Moda ChicStyle
+la coruña;Librería La Página en Blanco
+la coruña;Mercería Hilos y Colores
+la coruña;Cafetería El Rincón del Café
+la rioja;Estudio de Arte Pinceladas Creativas
+la rioja;Estanco del Aire Fresco
+la rioja;Joyas Exclusivas JoyaMía
+las palmas;Farmacia Salud y Bienestar
+las palmas;Supermercado Delicias Saludables
+las palmas;Peluquería Glamour Total
+león;Tienda de Ropa Trendy Fashion
+león;Cafetería La Buena Taza
+león;Librería de Ciencia Ficción Cosmos Literario
+lérida;Panadería El Horno Creativo
+lérida;Estanco del Aire Puro
+lérida;Bazar Variado Todo en Uno
+lugo;Galería de Arte Visiones Creativas
+lugo;Supermercado La Canasta Feliz
+lugo;Cafetería Sabor y Aromas
+madrid;Estudio de Fotografía Instantánea
+madrid;Boutique de Zapatos Pies de Ensueño
+madrid;Librería de Historia y Misterio
+málaga;Centro de Yoga Serenidad
+málaga;Peluquería Cortes de Autor
+málaga;Panadería Artesanal El Sabor del Pan
+murcia;Estanco del Bosque Encantado
+murcia;Tienda de Tecnología Innovatech
+murcia;Cafetería Delicias del Café
+navarra;Moda Juvenil Trendy Teens
+navarra;Boutique de Moda Elegante Glamour
+navarra;Librería de Aventuras Literarias
+ourense;Supermercado Frescura Natural
+ourense;Cafetería Aroma Celestial
+ourense;Estudio de Arte Pinturas Vivas
+palencia;Tienda de Electrónica TechWorld
+palencia;Joyería Estilo Radiante
+palencia;Panadería El Sabor del Trigo
+pontevedra;Mercería Hilos y Encajes
+pontevedra;Gimnasio Fitness Activo
+pontevedra;Estanco del Bosque Encantado
+salamanca;Café del Bulevar
+salamanca;Centro de Belleza Bella Imagen
+salamanca;Farmacia Salud y Vida
+santa cruz de tenerife;Moda Urbana StreetStyle
+santa cruz de tenerife;Restaurante Sazón del Chef
+santa cruz de tenerife;Estudio de Tatuajes Arte en Tinta
+segovia;Peluquería Estilo Moderno
+segovia;Boutique de Ropa ChicStyle
+segovia;Librería La Imaginación Despierta
+sevilla;Supermercado EcoVida
+sevilla;Cafetería Sabor y Aromas
+sevilla;Panadería La Masa Dorada
+soria;Estanco del Aire Puro
+soria;Centro de Fitness Energía Total
+soria;Tienda de Juguetes Sonrisas Infinitas
+tarragona;Galería de Arte Visiones Creativas
+tarragona;Joyas Exclusivas Diamante Azul
+tarragona;Farmacia La Salud Perfecta
+teruel;Bazar Variado Todo en Uno
+teruel;Panadería El Rincón del Panadero
+teruel;Boutique de Zapatos Pies de Ensueño
+toledo;Librería de Ciencia Ficción Cosmos Literario
+toledo;Cafetería Delicias del Café
+toledo;Estudio de Fotografía Instantánea
+valencia;Estanco del Aire Fresco
+valencia;Peluquería Cortes de Autor
+valencia;Supermercado Delicias Saludables
+valladolid;Café de la Esquina
+valladolid;Librería La Página en Blanco
+valladolid;Estudio de Arte Pinceladas Creativas
+vizcaya;Joyería Diamante Brillante
+vizcaya;Panadería Artesanal El Sabor del Pan
+vizcaya;Tienda de Ropa Trendy Fashion
+zamora;Centro de Yoga Serenidad
+zamora;Estanco del Humo Dulce
+zamora;Cafetería La Buena Taza
+zaragoza;Librería de Historia y Misterio
+zaragoza;Moda Juvenil Trendy Teens
+zaragoza;Boutique de Tecnología Innovatech

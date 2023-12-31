@@ -64,6 +64,7 @@ public class Principal {
 		BaseDatosConfig.crearTablas(con);
 		BaseDatosConfig.closeBD(con);
 		
+		
 		SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuariosPorEnvios));
 	}
 }
