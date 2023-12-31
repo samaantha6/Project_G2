@@ -691,6 +691,15 @@ public class VentanaHacerEnvio extends JFrame {
 						        			JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Aceptar", "Rechazar"}, "Aceptar");
 						        	if (seguro == JOptionPane.OK_OPTION) {
 						        		Envio envio = new Envio(trayecto, paquete, recogida, pago);
+						        	    for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
+						                    Usuario usuarioO = UsuarioYenvios.getKey();
+						                    List<Envio> envios = UsuarioYenvios.getValue();
+						                    if (usuarioO.equals(usuario)) {
+						                    	envios.add(envio);
+						                    	usuariosPorEnvios.put(usuario, envios);
+						                        break;
+						                    }
+						                }
 										SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios,usuario));
 										dispose();
 						        	}
