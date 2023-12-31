@@ -11,6 +11,8 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts.FontName;
 import org.apache.pdfbox.tools.PDFBox;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 import domain.Usuario;
@@ -40,6 +42,10 @@ import java.util.logging.Logger;
 	    private List<Usuario> usuarios = new ArrayList<>();
 	    
 	    private Usuario usuario;
+	    
+	    private JFileChooser guardar;
+	    
+	    private FileNameExtensionFilter filtro;
 	    
 		private Logger logger = Logger.getLogger(VentanaFacturacion.class.getName());
 
@@ -82,6 +88,13 @@ import java.util.logging.Logger;
 	        nEstado = new JTextField(10);
 	        nPagado = new JTextField(10);
 	        logger.info("JTextFields creados");
+	        
+	        guardar = new JFileChooser();
+	        guardar.setDialogTitle("Guardar como");
+	        
+	        
+	        filtro = new FileNameExtensionFilter("Archivos PDF (*.pdf)", "pdf");
+	        guardar.setFileFilter(filtro);
 	    	
 	    	pEste.add(txtDetalles);
 	    	
@@ -159,93 +172,99 @@ import java.util.logging.Logger;
 				@Override
 				public void actionPerformed(ActionEvent e) {
 
-					PDDocument a = new PDDocument();
-			    	
-			    	PDPage page = new PDPage();
-			    	a.addPage(page);
-			    	
-			    	try {
-			    		PDPageContentStream contentStream = new PDPageContentStream(a, page);
-			    		
-			    		
-			    		contentStream.beginText();
-			    		
-			    		contentStream.setFont(fuente, 12);
-			    	    //contentStream.newLineAtOffset(50, 700);
-			    	    
-		                String precio = nPrecio.getText();
-		                String descripcion = nDesc.getText();
-		                String estado = nEstado.getText();
-		                String pagado = nPagado.getText();
-		                String referencia = nRef.getText();
-		                
-		                
-		                
-		                /*ESCRIBE DE ARRIBA HACIA ABAJO*/
-		                		
-		                
-			    	    contentStream.newLineAtOffset(50,620);
-			    	    if (estado != null && !estado.isEmpty()) {
-			    	    	contentStream.showText("Estado: " + estado);
-			    	    } else {
-			    	        contentStream.showText("Estado: No disponible");
-			    	    }
-			    	    
-			    	    contentStream.newLine();
-			    	    
-			    	    
-			    	    contentStream.newLineAtOffset(0,30);
-			    	    if (pagado != null && !pagado.isEmpty()) {
-			    	    	contentStream.showText("¿Pagado?: " + pagado);
-			    	    } else {
-			    	        contentStream.showText("Pagado: No disponible");
-			    	    }
-			    	    
-			    	    contentStream.newLine();
-			    	    
-		                contentStream.newLineAtOffset(0,30);
-			    	    if (precio != null && !precio.isEmpty()) {
-			    	        contentStream.showText("Precio: " + precio);
-			    	    } else {
-			    	        contentStream.showText("Precio: No disponible");
-			    	    }
-			    	    
-			    	    contentStream.newLine();
-			    	    
-			    	    contentStream.newLineAtOffset(0,30);
-			    	    if (descripcion != null && !descripcion.isEmpty()) {
-			    	    	contentStream.showText("Descripción: " + descripcion);
-			    	    } else {
-			    	        contentStream.showText("Descripción: No disponible");
-			    	    }
-			    	    
-			    	    contentStream.newLine();
-			    	    
-
-			    	    contentStream.newLineAtOffset(0,40);
-			    	    contentStream.showText("FACTURA ENVIO CON Nº REFERENCIA:   " + referencia);
-			    	    contentStream.newLine();
-
-			    	    
-			    	    contentStream.endText();
-			    	    contentStream.close();
-
-			    	    a.save("factura.pdf");
-			    	    a.close();
-			    	    
-			    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Exportación exitosa a factura.pdf");
-			    	    
-			    	} catch (IOException ex) {
-			    		
-			    		
-			    	    ex.printStackTrace();
-			    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Error al exportar a PDF");
-					} 
+					int guardarComo = guardar.showSaveDialog(VentanaFacturacion.this);
 					
+					
+					
+					if (guardarComo == JFileChooser.APPROVE_OPTION) {
+			            try {
+			                String fpath = guardar.getSelectedFile().getAbsolutePath();
+			                
+			                if (!fpath.toLowerCase().endsWith(".pdf")) {
+			                    fpath += ".pdf";
+			                }
+
+			                PDDocument doc = new PDDocument();
+					    	PDPage page = new PDPage();
+					    	doc.addPage(page);
+
+			                try (PDPageContentStream contentStream = new PDPageContentStream(doc, page)) {
+			                	contentStream.beginText();
+					    		contentStream.setFont(fuente, 12);
+					    	    
+				                String precio = nPrecio.getText();
+				                String descripcion = nDesc.getText();
+				                String estado = nEstado.getText();
+				                String pagado = nPagado.getText();
+				                String referencia = nRef.getText();
+				                
+				                
+				                
+				                /*ESCRIBE DE ARRIBA HACIA ABAJO*/
+				                		
+				                
+					    	    contentStream.newLineAtOffset(50,620);
+					    	    if (estado != null && !estado.isEmpty()) {
+					    	    	contentStream.showText("Estado: " + estado);
+					    	    } else {
+					    	        contentStream.showText("Estado: No disponible");
+					    	    }
+					    	    
+					    	    contentStream.newLine();
+					    	    
+					    	    
+					    	    contentStream.newLineAtOffset(0,30);
+					    	    if (pagado != null && !pagado.isEmpty()) {
+					    	    	contentStream.showText("¿Pagado?: " + pagado);
+					    	    } else {
+					    	        contentStream.showText("Pagado: No disponible");
+					    	    }
+					    	    
+					    	    contentStream.newLine();
+					    	    
+				                contentStream.newLineAtOffset(0,30);
+					    	    if (precio != null && !precio.isEmpty()) {
+					    	        contentStream.showText("Precio: " + precio);
+					    	    } else {
+					    	        contentStream.showText("Precio: No disponible");
+					    	    }
+					    	    
+					    	    contentStream.newLine();
+					    	    
+					    	    contentStream.newLineAtOffset(0,30);
+					    	    if (descripcion != null && !descripcion.isEmpty()) {
+					    	    	contentStream.showText("Descripción: " + descripcion);
+					    	    } else {
+					    	        contentStream.showText("Descripción: No disponible");
+					    	    }
+					    	    
+					    	    contentStream.newLine();
+					    	    
+
+					    	    contentStream.newLineAtOffset(0,40);
+					    	    contentStream.showText("FACTURA ENVIO CON Nº REFERENCIA:   " + referencia);
+					    	    contentStream.newLine();
+
+					    	    
+					    	    contentStream.endText();
+					    	    contentStream.close();
+					    	    
+					    	    doc.save(fpath);
+					    	    doc.close();
+					    	    
+					    	    
+
+					    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Exportación exitosa a factura.pdf");
+			            } 		                
+			              
+			        } catch (IOException ex) {
+		                ex.printStackTrace();
+		                JOptionPane.showMessageDialog(VentanaFacturacion.this, "Error al exportar a PDF");
+		                
+		            }
+			            
+				  }
 				}
-				
-				
-				
 			});
 			
 			logger.info("Evento botón atras creado");
