@@ -317,6 +317,7 @@ public class VentanaHacerEnvio extends JFrame {
 		logger.info("JRadioButton de tab 'COMO' creados");
 		
 		comboRecog = new JComboBox<String>();
+		comboRecog.setEnabled(false);
 		logger.info("JComboBox de tab 'COMO' creados");
 		
 		tipoEnvioGrupo = new ButtonGroup();
@@ -832,7 +833,7 @@ public class VentanaHacerEnvio extends JFrame {
 
                         if (pestañaActual == 2) {
                         	
-                        	if (campoDir.getText().contains(provincia)) {
+                        	if (campoDirHasta.getText().contains(provincia)) {
                         		comboRecog.addItem(establecimiento);
                         	} else {
                         		
@@ -855,6 +856,23 @@ public class VentanaHacerEnvio extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios,usuario));
 				dispose();			
+			}
+		});
+		
+		radPtoRecog.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				comboRecog.setEnabled(true);
+			}
+		});
+		
+		
+		radUsoDir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				comboRecog.setEnabled(false);
 			}
 		});
 		
@@ -928,7 +946,7 @@ public class VentanaHacerEnvio extends JFrame {
         });
 		
 		
-		
+
 		
 
 		
