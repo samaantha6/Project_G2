@@ -814,6 +814,7 @@ public class VentanaHacerEnvio extends JFrame {
                 
 
         		/*para meter las direcciones en el JCombobox*/
+                
         		String ruta = "resources//provincias_direcciones.txt";
         		try {
                     File provYDir = new File(ruta);
@@ -829,11 +830,11 @@ public class VentanaHacerEnvio extends JFrame {
                         String provincia = sc.next();
                         String establecimiento = sc.next();
                         
-                        
+                        String fDirMinus = campoDirHasta.getText().toLowerCase();
 
                         if (pestañaActual == 2) {
                         	
-                        	if (campoDirHasta.getText().contains(provincia)) {
+                        	if (fDirMinus.contains(provincia)) {
                         		comboRecog.addItem(establecimiento);
                         	} else {
                         		
@@ -1011,7 +1012,6 @@ public class VentanaHacerEnvio extends JFrame {
         	numerosGenerados.add(referenciaComoString);
         	return referenciaComoString;
         } else if (numerosGenerados.size() == 10) {
-        	System.out.println("Se han generado el maximo de numeros");
         	return "";
         } else {
         	return generarNumeroReferencia();

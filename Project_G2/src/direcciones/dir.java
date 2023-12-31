@@ -10,14 +10,14 @@ public class dir {
     public static void main(String[] args) {
     	
         String[] provincias = {
-        		"Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila", "Badajoz", "Barcelona",
-                        "Burgos", "Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "Cuenca",
-                        "Girona", "Granada", "Guadalajara", "Gipuzkoa", "Huelva", "Huesca", 
-                        "Islas Balears", "Jaén", "La Coruña", "La Rioja", "Las Palmas", "León",
-                        "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Ourense", 
-                        "Palencia", "Pontevedra", "Salamanca", "Santa Cruz de Tenerife", "Segovia", "Sevilla",
-                        "Soria", "Tarragona", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya",
-                        "Zamora", "Zaragoza"
+        		"alava", "albacete", "alicante", "almería", "asturias", "ávila", "badajoz", "barcelona",
+                        "burgos", "cáceres", "cádiz", "cantabria", "castellón", "ciudad real", "córdoba", "cuenca",
+                        "girona", "granada", "guadalajara", "gipuzkoa", "huelva", "huesca", 
+                        "islas baleares", "jaén", "la coruña", "la rioja", "las palmas", "león",
+                        "lérida", "lugo", "madrid", "málaga", "murcia", "navarra", "ourense", 
+                        "palencia", "pontevedra", "salamanca", "santa cruz de tenerife", "segovia", "sevilla",
+                        "soria", "tarragona", "teruel", "toledo", "valencia", "valladolid", "vizcaya",
+                        "zamora", "zaragoza"
         };
 
         String[] direcciones = {
