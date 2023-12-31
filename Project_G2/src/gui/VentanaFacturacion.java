@@ -254,7 +254,7 @@ import java.util.logging.Logger;
 					    	    
 					    	    
 
-					    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Exportación exitosa a factura.pdf");
+					    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Exportación correcta");
 			            } 		                
 			              
 			        } catch (IOException ex) {
