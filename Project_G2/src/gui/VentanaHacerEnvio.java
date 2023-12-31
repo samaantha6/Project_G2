@@ -663,7 +663,11 @@ public class VentanaHacerEnvio extends JFrame {
 							radPremium.setOpaque(false);
 							radSuper.setOpaque(false);
 							Recogida recogida = new Recogida(fechaDeRecogida, lugarDeRecogida, tipoDeEnvio);
-							camposVacios =  windowMaster.camposVacios(campoDescrip, campoTarj, campoFTarj, campoCVV, campoDni);
+							if (radTarj.isSelected()) {
+								camposVacios =  windowMaster.camposVacios(campoDescrip, campoTarj, campoFTarj, campoCVV, campoDni);
+							} else if (radContrareembolso.isSelected()) {
+								camposVacios =  windowMaster.camposVacios(campoDescrip, campoDni);
+							}
 							boolean dniValido = windowMaster.esNumero(campoDni, "DNI");
 							if (camposVacios.isEmpty() && remitenteDestinatario != "" && tarjetaContrareembolso != "" && dniValido) {
 								windowMaster.restaurarFondo(fondosOriginales);
@@ -876,6 +880,15 @@ public class VentanaHacerEnvio extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				comboRecog.setEnabled(false);
+			}
+		});
+		
+		radTarj.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				campoTarj.setEditable(true);
+				campoFTarj.setEditable(true);
+				campoCVV.setEditable(true);
 			}
 		});
 		

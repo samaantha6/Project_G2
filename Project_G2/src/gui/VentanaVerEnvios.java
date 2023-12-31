@@ -8,7 +8,11 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -160,11 +164,32 @@ public class VentanaVerEnvios extends JFrame{
 	
     private void cargarDatosEnTabla(Map<Usuario, List<Envio>> usuariosPorEnvios) {
     	Object[] rowData;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String nuevaFechaString = "";
         for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
             Usuario usuario = UsuarioYenvios.getKey();
             List<Envio> envios = UsuarioYenvios.getValue();
             for (Envio envio : envios) {
-            	rowData = new Object[]{envio.getPaquete().getnReferencia(), envio.getRecogida().getFechaDeEnvio(), envio.getPago().getPrecio(), envio.getPago().getDescripcion(), "En reparto", ""};
+            	String fechaRecogida = envio.getRecogida().getFechaDeEnvio();
+            	String tipoEnvio = envio.getRecogida().getTipoDeEnvio();
+                try {
+                    Date fechaDate = sdf.parse(fechaRecogida);
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(fechaDate);
+                    if (tipoEnvio == "Estandar") {
+                    	calendar.add(Calendar.DAY_OF_MONTH, 12);
+                    } else if (tipoEnvio == "Premium") {
+                        calendar.add(Calendar.DAY_OF_MONTH, 10);
+                    } else if (tipoEnvio == "Super") {
+                        calendar.add(Calendar.DAY_OF_MONTH, 2);
+                    }
+                    Date fechaLlegada = calendar.getTime();
+                    nuevaFechaString = sdf.format(fechaLlegada);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            	rowData = new Object[]{envio.getPaquete().getnReferencia(), fechaRecogida, envio.getPago().getPrecio(), envio.getPago().getDescripcion(), "En reparto", nuevaFechaString};
                 ((DefaultTableModel) tablaEnvios.getModel()).addRow(rowData);
             }
         }
