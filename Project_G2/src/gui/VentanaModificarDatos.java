@@ -11,7 +11,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -26,6 +28,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import domain.Envio;
 import domain.Usuario;
 
 public class VentanaModificarDatos extends JFrame{
@@ -46,7 +49,7 @@ public class VentanaModificarDatos extends JFrame{
 					pApellido, pRespuesta, pTelefono, pCorreo, 
 					pPregSeg;
 	
-    private List<Usuario> usuarios = new ArrayList<>();
+    private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
     private boolean aIniciadoSesion;
     
@@ -63,9 +66,9 @@ public class VentanaModificarDatos extends JFrame{
 	
 	private Logger logger = Logger.getLogger(VentanaModificarDatos.class.getName());
 	
-	public VentanaModificarDatos(List<Usuario> usuariosS, boolean aIniciadoSesionN, Usuario usuarioO) {
+	public VentanaModificarDatos(Map<Usuario, List<Envio>> usuariosPorEnviosS, boolean aIniciadoSesionN, Usuario usuarioO) {
 		
-	    usuarios = usuariosS;
+		usuariosPorEnvios = usuariosPorEnviosS;
 	    aIniciadoSesion = aIniciadoSesionN;
 	    usuario = usuarioO;
 		
@@ -184,12 +187,14 @@ public class VentanaModificarDatos extends JFrame{
 				public void run() {
 					while(hiloEjecutando) {
 						RevisionCorreo = campoCorreo.getText();
-				        for (Usuario usuarioO : usuarios) {
-				            if (usuario.getCorreo().equals(RevisionCorreo)) {
+			    	    for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
+			                Usuario usuarioO = UsuarioYenvios.getKey();
+			                if (usuario.getCorreo().equals(RevisionCorreo)) {
 				            	usuario = usuarioO;
 				                break;
-				            }
-				        }
+			                }
+			            }
+
 				        if (usuario != null) {
 						campoPregSeg.setText(usuario.getPreguntaSeg());
 				        }
@@ -219,13 +224,13 @@ public class VentanaModificarDatos extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (aIniciadoSesion) {
-					SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios, usuario));
+					SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));
 					hiloEjecutando = false;
 
 					dispose();
 				
 				} else {
-					SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuarios));
+					SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuariosPorEnvios));
 					hiloEjecutando = false;
 					dispose();
 				}
@@ -262,7 +267,7 @@ public class VentanaModificarDatos extends JFrame{
     	        			usuario.setTelefono(telefono);
     	        			usuario.setNombre(nombre);
         	            	System.out.println(usuario);
-    	        			SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios, usuario));
+    	        			SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));
     						hiloEjecutando = false;
     	        			JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     	        			dispose();

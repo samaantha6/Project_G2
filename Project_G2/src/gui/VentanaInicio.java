@@ -10,7 +10,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -25,6 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import domain.Envio;
 import domain.Usuario;
 
 public class VentanaInicio extends JFrame{
@@ -40,7 +43,7 @@ public class VentanaInicio extends JFrame{
 	
 	public double precioBase;
 	
-    private List<Usuario> usuarios = new ArrayList<>();
+    private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
     private boolean aIniciadoSesion;
     
@@ -48,9 +51,9 @@ public class VentanaInicio extends JFrame{
 
 	private Logger logger = Logger.getLogger(VentanaInicio.class.getName());
 	
-	public VentanaInicio(List<Usuario> usuariosS, Usuario usuarioO) {
+	public VentanaInicio(Map<Usuario, List<Envio>> usuariosPorEnviosS, Usuario usuarioO) {
 		
-		usuarios = usuariosS;
+		usuariosPorEnvios = usuariosPorEnviosS;
 		usuario = usuarioO;
 		aIniciadoSesion = true;
 
@@ -187,7 +190,7 @@ public class VentanaInicio extends JFrame{
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuarios));
+				SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuariosPorEnvios));
 				dispose();			
 			}
 		});
@@ -195,7 +198,7 @@ public class VentanaInicio extends JFrame{
 		btnModificar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaModificarDatos(usuarios, aIniciadoSesion, usuario));
+				SwingUtilities.invokeLater(() -> new VentanaModificarDatos(usuariosPorEnvios, aIniciadoSesion, usuario));
 				dispose();			
 			}
 		});
@@ -203,7 +206,7 @@ public class VentanaInicio extends JFrame{
 		btnFac.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaFacturacion(usuarios, usuario));
+				SwingUtilities.invokeLater(() -> new VentanaFacturacion(usuariosPorEnvios, usuario));
 				dispose();			
 			}
 		});
@@ -211,7 +214,7 @@ public class VentanaInicio extends JFrame{
 		btnHacerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuarios, usuario));
+				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuariosPorEnvios, usuario));
 				dispose();			
 			}
 		});
@@ -219,7 +222,7 @@ public class VentanaInicio extends JFrame{
 		btnVerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaVerEnvios(usuarios, usuario));
+				SwingUtilities.invokeLater(() -> new VentanaVerEnvios(usuariosPorEnvios, usuario));
 				dispose();			
 			}
 		});
@@ -238,7 +241,7 @@ public class VentanaInicio extends JFrame{
 				} else if (largo2.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					SwingUtilities.invokeLater(() -> new VentanaPresupuesto(usuarios, usuario, VentanaInicio.this));
+					SwingUtilities.invokeLater(() -> new VentanaPresupuesto(usuariosPorEnvios, usuario, VentanaInicio.this));
 					dispose();		
 					
 					

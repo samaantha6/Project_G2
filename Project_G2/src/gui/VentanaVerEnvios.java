@@ -9,7 +9,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -27,6 +29,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import domain.Envio;
 import domain.Usuario;
 
 public class VentanaVerEnvios extends JFrame{
@@ -40,15 +43,15 @@ public class VentanaVerEnvios extends JFrame{
 	private JTable tablaEnvios;
 	private JScrollPane Scroll;
 	
-    private List<Usuario> usuarios = new ArrayList<>();
+    private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
     private Usuario usuario;
 	
 	private Logger logger = Logger.getLogger(VentanaVerEnvios.class.getName());
 	
-	public VentanaVerEnvios(List<Usuario> usuariosS, Usuario usuarioO) {
+	public VentanaVerEnvios(Map<Usuario, List<Envio>> usuariosPorEnviosS, Usuario usuarioO) {
 		
-		usuarios = usuariosS;
+		usuariosPorEnvios = usuariosPorEnviosS;
 		usuario = usuarioO;
 		
 		pNorte = new JPanel(new GridLayout(1, 5));
@@ -125,7 +128,7 @@ public class VentanaVerEnvios extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios, usuario));
+				SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));
 				dispose();			
 			}
 		});
@@ -133,7 +136,7 @@ public class VentanaVerEnvios extends JFrame{
 		btnEditar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuarios, usuario));
+				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuariosPorEnvios, usuario));
 				dispose();			
 			}
 		});

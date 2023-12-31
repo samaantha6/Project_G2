@@ -103,7 +103,7 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private double precioFinal;
 	
-    private List<Usuario> usuarios = new ArrayList<>();
+    private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
     private Usuario usuario;
     
@@ -125,10 +125,10 @@ public class VentanaHacerEnvio extends JFrame {
     
 	private Logger logger = Logger.getLogger(VentanaHacerEnvio.class.getName());
 	
-	public VentanaHacerEnvio(List<Usuario> usuariosS, Usuario usuarioO) {
+	public VentanaHacerEnvio(Map<Usuario, List<Envio>> usuariosPorEnviosS, Usuario usuarioO) {
 		
 		usuario = usuarioO;
-		usuarios = usuariosS;
+		usuariosPorEnvios = usuariosPorEnviosS;
 		
 		tabEnvios = new JTabbedPane();
         btnAnterior = new JButton("Anterior");
@@ -691,7 +691,7 @@ public class VentanaHacerEnvio extends JFrame {
 						        			JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Aceptar", "Rechazar"}, "Aceptar");
 						        	if (seguro == JOptionPane.OK_OPTION) {
 						        		Envio envio = new Envio(trayecto, paquete, recogida, pago);
-										SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios,usuario));
+										SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios,usuario));
 										dispose();
 						        	}
 								} else {
@@ -855,7 +855,7 @@ public class VentanaHacerEnvio extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios,usuario));
+				SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));
 				dispose();			
 			}
 		});

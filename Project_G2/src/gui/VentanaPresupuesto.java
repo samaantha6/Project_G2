@@ -9,7 +9,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
@@ -23,6 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import domain.Envio;
 import domain.Usuario;
 
 public class VentanaPresupuesto extends JFrame{
@@ -36,15 +39,15 @@ public class VentanaPresupuesto extends JFrame{
 	private ButtonGroup tipoEnvio;
 	private JLabel campoPrecio;
 	
-    private List<Usuario> usuarios = new ArrayList<>();
+    private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
     private Usuario usuario;
 	
 	private Logger logger = Logger.getLogger(VentanaPresupuesto.class.getName());
 	
-	public VentanaPresupuesto(List<Usuario> usuariosS, Usuario usuarioO, VentanaInicio vInicio) {
+	public VentanaPresupuesto(Map<Usuario, List<Envio>> usuariosPorEnviosS, Usuario usuarioO, VentanaInicio vInicio) {
 		
-		usuarios = usuariosS;
+		usuariosPorEnvios = usuariosPorEnviosS;
 		usuario = usuarioO;
 		
 		tipoEnvio = new ButtonGroup();
@@ -194,7 +197,7 @@ public class VentanaPresupuesto extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios, usuario));
+				SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));
 				dispose();			
 			}
 		});
@@ -202,7 +205,7 @@ public class VentanaPresupuesto extends JFrame{
 		btnHacerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuarios, usuario));
+				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuariosPorEnvios, usuario));
 				dispose();			
 			}
 		});

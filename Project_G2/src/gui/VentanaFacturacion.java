@@ -14,7 +14,7 @@ import org.apache.pdfbox.tools.PDFBox;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
+import domain.Envio;
 import domain.Usuario;
 
 import java.awt.*;
@@ -24,7 +24,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -39,7 +41,7 @@ import java.util.logging.Logger;
 	    private JLabel txtPrecio, txtPagado, txtRef, txtDesc, txtFact, txtEstado, txtDetalles, txtExport;
 	    private PDType1Font fuente;
 	    
-	    private List<Usuario> usuarios = new ArrayList<>();
+	    private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
 	    
 	    private Usuario usuario;
 	    
@@ -50,9 +52,9 @@ import java.util.logging.Logger;
 		private Logger logger = Logger.getLogger(VentanaFacturacion.class.getName());
 
 	    
-	    public VentanaFacturacion(List<Usuario> usuariosS, Usuario usuarioO) {
+	    public VentanaFacturacion(Map<Usuario, List<Envio>> usuariosPorEnviosS, Usuario usuarioO) {
 	    	
-	    	usuarios = usuariosS;
+	    	usuariosPorEnvios = usuariosPorEnviosS;
 	    	usuario = usuarioO;
 	    	
 	    	pNorte = new JPanel();
@@ -161,7 +163,7 @@ import java.util.logging.Logger;
 			btnatras.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios,usuario));
+					SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnviosS,usuario));
 					dispose();	
 						    
 				}

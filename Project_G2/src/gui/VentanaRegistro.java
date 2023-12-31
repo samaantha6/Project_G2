@@ -47,6 +47,7 @@ import javax.swing.text.Position;
 import javax.swing.text.Segment;
 
 import domain.Dominios;
+import domain.Envio;
 import domain.Usuario;
 
 public class VentanaRegistro extends JFrame{
@@ -74,7 +75,7 @@ public class VentanaRegistro extends JFrame{
 
 	private JPasswordField campoContrasenia, campoVenificaCon;
 	
-    public List<Usuario> usuarios = new ArrayList<>();
+    private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
 
     private HashMap<JTextField, Color> campoCambiados, campoContraniasCam;
     
@@ -94,9 +95,9 @@ public class VentanaRegistro extends JFrame{
 	private WindowMaster windowMaster = new WindowMaster();
 
 	
-	public VentanaRegistro(List<Usuario> usuariosS) {
+	public VentanaRegistro(Map<Usuario, List<Envio>> usuariosPorEnviosS) {
 		
-		usuarios = usuariosS;
+		usuariosPorEnvios = usuariosPorEnviosS;
 		
 		todosLosCampos = new ArrayList<>();
 		camposContrasenias = new ArrayList<>();
@@ -240,7 +241,7 @@ public class VentanaRegistro extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuarios));
+				SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuariosPorEnvios));
 				dispose();			
 			}
 		});
@@ -263,12 +264,13 @@ public class VentanaRegistro extends JFrame{
                 	Map<JTextField, Color> fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
                 	
                 	boolean usuarioExistente = false;
-                	for (Usuario usuario : usuarios) {
-                    	if (usuario.getCorreo().equals(correo)) {
+            	    for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
+                        Usuario usuarioO = UsuarioYenvios.getKey();
+                        if (usuarioO.getCorreo().equals(correo)) {
                         	usuarioExistente = true;
-                        	break;
-                    	}
-                	}
+                            break;
+                        }
+                    }
                 	
                 	if (!windowMaster.verificarDominio(correo).equals("Empleado")) {
                 		campoCorreo.setBackground(UIManager.getColor("TextField.background"));
@@ -283,9 +285,9 @@ public class VentanaRegistro extends JFrame{
                     			if (condiciones.isSelected() && windowMaster.esNumero(campoTelefono, "Telefono")) {
                     				aceptarCond.setBackground(UIManager.getColor("TextField.background"));
                     				Usuario nuevoUsuario = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
-                    				usuarios.add(nuevoUsuario);
+                    				usuariosPorEnvios.put(nuevoUsuario, new ArrayList<Envio>());
                     				JOptionPane.showMessageDialog(null, "Registro exitoso.", "Información", JOptionPane.INFORMATION_MESSAGE);
-                    				VentanaInicio ventanaInicio = new VentanaInicio(usuarios, nuevoUsuario);
+                    				VentanaInicio ventanaInicio = new VentanaInicio(usuariosPorEnvios, nuevoUsuario);
                     				dispose();
                     			} else if (windowMaster.esNumero(campoTelefono, "Telefono") == false) {
                     			} else {

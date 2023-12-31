@@ -8,13 +8,16 @@ import javax.swing.table.TableColumn;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JDateChooserCellEditor;
 
+import domain.Envio;
 import domain.Usuario;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class VentanaGestionEmpleados extends JFrame {
     
@@ -29,13 +32,13 @@ public class VentanaGestionEmpleados extends JFrame {
 	private JScrollPane Scroll;
 	private JDateChooser calendario;
 	
-    private List<Usuario> usuarios = new ArrayList<>();
+    private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
     Usuario usuario;
 
-    public VentanaGestionEmpleados(List<Usuario> usuariosS, Usuario usuarioO) {
+    public VentanaGestionEmpleados(Map<Usuario, List<Envio>> usuariosPorEnviosS, Usuario usuarioO) {
     	
-		usuarios = usuariosS;
+    	usuariosPorEnvios = usuariosPorEnviosS;
 		usuario = usuarioO;
     	
 		pNorte = new JPanel(new GridLayout(1, 4));
@@ -118,7 +121,7 @@ public class VentanaGestionEmpleados extends JFrame {
 		btnatras.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuarios));
+				SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuariosPorEnvios));
 				dispose();			
 			}
 		});

@@ -30,6 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import domain.Dominios;
+import domain.Envio;
 import domain.Usuario;
 
 public class VentanaInicioSesion extends JFrame{
@@ -43,7 +44,7 @@ public class VentanaInicioSesion extends JFrame{
 	private JPasswordField campoContrasenia;
 	private JLabel txtIS, txtOlvidoCsnia, txtCorreo, txtContrasenia, txtNull;
 	
-    private List<Usuario> usuarios = new ArrayList<>();
+    private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
 	private boolean esOjoAbierto = false;
 	private boolean aIniciadoSesion;
@@ -56,9 +57,9 @@ public class VentanaInicioSesion extends JFrame{
 	
 	public Usuario usuario; 
 	
-	public VentanaInicioSesion(List<Usuario> usuariosS) {
+	public VentanaInicioSesion(Map<Usuario, List<Envio>> usuariosPorEnviosS) {
 	
-	usuarios = usuariosS;
+	usuariosPorEnvios = usuariosPorEnviosS;
 	aIniciadoSesion = false;
 		
 	pNorte = new JPanel(new GridLayout(1,2));
@@ -132,7 +133,7 @@ public class VentanaInicioSesion extends JFrame{
 	txtOlvidoCsnia.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			SwingUtilities.invokeLater(() -> new VentanaModificarDatos(usuarios, aIniciadoSesion, null));
+			SwingUtilities.invokeLater(() -> new VentanaModificarDatos(usuariosPorEnvios, aIniciadoSesion, null));
 			dispose();
 		}
 	});
@@ -149,7 +150,8 @@ public class VentanaInicioSesion extends JFrame{
             }
 
             boolean credencialesCorrectas = false;
-            for (Usuario usuarioO : usuarios) {
+    	    for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
+                Usuario usuarioO = UsuarioYenvios.getKey();
                 if (usuarioO.getCorreo().equals(correo) && usuarioO.getContrasenia().equals(contrasenia)) {
                     credencialesCorrectas = true;
                     usuario = usuarioO;
@@ -161,7 +163,7 @@ public class VentanaInicioSesion extends JFrame{
             	
             	if (credencialesCorrectas) {
                 	JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
-                	SwingUtilities.invokeLater(() -> new VentanaGestionEmpleados(usuarios, usuario));
+                	SwingUtilities.invokeLater(() -> new VentanaGestionEmpleados(usuariosPorEnvios, usuario));
     				dispose();
             	} else {
                 	JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
@@ -169,7 +171,7 @@ public class VentanaInicioSesion extends JFrame{
             } else if (windowMaster.verificarDominio(correo).equals("Cliente")) {
             	if (credencialesCorrectas) {
                 	JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
-    				SwingUtilities.invokeLater(() -> new VentanaInicio(usuarios, usuario));		
+    				SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));		
     				dispose();
             	} else {
                 	JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
@@ -185,7 +187,7 @@ public class VentanaInicioSesion extends JFrame{
 	btnReg.addActionListener(new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			SwingUtilities.invokeLater(() -> new VentanaRegistro(usuarios));
+			SwingUtilities.invokeLater(() -> new VentanaRegistro(usuariosPorEnvios));
 			dispose();			
 		}
 	});
