@@ -128,7 +128,6 @@ public class VentanaGestionEmpleados extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int filaSeleccionada = tablaEnvios.getSelectedRow();
-				System.out.println(usuariosPorEnvios);
 		        if (filaSeleccionada != -1) {
 		            String nReferenciaABorrar = (String) tablaEnvios.getValueAt(filaSeleccionada, 0);
 		            for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
@@ -141,7 +140,6 @@ public class VentanaGestionEmpleados extends JFrame {
 		                	}
 		                }
 		            }
-		            System.out.println(usuariosPorEnvios);
 		            modeloTabla.removeRow(filaSeleccionada);
 
 		        } else {

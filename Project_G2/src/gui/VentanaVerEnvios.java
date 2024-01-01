@@ -146,11 +146,36 @@ public class VentanaVerEnvios extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				int fila = tablaEnvios.getSelectedRow();
 		        if (fila != -1) {
-		            
-		            String nRefe = (String) tablaEnvios.getValueAt(fila, 0);
+		            String nReferenciaABorrar = (String) tablaEnvios.getValueAt(fila, 0);
+		            for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
+		                Usuario usuario = UsuarioYenvios.getKey();
+		                List<Envio> envios = UsuarioYenvios.getValue();
+		                for (Envio envio : envios) {
+		                	if (envio.getPaquete().getnReferencia() == nReferenciaABorrar) {
+		                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		                        Date fechaEnvio;
+		                        try {
+		                            fechaEnvio = sdf.parse(envio.getRecogida().getFechaDeEnvio());
+		                            long tiempoTranscurrido = System.currentTimeMillis() - fechaEnvio.getTime();
+		                            System.out.println(tiempoTranscurrido);
+		                            System.out.println(System.currentTimeMillis());
+		                            System.out.println(fechaEnvio);
+		                            long tiempoEstimado = (long) (0.3 * tiempoTranscurrido);
+		                            System.out.println(tiempoEstimado);
+		                            if (tiempoTranscurrido > tiempoEstimado) {
+		                                JOptionPane.showMessageDialog(null, "No puedes eliminar este envío.\nHa pasado más del 30% del tiempo estimado.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+		                            }
+		                            envios.remove(envio);
+		                            break;
+		                        } catch (ParseException ex) {
+		                            ex.printStackTrace();
+		                            break;
 
+		                        }
+		                	}
+		                }
+		            }
 		            modeloTabla.removeRow(fila);
-
 		            } else {
 		            JOptionPane.showMessageDialog(null, "Selecciona una fila para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
 		        }		
