@@ -1,9 +1,12 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableRowSorter;
 
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JDateChooserCellEditor;
@@ -25,12 +28,14 @@ public class VentanaGestionEmpleados extends JFrame {
 	
 	private JPanel pNorte, pSur, pOeste, pEste, pCentro, pCentroDer, pCentroIzq, pCentroCen, pNReferencia, pBtnEliminarEnvio, pBtnVolver;
     private JButton btnatras, btnEliminarEnvio;
-	private JComboBox<String> nReferencia;
     private JLabel txtEnv, txtNReferencia, txtNull;
+    private JTextField campoNReferencia;
 	private DefaultTableModel modeloTabla;
 	private JTable tablaEnvios;
 	private JScrollPane Scroll;
 	private JDateChooser calendario;
+	
+    private TableRowSorter<DefaultTableModel> Busqueda;
 	
     private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
@@ -65,12 +70,12 @@ public class VentanaGestionEmpleados extends JFrame {
 
         btnatras = new JButton("<--");
         btnEliminarEnvio = new JButton("ELIMINAR ENVIO");
-		nReferencia = new JComboBox<String>();
+        campoNReferencia = new JTextField(10);
                 
 		pBtnVolver.add(btnatras);
         pNorte.add(pBtnVolver);
         pNReferencia.add(txtNReferencia);
-        pNReferencia.add(nReferencia);
+        pNReferencia.add(campoNReferencia);
         pNorte.add(pNReferencia);
         pNorte.add(btnEliminarEnvio);
         pBtnEliminarEnvio.add(btnEliminarEnvio);
@@ -104,7 +109,8 @@ public class VentanaGestionEmpleados extends JFrame {
 
         pSur.add(labelAboveTable, BorderLayout.NORTH); 
 
-        
+        Busqueda = new TableRowSorter<>(modeloTabla);
+        tablaEnvios.setRowSorter(Busqueda);
         
 /*EVENTOS*/
         
@@ -129,18 +135,28 @@ public class VentanaGestionEmpleados extends JFrame {
 		            //  la fila del modelo de tabla
 		            modeloTabla.removeRow(filaSeleccionada);
 
-		            // Aquí puedes realizar cualquier otra lógica relacionada con la eliminación, por ejemplo, en tu base de datos.
-		            System.out.println("Eliminando fila con Nº referencia: " + nReferenciaABorrar);
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Selecciona una fila para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
 		        }		
 			}
 		});
-        
 		
-		
+        campoNReferencia.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filtrarEnvios();
+            }
 
-		
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filtrarEnvios();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filtrarEnvios();
+            }
+        });
 		
         setTitle("Gestión");
         setBounds(300, 18, 600, 400); // Ajustar el ancho del marco
@@ -150,8 +166,11 @@ public class VentanaGestionEmpleados extends JFrame {
     }
     
 
-	public void agregarFila(Object[] nuevaFila) {
-		modeloTabla.addRow(nuevaFila);
+    private void filtrarEnvios() {
+        String nReferenciaBusqueda = campoNReferencia.getText();
+
+        RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter(nReferenciaBusqueda, 0);
+        Busqueda.setRowFilter(rowFilter);
     }
 
     
