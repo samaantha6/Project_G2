@@ -43,7 +43,7 @@ public class WindowMaster {
         for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
             Usuario usuario = UsuarioYenvios.getKey();
             List<Envio> envios = UsuarioYenvios.getValue();
-            if (usuario.equals(usuarioActual)) {
+            if (usuario.equals(usuarioActual) || usuarioActual.getCorreo().endsWith("@hermes.es")) {
             	for (Envio envio : envios) {
             		String fechaRecogida = envio.getRecogida().getFechaDeEnvio();
             		String tipoEnvio = envio.getRecogida().getTipoDeEnvio();

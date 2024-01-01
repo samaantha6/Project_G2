@@ -34,6 +34,8 @@ public class VentanaGestionEmpleados extends JFrame {
 	
     private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
+	private WindowMaster windowMaster = new WindowMaster();
+    
     Usuario usuario;
 
     public VentanaGestionEmpleados(Map<Usuario, List<Envio>> usuariosPorEnviosS, Usuario usuarioO) {
@@ -82,24 +84,14 @@ public class VentanaGestionEmpleados extends JFrame {
         add(pOeste, BorderLayout.WEST);
         
         String[] nombreColumnas = {"Nº referencia", "Fecha", "Precio", "Descripción", "Estado", "Fecha prevista"};
-        //son ejemplos para probar que todo funciona, no estaran en el proyecto final
-        Object[][] data = {
-                {"001", "2023-10-28", "$100", "Producto 1", "Activo", "2023-10-30"},
-                {"002", "2023-10-29", "$150", "Producto 2", "Inactivo", "2023-11-05"},
-                {"003", "2023-11-01", "$75", "Producto 3", "Activo", "2023-11-03"},
-                {"004", "2023-11-04", "$200", "Producto 4", "Inactivo", "2023-11-10"},
-                {"005", "2023-11-12", "$120", "Producto 5", "Activo", "2023-11-15"}
-            };
         
-        modeloTabla = new DefaultTableModel(data, nombreColumnas);
+        modeloTabla = new DefaultTableModel(null, nombreColumnas);
 
         tablaEnvios = new JTable(modeloTabla);
         
-        // Ajustar el alto de las filas
         int rowHeight = 30;  
         tablaEnvios.setRowHeight(rowHeight);
         
-        // Establecer márgenes
         JPanel tablePanel = new JPanel(new BorderLayout());
         tablePanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15)); 
         
@@ -108,7 +100,6 @@ public class VentanaGestionEmpleados extends JFrame {
 
         pSur.add(tablePanel, BorderLayout.CENTER);
         
-        // Agregar una etiqueta encima de la tabla
         JLabel labelAboveTable = new JLabel("     Envíos realizados");
 
         pSur.add(labelAboveTable, BorderLayout.NORTH); 
@@ -117,6 +108,7 @@ public class VentanaGestionEmpleados extends JFrame {
         
 /*EVENTOS*/
         
+        windowMaster.cargarDatosEnTabla(usuariosPorEnviosS, tablaEnvios, usuario);
         
 		btnatras.addActionListener(new ActionListener() {
 			@Override
