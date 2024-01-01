@@ -50,6 +50,8 @@ public class VentanaVerEnvios extends JFrame{
     private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
     private Usuario usuario;
+    
+	private WindowMaster windowMaster = new WindowMaster();
 	
 	private Logger logger = Logger.getLogger(VentanaVerEnvios.class.getName());
 	
@@ -121,7 +123,7 @@ public class VentanaVerEnvios extends JFrame{
 		
 /** EVENTOS */
 		
-		cargarDatosEnTabla(usuariosPorEnvios);
+		windowMaster.cargarDatosEnTabla(usuariosPorEnvios, tablaEnvios, usuario);
 		
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
@@ -161,39 +163,6 @@ public class VentanaVerEnvios extends JFrame{
 	setVisible(true);
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
-	
-    private void cargarDatosEnTabla(Map<Usuario, List<Envio>> usuariosPorEnvios) {
-    	Object[] rowData;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String nuevaFechaString = "";
-        for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
-            Usuario usuario = UsuarioYenvios.getKey();
-            List<Envio> envios = UsuarioYenvios.getValue();
-            for (Envio envio : envios) {
-            	String fechaRecogida = envio.getRecogida().getFechaDeEnvio();
-            	String tipoEnvio = envio.getRecogida().getTipoDeEnvio();
-                try {
-                    Date fechaDate = sdf.parse(fechaRecogida);
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(fechaDate);
-                    if (tipoEnvio == "Estandar") {
-                    	calendar.add(Calendar.DAY_OF_MONTH, 12);
-                    } else if (tipoEnvio == "Premium") {
-                        calendar.add(Calendar.DAY_OF_MONTH, 10);
-                    } else if (tipoEnvio == "Super") {
-                        calendar.add(Calendar.DAY_OF_MONTH, 2);
-                    }
-                    Date fechaLlegada = calendar.getTime();
-                    nuevaFechaString = sdf.format(fechaLlegada);
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            	rowData = new Object[]{envio.getPaquete().getnReferencia(), fechaRecogida, envio.getPago().getPrecio(), envio.getPago().getDescripcion(), "En reparto", nuevaFechaString};
-                ((DefaultTableModel) tablaEnvios.getModel()).addRow(rowData);
-            }
-        }
-    }
 	
 			
 }

@@ -605,7 +605,7 @@ public class VentanaHacerEnvio extends JFrame {
                 
                 String fechaDeRecogida = campoFenvio.getText();
                 if (radPtoRecog.isSelected()) {
-                    lugarDeRecogida = comboRecog.getSelectedItem().toString();
+                    lugarDeRecogida = (String) comboRecog.getSelectedItem();
                 } else if (radUsoDir.isSelected()) {
                     lugarDeRecogida = direccionOrigen;
                 } else {

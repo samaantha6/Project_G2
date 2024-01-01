@@ -27,11 +27,13 @@ public class Principal {
 		
 	    List<Usuario> usuarios = new ArrayList<>();
 	    Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
+	    
+	    Usuario b = new Usuario("", "", "", "", "", "", "");
 
 	    usuarios.add(new Usuario("b", "b", "b", "@gmail.com", "b", "b", "b"));
 	    usuarios.add(new Usuario("c", "c", "c", "@hotmail.com", "c", "c", "c"));
 	    usuarios.add(new Usuario("a", "a", "a", "@hermes.es", "a", "a", "a"));
-	    usuarios.add(new Usuario("", "", "", "", "", "", ""));
+	    usuarios.add(b);
 	    
     	Pago pago = new Pago("a", "a", "a", "a", "a");
     	Paquete paquete = new Paquete("b", "b", "b", "b", "b", "b", "b", "b");
@@ -42,8 +44,8 @@ public class Principal {
 	    for (Usuario usuario : usuarios) {
 	    	usuariosPorEnvios.put(usuario, new ArrayList<>());
         }
-	    
-			
+
+		
 		/**Cargamos la configuración del logger*/
 		try {
 			FileInputStream fis = new FileInputStream("conf/logger.properties");

@@ -1,17 +1,25 @@
 package gui;
 
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 import domain.Dominios;
+import domain.Envio;
+import domain.Usuario;
 
 public class WindowMaster {
 
@@ -26,6 +34,41 @@ public class WindowMaster {
             } 
         }
 		return "Desconocido";
+    }
+    
+    public void cargarDatosEnTabla(Map<Usuario, List<Envio>> usuariosPorEnvios, JTable tabla, Usuario usuarioActual) {
+    	Object[] rowData;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String nuevaFechaString = "";
+        for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
+            Usuario usuario = UsuarioYenvios.getKey();
+            List<Envio> envios = UsuarioYenvios.getValue();
+            if (usuario.equals(usuarioActual)) {
+            	for (Envio envio : envios) {
+            		String fechaRecogida = envio.getRecogida().getFechaDeEnvio();
+            		String tipoEnvio = envio.getRecogida().getTipoDeEnvio();
+            		try {
+            			Date fechaDate = sdf.parse(fechaRecogida);
+            			Calendar calendar = Calendar.getInstance();
+            			calendar.setTime(fechaDate);
+            			if (tipoEnvio == "Estandar") {
+            				calendar.add(Calendar.DAY_OF_MONTH, 12);
+            			} else if (tipoEnvio == "Premium") {
+            				calendar.add(Calendar.DAY_OF_MONTH, 10);
+            			} else if (tipoEnvio == "Super") {
+            				calendar.add(Calendar.DAY_OF_MONTH, 2);
+            			}
+            			Date fechaLlegada = calendar.getTime();
+            			nuevaFechaString = sdf.format(fechaLlegada);
+
+            		} catch (ParseException e) {
+            			e.printStackTrace();
+            		}
+            		rowData = new Object[]{envio.getPaquete().getnReferencia(), fechaRecogida, envio.getPago().getPrecio(), envio.getPago().getDescripcion(), "En reparto", nuevaFechaString};
+            		((DefaultTableModel) tabla.getModel()).addRow(rowData);
+            	}
+            }
+        }
     }
 	
     public boolean esNumero(JTextField textFieldNumero, String tipo) {
