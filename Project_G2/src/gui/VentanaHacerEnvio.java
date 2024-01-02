@@ -647,16 +647,16 @@ public class VentanaHacerEnvio extends JFrame {
                 }
 				
 				List<JTextField> camposVacios =  windowMaster.camposVacios(campoNom, campoDir, campoTel, campoCorreo, campoNomHasta, campoDirHasta, campoTelHasta, campoCorreoHasta);
+				windowMaster.restaurarFondo(fondosOriginales);
 				if (camposVacios.isEmpty()) {
-					windowMaster.restaurarFondo(fondosOriginales);
 					Trayecto trayecto = new Trayecto(nombreOrigen, direccionOrigen, correoOrigen, telefonoOrigen, nombreDestino, direccionDestino, correoDestino, telefonoDestino);
 					camposVacios =  windowMaster.camposVacios(campoPeso, campoLargo, campoAncho, campoAlto, campoValor);
+					windowMaster.restaurarFondo(fondosOriginales);
 					if (camposVacios.isEmpty()) {
-						windowMaster.restaurarFondo(fondosOriginales);
 						Paquete paquete = new Paquete(nReferencia, embalaje, peso, largo, ancho, alto, valor, fragil);
 						camposVacios =  windowMaster.camposVacios(campoFenvio);
+						windowMaster.restaurarFondo(fondosOriginales);
 						if (camposVacios.isEmpty() && lugarDeRecogida != "" && tipoDeEnvio != "") {
-							windowMaster.restaurarFondo(fondosOriginales);
 							radPtoRecog.setOpaque(false);
 							radUsoDir.setOpaque(false);
 							radEstandar.setOpaque(false);
@@ -669,8 +669,8 @@ public class VentanaHacerEnvio extends JFrame {
 								camposVacios =  windowMaster.camposVacios(campoDescrip, campoDni);
 							}
 							boolean dniValido = windowMaster.esNumero(campoDni, "DNI");
+							windowMaster.restaurarFondo(fondosOriginales);
 							if (camposVacios.isEmpty() && remitenteDestinatario != "" && tarjetaContrareembolso != "" && dniValido) {
-								windowMaster.restaurarFondo(fondosOriginales);
 								radFacRemit.setOpaque(false);
 								radFacDestinat.setOpaque(false);
 								radTarj.setOpaque(false);

@@ -128,8 +128,13 @@ public class WindowMaster {
     public HashMap<JTextField, Color> cambiarFondoCampos(List<JTextField> campos) {
         
         for (JTextField campo : campos) {
-        	fondosOriginales.put(campo, campo.getBackground());
-            campo.setBackground(Color.RED);
+        	if (campo.getBackground() != Color.RED) {
+        		fondosOriginales.put(campo, campo.getBackground());
+        		campo.setBackground(Color.RED);
+        	} else {
+        		fondosOriginales.put(campo, UIManager.getColor("TextField.background"));
+        		campo.setBackground(Color.RED);
+        	}
         }
         return fondosOriginales;
     }

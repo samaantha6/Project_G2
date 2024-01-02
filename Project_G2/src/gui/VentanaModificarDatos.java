@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -53,6 +54,8 @@ public class VentanaModificarDatos extends JFrame{
     
     private boolean aIniciadoSesion;
     
+    private HashMap<JTextField, Color> fondosOriginales;
+    
     private Usuario usuario;
         
     private boolean esOjoAbierto = false;
@@ -63,6 +66,8 @@ public class VentanaModificarDatos extends JFrame{
 	
 	private Thread hilo;
 	private boolean hiloEjecutando;
+	
+	private WindowMaster windowMaster = new WindowMaster();
 	
 	private Logger logger = Logger.getLogger(VentanaModificarDatos.class.getName());
 	
@@ -237,6 +242,30 @@ public class VentanaModificarDatos extends JFrame{
 			}
 		});
 		
+		btnElimCuen.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String nombre = campoNom.getText();
+                String apellido = campoApel.getText();
+                String correo = campoCorreo.getText();
+                String telefono = campoTelefono.getText();
+                contrasenia = windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoCon, esOjoAbierto).getText();
+                contraseniaVen = windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVerifCon, esOjoAbierto).getText();
+                String respuesta = campoRes.getText();
+                List<JTextField> camposVacios = windowMaster.camposVacios(campoNom, campoApel, campoCorreo, campoTelefono, windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoCon, esOjoAbierto), windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVerifCon, esOjoAbierto), campoRes);
+            	windowMaster.restaurarFondo(fondosOriginales);
+                if (usuario.getCorreo().equals(correo) && usuario.getRespuesta().equals(respuesta) && usuario.getContrasenia().equals(contrasenia) && contrasenia.equals(contraseniaVen) && camposVacios.isEmpty()) {
+	                usuariosPorEnvios.remove(usuario);
+	        		JOptionPane.showMessageDialog(null, "Cuenta eliminada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+					SwingUtilities.invokeLater(() -> new VentanaInicioSesion(usuariosPorEnvios));
+	        		dispose();
+                } else {
+	                fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
+	        		JOptionPane.showMessageDialog(null, "No se a podido eliminar la cuenta.", "Error", JOptionPane.ERROR_MESSAGE);
+	            }
+			}
+		});
+		
 		btnModif.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -245,19 +274,9 @@ public class VentanaModificarDatos extends JFrame{
                 String apellido = campoApel.getText();
                 String correo = campoCorreo.getText();
                 String telefono = campoTelefono.getText();
-                if (esOjoAbierto) {
-                	contrasenia = campoContrasenia1.getText();
-                } else {
-                	contrasenia = new String(campoCon.getPassword());
-                }
-                if (esOjoAbiertoVen) {
-                	contraseniaVen = campoVenificaCon1.getText();
-                } else {
-                	contraseniaVen = new String(campoVerifCon.getPassword());
-                }
+                contrasenia = windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoCon, esOjoAbierto).getText();
+                contraseniaVen = windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVerifCon, esOjoAbierto).getText();
                 String respuesta = campoRes.getText();
-
-    	        System.out.println(usuario);
     	        if (usuario != null) {
     	        	if (usuario.getRespuesta().equals(respuesta)) {
     	        		if (contrasenia.equals(contraseniaVen)) {
@@ -266,7 +285,6 @@ public class VentanaModificarDatos extends JFrame{
     	        			usuario.setCorreo(correo);
     	        			usuario.setTelefono(telefono);
     	        			usuario.setNombre(nombre);
-        	            	System.out.println(usuario);
     	        			SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));
     						hiloEjecutando = false;
     	        			JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
