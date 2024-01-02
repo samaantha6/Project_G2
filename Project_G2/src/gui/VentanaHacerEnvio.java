@@ -568,10 +568,20 @@ public class VentanaHacerEnvio extends JFrame {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				hilo = new Thread() {
-
+				int reloj = 0;
 				public void run() {
 					while(hiloEjecutando) {
-						
+						reloj++;
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						if (reloj == 300) {
+							JOptionPane.showMessageDialog(null, "Tiempo de espera agotado, vuelva a crear el envio por favor.", "Error", JOptionPane.ERROR_MESSAGE);
+							SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios,usuario));
+							dispose();
+						}
 					}
 				}
 				};
@@ -697,6 +707,7 @@ public class VentanaHacerEnvio extends JFrame {
 						        		Envio envio = new Envio(trayecto, paquete, recogida, pago);
 						        		List<Envio> envios = usuariosPorEnvios.get(usuario);
 						        		envios.add(envio);
+										hiloEjecutando = false;
 										SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios,usuario));
 										dispose();
 						        	}
