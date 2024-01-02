@@ -164,7 +164,9 @@ public class VentanaVerEnvios extends JFrame{
 		                            System.out.println(tiempoEstimado);
 		                            if (tiempoTranscurrido > tiempoEstimado) {
 		                                JOptionPane.showMessageDialog(null, "No puedes eliminar este envío.\nHa pasado más del 30% del tiempo estimado.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+			                            break;
 		                            }
+		                            modeloTabla.removeRow(fila);
 		                            envios.remove(envio);
 		                            break;
 		                        } catch (ParseException ex) {
@@ -175,7 +177,6 @@ public class VentanaVerEnvios extends JFrame{
 		                	}
 		                }
 		            }
-		            modeloTabla.removeRow(fila);
 		            } else {
 		            JOptionPane.showMessageDialog(null, "Selecciona una fila para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
 		        }		

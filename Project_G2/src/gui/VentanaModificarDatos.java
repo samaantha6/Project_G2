@@ -189,7 +189,7 @@ public class VentanaModificarDatos extends JFrame{
 						RevisionCorreo = campoCorreo.getText();
 			    	    for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
 			                Usuario usuarioO = UsuarioYenvios.getKey();
-			                if (usuario.getCorreo().equals(RevisionCorreo)) {
+			                if (usuarioO.getCorreo().equals(RevisionCorreo)) {
 				            	usuario = usuarioO;
 				                break;
 			                }
