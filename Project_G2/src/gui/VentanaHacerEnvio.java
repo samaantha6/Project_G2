@@ -578,14 +578,6 @@ public class VentanaHacerEnvio extends JFrame {
 			campoAncho.setText(DatosARellenar.getPaquete().getAncho());
 			campoLargo.setText(DatosARellenar.getPaquete().getLargo());
 			campoPeso.setText(DatosARellenar.getPaquete().getPeso());
-			System.out.println(DatosARellenar.getRecogida().getTipoDeEnvio());
-			if (DatosARellenar.getRecogida().getTipoDeEnvio() == "Estandar") {
-				radEstandar.setSelected(true);
-			} else if (DatosARellenar.getRecogida().getTipoDeEnvio() == "Superior") {
-				radSuper.setSelected(true);
-			} else {
-				radPremium.setSelected(true);
-			}
 			campoNom.setText(DatosARellenar.getTrayecto().getNombreOrigen());
 			campoNomHasta.setText(DatosARellenar.getTrayecto().getNombreDestino());
 			campoCorreo.setText(DatosARellenar.getTrayecto().getCorreoOrigen());
@@ -594,40 +586,20 @@ public class VentanaHacerEnvio extends JFrame {
 			campoTelHasta.setText(DatosARellenar.getTrayecto().getTelefonoDestino());
 			campoValor.setText(DatosARellenar.getPaquete().getValor());
 			comboEmbalaje.setSelectedItem(DatosARellenar.getPaquete().getEmbalaje());
-			if (DatosARellenar.getPaquete().getFragil() == "Si") {
-				checkFragil.setSelected(true);
-			}
-			if (DatosARellenar.getRecogida().getLugarDeRecogida() == DatosARellenar.getTrayecto().getDireccionOrigen()) {
-				radUsoDir.setSelected(true);
-			} else {
-				radPtoRecog.setSelected(true);
-				comboRecog.setSelectedItem(DatosARellenar.getRecogida().getLugarDeRecogida());
-			}
+			comboRecog.setSelectedItem(DatosARellenar.getRecogida().getLugarDeRecogida());
 			campoFenvio.setText(DatosARellenar.getRecogida().getFechaDeEnvio());
 			campoDescrip.setText(DatosARellenar.getPago().getDescripcion());
 			campoCVV.setText(DatosARellenar.getPago().getCVV());
 			campoDni.setText(DatosARellenar.getPago().getDni());
 			campoFTarj.setText(DatosARellenar.getPago().getFechaCaducidad());
 			campoTarj.setText(DatosARellenar.getPago().getNumeroTrajeta());
-			if (DatosARellenar.getPago().getCVV() != null) {
-				radTarj.setSelected(true);
-			} else {
-				radContrareembolso.setSelected(true);
-			}
-			if (DatosARellenar.getPago().getFactura() == "Si") {
-				checkFactura.setSelected(true);
-			}
-			if (DatosARellenar.getPago().getRemitenteDestinatario() == "Remitente") {
-				radFacRemit.setSelected(true);
-			} else if (DatosARellenar.getPago().getRemitenteDestinatario() == "Destinatario") {
-				radFacDestinat.setSelected(true);
-			}
-			if (campoNom == null) {
+			if (DatosARellenar.getTrayecto().getNombreOrigen() == null) {
 				ventanaAnterior = "presupuesto";
-			} else if (campoNom != null) {
+			} else if (DatosARellenar.getTrayecto().getNombreOrigen() != null) {
 				ventanaAnterior = "verEnvio";
 			}
 		}
+		System.out.println(ventanaAnterior);
 /** EVENTOS */
 		hiloEjecutando = true;
 		addWindowListener(new WindowAdapter() {
@@ -802,6 +774,8 @@ public class VentanaHacerEnvio extends JFrame {
 						                        break;
 						                    }
 						                }
+										SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));
+										dispose();
 						        	}
 								} else {
                     				JOptionPane.showMessageDialog(null, "Desbes acceptar los terminos y condiciones.", "Error", JOptionPane.ERROR_MESSAGE);

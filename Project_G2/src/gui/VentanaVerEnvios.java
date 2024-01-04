@@ -88,7 +88,12 @@ public class VentanaVerEnvios extends JFrame{
         String[] nombreColumnas = {"Nº referencia", "Fecha", "Precio", "Descripción", "Estado", "Fecha prevista"};
         modeloTabla = new DefaultTableModel(null, nombreColumnas);
 
-        tablaEnvios = new JTable(modeloTabla);
+        tablaEnvios = new JTable(modeloTabla) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         logger.info("Jtable creada");
         
         int rowHeight = 30;  
