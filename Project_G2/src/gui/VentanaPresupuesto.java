@@ -42,6 +42,8 @@ public class VentanaPresupuesto extends JFrame{
     private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
     private Usuario usuario;
+    
+    private Envio DatosARellenar;
 	
 	private Logger logger = Logger.getLogger(VentanaPresupuesto.class.getName());
 	
@@ -205,7 +207,7 @@ public class VentanaPresupuesto extends JFrame{
 		btnHacerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuariosPorEnvios, usuario));
+				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuariosPorEnvios, usuario, DatosARellenar));
 				dispose();			
 			}
 		});

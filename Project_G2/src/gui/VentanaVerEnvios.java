@@ -51,6 +51,8 @@ public class VentanaVerEnvios extends JFrame{
     
     private Usuario usuario;
     
+    private Envio DatosARellenar;
+    
 	private WindowMaster windowMaster = new WindowMaster();
 	
 	private Logger logger = Logger.getLogger(VentanaVerEnvios.class.getName());
@@ -136,8 +138,37 @@ public class VentanaVerEnvios extends JFrame{
 		btnEditar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuariosPorEnvios, usuario));
-				dispose();			
+				int fila = tablaEnvios.getSelectedRow();
+		        if (fila != -1) {
+		            String nReferenciaAEditar = (String) tablaEnvios.getValueAt(fila, 0);
+		            for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
+		                List<Envio> envios = UsuarioYenvios.getValue();
+		                for (Envio envio : envios) {
+		                	if (envio.getPaquete().getnReferencia() == nReferenciaAEditar) {
+		                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		                        Date fechaEnvio;
+		                        try {
+		                            fechaEnvio = sdf.parse(envio.getRecogida().getFechaDeEnvio());
+		                            long tiempoTranscurrido = System.currentTimeMillis() - fechaEnvio.getTime();
+		                            long tiempoEstimado = (long) (0.3 * tiempoTranscurrido);
+		                            if (tiempoTranscurrido > tiempoEstimado) {
+		                                JOptionPane.showMessageDialog(null, "No puedes editar este envío.\nHa pasado más del 30% del tiempo estimado.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+			                            break;
+		                            }
+		                            DatosARellenar = envio;
+		            				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuariosPorEnvios, usuario, DatosARellenar));
+		            				dispose();
+		                            break;
+		                        } catch (ParseException ex) {
+		                            ex.printStackTrace();
+		                            break;
+		                        }	
+		                	}
+		                }
+		            }
+		        } else {
+		        	JOptionPane.showMessageDialog(null, "Selecciona una fila para editar.", "Error", JOptionPane.ERROR_MESSAGE);
+		        }			
 			}
 		});
 		
@@ -148,7 +179,6 @@ public class VentanaVerEnvios extends JFrame{
 		        if (fila != -1) {
 		            String nReferenciaABorrar = (String) tablaEnvios.getValueAt(fila, 0);
 		            for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
-		                Usuario usuario = UsuarioYenvios.getKey();
 		                List<Envio> envios = UsuarioYenvios.getValue();
 		                for (Envio envio : envios) {
 		                	if (envio.getPaquete().getnReferencia() == nReferenciaABorrar) {
@@ -157,11 +187,7 @@ public class VentanaVerEnvios extends JFrame{
 		                        try {
 		                            fechaEnvio = sdf.parse(envio.getRecogida().getFechaDeEnvio());
 		                            long tiempoTranscurrido = System.currentTimeMillis() - fechaEnvio.getTime();
-		                            System.out.println(tiempoTranscurrido);
-		                            System.out.println(System.currentTimeMillis());
-		                            System.out.println(fechaEnvio);
 		                            long tiempoEstimado = (long) (0.3 * tiempoTranscurrido);
-		                            System.out.println(tiempoEstimado);
 		                            if (tiempoTranscurrido > tiempoEstimado) {
 		                                JOptionPane.showMessageDialog(null, "No puedes eliminar este envío.\nHa pasado más del 30% del tiempo estimado.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 			                            break;
@@ -179,7 +205,7 @@ public class VentanaVerEnvios extends JFrame{
 		            }
 		            } else {
 		            JOptionPane.showMessageDialog(null, "Selecciona una fila para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
-		        }		
+		            }	
 			}
 		});
 		

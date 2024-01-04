@@ -48,6 +48,8 @@ public class VentanaInicio extends JFrame{
     private boolean aIniciadoSesion;
     
     Usuario usuario;
+    
+    private Envio DatosARellenar;
 
 	private Logger logger = Logger.getLogger(VentanaInicio.class.getName());
 	
@@ -214,7 +216,7 @@ public class VentanaInicio extends JFrame{
 		btnHacerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuariosPorEnvios, usuario));
+				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuariosPorEnvios, usuario, DatosARellenar));
 				dispose();			
 			}
 		});

@@ -107,6 +107,8 @@ public class VentanaHacerEnvio extends JFrame {
     
     private Usuario usuario;
     
+    private Envio DatosARellenar;
+    
 	private Thread hilo;
 	private boolean hiloEjecutando;
 	
@@ -125,10 +127,11 @@ public class VentanaHacerEnvio extends JFrame {
     
 	private Logger logger = Logger.getLogger(VentanaHacerEnvio.class.getName());
 	
-	public VentanaHacerEnvio(Map<Usuario, List<Envio>> usuariosPorEnviosS, Usuario usuarioO) {
+	public VentanaHacerEnvio(Map<Usuario, List<Envio>> usuariosPorEnviosS, Usuario usuarioO, Envio DatosARellenarR) {
 		
 		usuario = usuarioO;
 		usuariosPorEnvios = usuariosPorEnviosS;
+		DatosARellenar = DatosARellenarR;
 		
 		tabEnvios = new JTabbedPane();
         btnAnterior = new JButton("Anterior");
@@ -581,6 +584,7 @@ public class VentanaHacerEnvio extends JFrame {
 							JOptionPane.showMessageDialog(null, "Tiempo de espera agotado, vuelva a crear el envio por favor.", "Error", JOptionPane.ERROR_MESSAGE);
 							SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios,usuario));
 							dispose();
+							hiloEjecutando = false;
 						}
 					}
 				}
