@@ -38,7 +38,7 @@ public class WindowMaster {
     
     public void cargarDatosEnTabla(Map<Usuario, List<Envio>> usuariosPorEnvios, JTable tabla, Usuario usuarioActual) {
     	Object[] rowData;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         String nuevaFechaString = "";
         for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
             Usuario usuario = UsuarioYenvios.getKey();
@@ -48,7 +48,7 @@ public class WindowMaster {
             		String fechaRecogida = envio.getRecogida().getFechaDeEnvio();
             		String tipoEnvio = envio.getRecogida().getTipoDeEnvio();
             		try {
-            			Date fechaDate = sdf.parse(fechaRecogida);
+            			Date fechaDate = formatoFecha.parse(fechaRecogida);
             			Calendar calendar = Calendar.getInstance();
             			calendar.setTime(fechaDate);
             			if (tipoEnvio == "Estandar") {
@@ -59,7 +59,7 @@ public class WindowMaster {
             				calendar.add(Calendar.DAY_OF_MONTH, 2);
             			}
             			Date fechaLlegada = calendar.getTime();
-            			nuevaFechaString = sdf.format(fechaLlegada);
+            			nuevaFechaString = formatoFecha.format(fechaLlegada);
 
             		} catch (ParseException e) {
             			e.printStackTrace();

@@ -16,7 +16,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -103,6 +106,10 @@ public class VentanaHacerEnvio extends JFrame {
 	
 	private double precioFinal;
 	
+	private Date fechaEnvio;
+	
+	private SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+	
     private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
     
     private Usuario usuario;
@@ -118,7 +125,7 @@ public class VentanaHacerEnvio extends JFrame {
 	
     private HashMap<JTextField, Color> fondosOriginales = new HashMap<>();
 
-    private String lugarDeRecogida, tipoDeEnvio, remitenteDestinatario, factura, tarjetaContrareembolso, textoTYC;
+    private String lugarDeRecogida, tipoDeEnvio, remitenteDestinatario, factura, tarjetaContrareembolso, textoTYC, ventanaAnterior;
     
 	private double precioBase;
 	private JLabel campoPrecio;
@@ -564,8 +571,65 @@ public class VentanaHacerEnvio extends JFrame {
 		add(tabEnvios, BorderLayout.CENTER);
 		add(pSur, BorderLayout.SOUTH);
 		
+		if (DatosARellenar != null) {
+			campoDir.setText(DatosARellenar.getTrayecto().getDireccionOrigen());
+			campoDirHasta.setText(DatosARellenar.getTrayecto().getDireccionDestino());
+			campoAlto.setText(DatosARellenar.getPaquete().getAlto());
+			campoAncho.setText(DatosARellenar.getPaquete().getAncho());
+			campoLargo.setText(DatosARellenar.getPaquete().getLargo());
+			campoPeso.setText(DatosARellenar.getPaquete().getPeso());
+			System.out.println(DatosARellenar.getRecogida().getTipoDeEnvio());
+			if (DatosARellenar.getRecogida().getTipoDeEnvio() == "Estandar") {
+				radEstandar.setSelected(true);
+			} else if (DatosARellenar.getRecogida().getTipoDeEnvio() == "Superior") {
+				radSuper.setSelected(true);
+			} else {
+				radPremium.setSelected(true);
+			}
+			campoNom.setText(DatosARellenar.getTrayecto().getNombreOrigen());
+			campoNomHasta.setText(DatosARellenar.getTrayecto().getNombreDestino());
+			campoCorreo.setText(DatosARellenar.getTrayecto().getCorreoOrigen());
+			campoCorreoHasta.setText(DatosARellenar.getTrayecto().getCorreoDestino());
+			campoTel.setText(DatosARellenar.getTrayecto().getTelefonoOrigen());
+			campoTelHasta.setText(DatosARellenar.getTrayecto().getTelefonoDestino());
+			campoValor.setText(DatosARellenar.getPaquete().getValor());
+			comboEmbalaje.setSelectedItem(DatosARellenar.getPaquete().getEmbalaje());
+			if (DatosARellenar.getPaquete().getFragil() == "Si") {
+				checkFragil.setSelected(true);
+			}
+			if (DatosARellenar.getRecogida().getLugarDeRecogida() == DatosARellenar.getTrayecto().getDireccionOrigen()) {
+				radUsoDir.setSelected(true);
+			} else {
+				radPtoRecog.setSelected(true);
+				comboRecog.setSelectedItem(DatosARellenar.getRecogida().getLugarDeRecogida());
+			}
+			campoFenvio.setText(DatosARellenar.getRecogida().getFechaDeEnvio());
+			campoDescrip.setText(DatosARellenar.getPago().getDescripcion());
+			campoCVV.setText(DatosARellenar.getPago().getCVV());
+			campoDni.setText(DatosARellenar.getPago().getDni());
+			campoFTarj.setText(DatosARellenar.getPago().getFechaCaducidad());
+			campoTarj.setText(DatosARellenar.getPago().getNumeroTrajeta());
+			if (DatosARellenar.getPago().getCVV() != null) {
+				radTarj.setSelected(true);
+			} else {
+				radContrareembolso.setSelected(true);
+			}
+			if (DatosARellenar.getPago().getFactura() == "Si") {
+				checkFactura.setSelected(true);
+			}
+			if (DatosARellenar.getPago().getRemitenteDestinatario() == "Remitente") {
+				radFacRemit.setSelected(true);
+			} else if (DatosARellenar.getPago().getRemitenteDestinatario() == "Destinatario") {
+				radFacDestinat.setSelected(true);
+			}
+			if (campoNom == null) {
+				ventanaAnterior = "presupuesto";
+			} else if (campoNom != null) {
+				ventanaAnterior = "verEnvio";
+			}
+		}
 /** EVENTOS */
-		
+		hiloEjecutando = true;
 		addWindowListener(new WindowAdapter() {
 			
 			@Override
@@ -589,9 +653,17 @@ public class VentanaHacerEnvio extends JFrame {
 					}
 				}
 				};
-				hiloEjecutando = true;
 				hilo.start();
 			}
+		});
+		
+		addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosed(WindowEvent e) {
+				hiloEjecutando = false;				
+			}
+
 		});
 		
 		btnFinalizar.addActionListener(new ActionListener() {
@@ -707,13 +779,29 @@ public class VentanaHacerEnvio extends JFrame {
 						        			null,
 						        			"¿Estas seguro que has rellenado todos los apartados de forma correcta?", "Aviso", 
 						        			JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, new Object[]{"Aceptar", "Rechazar"}, "Aceptar");
-						        	if (seguro == JOptionPane.OK_OPTION) {
+						        	if (seguro == JOptionPane.OK_OPTION && (ventanaAnterior == "presupuesto" || ventanaAnterior == null)) {
 						        		Envio envio = new Envio(trayecto, paquete, recogida, pago);
 						        		List<Envio> envios = usuariosPorEnvios.get(usuario);
 						        		envios.add(envio);
 										hiloEjecutando = false;
-										SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios,usuario));
+										SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));
 										dispose();
+						        	} else if (seguro == JOptionPane.OK_OPTION && ventanaAnterior == "verEnvio") {
+						        	    for (Map.Entry<Usuario, List<Envio>> UsuarioYenvios : usuariosPorEnvios.entrySet()) {
+						                    Usuario usuarioO = UsuarioYenvios.getKey();
+						                    List<Envio> envios = UsuarioYenvios.getValue();
+						                    if (usuarioO.equals(usuario)) {
+						                    	for (Envio envio : envios) {
+						                    		if (envio.getPaquete().getnReferencia() == DatosARellenar.getPaquete().getnReferencia()) {
+						                    			envios.remove(envio);
+						                    			Envio envioNuevo = new Envio(trayecto, paquete, recogida, pago);
+										        		envios.add(envioNuevo);
+														hiloEjecutando = false;
+						                    		}
+						                    	}
+						                        break;
+						                    }
+						                }
 						        	}
 								} else {
                     				JOptionPane.showMessageDialog(null, "Desbes acceptar los terminos y condiciones.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -876,6 +964,7 @@ public class VentanaHacerEnvio extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				hiloEjecutando = false;
 				SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));
 				dispose();			
 			}
@@ -965,13 +1054,10 @@ public class VentanaHacerEnvio extends JFrame {
 		dateChooser.getDateEditor().addPropertyChangeListener(e -> {
             if ("date".equals(e.getPropertyName())) {
                 Date date = dateChooser.getDate();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 if (date != null && date.before(new Date())) {
-                    JOptionPane.showMessageDialog(null, "La fecha seleccionada es anterior a la actual", "Error", JOptionPane.ERROR_MESSAGE);
-                    campoFenvio.setText(sdf.format(date));
-                    
+                    JOptionPane.showMessageDialog(null, "La fecha seleccionada es anterior a la actual", "Error", JOptionPane.ERROR_MESSAGE);                    
                 } else {
-                    campoFenvio.setText(sdf.format(date));
+                    campoFenvio.setText(formatoFecha.format(date));
                 }
             }
         });

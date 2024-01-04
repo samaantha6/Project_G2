@@ -23,6 +23,11 @@ public class Trayecto {
 		this.telefonoDestino = telefonoDestino;
 	}
 	
+	public Trayecto(String direccionOrigen, String direccionDestino) {
+		this.direccionOrigen = direccionOrigen;
+		this.direccionDestino = direccionDestino;
+	}
+
 	public String getNombreOrigen() {
 		return nombreOrigen;
 	}

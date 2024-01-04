@@ -33,6 +33,9 @@ public class Pago {
 		this.precio = precio;
 	}
 
+	public Pago() {
+	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}

@@ -22,6 +22,13 @@ public class Paquete {
 		this.valor = valor;
 		this.fragil = fragil;
 	}
+	
+	public Paquete(String peso, String largo, String ancho, String alto) {
+		this.peso = peso;
+		this.largo = largo;
+		this.ancho = ancho;
+		this.alto = alto;
+	}
 
 	public String getnReferencia() {
 		return nReferencia;

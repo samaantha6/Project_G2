@@ -12,6 +12,10 @@ public class Recogida {
 		this.tipoDeEnvio = tipoDeEnvio;
 	}
 
+	public Recogida(String tipoDeEnvio) {
+		this.tipoDeEnvio = tipoDeEnvio;
+	}
+
 	public String getFechaDeEnvio() {
 		return fechaDeRecogida;
 	}

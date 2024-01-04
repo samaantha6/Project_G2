@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -213,7 +214,6 @@ public class VentanaModificarDatos extends JFrame{
 		if (aIniciadoSesion) {
 			hiloEjecutando = false;
 	        
-		System.out.println(usuario);
 			campoNom.setText(usuario.getNombre());
 			campoApel.setText(usuario.getApellido());
 			campoCorreo.setText(usuario.getCorreo());

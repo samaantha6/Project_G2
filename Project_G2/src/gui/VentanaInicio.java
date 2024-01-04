@@ -299,4 +299,34 @@ public class VentanaInicio extends JFrame{
 	public double getPrecio() {
 		return precioBase;
 	}
+	
+	public String getDesde() {
+		String desde = campoDesde.getText();
+		return desde;
+	}
+	
+	public String getHasta() {
+		String hasta = campoHasta.getText();
+		return hasta;
+	}
+	
+	public String getAlto() {
+		String alto = campoAlto.getText();
+		return alto;
+	}
+	
+	public String getAncho() {
+		String ancho = campoAncho.getText();
+		return ancho;
+	}
+	
+	public String getLargo() {
+		String largo = campoLargo.getText();
+		return largo;
+	}
+	
+	public String getPeso() {
+		String peso = campoPeso.getText();
+		return peso;
+	}
 }

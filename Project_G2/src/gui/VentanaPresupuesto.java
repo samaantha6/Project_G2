@@ -26,6 +26,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import domain.Envio;
+import domain.Pago;
+import domain.Paquete;
+import domain.Recogida;
+import domain.Trayecto;
 import domain.Usuario;
 
 public class VentanaPresupuesto extends JFrame{
@@ -44,6 +48,8 @@ public class VentanaPresupuesto extends JFrame{
     private Usuario usuario;
     
     private Envio DatosARellenar;
+    
+    private String tipoEnvioAGuardar;
 	
 	private Logger logger = Logger.getLogger(VentanaPresupuesto.class.getName());
 	
@@ -117,19 +123,13 @@ public class VentanaPresupuesto extends JFrame{
 		add(pNorte, BorderLayout.NORTH); 
 		add(pOeste, BorderLayout.WEST); 
 		add(pEste, BorderLayout.EAST); 
-
 		
-		
-		
-
-		
-
-        
 /** EVENTOS */
 		        
 		estandar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				tipoEnvioAGuardar = "Estandar";
 				try {
 					
 			    	double precioFinal = vInicio.getPrecio();
@@ -149,10 +149,10 @@ public class VentanaPresupuesto extends JFrame{
 				}
 			}
 		});
-		
 		superior.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				tipoEnvioAGuardar = "Superior";
 				try {
 					
 			    	double precioFinal = vInicio.getPrecio();
@@ -176,6 +176,7 @@ public class VentanaPresupuesto extends JFrame{
 		premium.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				tipoEnvioAGuardar = "Premium";
 				try {
 					
 			    	double precioFinal = vInicio.getPrecio();
@@ -207,6 +208,12 @@ public class VentanaPresupuesto extends JFrame{
 		btnHacerEnvio.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Pago pago = new Pago();
+				Paquete paquete = new Paquete(vInicio.getPeso(), vInicio.getLargo(), vInicio.getAncho(), vInicio.getAlto());
+				Recogida recogida = new Recogida(tipoEnvioAGuardar);
+				Trayecto trayecto = new Trayecto(vInicio.getDesde(), vInicio.getHasta());
+				Envio envio = new Envio(trayecto, paquete, recogida, pago);
+				DatosARellenar = envio;
 				SwingUtilities.invokeLater(() -> new VentanaHacerEnvio(usuariosPorEnvios, usuario, DatosARellenar));
 				dispose();			
 			}
