@@ -2,7 +2,10 @@ package gui;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
+import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentInformation;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -10,6 +13,7 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts.FontName;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.tools.PDFBox;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -23,6 +27,7 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,13 +42,15 @@ import java.util.logging.Logger;
 		
 		private JPanel pNorte, pNorteArriba, pOesteArriba, pEste, pOeste, pCentro;
 	    private JButton btnatras, btnexportar;
-	    private JTextField nRef, nPrecio, nDesc, nPagado, nEstado;
-	    private JLabel txtPrecio, txtPagado, txtRef, txtDesc, txtFact, txtEstado, txtDetalles, txtExport;
+	    private JTextField nRef, nPrecio, nDesc, nPagado, nFecha;
+	    private JLabel txtPrecio, txtPagado, txtRef, txtDesc, txtFact, txtFecha, txtDetalles, txtExport;
 	    private PDType1Font fuente;
 	    
 	    private Map<Usuario, List<Envio>> usuariosPorEnvios = new HashMap<>();
 	    
 	    private Usuario usuario;
+	    
+	    private Envio envio;
 	    
 	    private JFileChooser guardar;
 	    
@@ -73,7 +80,7 @@ import java.util.logging.Logger;
 	        txtPrecio = new JLabel("Precio");
 	        txtRef = new JLabel("¿Envío?    ");
 	        txtDesc = new JLabel("Descripción");
-	        txtEstado = new JLabel("Estado");
+	        txtFecha = new JLabel("Fecha del envío:");
 	        txtExport = new JLabel("Exportar en pdf");
 	        txtFact = new JLabel("  FACTURACIÓN");
 	        txtDetalles = new JLabel("Detalles" );
@@ -87,8 +94,13 @@ import java.util.logging.Logger;
 	        nRef = new JTextField(10);
 	        nPrecio = new JTextField(10);
 	        nDesc = new JTextField(10);
-	        nEstado = new JTextField(10);
+	        nFecha = new JTextField(10);
 	        nPagado = new JTextField(10);
+	        
+	        nPrecio.setEditable(false);
+	        nDesc.setEditable(false);
+	        nFecha.setEditable(false);
+	        nPagado.setEditable(false);
 	        logger.info("JTextFields creados");
 	        
 	        guardar = new JFileChooser();
@@ -112,8 +124,8 @@ import java.util.logging.Logger;
 	        pEste.add(descPanel);
 
 	        JPanel estadoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	        estadoPanel.add(txtEstado);
-	        estadoPanel.add(nEstado);
+	        estadoPanel.add(txtFecha);
+	        estadoPanel.add(nFecha);
 	        pEste.add(estadoPanel);
 	        
 	        JPanel exPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -159,6 +171,39 @@ import java.util.logging.Logger;
 
 /*EVENTOS*/
 	        
+	        nRef.getDocument().addDocumentListener(new DocumentListener() {
+	            @Override
+	            public void insertUpdate(DocumentEvent e) {
+	            	String referencia = nRef.getText();
+	                envio = buscarEnvioPorReferencia(referencia);
+	                if (envio != null) {
+	                	nPrecio.setText(envio.getPago().getPrecio());
+	                	nDesc.setText(envio.getPago().getDescripcion());
+	                	nFecha.setText(envio.getRecogida().getFechaDeEnvio());
+	                	if (envio.getPago().getCVV() == null) {
+	                		nPagado.setText("No");
+	                	} else {
+	                		nPagado.setText("Si");
+	                	}
+	                }
+	                
+	            }
+
+	            @Override
+	            public void removeUpdate(DocumentEvent e) {
+	            	String referencia = nRef.getText();
+	            	envio = buscarEnvioPorReferencia(referencia);
+	                if (envio != null) {
+	                	System.out.println("seg");
+	                }
+	            }
+
+	            @Override
+	            public void changedUpdate(DocumentEvent e) {
+	                // Este método se llama para cambios en atributos del documento,
+	                // no es necesario para JTextField
+	            }
+	        });
 	        
 			btnatras.addActionListener(new ActionListener() {
 				@Override
@@ -191,62 +236,74 @@ import java.util.logging.Logger;
 			                    fpath += ".pdf";
 			                }
 
-			                contentStream.beginText();
-					    	contentStream.setFont(fuente, 12);
 					    	    
 				            String precio = nPrecio.getText();
 				            String descripcion = nDesc.getText();
-			                String estado = nEstado.getText();
+			                String estado = nFecha.getText();
 			                String pagado = nPagado.getText();
 			                String referencia = nRef.getText();
 				                
 				                
 				                
 				            /*ESCRIBE DE ARRIBA HACIA ABAJO*/
-				                		
-				                
-				    	    contentStream.newLineAtOffset(50,620);
-				    	    if (estado != null && !estado.isEmpty()) {
-				    	    	contentStream.showText("Estado: " + estado);
-				    	    } else {
-				    	        contentStream.showText("Estado: No disponible");
-				    	    }
+			                
+			                contentStream.beginText();
+			                contentStream.setFont(fuente, 20);
+			                
+			                contentStream.newLineAtOffset(50, 620);
+			                
+				    	    contentStream.showText("FACTURA:");
+				    	    contentStream.endText();
+			                
+			                float sa = 0.5f; // Ajusta según sea necesario
+			                InputStream imageen = getClass().getClassLoader().getResourceAsStream("Images/logoPngNegroPdf.png");
+			                PDImageXObject logoImageen = PDImageXObject.createFromByteArray(doc, IOUtils.toByteArray(imageen), "logo");
+			                contentStream.drawImage(logoImageen, 450, 620, logoImageen.getWidth() * sa, logoImageen.getHeight() * sa);
+			                
+			                contentStream.beginText();
+			                
+			                /*contentStream.beginText();
+			                contentStream.setFont(fuente, 12);
+			                
+			                contentStream.newLineAtOffset(50, 620);
+			                
+				    	    contentStream.newLineAtOffset(0,40);
+				    	    contentStream.showText("FACTURA ENVIO CON Nº REFERENCIA:   " + referencia);
+				    	    contentStream.newLine();
+			                
+				    	    contentStream.showText("Estado: " + estado);
+				    	    contentStream.showText("Estado: No disponible");
 				    	    
 				    	    contentStream.newLine();
 				    	    
 				    	    
 				    	    contentStream.newLineAtOffset(0,30);
-				    	    if (pagado != null && !pagado.isEmpty()) {
-				    	    	contentStream.showText("¿Pagado?: " + pagado);
-				    	    } else {
-				    	        contentStream.showText("Pagado: No disponible");
-				    	    }
+				    	    contentStream.showText("¿Pagado?: " + pagado);
+				    	    contentStream.showText("Pagado: No disponible");
+				    	    
 				    	    
 				    	    contentStream.newLine();
 				    	    
 			                contentStream.newLineAtOffset(0,30);
-				    	    if (precio != null && !precio.isEmpty()) {
-				    	        contentStream.showText("Precio: " + precio);
-				    	    } else {
-				    	        contentStream.showText("Precio: No disponible");
-				    	    }
+				    	    contentStream.showText("Precio: " + precio);
+				    	    contentStream.showText("Precio: No disponible");
+				    	    
 				    	    
 				    	    contentStream.newLine();
 				    	    
 				    	    contentStream.newLineAtOffset(0,30);
-				    	    if (descripcion != null && !descripcion.isEmpty()) {
-				    	    	contentStream.showText("Descripción: " + descripcion);
-				    	    } else {
-				    	        contentStream.showText("Descripción: No disponible");
-				    	    }
-				    	    
+				    	    contentStream.showText("Descripción: " + descripcion);
+				    	    contentStream.showText("Descripción: No disponible");
+
 				    	    contentStream.newLine();
 				    	    
-				    	    contentStream.newLineAtOffset(0,40);
-				    	    contentStream.showText("FACTURA ENVIO CON Nº REFERENCIA:   " + referencia);
-				    	    contentStream.newLine();
 					    	    
 				    	    contentStream.endText();
+			                float s = 0.5f; // Ajusta según sea necesario
+			                InputStream imagen = getClass().getClassLoader().getResourceAsStream("Images/logoPngNegro.png");
+			                PDImageXObject logoImagen = PDImageXObject.createFromByteArray(doc, IOUtils.toByteArray(imagen), "logo");
+			                contentStream.drawImage(logoImagen, 50, 50, logoImagen.getWidth() * s, logoImagen.getHeight() * s);
+			                */
 				    	    contentStream.close();
 				    	    
 				    	    doc.save(fpath);
@@ -274,6 +331,18 @@ import java.util.logging.Logger;
 	        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	        setVisible(true);
 	        
+	    }
+	    
+	    private Envio buscarEnvioPorReferencia(String referencia) {
+	        for (Map.Entry<Usuario, List<Envio>> entry : usuariosPorEnvios.entrySet()) {
+	            List<Envio> envios = entry.getValue();
+	            for (Envio envio : envios) {
+	                if (envio.getPaquete().getnReferencia().equals(referencia)) {
+	                    return envio;
+	                }
+	            }
+	        }
+	        return null;
 	    }
 	    
 }

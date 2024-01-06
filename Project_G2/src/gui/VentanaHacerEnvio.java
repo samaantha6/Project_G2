@@ -1094,8 +1094,8 @@ public class VentanaHacerEnvio extends JFrame {
 	private static List<String> numerosGenerados = new ArrayList<>();
     private static String generarNumeroReferencia() {
         Random random = new Random();
-        int minimo = 100000000;
-        int maximo = 999999999;
+        int minimo = 10000;
+        int maximo = 99999;
         int numeroReferencia = random.nextInt(maximo - minimo + 1) + minimo;
         String referenciaComoString = Integer.toString(numeroReferencia);
         if (!numerosGenerados.contains(referenciaComoString)) {
