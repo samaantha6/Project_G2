@@ -15,7 +15,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts.FontName;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.tools.PDFBox;
-import javax.swing.JFileChooser;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import domain.Envio;
@@ -223,7 +223,7 @@ import java.util.logging.Logger;
 					
 					
 					
-					if (guardarComo == JFileChooser.APPROVE_OPTION) {
+					if (guardarComo == JFileChooser.APPROVE_OPTION && envio != null) {
 						PDDocument doc = new PDDocument();
 				    	PDPage page = new PDPage();
 				    	doc.addPage(page);
@@ -234,91 +234,97 @@ import java.util.logging.Logger;
 			                
 			                if (!fpath.toLowerCase().endsWith(".pdf")) {
 			                    fpath += ".pdf";
-			                }
-
-					    	    
-				            String precio = nPrecio.getText();
-				            String descripcion = nDesc.getText();
-			                String estado = nFecha.getText();
-			                String pagado = nPagado.getText();
-			                String referencia = nRef.getText();
-				                
-				                
+			                }   
 				                
 				            /*ESCRIBE DE ARRIBA HACIA ABAJO*/
 			                
 			                contentStream.beginText();
-			                contentStream.setFont(fuente, 20);
+			                contentStream.setFont(fuente, 14);
 			                
 			                contentStream.newLineAtOffset(50, 620);
 			                
+				    	    contentStream.newLineAtOffset(80,-120);
+				    	    contentStream.showText(envio.getPago().getDescripcion());
+				    	    contentStream.newLineAtOffset(220,0);
+				    	    contentStream.showText(envio.getPago().getPrecio());
+				    	    contentStream.newLine();
+			                
+				    	    contentStream.newLineAtOffset(-220,40);
+				    	    contentStream.showText("DESCRIPCIÓN");
+				    	    contentStream.newLineAtOffset(220,0);
+				    	    contentStream.showText("PRECIO");
+				    	    contentStream.newLine();
+			                
+			                contentStream.setFont(fuente, 12);
+				    	    contentStream.newLineAtOffset(-300,40);
+				    	    if (envio.getPago().getRemitenteDestinatario() == "Remitente") {
+				    	    contentStream.showText(envio.getTrayecto().getDireccionOrigen());
+				    	    } else {
+					    	    contentStream.showText(envio.getTrayecto().getDireccionDestino());
+				    	    }
+				    	    contentStream.newLineAtOffset(140,0);
+				    	    contentStream.showText(envio.getTrayecto().getDireccionDestino());
+				    	    contentStream.newLineAtOffset(140,0);
+			                contentStream.setFont(fuente, 14);
+				    	    contentStream.showText("TIPO DE ENVÍO:");
+			                contentStream.setFont(fuente, 12);
+				    	    contentStream.newLineAtOffset(160,0);
+				    	    contentStream.showText(envio.getRecogida().getTipoDeEnvio());
+				    	    contentStream.newLine();
+			                
+				    	    contentStream.newLineAtOffset(-440,40);
+				    	    if (envio.getPago().getRemitenteDestinatario() == "Remitente") {
+				    	    contentStream.showText(envio.getTrayecto().getNombreOrigen());
+				    	    } else {
+					    	    contentStream.showText(envio.getTrayecto().getNombreDestino());
+				    	    }
+				    	    contentStream.newLineAtOffset(140,0);
+				    	    contentStream.showText(envio.getTrayecto().getNombreDestino());
+				    	    contentStream.newLineAtOffset(140,0);
+			                contentStream.setFont(fuente, 14);
+				    	    contentStream.showText("FECHA:");
+			                contentStream.setFont(fuente, 12);
+				    	    contentStream.newLineAtOffset(160,0);
+				    	    contentStream.showText(envio.getRecogida().getFechaDeEnvio());
+				    	    contentStream.newLine();
+			                
+				    	    contentStream.newLineAtOffset(-440,40);
+				    	    contentStream.showText("FACTURAR A");
+				    	    contentStream.newLineAtOffset(140,0);
+				    	    contentStream.showText("ENVIAR A");
+				    	    contentStream.newLineAtOffset(140,0);
+				    	    contentStream.showText("Nº DE REFERENCIA:");
+			                contentStream.setFont(fuente, 12);
+				    	    contentStream.newLineAtOffset(160,0);
+				    	    contentStream.showText(envio.getPaquete().getnReferencia());
+				    	    contentStream.newLine();
+			                
+			                contentStream.setFont(fuente, 20);
+			                
+				    	    contentStream.newLineAtOffset(-440,40);
 				    	    contentStream.showText("FACTURA:");
 				    	    contentStream.endText();
 			                
-			                float sa = 0.5f; // Ajusta según sea necesario
-			                InputStream imageen = getClass().getClassLoader().getResourceAsStream("Images/logoPngNegroPdf.png");
-			                PDImageXObject logoImageen = PDImageXObject.createFromByteArray(doc, IOUtils.toByteArray(imageen), "logo");
-			                contentStream.drawImage(logoImageen, 450, 620, logoImageen.getWidth() * sa, logoImageen.getHeight() * sa);
-			                
-			                contentStream.beginText();
-			                
-			                /*contentStream.beginText();
-			                contentStream.setFont(fuente, 12);
-			                
-			                contentStream.newLineAtOffset(50, 620);
-			                
-				    	    contentStream.newLineAtOffset(0,40);
-				    	    contentStream.showText("FACTURA ENVIO CON Nº REFERENCIA:   " + referencia);
-				    	    contentStream.newLine();
-			                
-				    	    contentStream.showText("Estado: " + estado);
-				    	    contentStream.showText("Estado: No disponible");
-				    	    
-				    	    contentStream.newLine();
-				    	    
-				    	    
-				    	    contentStream.newLineAtOffset(0,30);
-				    	    contentStream.showText("¿Pagado?: " + pagado);
-				    	    contentStream.showText("Pagado: No disponible");
-				    	    
-				    	    
-				    	    contentStream.newLine();
-				    	    
-			                contentStream.newLineAtOffset(0,30);
-				    	    contentStream.showText("Precio: " + precio);
-				    	    contentStream.showText("Precio: No disponible");
-				    	    
-				    	    
-				    	    contentStream.newLine();
-				    	    
-				    	    contentStream.newLineAtOffset(0,30);
-				    	    contentStream.showText("Descripción: " + descripcion);
-				    	    contentStream.showText("Descripción: No disponible");
-
-				    	    contentStream.newLine();
-				    	    
-					    	    
-				    	    contentStream.endText();
-			                float s = 0.5f; // Ajusta según sea necesario
-			                InputStream imagen = getClass().getClassLoader().getResourceAsStream("Images/logoPngNegro.png");
+			                float escala = 0.5f;
+			                InputStream imagen = getClass().getClassLoader().getResourceAsStream("Images/logoPngNegroPdf.png");
 			                PDImageXObject logoImagen = PDImageXObject.createFromByteArray(doc, IOUtils.toByteArray(imagen), "logo");
-			                contentStream.drawImage(logoImagen, 50, 50, logoImagen.getWidth() * s, logoImagen.getHeight() * s);
-			                */
+			                contentStream.drawImage(logoImagen, 450, 700, logoImagen.getWidth() * escala, logoImagen.getHeight() * escala);
+				    	   
 				    	    contentStream.close();
 				    	    
 				    	    doc.save(fpath);
 				    	    doc.close();
 				    	    
-				    	    
 				    	    JOptionPane.showMessageDialog(VentanaFacturacion.this, "Exportación correcta");
 		                  
-		              
 			        } catch (IOException ex) {
 		                ex.printStackTrace();
 		                JOptionPane.showMessageDialog(VentanaFacturacion.this, "Error al exportar a PDF");
 		                
 		            }
 			            
+				  } else {
+	                	JOptionPane.showMessageDialog(null, "Numero de referencia no existente.", "Error", JOptionPane.ERROR_MESSAGE);
 				  }
 				}
 			});
