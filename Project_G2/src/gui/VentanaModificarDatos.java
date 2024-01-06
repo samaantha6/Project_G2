@@ -220,8 +220,6 @@ public class VentanaModificarDatos extends JFrame{
 			campoPregSeg.setText(usuario.getPreguntaSeg());
 			campoTelefono.setText(usuario.getTelefono());
 		} else {
-			
-			
 			JOptionPane.showMessageDialog(null, "Al no haber iniciado sesión debe escribir su correo para asi ubicar su correo.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 	    }
 		
@@ -252,7 +250,7 @@ public class VentanaModificarDatos extends JFrame{
                 contrasenia = windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoCon, esOjoAbierto).getText();
                 contraseniaVen = windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVerifCon, esOjoAbierto).getText();
                 String respuesta = campoRes.getText();
-                List<JTextField> camposVacios = windowMaster.camposVacios(campoNom, campoApel, campoCorreo, campoTelefono, windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoCon, esOjoAbierto), windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVerifCon, esOjoAbierto), campoRes);
+                List<JTextField> camposVacios = windowMaster.camposVacios(campoNom, campoApel, campoCorreo, campoTelefono, windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoCon, esOjoAbierto), windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVerifCon, esOjoAbiertoVen), campoRes);
             	windowMaster.restaurarFondo(fondosOriginales);
                 if (usuario.getCorreo().equals(correo) && usuario.getRespuesta().equals(respuesta) && usuario.getContrasenia().equals(contrasenia) && contrasenia.equals(contraseniaVen) && camposVacios.isEmpty()) {
 	                usuariosPorEnvios.remove(usuario);
@@ -278,22 +276,29 @@ public class VentanaModificarDatos extends JFrame{
                 contraseniaVen = windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVerifCon, esOjoAbierto).getText();
                 String respuesta = campoRes.getText();
     	        if (usuario != null) {
-    	        	if (usuario.getRespuesta().equals(respuesta)) {
-    	        		if (contrasenia.equals(contraseniaVen)) {
-    	        			usuario.setApellido(apellido);
-    	        			usuario.setContrasenia(contrasenia);
-    	        			usuario.setCorreo(correo);
-    	        			usuario.setTelefono(telefono);
-    	        			usuario.setNombre(nombre);
-    	        			SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));
-    						hiloEjecutando = false;
-    	        			JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-    	        			dispose();
+    	        	if (contrasenia.equals(contraseniaVen)) {
+    	        		if (usuario.getRespuesta().equals(respuesta)) {
+    	        			List<JTextField> camposVacios = windowMaster.camposVacios(campoApel, windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoCon, esOjoAbierto), campoCorreo, campoNom, campoRes, campoTelefono, windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVerifCon, esOjoAbiertoVen));
+	        				windowMaster.restaurarFondo(fondosOriginales);
+    	        			if (camposVacios.isEmpty()) {
+    	        				usuario.setApellido(apellido);
+    	        				usuario.setContrasenia(contrasenia);
+    	        				usuario.setCorreo(correo);
+    	        				usuario.setTelefono(telefono);
+    	        				usuario.setNombre(nombre);
+    	        				hiloEjecutando = false;
+    	        				JOptionPane.showMessageDialog(null, "Cuenta modificada con exito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+    	        				SwingUtilities.invokeLater(() -> new VentanaInicio(usuariosPorEnvios, usuario));
+    	        				dispose();
+    	        			} else {
+    	    	                fondosOriginales = windowMaster.cambiarFondoCampos(camposVacios);
+        	                	JOptionPane.showMessageDialog(null, "Debes rellenar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+    	        			}
     	        		} else {
-    	        			JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
+    	                	JOptionPane.showMessageDialog(null, "La respuesta no es correcta.", "Error", JOptionPane.ERROR_MESSAGE);
     	        		}
     	        	} else {
-                	JOptionPane.showMessageDialog(null, "La respuesta no es correcta.", "Error", JOptionPane.ERROR_MESSAGE);
+	        			JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
     	        	}
     	        } else {
     	        	JOptionPane.showMessageDialog(null, "No existe ningun usuario con ese correo.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -335,7 +340,7 @@ public class VentanaModificarDatos extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!esOjoAbierto) {
+				if (!esOjoAbiertoVen) {
 					String contrasenia = new String(campoVerifCon.getPassword());
 					campoVenificaCon1.setText(contrasenia);
 					pVenificaCon.remove(campoVerifCon);
