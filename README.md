@@ -48,4 +48,23 @@ La idea principal de este proyecto es la gestión de una empresa de paquetería,
         - Esta opción se encuentra en la ventana de inicio y el usuario podrá introducir desde donde
           y hasta donde se envía el paquete, el peso y las medidas. Una vez introduciods todos los
           datos se le llevará a otra ventanna en la que tendrá que seleccionar que tipo de envío quiere
-          utilizar (estándar,superior o premium) y en base a toda la infomación aportadda se le generará un presupuesto. 
+          utilizar (estándar,superior o premium) y en base a toda la infomación aportadda se le generará
+          un presupuesto.
+  
+## Como instalar
+
+1º.Clonar el repositorio.
+
+2º.Importar el repositorio en el IDE de Java.
+
+3º.Ejecutar el archivo `Principal.java` que se encuentra en el paquete `main` para iniciar el programa.
+
+## Contributors
+
+- [[Iñaki Ruiz de Alegría](https://github.com/InakiRuizDeAlegria)]
+
+- [[Sofía Fernández,](https://github.com/soferpel)]
+
+- [[Samantha Muñoz](https://github.com/samaantha6)]
+
+- [[Josu Mirena Sáez](https://github.com/josusaez)]
