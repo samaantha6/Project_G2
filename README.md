@@ -59,7 +59,7 @@ La idea principal de este proyecto es la gestión de una empresa de paquetería,
 
 3º Ejecutar el archivo `Principal.java` que se encuentra en el paquete `main` para iniciar el programa
 
-4ª ¡Crea tu primer envío!
+4º ¡Crea tu primer envío!
 
 ## Contributors
 
