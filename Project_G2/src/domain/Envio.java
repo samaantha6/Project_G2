@@ -15,6 +15,27 @@ public class Envio {
 		this.pago = pago;
 	}
 
+
+
+
+
+
+
+	public Envio(String dO, String dD, String nRefe, String fRec, String dni, String precio) {
+		dO = trayecto.getDireccionOrigen();
+		dD = trayecto.getDireccionDestino();
+		nRefe = paquete.getnReferencia();
+		fRec = recogida.getFechaDeEnvio();
+		dni = pago.getDni();
+		precio = pago.getPrecio();
+	}
+
+
+
+
+
+
+
 	public Trayecto getTrayecto() {
 		return trayecto;
 	}

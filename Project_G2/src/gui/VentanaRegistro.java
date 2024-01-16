@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +47,7 @@ import javax.swing.text.Element;
 import javax.swing.text.Position;
 import javax.swing.text.Segment;
 
+import db.BaseDatosConfig;
 import domain.Dominios;
 import domain.Envio;
 import domain.Usuario;
@@ -258,6 +260,14 @@ public class VentanaRegistro extends JFrame{
                 String respuesta = campoRespuesta.getText();
                 String preguntaSeguridad = pregSeg.getSelectedItem().toString();
                 
+                
+                if (!nombre.equals("") && !apellido.equals("") && !telefono.equals("") && !correo.equals("") && !preguntaSeguridad.equals("") && !respuesta.equals("") && !contrasenia.equals("")) {
+                	Usuario u = new Usuario(nombre, apellido, telefono, correo, respuesta, preguntaSeguridad, contrasenia);
+					Connection c = BaseDatosConfig.initBD("hermes.db");
+					BaseDatosConfig.insertarUsuario(c, u);
+					BaseDatosConfig.closeBD(c);
+				} 
+                
                 if (contrasenia.equals(contraseniaVen)) {
                 	windowMaster.restaurarFondo(campoContraniasCam);
                 	List<JTextField> camposVacios = windowMaster.camposVacios(windowMaster.distinguirCampoContrasenia(campoContrasenia1, campoContrasenia, esOjoAbierto), windowMaster.distinguirCampoContrasenia(campoVenificaCon1, campoVenificaCon, esOjoAbiertoVen));
@@ -309,7 +319,9 @@ public class VentanaRegistro extends JFrame{
                 	JOptionPane.showMessageDialog(null, "La contraseña no coincide.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 				
+                
 			}
+			
 		});
 		
 		

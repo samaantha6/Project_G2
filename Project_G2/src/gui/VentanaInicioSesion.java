@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -158,6 +159,8 @@ public class VentanaInicioSesion extends JFrame{
                 }
             }
             	
+
+    	    
             if (windowMaster.verificarDominio(correo).equals("Empleado")) {
             	
             	if (credencialesCorrectas) {
@@ -178,9 +181,11 @@ public class VentanaInicioSesion extends JFrame{
             } else {
             	JOptionPane.showMessageDialog(null, "Dominio no registrado", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
+           
+
+    	    
             }
-		
+
 	});
 	
 	btnReg.addActionListener(new ActionListener() {
@@ -219,6 +224,9 @@ public class VentanaInicioSesion extends JFrame{
 			esOjoAbierto = !esOjoAbierto;
 		}
 	});
+	 
+
+	
 	
 	add(pNorte,BorderLayout.NORTH);
 	add(pSur,BorderLayout.SOUTH);
