@@ -53,11 +53,11 @@ La idea principal de este proyecto es la gestión de una empresa de paquetería,
   
 ## Como instalar
 
-1º.Clonar el repositorio.
+1º Clonar el repositorio
 
-2º.Importar el repositorio en el IDE de Java.
+2º Importar el repositorio en el IDE de Java
 
-3º.Ejecutar el archivo `Principal.java` que se encuentra en el paquete `main` para iniciar el programa.
+3º Ejecutar el archivo `Principal.java` que se encuentra en el paquete `main` para iniciar el programa
 
 ## Contributors
 
