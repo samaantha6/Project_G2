@@ -46,8 +46,8 @@ La idea principal de este proyecto es la gestión de una empresa de paquetería,
 - Creación de presupuesto:
 
         - Esta opción se encuentra en la ventana de inicio y el usuario podrá introducir desde donde
-          y hasta donde se envía el paquete, el peso y las medidas. Una vez introduciods todos los
-          datos se le llevará a otra ventanna en la que tendrá que seleccionar que tipo de envío quiere
+          y hasta donde se envía el paquete, el peso y las medidas. Una vez introducidos todos los
+          datos se le llevará a otra ventana en la que tendrá que seleccionar que tipo de envío quiere
           utilizar (estándar,superior o premium) y en base a toda la infomación aportadda se le generará
           un presupuesto.
   
