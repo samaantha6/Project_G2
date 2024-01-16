@@ -34,7 +34,7 @@ La idea principal de este proyecto es la gestión de una empresa de paquetería,
 
 - Facturación:
 
-        - En esta ventana el usuario podrá ver los el precio, descripción y fecha de envío de su paquete.
+        - En esta ventana el usuario podrá ver el precio, descripción y fecha de envío de su paquete.
          
         - También tendrá la opción de crear un archivo pdf con todos los detalles a modo de factura.
 
